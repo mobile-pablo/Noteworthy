@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "iOS Notes"
 include ':app'
 include ':core'
+include ':domain'
