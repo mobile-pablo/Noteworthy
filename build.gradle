@@ -13,17 +13,13 @@ buildscript {
     ext.excuseMe = '0.9.5'
 
     //core
-    ext.hilt = '2.40.1'
+    ext.hilt = '2.45'
     ext.coroutines = '1.5.2'
 
     ext.coil = '2.2.2'
 
-    //networking
-    ext.okhttp = '4.9.1'
-    ext.retrofit = '2.9.0'
-
     //storage
-    ext.room = '2.4.2'
+    ext.room = '2.5.1'
 
     //test
     ext.junit = '4.13.2'
