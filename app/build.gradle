@@ -65,8 +65,8 @@ ktlint {
 }
 
 dependencies {
-   // implementation project('::uicomponents')
-  //  implementation project('::domain')
+    implementation project('::uicomponents')
+    implementation project('::domain')
 
     implementation "androidx.core:core-ktx:$rootProject.androidx_core"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.lifecycle"
