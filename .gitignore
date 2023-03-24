@@ -322,4 +322,4 @@ Thumbs.db
 
 # End of https://www.toptal.com/developers/gitignore/api/android,androidstudio,intellij,kotlin
 
-playground
+playground/*
