@@ -1,19 +1,18 @@
 package com.mobile.pablo.uicomponents.ui.home
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import DateUtils.dayMonthYearFormat
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mobile.pablo.domain.data.home.PreviewNote
 
 @Composable
-fun PreviewNoteItem(previewNote : PreviewNote) {
+fun PreviewNoteItem(previewNote: PreviewNote) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -24,10 +23,24 @@ fun PreviewNoteItem(previewNote : PreviewNote) {
     ) {
         Column {
             Text(
-                text = "Monday | 27.03",
+                text = previewNote.title,
                 fontSize = 15.sp,
                 color = Color.White
             )
+
+            Row(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    text = dayMonthYearFormat(previewNote.date),
+                    fontSize = 10.sp,
+                    color = Color.White
+                )
+                Text(
+                    text = previewNote.description,
+                    fontSize = 10.sp,
+                    color = Color.White,
+                    overflow = TextOverflow.Clip
+                )
+            }
         }
     }
 }
