@@ -21,7 +21,7 @@ internal class PreviewNoteDTOMapper @Inject constructor() {
             id,
             title,
             date,
-            fullDescription
+            description
         )
     }
 }
