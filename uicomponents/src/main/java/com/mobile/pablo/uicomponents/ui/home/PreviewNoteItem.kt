@@ -10,9 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mobile.pablo.domain.data.home.PreviewNote
 
 @Composable
-fun PreviewNoteItem() {
+fun PreviewNoteItem(previewNote : PreviewNote) {
     Box(
         modifier = Modifier
             .fillMaxSize()
