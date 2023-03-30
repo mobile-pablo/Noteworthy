@@ -9,6 +9,7 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
@@ -16,25 +17,25 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.ViewCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = BackgroundDay,
-    secondary = BackgroundDay,
-    tertiary = BackgroundDay
+    primary = HomeBackgroundNight,
+    secondary = NoteBackgroundNight,
+    tertiary = TextNight,
+    onPrimary = TopBarBackgroundNight,
+    onSecondary = TopBarTextNight,
+    onTertiary = TopBarSelectedItemBackgroundNight,
+    onBackground = TopBarSelectedItemTextNight,
+    onSurface = SelectedNoteBackgroundNight
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = BackgroundDay,
-    secondary = BackgroundDay,
-    tertiary = BackgroundDay
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+    primary = HomeBackgroundDay,
+    secondary = NoteBackgroundDay,
+    tertiary = TextDay,
+    onPrimary = TopBarBackgroundDay,
+    onSecondary = TopBarTextDay,
+    onTertiary = TopBarSelectedItemBackgroundDay,
+    onBackground = TopBarSelectedItemTextDay,
+    onSurface = SelectedNoteBackgroundDay
 )
 
 @Composable
@@ -49,6 +50,7 @@ fun IOSNotesTheme(
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
+
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
@@ -60,9 +62,12 @@ fun IOSNotesTheme(
         }
     }
 
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+    CompositionLocalProvider(LocalSpacing provides Spacing()) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = Typography,
+            content = content,
+        )
+    }
+
 }

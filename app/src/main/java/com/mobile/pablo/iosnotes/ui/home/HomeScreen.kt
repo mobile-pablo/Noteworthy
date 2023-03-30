@@ -7,6 +7,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.mobile.pablo.domain.data.home.PreviewNote
+import com.mobile.pablo.uicomponents.ui.home.PreviewNoteItem
+import java.util.*
 
 @Composable
 fun HomeScreen() {
@@ -17,6 +20,14 @@ fun HomeScreen() {
     ) {
         LazyColumn(content = {
             item {
+                PreviewNoteItem(
+                    previewNote = PreviewNote(
+                        0,
+                        "Wtorek | 30.03",
+                        Date(42L),
+                        "Lorem ipsum dolet sit amet"
+                    )
+                )
             }
         })
     }

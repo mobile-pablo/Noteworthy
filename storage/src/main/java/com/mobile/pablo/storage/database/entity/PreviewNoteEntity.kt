@@ -9,7 +9,7 @@ import java.util.Date
 )
 internal data class PreviewNoteEntity(
     @PrimaryKey
-    val id : String,
+    val id : Int,
     val title : String,
     val date : Date,
     val description : String
