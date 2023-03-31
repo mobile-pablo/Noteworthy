@@ -23,6 +23,10 @@ import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.*
+import com.mobile.pablo.iosnotes.ui.theme.FontSize
+import com.mobile.pablo.iosnotes.ui.theme.LocalFontSize
+import com.mobile.pablo.iosnotes.ui.theme.LocalSpacing
+import com.mobile.pablo.iosnotes.ui.theme.Spacing
 
 /**
  * <a href="https://material.io/design/material-theming/overview.html" class="external" target="_blank">Material Theming</a>.
@@ -78,16 +82,12 @@ fun MaterialTheme(
         LocalRippleTheme provides MaterialRippleTheme,
         LocalShapes provides shapes,
         LocalTextSelectionColors provides selectionColors,
-        LocalTypography provides typography
+        LocalTypography provides typography,
+        LocalSpacing provides Spacing(),
+        LocalFontSize provides FontSize()
     ) {
-        ProvideTextStyle(value = typography.body1) {
-            PlatformMaterialTheme(content)
-        }
+        ProvideTextStyle(value = typography.body1, content)
     }
-}
-
-@Composable
-internal fun PlatformMaterialTheme(content: @Composable () -> Unit) {
 }
 
 /**
