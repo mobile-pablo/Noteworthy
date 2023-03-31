@@ -12,10 +12,7 @@ import com.mobile.pablo.storage.database.entity.FullNoteEntity
 import com.mobile.pablo.storage.database.entity.PreviewNoteEntity
 
 @Database(
-    entities = [
-        FullNoteEntity::class,
-        PreviewNoteEntity::class
-    ],
+    entities = [FullNoteEntity::class, PreviewNoteEntity::class],
     version = 1,
     exportSchema = false
 )
@@ -31,18 +28,13 @@ internal abstract class AppDatabase : RoomDatabase() {
 
         private const val DB_NAME = "app_database.db"
         private lateinit var instance: AppDatabase
-        fun getInstance(context: Context): AppDatabase =
-            if (this::instance.isInitialized) instance
-            else
-                Room.databaseBuilder(
-                    context,
-                    AppDatabase::class.java,
-                    DB_NAME
-                )
-                    .fallbackToDestructiveMigration()
-                    .build()
-                    .apply {
-                        instance = this
-                    }
+        fun getInstance(context: Context): AppDatabase = if (this::instance.isInitialized) instance
+        else Room.databaseBuilder(
+            context,
+            AppDatabase::class.java,
+            DB_NAME
+        ).fallbackToDestructiveMigration().build().apply {
+            instance = this
+        }
     }
 }

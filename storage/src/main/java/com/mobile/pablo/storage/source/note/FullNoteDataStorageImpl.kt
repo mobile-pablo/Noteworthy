@@ -20,5 +20,5 @@ internal class FullNoteDataStorageImpl @Inject constructor(
         fullNoteDao.insertNote(entity)
     }
 
-    override suspend fun clearNotes() : Unit = fullNoteDao.clearNotes()
+    override suspend fun clearNotes(): Unit = fullNoteDao.clearNotes()
 }
