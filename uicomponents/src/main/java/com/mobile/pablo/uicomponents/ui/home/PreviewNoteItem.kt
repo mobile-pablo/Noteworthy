@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.sp
 import com.mobile.pablo.domain.data.home.PreviewNote
 import com.mobile.pablo.uicomponents.ui.theme.font
 import com.mobile.pablo.uicomponents.ui.theme.spacing
@@ -31,7 +30,7 @@ fun PreviewNoteItem(previewNote: PreviewNote) {
         Column {
             Text(
                 text = previewNote.title,
-                fontSize = 15.sp,
+                fontSize = Theme.font.font_15,
                 color = Theme.colors.text
             )
 

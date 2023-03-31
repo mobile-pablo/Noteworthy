@@ -5,14 +5,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import com.mobile.pablo.uicomponents.ui.theme.spacing
+import com.mobile.pablo.uicomponents.ui.util.Theme
 
 @Composable
 fun NoteScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .padding(5.dp)
+            .padding(Theme.spacing.spacing_6)
     ) {
     }
 }

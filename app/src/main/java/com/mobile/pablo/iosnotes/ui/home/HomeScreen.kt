@@ -8,10 +8,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.mobile.pablo.domain.data.home.PreviewNote
 import com.mobile.pablo.uicomponents.ui.home.PreviewNoteItem
 import com.mobile.pablo.uicomponents.ui.home.TopHomeBar
+import com.mobile.pablo.uicomponents.ui.theme.spacing
 import com.mobile.pablo.uicomponents.ui.util.Theme
 import java.util.*
 
@@ -21,7 +21,7 @@ fun HomeScreen() {
         modifier = Modifier
             .fillMaxSize()
             .background(Theme.colors.homeBackground)
-            .padding(horizontal = 10.dp)
+            .padding(horizontal = Theme.spacing.spacing_6)
     ) {
         Column {
             TopHomeBar()
