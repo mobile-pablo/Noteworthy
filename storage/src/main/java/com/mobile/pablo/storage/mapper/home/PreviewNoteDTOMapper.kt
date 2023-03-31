@@ -1,6 +1,6 @@
 package com.mobile.pablo.storage.mapper.home
 
-import com.mobile.pablo.core.data.home.PreviewNoteDTO
+import com.mobile.pablo.core.model.home.PreviewNoteDTO
 import com.mobile.pablo.storage.database.entity.FullNoteEntity
 import com.mobile.pablo.storage.database.entity.PreviewNoteEntity
 import javax.inject.Inject

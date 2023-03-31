@@ -1,4 +1,4 @@
-package com.mobile.pablo.storage.database.dao
+package com.mobile.pablo.storage.database.dao.note
 
 import androidx.room.*
 import com.mobile.pablo.storage.database.entity.FullNoteEntity
@@ -14,7 +14,7 @@ internal abstract class FullNoteDao {
     abstract suspend fun deleteNote(noteId : String)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertNote(fullNoteEntity: FullNoteEntity)
+    abstract suspend fun insertNote(fullNoteEntity: FullNoteEntity?)
 
     @Query("DELETE FROM notes")
     abstract suspend fun clearNotes()

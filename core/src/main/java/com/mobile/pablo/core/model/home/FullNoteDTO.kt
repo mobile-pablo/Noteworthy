@@ -1,4 +1,4 @@
-package com.mobile.pablo.core.data.home
+package com.mobile.pablo.core.model.home
 
 import java.util.Date
 

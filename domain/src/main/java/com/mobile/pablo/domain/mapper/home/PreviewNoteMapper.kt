@@ -1,6 +1,6 @@
 package com.mobile.pablo.domain.mapper.home
 
-import com.mobile.pablo.core.data.home.PreviewNoteDTO
+import com.mobile.pablo.core.model.home.PreviewNoteDTO
 import com.mobile.pablo.domain.data.home.PreviewNote
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.mobile.pablo.storage.database.dao
+package com.mobile.pablo.storage.database.dao.home
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -17,7 +17,7 @@ internal abstract class PreviewNoteDao {
     abstract suspend fun deleteNote(noteId : String)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertNote(previewNoteEntity: PreviewNoteEntity)
+    abstract suspend fun insertNote(previewNoteEntity: PreviewNoteEntity?)
 
     @Query("DELETE FROM notes")
     abstract suspend fun clearNotes()

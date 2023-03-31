@@ -1,6 +1,6 @@
-package com.mobile.pablo.storage.mapper.home
+package com.mobile.pablo.storage.mapper.note
 
-import com.mobile.pablo.core.data.home.FullNoteDTO
+import com.mobile.pablo.core.model.home.FullNoteDTO
 import com.mobile.pablo.storage.database.entity.FullNoteEntity
 import javax.inject.Inject
 
