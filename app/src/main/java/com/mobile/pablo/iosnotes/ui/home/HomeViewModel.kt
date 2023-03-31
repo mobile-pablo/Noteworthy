@@ -6,7 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.mobile.pablo.core.utils.SingleLiveEvent
 import com.mobile.pablo.domain.data.home.PreviewNote
 import com.mobile.pablo.domain.usecase.home.PreviewNoteUseCase
+import com.mobile.pablo.domain.usecase.note.FullNoteUseCase
 import com.mobile.pablo.iosnotes.util.launch
+import com.mobile.pablo.uicomponents.ui.util.StringRes.INTERNET_ISSUE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import javax.inject.Inject
@@ -14,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getPreviewNotes: PreviewNoteUseCase.GetPreviewNotes,
-    private val deletePreviewNote: PreviewNoteUseCase.DeletePreviewNote
+    private val deletePreviewNote: PreviewNoteUseCase.DeletePreviewNote,
+    private val deleteFullNote: FullNoteUseCase.DeleteFullNote
 ) : ViewModel() {
 
     private var getNotesJob: Job? = null
@@ -30,31 +33,31 @@ class HomeViewModel @Inject constructor(
         downloadNotes()
     }
 
+
     fun downloadNotes() {
         getNotesJob?.cancel()
         getNotesJob = launch {
             val noteResult = getPreviewNotes()
 
-            noteResult.apply {
+            _viewState.value = noteResult.run {
                 if (isSuccessful && data != null) {
                     _previewNotes.value = data
-                } else {
-
-                }
+                    ViewState.DownloadSuccessful
+                } else ViewState.Error(INTERNET_ISSUE)
             }
         }
     }
 
-    fun deletePreviewNote(noteId: String) {
+    fun deleteNotes(noteId: String) {
         deleteNoteJob?.cancel()
         deleteNoteJob = launch {
             deletePreviewNote(noteId)
+            deleteFullNote(noteId)
         }
     }
 }
 
 sealed class ViewState {
     object DownloadSuccessful : ViewState()
-    object DeleteSuccessful : ViewState()
     class Error(val message: String) : ViewState()
 }
