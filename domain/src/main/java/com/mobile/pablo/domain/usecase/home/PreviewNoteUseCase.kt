@@ -1,5 +1,6 @@
 package com.mobile.pablo.domain.usecase.home
 
+import com.mobile.pablo.core.data.DataTransfer
 import com.mobile.pablo.domain.data.home.PreviewNote
 import com.mobile.pablo.domain.mapper.home.PreviewNoteMapper
 import com.mobile.pablo.storage.source.home.PreviewNoteDataStorage
@@ -12,8 +13,11 @@ sealed class PreviewNoteUseCase {
         private val previewNoteDataStorage: PreviewNoteDataStorage
     ) {
 
-        suspend operator fun invoke(): List<PreviewNote?> =
-            previewNoteDataStorage.getNotes().map(previewNoteMapper::map)
+        suspend operator fun invoke(): DataTransfer<List<PreviewNote?>> =
+            DataTransfer(
+                previewNoteDataStorage.getNotes()
+                    .map(previewNoteMapper::map)
+            )
     }
 
     class InsertPreviewNote @Inject constructor(
