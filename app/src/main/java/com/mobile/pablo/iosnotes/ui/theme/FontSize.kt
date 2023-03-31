@@ -1,11 +1,11 @@
 package com.mobile.pablo.iosnotes.ui.theme
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
+import com.mobile.pablo.iosnotes.ui.util.MaterialTheme
 
 data class FontSize(
     val default: TextUnit = 0.sp,
