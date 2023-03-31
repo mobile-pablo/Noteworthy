@@ -33,7 +33,6 @@ class HomeViewModel @Inject constructor(
         downloadNotes()
     }
 
-
     fun downloadNotes() {
         getNotesJob?.cancel()
         getNotesJob = launch {
@@ -48,7 +47,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun deleteNotes(noteId: String) {
+    fun deleteNote(noteId: String) {
         deleteNoteJob?.cancel()
         deleteNoteJob = launch {
             deletePreviewNote(noteId)

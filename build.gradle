@@ -17,7 +17,7 @@ buildscript {
     ext.coroutines = '1.5.2'
 
     ext.coil = '2.2.2'
-
+    ext.navigation_compose = '1.8.38-beta'
     //storage
     ext.room = '2.5.1'
 
