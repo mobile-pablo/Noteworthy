@@ -9,8 +9,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.mobile.pablo.iosnotes.ui.theme.IOSNotesTheme
-import com.mobile.pablo.iosnotes.ui.util.MaterialTheme
+import com.mobile.pablo.iosnotes.ui.home.HomeScreen
+import com.mobile.pablo.uicomponents.ui.theme.IOSNotesTheme
+import com.mobile.pablo.uicomponents.ui.util.Theme
 
 class MainActivity : ComponentActivity() {
 
@@ -21,9 +22,9 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.homeBackground
+                    color = Theme.colors.homeBackground
                 ) {
-                    Greeting("Android")
+                    HomeScreen()
                 }
             }
         }
@@ -34,11 +35,11 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun DefaultPreview() {
     IOSNotesTheme {
-        Greeting("Android")
+        HomeScreen()
     }
 }
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "Hello $name!", color = MaterialTheme.colors.text)
+    Text(text = "Hello $name!", color = Theme.colors.text)
 }

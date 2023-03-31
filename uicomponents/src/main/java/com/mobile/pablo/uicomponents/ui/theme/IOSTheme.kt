@@ -1,10 +1,10 @@
-package com.mobile.pablo.iosnotes.ui.theme
+package com.mobile.pablo.uicomponents.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import com.mobile.pablo.iosnotes.ui.util.MaterialTheme
-import com.mobile.pablo.iosnotes.ui.util.darkCustomColors
+import com.mobile.pablo.uicomponents.ui.util.MaterialTheme
+import com.mobile.pablo.uicomponents.ui.util.darkCustomColors
 
 private val darkColors = darkCustomColors(
     text = TextNight,

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mobile.pablo.iosnotes.ui.util
+package com.mobile.pablo.uicomponents.ui.util
 
 import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.ContentAlpha

@@ -1,5 +1,3 @@
-package com.mobile.pablo.iosnotes.ui.util
-
 /*
  * Copyright 2019 The Android Open Source Project
  *
@@ -16,6 +14,8 @@ package com.mobile.pablo.iosnotes.ui.util
  * limitations under the License.
  */
 
+package com.mobile.pablo.uicomponents.ui.util
+
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.contentColorFor
 import androidx.compose.runtime.Composable
@@ -27,7 +27,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.structuralEqualityPolicy
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.takeOrElse
-import com.mobile.pablo.iosnotes.ui.util.MaterialTheme.colors
+import com.mobile.pablo.uicomponents.ui.util.Theme.colors
 
 /**
  * <a href="https://material.io/design/color/the-color-system.html" class="external" target="_blank">Material Design color system</a>.

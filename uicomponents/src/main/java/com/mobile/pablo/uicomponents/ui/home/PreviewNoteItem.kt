@@ -1,43 +1,53 @@
 package com.mobile.pablo.uicomponents.ui.home
 
 import DateUtils.dayMonthYearFormat
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mobile.pablo.domain.data.home.PreviewNote
+import com.mobile.pablo.uicomponents.ui.theme.font
+import com.mobile.pablo.uicomponents.ui.theme.spacing
+import com.mobile.pablo.uicomponents.ui.util.Theme
 
 @Composable
 fun PreviewNoteItem(previewNote: PreviewNote) {
     Box(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(Theme.spacing.spacing_6))
+            .background(Theme.colors.selectedNoteBackground)
             .padding(
-                vertical = 20.dp,
-                horizontal = 10.dp
+                vertical = Theme.spacing.spacing_16,
+                horizontal = Theme.spacing.spacing_10
             )
+
     ) {
         Column {
             Text(
                 text = previewNote.title,
                 fontSize = 15.sp,
-                color = Color.White
+                color = Theme.colors.text
             )
 
-            Row(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Text(
                     text = dayMonthYearFormat(previewNote.date),
-                    fontSize = 10.sp,
-                    color = Color.White
+                    fontSize = Theme.font.font_9,
+                    color = Theme.colors.text
                 )
                 Text(
                     text = previewNote.description,
-                    fontSize = 10.sp,
-                    color = Color.White,
+                    fontSize = Theme.font.font_9,
+                    color = Theme.colors.text,
                     overflow = TextOverflow.Clip
                 )
             }

@@ -1,4 +1,4 @@
-package com.mobile.pablo.iosnotes.ui.theme
+package com.mobile.pablo.uicomponents.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.mobile.pablo.iosnotes.ui.util
+package com.mobile.pablo.uicomponents.ui.util
 
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.text.selection.LocalTextSelectionColors
@@ -23,10 +23,10 @@ import androidx.compose.material.ripple.LocalRippleTheme
 import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.*
-import com.mobile.pablo.iosnotes.ui.theme.FontSize
-import com.mobile.pablo.iosnotes.ui.theme.LocalFontSize
-import com.mobile.pablo.iosnotes.ui.theme.LocalSpacing
-import com.mobile.pablo.iosnotes.ui.theme.Spacing
+import com.mobile.pablo.uicomponents.ui.theme.FontSize
+import com.mobile.pablo.uicomponents.ui.theme.LocalFontSize
+import com.mobile.pablo.uicomponents.ui.theme.LocalSpacing
+import com.mobile.pablo.uicomponents.ui.theme.Spacing
 
 /**
  * <a href="https://material.io/design/material-theming/overview.html" class="external" target="_blank">Material Theming</a>.
@@ -62,9 +62,9 @@ private val LocalShapes = staticCompositionLocalOf { Shapes() }
 
 @Composable
 fun MaterialTheme(
-    colors: CustomColors = MaterialTheme.colors,
-    typography: Typography = MaterialTheme.typography,
-    shapes: Shapes = MaterialTheme.shapes,
+    colors: CustomColors = Theme.colors,
+    typography: Typography = Theme.typography,
+    shapes: Shapes = Theme.shapes,
     content: @Composable () -> Unit
 ) {
 
@@ -74,7 +74,8 @@ fun MaterialTheme(
         colors.copy()
     }.apply { updateColorsFrom(colors) }
     val rippleIndication = rememberRipple()
-    val selectionColors = rememberTextSelectionColors(rememberedColors)
+    val selectionColors =
+        rememberTextSelectionColors(rememberedColors)
     CompositionLocalProvider(
         LocalColors provides rememberedColors,
         LocalContentAlpha provides ContentAlpha.high,
@@ -94,7 +95,7 @@ fun MaterialTheme(
  * Contains functions to access the current theme values provided at the call site's position in
  * the hierarchy.
  */
-object MaterialTheme {
+object Theme {
     /**
      * Retrieves the current [Colors] at the call site's position in the hierarchy.
      *
@@ -128,12 +129,12 @@ private object MaterialRippleTheme : RippleTheme {
     @Composable
     override fun defaultColor() = RippleTheme.defaultRippleColor(
         contentColor = LocalContentColor.current,
-        lightTheme = MaterialTheme.colors.isLight
+        lightTheme = Theme.colors.isLight
     )
 
     @Composable
     override fun rippleAlpha() = RippleTheme.defaultRippleAlpha(
         contentColor = LocalContentColor.current,
-        lightTheme = MaterialTheme.colors.isLight
+        lightTheme = Theme.colors.isLight
     )
 }

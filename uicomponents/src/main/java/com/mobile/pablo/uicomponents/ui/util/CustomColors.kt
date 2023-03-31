@@ -1,4 +1,4 @@
-package com.mobile.pablo.iosnotes.ui.util
+package com.mobile.pablo.uicomponents.ui.util
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
