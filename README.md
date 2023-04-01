@@ -3,6 +3,7 @@
 # Tech stack
 * Room
 * MVVM
+* Coil
 * Coroutines
 * Compose
 * Compose Navigation
