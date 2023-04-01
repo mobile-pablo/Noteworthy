@@ -37,13 +37,14 @@ fun HomeScreen(
                     "Wtorek | 30.03",
                     Date(42L),
                     "Lorem ipsum dolet sit amet"
-                )
+                ),
+                onClick = { navigateToNote(navigator) }
             )
             LazyColumn(content = {})
         }
     }
+}
 
-    fun navigateToNote(navigator: DestinationsNavigator) {
-        navigator.navigate(NoteScreenDestination)
-    }
+fun navigateToNote(navigator: DestinationsNavigator) {
+    navigator.navigate(NoteScreenDestination)
 }

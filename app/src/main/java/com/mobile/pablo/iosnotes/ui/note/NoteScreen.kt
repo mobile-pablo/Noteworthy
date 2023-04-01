@@ -3,6 +3,7 @@ package com.mobile.pablo.iosnotes.ui.note
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.mobile.pablo.uicomponents.ui.theme.spacing
@@ -17,10 +18,11 @@ fun NoteScreen() {
             .fillMaxSize()
             .padding(Theme.spacing.spacing_6)
     ) {
+        Greeting("Note Screen")
     }
 }
-// Dodac long press akcje
 
 @Composable
-fun TopNavButtons() {
+fun Greeting(name: String) {
+    Text(text = "Hello $name!", color = Theme.colors.text)
 }

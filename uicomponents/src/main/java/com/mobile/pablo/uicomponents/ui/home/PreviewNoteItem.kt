@@ -2,6 +2,7 @@ package com.mobile.pablo.uicomponents.ui.home
 
 import DateUtils.dayMonthYearFormat
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
@@ -15,7 +16,7 @@ import com.mobile.pablo.uicomponents.ui.theme.spacing
 import com.mobile.pablo.uicomponents.ui.util.Theme
 
 @Composable
-fun PreviewNoteItem(previewNote: PreviewNote) {
+fun PreviewNoteItem(previewNote: PreviewNote, onClick : () -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -24,8 +25,7 @@ fun PreviewNoteItem(previewNote: PreviewNote) {
             .padding(
                 vertical = Theme.spacing.spacing_16,
                 horizontal = Theme.spacing.spacing_10
-            )
-
+            ).clickable(onClick = onClick)
     ) {
         Column {
             Text(
