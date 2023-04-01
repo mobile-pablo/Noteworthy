@@ -6,8 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.mobile.pablo.storage.database.converter.DateTypeConverter
-import com.mobile.pablo.storage.database.dao.note.FullNoteDao
 import com.mobile.pablo.storage.database.dao.home.PreviewNoteDao
+import com.mobile.pablo.storage.database.dao.note.FullNoteDao
 import com.mobile.pablo.storage.database.entity.FullNoteEntity
 import com.mobile.pablo.storage.database.entity.PreviewNoteEntity
 

@@ -1,7 +1,6 @@
 package com.mobile.pablo.storage.source.home
 
 import com.mobile.pablo.core.model.home.PreviewNoteDTO
-import com.mobile.pablo.storage.database.entity.PreviewNoteEntity
 
 interface PreviewNoteDataStorage {
 

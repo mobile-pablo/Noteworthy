@@ -9,8 +9,8 @@ import java.util.Date
 )
 internal data class FullNoteEntity(
     @PrimaryKey
-    val id : Int,
-    val title : String,
-    val date : Date,
-    val fullDescription : String
+    val id: Int,
+    val title: String,
+    val date: Date,
+    val fullDescription: String
 )

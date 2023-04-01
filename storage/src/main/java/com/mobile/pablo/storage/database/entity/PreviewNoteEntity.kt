@@ -9,8 +9,8 @@ import java.util.Date
 )
 internal data class PreviewNoteEntity(
     @PrimaryKey
-    val id : Int,
-    val title : String,
-    val date : Date,
-    val description : String
+    val id: Int,
+    val title: String,
+    val date: Date,
+    val description: String
 )
