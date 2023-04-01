@@ -9,9 +9,11 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.mobile.pablo.iosnotes.ui.NavGraphs
 import com.mobile.pablo.iosnotes.ui.home.HomeScreen
 import com.mobile.pablo.uicomponents.ui.theme.IOSNotesTheme
 import com.mobile.pablo.uicomponents.ui.util.Theme
+import com.ramcosta.composedestinations.DestinationsNavHost
 
 class MainActivity : ComponentActivity() {
 
@@ -24,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = Theme.colors.homeBackground
                 ) {
-                    HomeScreen()
+                  DestinationsNavHost(navGraph = NavGraphs.root)
                 }
             }
         }

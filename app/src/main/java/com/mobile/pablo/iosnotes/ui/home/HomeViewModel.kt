@@ -10,8 +10,8 @@ import com.mobile.pablo.domain.usecase.note.FullNoteUseCase
 import com.mobile.pablo.iosnotes.util.launch
 import com.mobile.pablo.uicomponents.ui.util.StringRes.INTERNET_ISSUE
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
 import javax.inject.Inject
+import kotlinx.coroutines.Job
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(

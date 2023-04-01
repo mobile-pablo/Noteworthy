@@ -7,7 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.mobile.pablo.uicomponents.ui.theme.spacing
 import com.mobile.pablo.uicomponents.ui.util.Theme
+import com.ramcosta.composedestinations.annotation.Destination
 
+@Destination
 @Composable
 fun NoteScreen() {
     Box(

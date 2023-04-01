@@ -9,14 +9,20 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.mobile.pablo.domain.data.home.PreviewNote
+import com.mobile.pablo.iosnotes.ui.destinations.NoteScreenDestination
 import com.mobile.pablo.uicomponents.ui.home.PreviewNoteItem
 import com.mobile.pablo.uicomponents.ui.home.TopHomeBar
 import com.mobile.pablo.uicomponents.ui.theme.spacing
 import com.mobile.pablo.uicomponents.ui.util.Theme
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import java.util.*
 
+@Destination(start = true)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navigator: DestinationsNavigator
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -35,5 +41,9 @@ fun HomeScreen() {
             )
             LazyColumn(content = {})
         }
+    }
+
+    fun navigateToNote(navigator: DestinationsNavigator) {
+        navigator.navigate(NoteScreenDestination)
     }
 }
