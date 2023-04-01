@@ -9,10 +9,13 @@ import androidx.compose.ui.Modifier
 import com.mobile.pablo.uicomponents.ui.theme.spacing
 import com.mobile.pablo.uicomponents.ui.util.Theme
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Destination
 @Composable
-fun NoteScreen() {
+fun NoteScreen(
+    navigator: DestinationsNavigator
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()

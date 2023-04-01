@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.mobile.pablo.domain.data.home.PreviewNote
+import com.mobile.pablo.iosnotes.ui.destinations.CreateScreenDestination
 import com.mobile.pablo.iosnotes.ui.destinations.NoteScreenDestination
 import com.mobile.pablo.uicomponents.ui.home.PreviewNoteItem
 import com.mobile.pablo.uicomponents.ui.home.TopHomeBar
@@ -47,4 +48,8 @@ fun HomeScreen(
 
 fun navigateToNote(navigator: DestinationsNavigator) {
     navigator.navigate(NoteScreenDestination)
+}
+
+fun navigateToCreate(navigator: DestinationsNavigator) {
+    navigator.navigate(CreateScreenDestination)
 }
