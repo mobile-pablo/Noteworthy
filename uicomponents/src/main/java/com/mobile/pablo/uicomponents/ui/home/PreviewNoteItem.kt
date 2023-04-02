@@ -3,20 +3,30 @@ package com.mobile.pablo.uicomponents.ui.home
 import DateUtils.dayMonthYearFormat
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.text.style.TextAlign
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
+import androidx.constraintlayout.compose.Dimension
 import com.mobile.pablo.domain.data.home.PreviewNote
 import com.mobile.pablo.uicomponents.ui.theme.font
 import com.mobile.pablo.uicomponents.ui.theme.spacing
 import com.mobile.pablo.uicomponents.ui.util.Theme
 
 @Composable
-fun PreviewNoteItem(previewNote: PreviewNote, onClick : () -> Unit) {
+fun PreviewNoteItem(
+    previewNote: PreviewNote,
+    onClick: () -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -24,8 +34,9 @@ fun PreviewNoteItem(previewNote: PreviewNote, onClick : () -> Unit) {
             .background(Theme.colors.selectedNoteBackground)
             .padding(
                 vertical = Theme.spacing.spacing_16,
-                horizontal = Theme.spacing.spacing_10
-            ).clickable(onClick = onClick)
+                horizontal = Theme.spacing.spacing_20
+            )
+            .clickable(onClick = onClick)
     ) {
         Column {
             Text(
@@ -34,22 +45,56 @@ fun PreviewNoteItem(previewNote: PreviewNote, onClick : () -> Unit) {
                 color = Theme.colors.text
             )
 
-            Row(
+            ConstraintLayout(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                constraintSet = previewConstraints
             ) {
                 Text(
                     text = dayMonthYearFormat(previewNote.date),
                     fontSize = Theme.font.font_9,
-                    color = Theme.colors.text
+                    color = Theme.colors.text,
+                    modifier = Modifier
+                        .layoutId(ID_DATE_TEXT)
+                        .padding(end = Theme.spacing.spacing_20)
                 )
+
                 Text(
                     text = previewNote.description,
                     fontSize = Theme.font.font_9,
                     color = Theme.colors.text,
-                    overflow = TextOverflow.Clip
+                    modifier = Modifier
+                        .layoutId(ID_DESCRIPTION)
+                        .padding(
+                            start = Theme.spacing.spacing_20,
+                            end = Theme.spacing.spacing_20
+                        ),
+                    textAlign = TextAlign.Start,
+                    maxLines = 1
                 )
             }
         }
     }
 }
+
+private val previewConstraints = ConstraintSet {
+    val dateText = createRefFor(ID_DATE_TEXT)
+    val description = createRefFor(ID_DESCRIPTION)
+
+    constrain(dateText) {
+        top.linkTo(parent.top)
+        start.linkTo(parent.start)
+        bottom.linkTo(parent.bottom)
+    }
+
+    constrain(description) {
+        top.linkTo(parent.top)
+        end.linkTo(parent.end)
+        start.linkTo(dateText.end)
+        height = Dimension.wrapContent
+        bottom.linkTo(parent.bottom)
+    }
+}
+
+// Layout ids
+private const val ID_DATE_TEXT = "dateText"
+private const val ID_DESCRIPTION = "description"

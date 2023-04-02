@@ -18,9 +18,6 @@ import com.mobile.pablo.uicomponents.ui.home.BottomHomeBar
 import com.mobile.pablo.uicomponents.ui.home.PreviewNoteItem
 import com.mobile.pablo.uicomponents.ui.home.TopHomeBar
 import com.mobile.pablo.uicomponents.ui.theme.spacing
-import com.mobile.pablo.uicomponents.ui.util.StringRes.ID_BOTTOM_HOME_BAR
-import com.mobile.pablo.uicomponents.ui.util.StringRes.ID_PREVIEW_NOTE_LISTS
-import com.mobile.pablo.uicomponents.ui.util.StringRes.ID_TOP_HOME_BAR
 import com.mobile.pablo.uicomponents.ui.util.Theme
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -39,7 +36,7 @@ fun HomeScreen(
     ) {
         ConstraintLayout(
             modifier = Modifier.fillMaxSize(),
-            constraintSet = constraints
+            constraintSet = homeConstraints
         ) {
             TopHomeBar(Modifier.layoutId(ID_TOP_HOME_BAR))
             LazyColumn(
@@ -51,7 +48,10 @@ fun HomeScreen(
                                 0,
                                 "Wtorek | 30.03",
                                 Date(42L),
-                                "Lorem ipsum dolet sit amet"
+                                "Lorem ipsum dolor sit amet," +
+                                    " consectetur adipiscing elit. Nunc ut malesuada lacus." +
+                                    " Vestibulum eget odio tincidunt, varius magna non," +
+                                    " rhoncus eros. Donec et nulla purus."
                             ),
                             onClick = { navigateToNote(navigator) }
                         )
@@ -75,7 +75,7 @@ fun navigateToCreate(navigator: DestinationsNavigator) {
     navigator.navigate(CreateScreenDestination)
 }
 
-private val constraints = ConstraintSet {
+private val homeConstraints = ConstraintSet {
 
     val topHomeBar = createRefFor(ID_TOP_HOME_BAR)
     val previewNoteLists = createRefFor(ID_PREVIEW_NOTE_LISTS)
@@ -101,3 +101,8 @@ private val constraints = ConstraintSet {
         end.linkTo(parent.end)
     }
 }
+
+// Layout ids
+private const val ID_TOP_HOME_BAR = "topHomeBar"
+private const val ID_PREVIEW_NOTE_LISTS = "previewNoteLists"
+private const val ID_BOTTOM_HOME_BAR = "bottomHomeBar"
