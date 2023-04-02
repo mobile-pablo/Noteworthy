@@ -17,8 +17,10 @@ import com.mobile.pablo.uicomponents.ui.theme.spacing
 import com.mobile.pablo.uicomponents.ui.util.Theme
 
 @Composable
-fun TopHomeBar() {
-    Column(modifier = Modifier.fillMaxWidth()) {
+fun TopHomeBar(
+    modifier: Modifier
+) {
+    Column(modifier = modifier.fillMaxWidth()) {
         val textState = remember { mutableStateOf(TextFieldValue("")) }
         Text(
             text = stringResource(id = R.string.all_notes),
