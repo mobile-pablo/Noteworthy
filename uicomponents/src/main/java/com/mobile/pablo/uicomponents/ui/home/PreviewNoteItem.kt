@@ -14,14 +14,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.mobile.pablo.domain.data.home.PreviewNote
-import com.mobile.pablo.uicomponents.ui.theme.SelectedNoteBackground
-import com.mobile.pablo.uicomponents.ui.theme.Text
-import com.mobile.pablo.uicomponents.ui.theme.font
-import com.mobile.pablo.uicomponents.ui.theme.spacing
+import com.mobile.pablo.uicomponents.ui.theme.*
 import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
@@ -33,7 +31,7 @@ fun PreviewNoteItem(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(Theme.spacing.spacing_6))
-            .background(Theme.colors.SelectedNoteBackground)
+            .background(Theme.colors.PreviewNoteBackground)
             .padding(
                 vertical = Theme.spacing.spacing_16,
                 horizontal = Theme.spacing.spacing_20
@@ -71,7 +69,8 @@ fun PreviewNoteItem(
                             end = Theme.spacing.spacing_20
                         ),
                     textAlign = TextAlign.Start,
-                    maxLines = 1
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }

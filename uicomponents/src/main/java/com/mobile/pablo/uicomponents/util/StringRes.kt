@@ -1,4 +1,4 @@
-package com.mobile.pablo.uicomponents.ui.util
+package com.mobile.pablo.uicomponents.util
 
 // String for places where it cannot be used like VM
 

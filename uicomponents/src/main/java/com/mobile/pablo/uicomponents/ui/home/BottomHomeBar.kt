@@ -6,6 +6,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Done
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -13,10 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
-import com.mobile.pablo.uicomponents.ui.theme.Text
-import com.mobile.pablo.uicomponents.ui.theme.TopBarSelectedItemBackground
-import com.mobile.pablo.uicomponents.ui.theme.font
-import com.mobile.pablo.uicomponents.ui.theme.spacing
+import com.mobile.pablo.uicomponents.ui.theme.*
 import androidx.compose.material.MaterialTheme as Theme
 import kotlinx.coroutines.launch
 
@@ -37,7 +35,7 @@ fun BottomHomeBar(
     ConstraintLayout(
         modifier = modifier
             .fillMaxWidth()
-            .background(Theme.colors.TopBarSelectedItemBackground)
+            .background(Theme.colors.HomeBottomBarBackground)
             .padding(vertical = Theme.spacing.spacing_14),
         constraintSet = bottomHomeConstraints
     ) {
@@ -62,9 +60,9 @@ fun BottomHomeBar(
                 }
             ) {
                 Icon(
-                    Icons.Default.Search,
+                    Icons.Default.Done,
                     contentDescription = "New File",
-                    tint = Theme.colors.Text,
+                    tint = Theme.colors.CTA,
                     modifier = Modifier.size(Theme.spacing.spacing_24)
                 )
             }

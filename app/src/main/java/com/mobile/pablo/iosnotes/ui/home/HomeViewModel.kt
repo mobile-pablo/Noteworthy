@@ -8,7 +8,7 @@ import com.mobile.pablo.domain.data.home.PreviewNote
 import com.mobile.pablo.domain.usecase.home.PreviewNoteUseCase
 import com.mobile.pablo.domain.usecase.note.FullNoteUseCase
 import com.mobile.pablo.iosnotes.util.launch
-import com.mobile.pablo.uicomponents.ui.util.StringRes.INTERNET_ISSUE
+import com.mobile.pablo.uicomponents.util.StringRes.INTERNET_ISSUE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Job
