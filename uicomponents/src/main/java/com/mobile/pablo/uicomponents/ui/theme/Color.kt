@@ -42,7 +42,7 @@ val Colors.SearchBackground: Color @Composable
 val Colors.PreviewNoteBackground: Color @Composable
     get() = if (isSystemInDarkTheme()) PreviewNoteBackgroundNight else PreviewNoteBackgroundDay
 
-val Colors.c: Color @Composable
+val Colors.PreviewLine: Color @Composable
     get() = if (isSystemInDarkTheme()) PreviewLineNight else PreviewLineDay
 
 val Colors.CTA: Color @Composable

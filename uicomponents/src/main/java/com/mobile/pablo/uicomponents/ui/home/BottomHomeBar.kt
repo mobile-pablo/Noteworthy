@@ -1,21 +1,25 @@
 package com.mobile.pablo.uicomponents.ui.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
-import com.mobile.pablo.uicomponents.R
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
+import com.mobile.pablo.uicomponents.R
 import com.mobile.pablo.uicomponents.ui.theme.*
-import androidx.compose.material.MaterialTheme as Theme
+import com.mobile.pablo.uicomponents.ui.util.topRectBorder
 import kotlinx.coroutines.launch
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun BottomHomeBar(
@@ -35,7 +39,9 @@ fun BottomHomeBar(
         modifier = modifier
             .fillMaxWidth()
             .background(Theme.colors.HomeBottomBarBackground)
-            .padding(vertical = Theme.spacing.spacing_14),
+            .topRectBorder(
+                brush = SolidColor(Theme.colors.PreviewLine)
+            ),
         constraintSet = bottomHomeConstraints
     ) {
 

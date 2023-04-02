@@ -28,5 +28,8 @@ fun NoteScreen(
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "Hello $name!", color = Theme.colors.Text)
+    Text(
+        text = "Hello $name!",
+        color = Theme.colors.Text
+    )
 }

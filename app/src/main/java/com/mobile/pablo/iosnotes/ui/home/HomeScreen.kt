@@ -35,15 +35,19 @@ fun HomeScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Theme.colors.HomeBackground)
-            .padding(horizontal = Theme.spacing.spacing_6)
     ) {
         ConstraintLayout(
             modifier = Modifier.fillMaxSize(),
             constraintSet = homeConstraints
         ) {
-            TopHomeBar(Modifier.layoutId(ID_TOP_HOME_BAR))
+            TopHomeBar(
+                Modifier.layoutId(ID_TOP_HOME_BAR)
+                    .padding(horizontal = Theme.spacing.spacing_14)
+            )
             LazyColumn(
-                modifier = Modifier.layoutId(ID_PREVIEW_NOTE_LISTS),
+                modifier = Modifier
+                    .layoutId(ID_PREVIEW_NOTE_LISTS)
+                    .padding(horizontal = Theme.spacing.spacing_14),
                 content = {
                     item {
                         PreviewNoteItem(
