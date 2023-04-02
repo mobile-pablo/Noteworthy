@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="all_notes">All Notes</string>
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit. Ut quis semper eros.
+        Phasellus nec maximus augue. Vestibulum dapibus lacus rutrum
+        diam faucibus iaculis. Sed magna augue, porta non purus sed,
+        tristique vestibulum turpis. Morbi sodales volutpat sapien,
+        nec porttitor justo blandit sed. Nulla facilisi.
+    </string>
 </resources>

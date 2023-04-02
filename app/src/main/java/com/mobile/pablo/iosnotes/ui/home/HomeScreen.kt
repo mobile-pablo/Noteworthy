@@ -8,12 +8,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.res.stringResource
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.mobile.pablo.domain.data.home.PreviewNote
 import com.mobile.pablo.iosnotes.ui.destinations.CreateScreenDestination
 import com.mobile.pablo.iosnotes.ui.destinations.NoteScreenDestination
+import com.mobile.pablo.uicomponents.R
 import com.mobile.pablo.uicomponents.ui.home.BottomHomeBar
 import com.mobile.pablo.uicomponents.ui.home.PreviewNoteItem
 import com.mobile.pablo.uicomponents.ui.home.TopHomeBar
@@ -48,10 +50,7 @@ fun HomeScreen(
                                 0,
                                 "Wtorek | 30.03",
                                 Date(42L),
-                                "Lorem ipsum dolor sit amet," +
-                                    " consectetur adipiscing elit. Nunc ut malesuada lacus." +
-                                    " Vestibulum eget odio tincidunt, varius magna non," +
-                                    " rhoncus eros. Donec et nulla purus."
+                                stringResource(id = R.string.lorem_ipsum)
                             ),
                             onClick = { navigateToNote(navigator) }
                         )
