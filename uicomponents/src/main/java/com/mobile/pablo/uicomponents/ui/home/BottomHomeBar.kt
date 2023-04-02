@@ -5,13 +5,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Done
-import androidx.compose.material.icons.filled.Search
+import com.mobile.pablo.uicomponents.R
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.res.painterResource
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import com.mobile.pablo.uicomponents.ui.theme.*
@@ -60,7 +59,7 @@ fun BottomHomeBar(
                 }
             ) {
                 Icon(
-                    Icons.Default.Done,
+                    painter = painterResource(id = R.drawable.write),
                     contentDescription = "New File",
                     tint = Theme.colors.CTA,
                     modifier = Modifier.size(Theme.spacing.spacing_24)
