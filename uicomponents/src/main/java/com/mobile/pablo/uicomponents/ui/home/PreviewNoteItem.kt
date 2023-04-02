@@ -18,9 +18,11 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.mobile.pablo.domain.data.home.PreviewNote
+import com.mobile.pablo.uicomponents.ui.theme.SelectedNoteBackground
+import com.mobile.pablo.uicomponents.ui.theme.Text
 import com.mobile.pablo.uicomponents.ui.theme.font
 import com.mobile.pablo.uicomponents.ui.theme.spacing
-import com.mobile.pablo.uicomponents.ui.util.Theme
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun PreviewNoteItem(
@@ -31,7 +33,7 @@ fun PreviewNoteItem(
         modifier = Modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(Theme.spacing.spacing_6))
-            .background(Theme.colors.selectedNoteBackground)
+            .background(Theme.colors.SelectedNoteBackground)
             .padding(
                 vertical = Theme.spacing.spacing_16,
                 horizontal = Theme.spacing.spacing_20
@@ -42,7 +44,7 @@ fun PreviewNoteItem(
             Text(
                 text = previewNote.title,
                 fontSize = Theme.font.font_15,
-                color = Theme.colors.text
+                color = Theme.colors.Text
             )
 
             ConstraintLayout(
@@ -52,7 +54,7 @@ fun PreviewNoteItem(
                 Text(
                     text = dayMonthYearFormat(previewNote.date),
                     fontSize = Theme.font.font_9,
-                    color = Theme.colors.text,
+                    color = Theme.colors.Text,
                     modifier = Modifier
                         .layoutId(ID_DATE_TEXT)
                         .padding(end = Theme.spacing.spacing_20)
@@ -61,7 +63,7 @@ fun PreviewNoteItem(
                 Text(
                     text = previewNote.description,
                     fontSize = Theme.font.font_9,
-                    color = Theme.colors.text,
+                    color = Theme.colors.Text,
                     modifier = Modifier
                         .layoutId(ID_DESCRIPTION)
                         .padding(

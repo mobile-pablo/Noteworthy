@@ -16,9 +16,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
+import com.mobile.pablo.uicomponents.ui.theme.Text
+import com.mobile.pablo.uicomponents.ui.theme.TopBarSelectedItemBackground
 import com.mobile.pablo.uicomponents.ui.theme.font
 import com.mobile.pablo.uicomponents.ui.theme.spacing
-import com.mobile.pablo.uicomponents.ui.util.Theme
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun SearchBar(state: MutableState<TextFieldValue>) {
@@ -31,7 +33,7 @@ fun SearchBar(state: MutableState<TextFieldValue>) {
             .fillMaxWidth()
             .clip(RoundedCornerShape(Theme.spacing.spacing_12)),
         textStyle = TextStyle(
-            color = Theme.colors.text,
+            color = Theme.colors.Text,
             fontSize = Theme.font.font_14,
         ),
         leadingIcon = {
@@ -63,11 +65,11 @@ fun SearchBar(state: MutableState<TextFieldValue>) {
         singleLine = true,
         shape = RectangleShape, // The TextFiled has rounded corners top left and right by default
         colors = TextFieldDefaults.textFieldColors(
-            textColor = Theme.colors.text,
-            cursorColor = Theme.colors.text,
-            leadingIconColor = Theme.colors.text,
-            trailingIconColor = Theme.colors.text,
-            backgroundColor = Theme.colors.topBarSelectedItemBackground,
+            textColor = Theme.colors.Text,
+            cursorColor = Theme.colors.Text,
+            leadingIconColor = Theme.colors.Text,
+            trailingIconColor = Theme.colors.Text,
+            backgroundColor = Theme.colors.TopBarSelectedItemBackground,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
             disabledIndicatorColor = Color.Transparent

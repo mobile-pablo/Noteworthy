@@ -12,9 +12,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import com.mobile.pablo.uicomponents.R
+import com.mobile.pablo.uicomponents.ui.theme.Text
 import com.mobile.pablo.uicomponents.ui.theme.font
 import com.mobile.pablo.uicomponents.ui.theme.spacing
-import com.mobile.pablo.uicomponents.ui.util.Theme
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun TopHomeBar(
@@ -25,7 +26,7 @@ fun TopHomeBar(
         Text(
             text = stringResource(id = R.string.all_notes),
             fontSize = Theme.font.font_28,
-            color = Theme.colors.text
+            color = Theme.colors.Text
         )
         Spacer(
             modifier = Modifier.height(

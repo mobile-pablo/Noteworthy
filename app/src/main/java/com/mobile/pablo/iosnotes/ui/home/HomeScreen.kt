@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
@@ -19,8 +20,8 @@ import com.mobile.pablo.uicomponents.R
 import com.mobile.pablo.uicomponents.ui.home.BottomHomeBar
 import com.mobile.pablo.uicomponents.ui.home.PreviewNoteItem
 import com.mobile.pablo.uicomponents.ui.home.TopHomeBar
+import com.mobile.pablo.uicomponents.ui.theme.HomeBackground
 import com.mobile.pablo.uicomponents.ui.theme.spacing
-import com.mobile.pablo.uicomponents.ui.util.Theme
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import java.util.Date
@@ -33,7 +34,7 @@ fun HomeScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Theme.colors.homeBackground)
+            .background(Theme.colors.HomeBackground)
             .padding(horizontal = Theme.spacing.spacing_6)
     ) {
         ConstraintLayout(

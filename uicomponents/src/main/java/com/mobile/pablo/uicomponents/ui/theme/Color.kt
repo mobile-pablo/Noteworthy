@@ -1,5 +1,8 @@
 package com.mobile.pablo.uicomponents.ui.theme
 
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.Colors
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 // Day
@@ -21,3 +24,29 @@ val TopBarTextNight = Color(0xffb8b7b5)
 val TopBarSelectedItemBackgroundNight = Color(0xff47484a)
 val TopBarSelectedItemTextNight = Color(0xffb1b2b4)
 val SelectedNoteBackgroundNight = Color(0xffa0852c)
+
+
+
+val Colors.Text: Color @Composable
+    get() = if (isSystemInDarkTheme()) TextNight else TextDay
+
+val Colors.NoteBackground: Color @Composable
+    get() = if (isSystemInDarkTheme()) NoteBackgroundNight else NoteBackgroundDay
+
+val Colors.HomeBackground: Color @Composable
+    get() = if (isSystemInDarkTheme()) HomeBackgroundNight else HomeBackgroundDay
+
+val Colors.TopBarBackground: Color @Composable
+    get() = if (isSystemInDarkTheme()) TopBarBackgroundNight else TopBarBackgroundDay
+
+val Colors.TopBarText: Color @Composable
+    get() = if (isSystemInDarkTheme()) TopBarTextNight else TopBarTextDay
+
+val Colors.TopBarSelectedItemBackground: Color @Composable
+    get() = if (isSystemInDarkTheme()) TopBarSelectedItemBackgroundNight else TopBarSelectedItemBackgroundDay
+
+val Colors.TopBarSelectedItemText: Color @Composable
+    get() = if (isSystemInDarkTheme()) TopBarSelectedItemTextNight else TopBarSelectedItemTextDay
+
+val Colors.SelectedNoteBackground: Color @Composable
+    get() = if (isSystemInDarkTheme()) SelectedNoteBackgroundNight else SelectedNoteBackgroundDay
