@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
@@ -16,14 +17,13 @@ import com.mobile.pablo.domain.data.home.PreviewNote
 import com.mobile.pablo.iosnotes.ui.destinations.NoteScreenDestination
 import com.mobile.pablo.uicomponents.R
 import com.mobile.pablo.uicomponents.ui.home.HomeBottomBar
-import com.mobile.pablo.uicomponents.ui.home.PreviewNoteItem
 import com.mobile.pablo.uicomponents.ui.home.HomeTopBar
+import com.mobile.pablo.uicomponents.ui.home.PreviewNoteItem
 import com.mobile.pablo.uicomponents.ui.theme.HomeBackground
 import com.mobile.pablo.uicomponents.ui.theme.spacing
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import java.util.Date
-import androidx.compose.material.MaterialTheme as Theme
 
 @Destination(start = true)
 @Composable

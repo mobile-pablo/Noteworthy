@@ -49,7 +49,7 @@ fun SearchBar(state: MutableState<TextFieldValue>) {
                 ) {
                     Icon(
                         Icons.Default.Close,
-                        contentDescription = "Close",
+                        contentDescription = stringResource(id = R.string.close),
                         modifier = Modifier
                             .padding(Theme.spacing.spacing_16)
                             .size(Theme.spacing.spacing_24)
@@ -58,7 +58,7 @@ fun SearchBar(state: MutableState<TextFieldValue>) {
             } else {
                 Icon(
                     Icons.Default.Search,
-                    contentDescription = "Search",
+                    contentDescription = stringResource(id = R.string.search),
                     modifier = Modifier
                         .padding(Theme.spacing.spacing_16)
                         .size(Theme.spacing.spacing_24)

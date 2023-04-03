@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import com.mobile.pablo.uicomponents.R
@@ -66,7 +67,7 @@ fun HomeBottomBar(
             ) {
                 Icon(
                     painter = painterResource(id = R.drawable.write),
-                    contentDescription = "New File",
+                    contentDescription = stringResource(id = R.string.write),
                     tint = Theme.colors.CTA,
                     modifier = Modifier.size(Theme.spacing.spacing_24)
                 )

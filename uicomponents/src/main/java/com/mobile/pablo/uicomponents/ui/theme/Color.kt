@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.Color
 
 // Day
 val TextDay = Color(0xff271e05)
-val NoteBackgroundDay = Color(0xff292929)
+val NoteBackgroundDay = Color(0xffffffff)
 val HomeBackgroundDay = Color(0xfff2f2f4)
 val SearchDay = Color(0xffe4e3e9)
 val PreviewNoteBackgroundDay = Color(0xffffffff)
