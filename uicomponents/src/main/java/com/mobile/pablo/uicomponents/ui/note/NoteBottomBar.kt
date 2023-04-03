@@ -1,9 +1,7 @@
 package com.mobile.pablo.uicomponents.ui.note
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
@@ -14,6 +12,7 @@ import androidx.compose.ui.res.stringResource
 import com.mobile.pablo.uicomponents.R
 import com.mobile.pablo.uicomponents.data.NoteBottomWrapper
 import com.mobile.pablo.uicomponents.ui.theme.CTA
+import com.mobile.pablo.uicomponents.ui.theme.spacing
 
 @Composable
 fun NoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper : NoteBottomWrapper) {
@@ -22,7 +21,8 @@ fun NoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper : NoteBottomW
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .clickable { noteBottomWrapper.onCheckboxItem() },
+                .clickable { noteBottomWrapper.onCheckboxItem() }
+                .padding(vertical = Theme.spacing.spacing_6),
             contentAlignment = Alignment.Center,
         ) {
             Icon(
@@ -36,7 +36,8 @@ fun NoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper : NoteBottomW
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .clickable { noteBottomWrapper.onCameraItem },
+                .clickable { noteBottomWrapper.onCameraItem }
+                .padding(vertical = Theme.spacing.spacing_6),
             contentAlignment = Alignment.Center,
         ) {
             Icon(
@@ -50,7 +51,8 @@ fun NoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper : NoteBottomW
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .clickable { noteBottomWrapper.onPin },
+                .clickable { noteBottomWrapper.onPin }
+                .padding(vertical = Theme.spacing.spacing_6),
             contentAlignment = Alignment.Center,
         ) {
             Icon(
@@ -64,7 +66,8 @@ fun NoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper : NoteBottomW
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .clickable { noteBottomWrapper.onNew },
+                .clickable { noteBottomWrapper.onNew }
+                .padding(vertical = Theme.spacing.spacing_6),
             contentAlignment = Alignment.Center,
         ) {
             Icon(
