@@ -14,12 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.mobile.pablo.domain.data.home.PreviewNote
+import com.mobile.pablo.uicomponents.R
 import com.mobile.pablo.uicomponents.ui.theme.*
 import me.saket.swipe.SwipeAction
 import me.saket.swipe.SwipeableActionsBox
@@ -28,25 +30,28 @@ import androidx.compose.material.MaterialTheme as Theme
 @Composable
 fun PreviewNoteItem(
     previewNote: PreviewNote,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onPin: () -> Unit,
+    onDelete: () -> Unit,
 ) {
 
-    val archive = SwipeAction(
-        icon = { Text("Pin") },
+    val pinAction = SwipeAction(
+        icon = painterResource(id = R.drawable.pin),
         background = Color.Green,
-        onSwipe = { }
+        onSwipe = { onPin() }
     )
 
-    val snooze = SwipeAction(
-        icon = { Text("Delete") },
+    val deleteAction = SwipeAction(
+        icon = painterResource(id = R.drawable.trash),
         background = Color.Yellow,
         isUndo = true,
-        onSwipe = { },
+        onSwipe = { onDelete() },
     )
 
     SwipeableActionsBox(
-        startActions = listOf(archive),
-        endActions = listOf(snooze)
+        startActions = listOf(pinAction),
+        endActions = listOf(deleteAction),
+        swipeThreshold = Theme.spacing.spacing_4
     ) {
         Box(
             modifier = Modifier

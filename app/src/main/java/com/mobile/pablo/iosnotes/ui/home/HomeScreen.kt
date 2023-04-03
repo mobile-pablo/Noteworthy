@@ -41,7 +41,8 @@ fun HomeScreen(
             constraintSet = homeConstraints
         ) {
             TopHomeBar(
-                Modifier.layoutId(ID_TOP_HOME_BAR)
+                Modifier
+                    .layoutId(ID_TOP_HOME_BAR)
                     .padding(horizontal = Theme.spacing.spacing_14)
             )
             LazyColumn(
@@ -57,7 +58,9 @@ fun HomeScreen(
                                 Date(42L),
                                 stringResource(id = R.string.lorem_ipsum)
                             ),
-                            onClick = { navigateToNote(navigator) }
+                            onClick = { navigateToNote(navigator) },
+                            onDelete = { },
+                            onPin = { }
                         )
                     }
                 }
