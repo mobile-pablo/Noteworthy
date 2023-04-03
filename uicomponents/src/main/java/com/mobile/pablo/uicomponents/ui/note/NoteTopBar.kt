@@ -5,13 +5,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import com.mobile.pablo.uicomponents.R
@@ -26,36 +27,41 @@ fun NoteTopBar(
     noteTopWrapper: NoteTopWrapper
 ) {
     ConstraintLayout(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = Theme.spacing.spacing_4),
         constraintSet = constraints
     ) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
                 .layoutId(ID_GO_BACK)
                 .clickable { noteTopWrapper.onBackItem() }
-                .padding(vertical = Theme.spacing.spacing_6),
+                .padding(vertical = Theme.spacing.spacing_7, horizontal = Theme.spacing.spacing_4),
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.list),
+                imageVector = Icons.Default.KeyboardArrowLeft,
                 contentDescription = stringResource(id = R.string.list),
                 tint = Theme.colors.CTA
             )
             Spacer(modifier = Modifier.width(Theme.spacing.spacing_8))
 
             // For now we don't have folders, In future title will be passed here via Wrapper
-            Text(text = stringResource(id = R.string.all_notes))
+            Text(
+                text = stringResource(id = R.string.all_notes),
+                color = Theme.colors.CTA,
+                fontWeight = FontWeight.Medium
+            )
         }
 
         Box(
             modifier = Modifier
-                .fillMaxWidth()
+                .layoutId(ID_SHARE)
                 .clickable { noteTopWrapper.onShareItem() }
-                .padding(vertical = Theme.spacing.spacing_6),
+                .padding(Theme.spacing.spacing_7),
             contentAlignment = Alignment.Center,
         ) {
             Icon(
-                imageVector = Icons.Default.Share,
+                painter = painterResource(id = R.drawable.share),
                 contentDescription = stringResource(id = R.string.share),
                 tint = Theme.colors.CTA
             )
@@ -63,12 +69,16 @@ fun NoteTopBar(
 
         Box(
             modifier = Modifier
-                .fillMaxWidth()
+                .layoutId(ID_DONE)
                 .clickable { noteTopWrapper.onDoneItem }
-                .padding(vertical = Theme.spacing.spacing_6),
+                .padding(Theme.spacing.spacing_7),
             contentAlignment = Alignment.Center,
         ) {
-            Text(text = stringResource(id = R.string.done))
+            Text(
+                text = stringResource(id = R.string.done),
+                color = Theme.colors.CTA,
+                fontWeight = FontWeight.Medium
+            )
         }
     }
 }
