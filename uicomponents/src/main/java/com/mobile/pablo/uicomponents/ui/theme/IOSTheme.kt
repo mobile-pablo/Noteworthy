@@ -1,8 +1,8 @@
 package com.mobile.pablo.uicomponents.ui.theme
 
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun IOSNotesTheme(
@@ -13,7 +13,7 @@ fun IOSNotesTheme(
         LocalSpacing provides Spacing(),
         LocalFontSize provides FontSize()
     ) {
-        MaterialTheme(
+        Theme(
             typography = Typography,
             shapes = Shapes,
             content = content,

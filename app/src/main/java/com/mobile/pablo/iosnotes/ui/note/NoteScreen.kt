@@ -1,15 +1,19 @@
 package com.mobile.pablo.iosnotes.ui.note
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layoutId
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.mobile.pablo.domain.data.home.PreviewNote
+import com.mobile.pablo.uicomponents.ui.note.NoteBottomBar
 import com.mobile.pablo.uicomponents.ui.note.NoteTopBar
 import com.mobile.pablo.uicomponents.ui.note.TextCanvas
+import com.mobile.pablo.uicomponents.ui.theme.NoteBackground
 import com.mobile.pablo.uicomponents.ui.theme.spacing
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -24,11 +28,20 @@ fun NoteScreen(
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
+            .background(Theme.colors.NoteBackground)
             .padding(Theme.spacing.spacing_6),
         constraintSet = constraints
     ) {
-        NoteTopBar()
-        TextCanvas()
+        NoteTopBar(
+            modifier = Modifier.layoutId(ID_NOTE_TOP_BAR)
+        )
+        TextCanvas(
+            modifier = Modifier.layoutId(ID_TEXT_CANVAS),
+            previewNote = previewNote
+        )
+        NoteBottomBar(
+            modifier = Modifier.layoutId(ID_NOTE_BOTTOM_BAR)
+        )
     }
 }
 
