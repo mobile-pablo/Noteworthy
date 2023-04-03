@@ -11,6 +11,7 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.mobile.pablo.domain.data.home.PreviewNote
 import com.mobile.pablo.uicomponents.data.NoteBottomWrapper
+import com.mobile.pablo.uicomponents.data.NoteTopWrapper
 import com.mobile.pablo.uicomponents.ui.note.NoteBottomBar
 import com.mobile.pablo.uicomponents.ui.note.NoteTopBar
 import com.mobile.pablo.uicomponents.ui.note.TextCanvas
@@ -31,7 +32,10 @@ fun NoteScreen(
         constraintSet = constraints
     ) {
         NoteTopBar(
-            modifier = Modifier.layoutId(ID_NOTE_TOP_BAR)
+            modifier = Modifier.layoutId(ID_NOTE_TOP_BAR),
+            noteTopWrapper = NoteTopWrapper(
+                {}, {}, {}
+            )
         )
         TextCanvas(
             modifier = Modifier.layoutId(ID_TEXT_CANVAS),
