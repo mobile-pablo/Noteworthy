@@ -78,6 +78,7 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:$rootProject.hilt"
     implementation "com.github.AraujoJordan:ExcuseMe:$rootProject.excuseMe"
     implementation "androidx.constraintlayout:constraintlayout-compose:$compose_constraint"
+    implementation "me.saket.swipe:swipe:$compose_swipe"
 
     testImplementation "junit:junit:$rootProject.junit"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.junitExt"

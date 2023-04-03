@@ -12,6 +12,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -20,6 +21,8 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.mobile.pablo.domain.data.home.PreviewNote
 import com.mobile.pablo.uicomponents.ui.theme.*
+import me.saket.swipe.SwipeAction
+import me.saket.swipe.SwipeableActionsBox
 import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
@@ -27,51 +30,70 @@ fun PreviewNoteItem(
     previewNote: PreviewNote,
     onClick: () -> Unit
 ) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(Theme.spacing.spacing_6))
-            .background(Theme.colors.PreviewNoteBackground)
-            .padding(
-                vertical = Theme.spacing.spacing_16,
-                horizontal = Theme.spacing.spacing_20
-            )
-            .clickable(onClick = onClick)
+
+    val archive = SwipeAction(
+        icon = { Text("Pin") },
+        background = Color.Green,
+        onSwipe = { }
+    )
+
+    val snooze = SwipeAction(
+        icon = { Text("Delete") },
+        background = Color.Yellow,
+        isUndo = true,
+        onSwipe = { },
+    )
+
+    SwipeableActionsBox(
+        startActions = listOf(archive),
+        endActions = listOf(snooze)
     ) {
-        Column {
-            Text(
-                text = previewNote.title,
-                fontSize = Theme.font.font_15,
-                color = Theme.colors.Text
-            )
-
-            ConstraintLayout(
-                modifier = Modifier.fillMaxWidth(),
-                constraintSet = previewConstraints
-            ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(Theme.spacing.spacing_6))
+                .clickable(onClick = onClick)
+                .background(Theme.colors.PreviewNoteBackground)
+                .padding(
+                    vertical = Theme.spacing.spacing_16,
+                    horizontal = Theme.spacing.spacing_20
+                )
+        ) {
+            Column {
                 Text(
-                    text = dayMonthYearFormat(previewNote.date),
-                    fontSize = Theme.font.font_9,
-                    color = Theme.colors.Text,
-                    modifier = Modifier
-                        .layoutId(ID_DATE_TEXT)
-                        .padding(end = Theme.spacing.spacing_20)
+                    text = previewNote.title,
+                    fontSize = Theme.font.font_15,
+                    color = Theme.colors.Text
                 )
 
-                Text(
-                    text = previewNote.description,
-                    fontSize = Theme.font.font_9,
-                    color = Theme.colors.Text,
-                    modifier = Modifier
-                        .layoutId(ID_DESCRIPTION)
-                        .padding(
-                            start = Theme.spacing.spacing_20,
-                            end = Theme.spacing.spacing_20
-                        ),
-                    textAlign = TextAlign.Start,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
+                ConstraintLayout(
+                    modifier = Modifier.fillMaxWidth(),
+                    constraintSet = previewConstraints
+                ) {
+                    Text(
+                        text = dayMonthYearFormat(previewNote.date),
+                        fontSize = Theme.font.font_9,
+                        color = Theme.colors.Text,
+                        modifier = Modifier
+                            .layoutId(ID_DATE_TEXT)
+                            .padding(end = Theme.spacing.spacing_20)
+                    )
+
+                    Text(
+                        text = previewNote.description,
+                        fontSize = Theme.font.font_9,
+                        color = Theme.colors.Text,
+                        modifier = Modifier
+                            .layoutId(ID_DESCRIPTION)
+                            .padding(
+                                start = Theme.spacing.spacing_20,
+                                end = Theme.spacing.spacing_20
+                            ),
+                        textAlign = TextAlign.Start,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
         }
     }

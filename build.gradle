@@ -19,6 +19,7 @@ buildscript {
     ext.coil = '2.2.2'
     ext.navigation_compose = '1.8.38-beta'
     ext.compose_constraint = '1.0.1'
+    ext.compose_swipe = '1.1.1'
     //storage
     ext.room = '2.5.1'
 
