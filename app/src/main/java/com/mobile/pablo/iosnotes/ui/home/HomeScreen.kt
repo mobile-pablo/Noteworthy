@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
@@ -14,7 +13,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.mobile.pablo.domain.data.home.PreviewNote
-import com.mobile.pablo.iosnotes.ui.destinations.CreateScreenDestination
 import com.mobile.pablo.iosnotes.ui.destinations.NoteScreenDestination
 import com.mobile.pablo.uicomponents.R
 import com.mobile.pablo.uicomponents.ui.home.BottomHomeBar
@@ -25,6 +23,7 @@ import com.mobile.pablo.uicomponents.ui.theme.spacing
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import java.util.Date
+import androidx.compose.material.MaterialTheme as Theme
 
 @Destination(start = true)
 @Composable
@@ -68,18 +67,17 @@ fun HomeScreen(
             BottomHomeBar(
                 5,
                 modifier = Modifier.layoutId(ID_BOTTOM_HOME_BAR),
-                onClickNewNote = { navigateToCreate(navigator) }
+                onClickNewNote = { navigateToNote(navigator) }
             )
         }
     }
 }
 
-fun navigateToNote(navigator: DestinationsNavigator) {
-    navigator.navigate(NoteScreenDestination)
-}
-
-fun navigateToCreate(navigator: DestinationsNavigator) {
-    navigator.navigate(CreateScreenDestination)
+fun navigateToNote(
+    navigator: DestinationsNavigator,
+    previewNote: PreviewNote? = null
+) {
+    navigator.navigate(NoteScreenDestination(previewNote))
 }
 
 private val homeConstraints = ConstraintSet {

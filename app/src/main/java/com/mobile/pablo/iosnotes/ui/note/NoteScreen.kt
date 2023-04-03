@@ -7,6 +7,7 @@ import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.mobile.pablo.domain.data.home.PreviewNote
 import com.mobile.pablo.uicomponents.ui.theme.Text
 import com.mobile.pablo.uicomponents.ui.theme.spacing
 import com.ramcosta.composedestinations.annotation.Destination
@@ -15,7 +16,8 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Destination
 @Composable
 fun NoteScreen(
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
+    previewNote: PreviewNote?
 ) {
     Box(
         modifier = Modifier
