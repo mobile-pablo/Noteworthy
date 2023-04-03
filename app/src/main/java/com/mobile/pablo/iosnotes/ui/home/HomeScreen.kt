@@ -15,9 +15,9 @@ import androidx.constraintlayout.compose.Dimension
 import com.mobile.pablo.domain.data.home.PreviewNote
 import com.mobile.pablo.iosnotes.ui.destinations.NoteScreenDestination
 import com.mobile.pablo.uicomponents.R
-import com.mobile.pablo.uicomponents.ui.home.BottomHomeBar
+import com.mobile.pablo.uicomponents.ui.home.HomeBottomBar
 import com.mobile.pablo.uicomponents.ui.home.PreviewNoteItem
-import com.mobile.pablo.uicomponents.ui.home.TopHomeBar
+import com.mobile.pablo.uicomponents.ui.home.HomeTopBar
 import com.mobile.pablo.uicomponents.ui.theme.HomeBackground
 import com.mobile.pablo.uicomponents.ui.theme.spacing
 import com.ramcosta.composedestinations.annotation.Destination
@@ -39,9 +39,9 @@ fun HomeScreen(
             modifier = Modifier.fillMaxSize(),
             constraintSet = homeConstraints
         ) {
-            TopHomeBar(
+            HomeTopBar(
                 Modifier
-                    .layoutId(ID_TOP_HOME_BAR)
+                    .layoutId(ID_HOME_TOP_BAR)
                     .padding(horizontal = Theme.spacing.spacing_14)
             )
             LazyColumn(
@@ -64,9 +64,9 @@ fun HomeScreen(
                     }
                 }
             )
-            BottomHomeBar(
+            HomeBottomBar(
                 5,
-                modifier = Modifier.layoutId(ID_BOTTOM_HOME_BAR),
+                modifier = Modifier.layoutId(ID_HOME_BOTTOM_BAR),
                 onClickNewNote = { navigateToNote(navigator) }
             )
         }
@@ -82,25 +82,25 @@ fun navigateToNote(
 
 private val homeConstraints = ConstraintSet {
 
-    val topHomeBar = createRefFor(ID_TOP_HOME_BAR)
+    val homeTopBar = createRefFor(ID_HOME_TOP_BAR)
     val previewNoteLists = createRefFor(ID_PREVIEW_NOTE_LISTS)
-    val bottomHomeBar = createRefFor(ID_BOTTOM_HOME_BAR)
+    val homeBottomBar = createRefFor(ID_HOME_BOTTOM_BAR)
 
-    constrain(topHomeBar) {
+    constrain(homeTopBar) {
         top.linkTo(parent.top)
         start.linkTo(parent.start)
         end.linkTo(parent.end)
     }
 
     constrain(previewNoteLists) {
-        top.linkTo(topHomeBar.bottom)
+        top.linkTo(homeTopBar.bottom)
         start.linkTo(parent.start)
         end.linkTo(parent.end)
         height = Dimension.fillToConstraints
-        bottom.linkTo(bottomHomeBar.top)
+        bottom.linkTo(homeBottomBar.top)
     }
 
-    constrain(bottomHomeBar) {
+    constrain(homeBottomBar) {
         bottom.linkTo(parent.bottom)
         start.linkTo(parent.start)
         end.linkTo(parent.end)
@@ -108,6 +108,6 @@ private val homeConstraints = ConstraintSet {
 }
 
 // Layout ids
-private const val ID_TOP_HOME_BAR = "topHomeBar"
+private const val ID_HOME_TOP_BAR = "homeTopBar"
 private const val ID_PREVIEW_NOTE_LISTS = "previewNoteLists"
-private const val ID_BOTTOM_HOME_BAR = "bottomHomeBar"
+private const val ID_HOME_BOTTOM_BAR = "HomeBottomBar"

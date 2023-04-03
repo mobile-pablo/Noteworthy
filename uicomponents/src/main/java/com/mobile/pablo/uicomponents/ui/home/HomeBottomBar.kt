@@ -22,9 +22,9 @@ import kotlinx.coroutines.launch
 import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
-fun BottomHomeBar(
+fun HomeBottomBar(
     amountNotes: Int,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     onClickNewNote: () -> Unit
 ) {
 
@@ -42,7 +42,7 @@ fun BottomHomeBar(
             .topRectBorder(
                 brush = SolidColor(Theme.colors.PreviewLine)
             ),
-        constraintSet = bottomHomeConstraints
+        constraintSet = homeBottomConstraints
     ) {
 
         Box(
@@ -75,7 +75,7 @@ fun BottomHomeBar(
     }
 }
 
-private val bottomHomeConstraints = ConstraintSet {
+private val homeBottomConstraints = ConstraintSet {
     val amountTitle = createRefFor(ID_AMOUNT_TITLE)
     val addUser = createRefFor(ID_ADD_USER)
 

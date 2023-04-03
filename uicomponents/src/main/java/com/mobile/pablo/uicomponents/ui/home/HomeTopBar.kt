@@ -18,8 +18,8 @@ import com.mobile.pablo.uicomponents.ui.theme.spacing
 import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
-fun TopHomeBar(
-    modifier: Modifier
+fun HomeTopBar(
+    modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier.fillMaxWidth()) {
         val textState = remember { mutableStateOf(TextFieldValue("")) }
