@@ -37,13 +37,13 @@ fun PreviewNoteItem(
 
     val pinAction = SwipeAction(
         icon = painterResource(id = R.drawable.pin),
-        background = Color.Green,
+        background = Theme.colors.SwipeStart,
         onSwipe = { onPin() }
     )
 
     val deleteAction = SwipeAction(
         icon = painterResource(id = R.drawable.trash),
-        background = Color.Yellow,
+        background = Theme.colors.SwipeEnd,
         isUndo = true,
         onSwipe = { onDelete() },
     )
@@ -51,7 +51,7 @@ fun PreviewNoteItem(
     SwipeableActionsBox(
         startActions = listOf(pinAction),
         endActions = listOf(deleteAction),
-        swipeThreshold = Theme.spacing.spacing_4
+        modifier = Modifier.clip(RoundedCornerShape(Theme.spacing.spacing_6))
     ) {
         Box(
             modifier = Modifier
