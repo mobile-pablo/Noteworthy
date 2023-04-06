@@ -25,15 +25,14 @@ import com.mobile.pablo.uicomponents.ui.theme.*
 import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
-fun SearchBar(state: MutableState<TextFieldValue>) {
+fun SearchBar(modifier : Modifier, state: MutableState<TextFieldValue>) {
     TextField(
         value = state.value,
         placeholder = { stringResource(id = R.string.search) },
         onValueChange = {
             state.value = it
         },
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = modifier
             .clip(RoundedCornerShape(Theme.spacing.spacing_12)),
         textStyle = TextStyle(
             color = Theme.colors.Text,

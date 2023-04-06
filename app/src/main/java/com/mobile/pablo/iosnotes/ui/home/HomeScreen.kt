@@ -3,6 +3,7 @@ package com.mobile.pablo.iosnotes.ui.home
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.MaterialTheme as Theme
@@ -43,6 +44,7 @@ fun HomeScreen(
                 Modifier
                     .layoutId(ID_HOME_TOP_BAR)
                     .padding(horizontal = Theme.spacing.spacing_14)
+                    .fillMaxWidth()
             )
             LazyColumn(
                 modifier = Modifier
@@ -66,7 +68,9 @@ fun HomeScreen(
             )
             HomeBottomBar(
                 5,
-                modifier = Modifier.layoutId(ID_HOME_BOTTOM_BAR),
+                modifier = Modifier
+                    .layoutId(ID_HOME_BOTTOM_BAR)
+                    .fillMaxWidth(),
                 onClickNewNote = { navigateToNote(navigator) }
             )
         }

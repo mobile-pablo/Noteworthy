@@ -21,7 +21,7 @@ import androidx.compose.material.MaterialTheme as Theme
 fun HomeTopBar(
     modifier: Modifier = Modifier
 ) {
-    Column(modifier = modifier.fillMaxWidth()) {
+    Column(modifier = modifier) {
         val textState = remember { mutableStateOf(TextFieldValue("")) }
         Text(
             text = stringResource(id = R.string.all_notes),
@@ -33,7 +33,10 @@ fun HomeTopBar(
                 Theme.spacing.spacing_14
             )
         )
-        SearchBar(textState)
+        SearchBar(
+            modifier = Modifier.fillMaxWidth(),
+            state = textState
+        )
         Spacer(
             modifier = Modifier.height(
                 Theme.spacing.spacing_14

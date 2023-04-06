@@ -38,7 +38,6 @@ fun HomeBottomBar(
     }
     ConstraintLayout(
         modifier = modifier
-            .fillMaxWidth()
             .background(Theme.colors.HomeBottomBarBackground)
             .topRectBorder(
                 brush = SolidColor(Theme.colors.PreviewLine)

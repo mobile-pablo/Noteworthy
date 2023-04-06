@@ -2,6 +2,7 @@ package com.mobile.pablo.iosnotes.ui.note
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -32,20 +33,20 @@ fun NoteScreen(
         constraintSet = constraints
     ) {
         NoteTopBar(
-            modifier = Modifier.layoutId(ID_NOTE_TOP_BAR),
-            noteTopWrapper = NoteTopWrapper(
-                {}, {}, {}
-            )
+            modifier = Modifier
+                .layoutId(ID_NOTE_TOP_BAR)
+                .fillMaxWidth(),
+            noteTopWrapper = NoteTopWrapper({}, {}, {})
         )
         TextCanvas(
             modifier = Modifier.layoutId(ID_TEXT_CANVAS),
             previewNote = previewNote
         )
         NoteBottomBar(
-            modifier = Modifier.layoutId(ID_NOTE_BOTTOM_BAR),
-            noteBottomWrapper = NoteBottomWrapper(
-                {}, {}, {}, {}
-            )
+            modifier = Modifier
+                .layoutId(ID_NOTE_BOTTOM_BAR)
+                .fillMaxWidth(),
+            noteBottomWrapper = NoteBottomWrapper({}, {}, {}, {})
         )
     }
 }

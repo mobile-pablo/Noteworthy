@@ -28,7 +28,6 @@ fun NoteTopBar(
 ) {
     ConstraintLayout(
         modifier = modifier
-            .fillMaxWidth()
             .padding(horizontal = Theme.spacing.spacing_4),
         constraintSet = constraints
     ) {

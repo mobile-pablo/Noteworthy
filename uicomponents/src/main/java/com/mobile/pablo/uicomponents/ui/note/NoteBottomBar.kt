@@ -16,7 +16,7 @@ import com.mobile.pablo.uicomponents.ui.theme.spacing
 
 @Composable
 fun NoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper : NoteBottomWrapper) {
-    Row(modifier = modifier.fillMaxWidth()) {
+    Row(modifier = modifier) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
