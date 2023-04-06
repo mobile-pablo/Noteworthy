@@ -32,8 +32,7 @@ fun SearchBar(modifier : Modifier, state: MutableState<TextFieldValue>) {
         onValueChange = {
             state.value = it
         },
-        modifier = modifier
-            .clip(RoundedCornerShape(Theme.spacing.spacing_12)),
+        modifier = modifier,
         textStyle = TextStyle(
             color = Theme.colors.Text,
             fontSize = Theme.font.font_14,
@@ -65,7 +64,7 @@ fun SearchBar(modifier : Modifier, state: MutableState<TextFieldValue>) {
             }
         },
         singleLine = true,
-        shape = RectangleShape, // The TextFiled has rounded corners top left and right by default
+        shape = RoundedCornerShape(Theme.spacing.spacing_12),
         colors = TextFieldDefaults.textFieldColors(
             textColor = Theme.colors.Text,
             cursorColor = Theme.colors.Text,
