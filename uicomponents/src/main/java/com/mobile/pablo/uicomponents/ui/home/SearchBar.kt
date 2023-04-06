@@ -1,22 +1,16 @@
 package com.mobile.pablo.uicomponents.ui.home
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
@@ -25,10 +19,13 @@ import com.mobile.pablo.uicomponents.ui.theme.*
 import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
-fun SearchBar(modifier : Modifier, state: MutableState<TextFieldValue>) {
+fun SearchBar(
+    modifier: Modifier,
+    state: MutableState<TextFieldValue>
+) {
     TextField(
         value = state.value,
-        placeholder = { stringResource(id = R.string.search) },
+        placeholder = { Text(stringResource(id = R.string.search)) },
         onValueChange = {
             state.value = it
         },

@@ -1,0 +1,59 @@
+package com.mobile.pablo.uicomponents.ui.note
+
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldDefaults
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.TextFieldValue
+import com.mobile.pablo.uicomponents.R
+import com.mobile.pablo.uicomponents.ui.theme.Text
+import androidx.compose.material.MaterialTheme as Theme
+
+/**
+I have spent over 5hours trying to do that make that
+TextField not scrollable and limited dynamicly but I couldnt find solution.
+Same with trying AndroidView with xmls. Only w
+ */
+
+@Composable
+fun NoteField(
+    modifier: Modifier = Modifier,
+    textLimit: Int = 30
+) {
+    val focusManager = LocalFocusManager.current
+
+    var text by remember { mutableStateOf(TextFieldValue("")) }
+    TextField(
+        modifier = modifier,
+        value = text,
+        onValueChange = {
+            if (it.text.length <= textLimit) text = it
+            else focusManager.moveFocus(FocusDirection.Down)
+        },
+        placeholder = { Text(stringResource(id = R.string.search)) },
+        colors = TextFieldDefaults.textFieldColors(
+            textColor = Theme.colors.Text,
+            disabledTextColor = Color.Transparent,
+            backgroundColor = Color.Transparent,
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent,
+            disabledIndicatorColor = Color.Transparent
+        ),
+        maxLines = 1,
+        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+        keyboardActions = KeyboardActions(
+            onNext = {
+                focusManager.moveFocus(FocusDirection.Down)
+            }
+        )
+    )
+}
+

@@ -3,7 +3,6 @@ package com.mobile.pablo.iosnotes.ui.note
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
@@ -19,6 +18,7 @@ import com.mobile.pablo.uicomponents.ui.note.TextCanvas
 import com.mobile.pablo.uicomponents.ui.theme.NoteBackground
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import androidx.compose.material.MaterialTheme as Theme
 
 @Destination
 @Composable
@@ -36,17 +36,26 @@ fun NoteScreen(
             modifier = Modifier
                 .layoutId(ID_NOTE_TOP_BAR)
                 .fillMaxWidth(),
-            noteTopWrapper = NoteTopWrapper({}, {}, {})
+            noteTopWrapper = NoteTopWrapper(
+                {},
+                {},
+                {})
         )
         TextCanvas(
-            modifier = Modifier.layoutId(ID_TEXT_CANVAS),
+            modifier = Modifier
+                .layoutId(ID_TEXT_CANVAS)
+                .fillMaxWidth(),
             previewNote = previewNote
         )
         NoteBottomBar(
             modifier = Modifier
                 .layoutId(ID_NOTE_BOTTOM_BAR)
                 .fillMaxWidth(),
-            noteBottomWrapper = NoteBottomWrapper({}, {}, {}, {})
+            noteBottomWrapper = NoteBottomWrapper(
+                {},
+                {},
+                {},
+                {})
         )
     }
 }
