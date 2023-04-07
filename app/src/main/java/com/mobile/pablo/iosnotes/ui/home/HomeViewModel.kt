@@ -1,7 +1,6 @@
 package com.mobile.pablo.iosnotes.ui.home
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.mobile.pablo.core.utils.SingleLiveEvent
 import com.mobile.pablo.domain.data.home.PreviewNote
@@ -12,6 +11,9 @@ import com.mobile.pablo.uicomponents.util.StringRes.INTERNET_ISSUE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -23,8 +25,8 @@ class HomeViewModel @Inject constructor(
     private var getNotesJob: Job? = null
     private var deleteNoteJob: Job? = null
 
-    private val _previewNotes = MutableLiveData<List<PreviewNote?>>()
-    val previewNotes: LiveData<List<PreviewNote?>> = _previewNotes
+    private val _previewNotes: MutableStateFlow<List<PreviewNote?>?> = MutableStateFlow(null)
+    val previewNotes: StateFlow<List<PreviewNote?>?> = _previewNotes.asStateFlow()
 
     private val _viewState = SingleLiveEvent<ViewState>()
     val viewState: LiveData<ViewState> = _viewState

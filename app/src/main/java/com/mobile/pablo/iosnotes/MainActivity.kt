@@ -9,7 +9,9 @@ import androidx.compose.ui.Modifier
 import com.mobile.pablo.iosnotes.ui.NavGraphs
 import com.mobile.pablo.uicomponents.ui.theme.IOSNotesTheme
 import com.ramcosta.composedestinations.DestinationsNavHost
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
