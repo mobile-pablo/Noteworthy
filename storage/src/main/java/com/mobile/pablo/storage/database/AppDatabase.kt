@@ -6,18 +6,25 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.mobile.pablo.storage.database.converter.DateTypeConverter
+import com.mobile.pablo.storage.database.converter.NoteLineConverter
 import com.mobile.pablo.storage.database.dao.home.PreviewNoteDao
 import com.mobile.pablo.storage.database.dao.note.FullNoteDao
 import com.mobile.pablo.storage.database.entity.FullNoteEntity
+import com.mobile.pablo.storage.database.entity.FullNoteWithDescriptionEntity
+import com.mobile.pablo.storage.database.entity.NoteLineEntity
 import com.mobile.pablo.storage.database.entity.PreviewNoteEntity
 
 @Database(
-    entities = [FullNoteEntity::class, PreviewNoteEntity::class],
+    entities = [
+        FullNoteEntity::class, PreviewNoteEntity::class, NoteLineEntity::class,
+        FullNoteWithDescriptionEntity::class
+               ],
     version = 1,
     exportSchema = false
 )
 @TypeConverters(
-    DateTypeConverter::class
+    DateTypeConverter::class,
+    NoteLineConverter::class
 )
 internal abstract class AppDatabase : RoomDatabase() {
 

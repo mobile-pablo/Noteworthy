@@ -1,5 +1,6 @@
 package com.mobile.pablo.storage.database.entity
 
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.Date
@@ -7,10 +8,9 @@ import java.util.Date
 @Entity(
     tableName = "notes"
 )
-internal data class FullNoteEntity(
-    @PrimaryKey
+data class FullNoteEntity(
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
     val title: String,
-    val date: Date,
-    val fullDescription: String
+    val date: Date
 )

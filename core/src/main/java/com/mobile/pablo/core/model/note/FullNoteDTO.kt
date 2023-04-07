@@ -1,4 +1,4 @@
-package com.mobile.pablo.core.model.home
+package com.mobile.pablo.core.model.note
 
 import java.util.Date
 
@@ -6,5 +6,5 @@ data class FullNoteDTO(
     val id: Int,
     val title: String,
     val date: Date,
-    val fullDescription: String
+    val fullDescription: List<NoteLineDTO>?
 )

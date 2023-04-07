@@ -1,17 +1,20 @@
 package com.mobile.pablo.storage.mapper.note
 
-import com.mobile.pablo.core.model.home.FullNoteDTO
+import com.mobile.pablo.core.model.note.FullNoteDTO
 import com.mobile.pablo.storage.database.entity.FullNoteEntity
+import com.mobile.pablo.storage.database.entity.NoteLineEntity
 import javax.inject.Inject
 
-internal class FullNoteDTOMapper @Inject constructor() {
+internal class FullNoteDTOMapper @Inject constructor(
+    private val noteLineDTOMapper: NoteLineDTOMapper
+) {
 
-    fun map(entity: FullNoteEntity?): FullNoteDTO? = entity?.run {
+    fun map(entity: FullNoteEntity?, description: List<NoteLineEntity>?): FullNoteDTO? = entity?.run {
         FullNoteDTO(
             id,
             title,
             date,
-            fullDescription
+            description?.map(noteLineDTOMapper::map)
         )
     }
 
@@ -20,7 +23,6 @@ internal class FullNoteDTOMapper @Inject constructor() {
             id,
             title,
             date,
-            fullDescription
         )
     }
 }

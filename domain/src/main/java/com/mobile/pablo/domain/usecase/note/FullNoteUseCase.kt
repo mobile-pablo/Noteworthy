@@ -1,7 +1,7 @@
 package com.mobile.pablo.domain.usecase.note
 
-import com.mobile.pablo.domain.data.home.FullNote
-import com.mobile.pablo.domain.mapper.home.FullNoteMapper
+import com.mobile.pablo.domain.data.note.FullNote
+import com.mobile.pablo.domain.mapper.note.FullNoteMapper
 import com.mobile.pablo.storage.source.note.FullNoteDataStorage
 import javax.inject.Inject
 

@@ -8,7 +8,7 @@ import java.util.Date
     tableName = "preview_notes"
 )
 internal data class PreviewNoteEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     val id: Int,
     val title: String,
     val date: Date,

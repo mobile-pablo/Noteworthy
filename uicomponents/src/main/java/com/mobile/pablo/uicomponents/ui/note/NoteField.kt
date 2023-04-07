@@ -32,7 +32,7 @@ Same with trying AndroidView with xmls. Only w
 @Composable
 fun NoteField(
     modifier: Modifier = Modifier
-) {
+) : TextFieldValue {
     val focusManager = LocalFocusManager.current
 
     var text by remember { mutableStateOf(TextFieldValue("")) }
@@ -64,5 +64,7 @@ fun NoteField(
             )
         )
     }
+
+    return text
 }
 

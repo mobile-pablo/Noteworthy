@@ -1,4 +1,4 @@
-package com.mobile.pablo.domain.data.home
+package com.mobile.pablo.domain.data.note
 
 import java.util.Date
 
@@ -6,5 +6,5 @@ data class FullNote(
     val id: Int,
     val title: String,
     val date: Date,
-    val fullDescription: String
+    val fullDescription: List<NoteLine?>
 )
