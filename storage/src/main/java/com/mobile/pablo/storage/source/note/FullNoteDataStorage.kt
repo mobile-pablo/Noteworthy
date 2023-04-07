@@ -4,7 +4,7 @@ import com.mobile.pablo.core.model.note.FullNoteDTO
 
 interface FullNoteDataStorage {
 
-    suspend fun getNotes(): List<FullNoteDTO?>
+    suspend fun getNote(noteId: String): FullNoteDTO?
 
     suspend fun deleteNote(noteId: String)
 

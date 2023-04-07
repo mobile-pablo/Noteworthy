@@ -65,7 +65,7 @@ fun HomeScreen(
                                 note.date,
                                 note.description
                             ),
-                            onClick = { navigateToNote(navigator) },
+                            onClick = { navigateToNote(navigator, note!!.id) },
                             onDelete = { homeViewModel.deleteNote(note.id) },
                             onPin = { }
                         )
@@ -85,9 +85,9 @@ fun HomeScreen(
 
 fun navigateToNote(
     navigator: DestinationsNavigator,
-    previewNote: PreviewNote? = null
+    noteId: String? = null
 ) {
-    navigator.navigate(NoteScreenDestination(previewNote))
+    navigator.navigate(NoteScreenDestination(noteId = noteId))
 }
 
 private val homeConstraints = ConstraintSet {

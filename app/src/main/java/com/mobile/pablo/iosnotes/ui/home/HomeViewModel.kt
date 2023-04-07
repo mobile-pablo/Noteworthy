@@ -20,7 +20,7 @@ class HomeViewModel @Inject constructor(
     private val getPreviewNotes: PreviewNoteUseCase.GetPreviewNotes,
     private val deletePreviewNote: PreviewNoteUseCase.DeletePreviewNote,
     private val deleteFullNote: FullNoteUseCase.DeleteFullNote
-) : ViewModel() {
+) : ViewModel(), HomeInterface {
 
     private var getNotesJob: Job? = null
     private var deleteNoteJob: Job? = null
@@ -35,21 +35,21 @@ class HomeViewModel @Inject constructor(
         downloadNotes()
     }
 
-    fun downloadNotes() {
+    override fun downloadNotes() {
         getNotesJob?.cancel()
         getNotesJob = launch {
             val noteResult = getPreviewNotes()
 
             _viewState.value = noteResult.run {
                 if (isSuccessful && data != null) {
-                    _previewNotes.value = data
+                    _previewNotes.emit(data)
                     ViewState.DownloadSuccessful
                 } else ViewState.Error(INTERNET_ISSUE)
             }
         }
     }
 
-    fun deleteNote(noteId: String) {
+    override fun deleteNote(noteId: String) {
         deleteNoteJob?.cancel()
         deleteNoteJob = launch {
             deletePreviewNote(noteId)

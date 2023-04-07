@@ -8,12 +8,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.mobile.pablo.domain.data.home.PreviewNote
+import com.mobile.pablo.domain.data.note.FullNote
 import com.mobile.pablo.uicomponents.ui.theme.spacing
 
 @Composable
 fun TextCanvas(
     modifier: Modifier = Modifier,
-    previewNote: PreviewNote?
+    fullNote: FullNote? = null
 ) {
     val listState = rememberLazyListState()
     LazyColumn(

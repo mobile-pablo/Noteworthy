@@ -7,13 +7,16 @@ import javax.inject.Inject
 
 sealed class FullNoteUseCase {
 
-    class GetFullNotes @Inject constructor(
+    class GetFullNote @Inject constructor(
         private val fullNoteMapper: FullNoteMapper,
         private val fullNoteDataStorage: FullNoteDataStorage
     ) {
 
-        suspend operator fun invoke(): List<FullNote?> =
-            fullNoteDataStorage.getNotes().map(fullNoteMapper::map)
+        suspend operator fun invoke(noteId: String): FullNote? {
+            val response = fullNoteDataStorage.getNote(noteId)
+            return fullNoteMapper.map(response)
+        }
+
     }
 
     class InsertFullNote @Inject constructor(
