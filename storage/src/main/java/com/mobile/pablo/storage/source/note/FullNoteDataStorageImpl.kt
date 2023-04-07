@@ -14,32 +14,27 @@ internal class FullNoteDataStorageImpl @Inject constructor(
 ) : FullNoteDataStorage {
 
     override suspend fun getNotes(): List<FullNoteDTO?> {
-        val dao = fullNoteDao.getNotes()
+        val dao = fullNoteDao.getNotesWithDescriptions()
         return dao.map {
             fullNoteDTOMapper.map(
-                it?.fullNoteEntity,
-                it?.noteLineEntityList
+                it.fullNoteEntity,
+                it.noteLineEntityList
             )
         }
     }
 
     override suspend fun deleteNote(noteId: String): Unit = fullNoteDao.deleteNote(noteId)
 
-    override suspend fun insertNote(fullNoteEntity: FullNoteDTO?) {
-        val entity = fullNoteDTOMapper.map(fullNoteEntity)
-        val description = fullNoteEntity?.fullDescription?.map(noteLineDTOMapper::map)
+    override suspend fun insertNote(dto: FullNoteDTO?) {
+        val entity = fullNoteDTOMapper.map(dto)
+        val description = dto?.fullDescription!!.map(noteLineDTOMapper::map)
 
-        val entityId = fullNoteDao.insertFullNote(entity)
-        description?.forEach {
-            val noteLineId = fullNoteDao.insertNoteLine(it)
-            fullNoteDao.insertNote(
-                FullNoteWithDescriptionEntity(
-                    entityId,
-                    noteLineId
-                )
+        fullNoteDao.insertNoteWithDescription(
+            FullNoteWithDescriptionEntity(
+                entity,
+                description
             )
-        }
-
+        )
     }
 
     override suspend fun clearNotes(): Unit = fullNoteDao.clearNotes()

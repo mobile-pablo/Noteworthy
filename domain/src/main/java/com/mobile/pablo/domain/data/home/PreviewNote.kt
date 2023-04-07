@@ -6,7 +6,7 @@ import java.util.Date
 
 @Parcelize
 data class PreviewNote(
-    val id: Int,
+    val id: String,
     val title: String,
     val date: Date,
     val description: String

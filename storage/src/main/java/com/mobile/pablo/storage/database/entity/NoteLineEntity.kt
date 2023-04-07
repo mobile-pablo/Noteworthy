@@ -2,19 +2,19 @@ package com.mobile.pablo.storage.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.Date
 
 @Entity(
     tableName = "note_line"
 )
 data class NoteLineEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    @PrimaryKey
+    val id: String,
+    val fullNoteId: String,
     val isCheckbox: Boolean = false,
-    val noteText: String ="0"
+    val noteText: String = "0"
 ) {
 
     override fun toString(): String {
-        return "$id,$isCheckbox,$noteText"
+        return "$id,$fullNoteId,$isCheckbox,$noteText"
     }
 }

@@ -9,12 +9,15 @@ internal class FullNoteDTOMapper @Inject constructor(
     private val noteLineDTOMapper: NoteLineDTOMapper
 ) {
 
-    fun map(entity: FullNoteEntity?, description: List<NoteLineEntity>?): FullNoteDTO? = entity?.run {
+    fun map(
+        entity: FullNoteEntity?,
+        description: List<NoteLineEntity?>
+    ): FullNoteDTO? = entity?.run {
         FullNoteDTO(
             id,
             title,
             date,
-            description?.map(noteLineDTOMapper::map)
+            description.map(noteLineDTOMapper::map)
         )
     }
 
