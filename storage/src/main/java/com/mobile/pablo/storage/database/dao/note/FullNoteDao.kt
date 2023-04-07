@@ -61,11 +61,13 @@ internal abstract class FullNoteDao {
             noteLineEntityList = getNoteLines(id)
         )
 
+    @Transaction
     open suspend fun clearNotesWithDescriptions() {
         clearFullNotes()
         clearNoteLines()
     }
 
+    @Transaction
     open suspend fun deleteNoteWithDescription(id: String) {
         deleteFullNote(id)
         deleteNoteLine(id)
