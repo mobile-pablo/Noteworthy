@@ -23,7 +23,7 @@ internal class FullNoteDataStorageImpl @Inject constructor(
         }
     }
 
-    override suspend fun deleteNote(noteId: String): Unit = fullNoteDao.deleteNote(noteId)
+    override suspend fun deleteNote(noteId: String): Unit = fullNoteDao.deleteNoteWithDescription(noteId)
 
     override suspend fun insertNote(dto: FullNoteDTO?) {
         val entity = fullNoteDTOMapper.map(dto)
@@ -37,5 +37,5 @@ internal class FullNoteDataStorageImpl @Inject constructor(
         )
     }
 
-    override suspend fun clearNotes(): Unit = fullNoteDao.clearNotes()
+    override suspend fun clearNotes(): Unit = fullNoteDao.clearNotesWithDescriptions()
 }

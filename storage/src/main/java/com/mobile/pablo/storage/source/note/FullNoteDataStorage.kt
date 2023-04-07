@@ -8,7 +8,7 @@ interface FullNoteDataStorage {
 
     suspend fun deleteNote(noteId: String)
 
-    suspend fun insertNote(fullNoteEntity: FullNoteDTO?)
+    suspend fun insertNote(dto: FullNoteDTO?)
 
     suspend fun clearNotes()
 }

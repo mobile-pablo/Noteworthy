@@ -24,10 +24,16 @@ internal abstract class FullNoteDao {
     abstract suspend fun insertNoteLine(fullNoteEntity: NoteLineEntity?)
 
     @Query("DELETE FROM notes where id = :noteId")
-    abstract suspend fun deleteNote(noteId: String)
+    abstract suspend fun deleteFullNote(noteId: String)
 
     @Query("DELETE FROM notes")
-    abstract suspend fun clearNotes()
+    abstract suspend fun clearFullNotes()
+
+    @Query("DELETE FROM note_line")
+    abstract suspend fun clearNoteLines()
+
+    @Query("DELETE FROM note_line where fullNoteId = :noteId")
+    abstract suspend fun deleteNoteLine(fullNoteId: String)
 
     @Transaction
     open suspend fun insertNoteWithDescription(
@@ -54,4 +60,14 @@ internal abstract class FullNoteDao {
             fullNoteEntity = getFullNote(id),
             noteLineEntityList = getNoteLines(id)
         )
+
+    open suspend fun clearNotesWithDescriptions() {
+        clearFullNotes()
+        clearNoteLines()
+    }
+
+    open suspend fun deleteNoteWithDescription(id: String) {
+        deleteFullNote(id)
+        deleteNoteLine(id)
+    }
 }
