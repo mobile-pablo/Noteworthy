@@ -1,28 +1,28 @@
 package com.mobile.pablo.storage.database.dao.note
 
 import androidx.room.*
-import com.mobile.pablo.storage.database.entity.FullNoteEntity
-import com.mobile.pablo.storage.database.entity.FullNoteWithDescriptionEntity
+import com.mobile.pablo.storage.database.entity.NoteEntity
+import com.mobile.pablo.storage.database.entity.NoteWithDescriptionEntity
 import com.mobile.pablo.storage.database.entity.NoteLineEntity
 import java.util.Date
 
 @Dao
-internal abstract class FullNoteDao {
+internal abstract class NoteDao {
 
     @Query("SELECT * FROM notes")
-    abstract suspend fun getFullNotes(): List<FullNoteEntity>
+    abstract suspend fun getFullNotes(): List<NoteEntity>
 
     @Query("SELECT * FROM notes WHERE id = :id")
-    abstract suspend fun getFullNote(id: Int?): FullNoteEntity
+    abstract suspend fun getFullNote(id: Int?): NoteEntity
 
     @Query("SELECT * FROM note_line WHERE fullNoteId = :id")
     abstract suspend fun getNoteLines(id: Int?): List<NoteLineEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertFullNote(fullNoteEntity: FullNoteEntity?)
+    abstract suspend fun insertFullNote(noteEntity: NoteEntity?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertEmptyWithId(fullNoteEntity: FullNoteEntity?) : Long
+    abstract suspend fun insertEmptyWithId(noteEntity: NoteEntity?) : Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertNoteLine(fullNoteEntity: NoteLineEntity?)
@@ -41,19 +41,19 @@ internal abstract class FullNoteDao {
 
     @Transaction
     open suspend fun insertNoteWithDescription(
-        fullNoteWithDescriptionEntity: FullNoteWithDescriptionEntity
+        noteWithDescriptionEntity: NoteWithDescriptionEntity
     ) {
-        insertFullNote(fullNoteWithDescriptionEntity.fullNoteEntity)
-        fullNoteWithDescriptionEntity.noteLineEntityList.forEach {
+        insertFullNote(noteWithDescriptionEntity.noteEntity)
+        noteWithDescriptionEntity.noteLineEntityList.forEach {
             insertNoteLine(it)
         }
     }
 
     @Transaction
-    open  suspend fun insertEmptyNote() : Long =  insertEmptyWithId(FullNoteEntity(title = "", date = Date()))
+    open  suspend fun insertEmptyNote() : Long =  insertEmptyWithId(NoteEntity(title = "", date = Date()))
 
     @Transaction
-    open suspend fun getNotesWithDescriptions(): List<FullNoteWithDescriptionEntity> {
+    open suspend fun getNotesWithDescriptions(): List<NoteWithDescriptionEntity> {
         val fullNotes = getFullNotes()
 
         return fullNotes.map {
@@ -62,9 +62,9 @@ internal abstract class FullNoteDao {
     }
 
     @Transaction
-    open suspend fun getNotesWithDescriptions(id: Int?): FullNoteWithDescriptionEntity =
-        FullNoteWithDescriptionEntity(
-            fullNoteEntity = getFullNote(id),
+    open suspend fun getNotesWithDescriptions(id: Int?): NoteWithDescriptionEntity =
+        NoteWithDescriptionEntity(
+            noteEntity = getFullNote(id),
             noteLineEntityList = getNoteLines(id)
         )
 

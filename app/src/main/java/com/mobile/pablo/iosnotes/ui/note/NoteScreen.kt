@@ -31,7 +31,7 @@ fun NoteScreen(
     noteId: Int,
     viewModel: NoteViewModel = hiltViewModel()
 ) {
-    val fullNote = viewModel.fullNote.collectAsState()
+    val fullNote = viewModel.note.collectAsState()
     val context = LocalContext.current
     LaunchedEffect(
         key1 = fullNote
@@ -61,7 +61,7 @@ fun NoteScreen(
                 modifier = Modifier
                     .layoutId(ID_TEXT_CANVAS)
                     .fillMaxWidth(),
-                fullNote = fullNote.value,
+                note = fullNote.value,
                 noteId = noteId
             )
         )

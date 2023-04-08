@@ -9,7 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import com.mobile.pablo.domain.data.note.FullNote
+import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.data.note.NoteLine
 import com.mobile.pablo.uicomponents.ui.theme.spacing
 import java.util.Date
@@ -17,9 +17,9 @@ import java.util.Date
 @Composable
 fun TextCanvas(
     modifier: Modifier = Modifier,
-    fullNote: FullNote? = null,
+    note: Note? = null,
     noteId: Int
-): FullNote {
+): Note {
 
     val listState = rememberLazyListState()
     var title = remember { mutableStateOf("") }
@@ -35,8 +35,8 @@ fun TextCanvas(
                 title = ""
             )
         }
-        fullNote?.let { fullNote ->
-            fullNote.fullDescription.map { note ->
+        note?.let { fullNote ->
+            fullNote.description.map { note ->
                 item {
                     note?.let {
                         NoteField(
@@ -59,11 +59,11 @@ fun TextCanvas(
         }
     }
 
-    return fullNote
-        ?: FullNote(
+    return note
+        ?: Note(
             id = noteId,
             title = title.value,
             date = date,
-            fullDescription = listOf()
+            description = listOf()
         )
 }

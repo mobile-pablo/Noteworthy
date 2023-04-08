@@ -2,9 +2,9 @@ package com.mobile.pablo.domain.data.note
 
 import java.util.Date
 
-data class FullNote(
+data class Note(
     val id: Int,
     val title: String,
     val date: Date,
-    val fullDescription: List<NoteLine?>
+    val description: List<NoteLine?>
 )

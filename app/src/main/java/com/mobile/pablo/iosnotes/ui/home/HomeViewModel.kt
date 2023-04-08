@@ -3,9 +3,8 @@ package com.mobile.pablo.iosnotes.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.mobile.pablo.core.utils.SingleLiveEvent
-import com.mobile.pablo.domain.data.home.PreviewNote
-import com.mobile.pablo.domain.usecase.home.PreviewNoteUseCase
-import com.mobile.pablo.domain.usecase.note.FullNoteUseCase
+import com.mobile.pablo.domain.data.note.Note
+import com.mobile.pablo.domain.usecase.note.NoteUseCase
 import com.mobile.pablo.iosnotes.util.launch
 import com.mobile.pablo.uicomponents.util.StringRes.INTERNET_ISSUE
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,17 +16,16 @@ import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val getPreviewNotes: PreviewNoteUseCase.GetPreviewNotes,
-    private val deletePreviewNote: PreviewNoteUseCase.DeletePreviewNote,
-    private val deleteFullNote: FullNoteUseCase.DeleteFullNote,
-    private val insertEmptyFullNote: FullNoteUseCase.InsertEmptyNote
+    private val getNotesUseCase: NoteUseCase.GetNotes,
+    private val deleteNoteUseCase: NoteUseCase.DeleteNote,
+    private val insertEmptyNoteUseCase: NoteUseCase.InsertEmptyNote
 ) : ViewModel(), HomeInterface {
 
     private var getNotesJob: Job? = null
     private var deleteNoteJob: Job? = null
 
-    private val _previewNotes: MutableStateFlow<List<PreviewNote?>?> = MutableStateFlow(null)
-    val previewNotes: StateFlow<List<PreviewNote?>?> = _previewNotes.asStateFlow()
+    private val _notes: MutableStateFlow<List<Note?>?> = MutableStateFlow(null)
+    val notes: StateFlow<List<Note?>?> = _notes.asStateFlow()
 
     private val _emptyNoteId: MutableStateFlow<Long?> = MutableStateFlow(null)
     val emptyNoteId: StateFlow<Long?> = _emptyNoteId.asStateFlow()
@@ -42,11 +40,10 @@ class HomeViewModel @Inject constructor(
     override fun downloadNotes() {
         getNotesJob?.cancel()
         getNotesJob = launch {
-            val noteResult = getPreviewNotes()
-
+            val noteResult = getNotesUseCase()
             _viewState.value = noteResult.run {
                 if (isSuccessful && data != null) {
-                    _previewNotes.emit(data)
+                    _notes.emit(data)
                     ViewState.DownloadSuccessful
                 } else ViewState.Error(INTERNET_ISSUE)
             }
@@ -56,20 +53,26 @@ class HomeViewModel @Inject constructor(
     override fun deleteNote(noteId: Int) {
         deleteNoteJob?.cancel()
         deleteNoteJob = launch {
-            deletePreviewNote(noteId)
-            deleteFullNote(noteId)
+            deleteNoteUseCase(noteId)
         }
     }
 
     override fun insertEmptyNote() {
         deleteNoteJob?.cancel()
         deleteNoteJob = launch {
-            _emptyNoteId.emit(insertEmptyFullNote())
+            val noteResult = insertEmptyNoteUseCase()
+            _viewState.value = noteResult.run {
+                if (isSuccessful && data != null) {
+                    _emptyNoteId.emit(data)
+                    ViewState.InsertSuccessful
+                } else ViewState.Error(INTERNET_ISSUE)
+            }
         }
     }
 }
 
 sealed class ViewState {
     object DownloadSuccessful : ViewState()
+    object InsertSuccessful : ViewState()
     class Error(val message: String) : ViewState()
 }

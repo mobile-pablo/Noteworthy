@@ -2,10 +2,8 @@ package com.mobile.pablo.storage.di
 
 import android.content.Context
 import com.mobile.pablo.storage.database.AppDatabase
-import com.mobile.pablo.storage.source.home.PreviewNoteDataStorage
-import com.mobile.pablo.storage.source.home.PreviewNoteDataStorageImpl
-import com.mobile.pablo.storage.source.note.FullNoteDataStorage
-import com.mobile.pablo.storage.source.note.FullNoteDataStorageImpl
+import com.mobile.pablo.storage.source.note.NoteDataStorage
+import com.mobile.pablo.storage.source.note.NoteDataStorageImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,16 +23,7 @@ object StorageModule {
     @Provides
     @Singleton
     internal fun providesFullNotesDao(database: AppDatabase) = database.fullNoteDao()
-
     @Provides
     @Singleton
-    internal fun providesPreviewNotesDao(database: AppDatabase) = database.previewNote()
-
-    @Provides
-    @Singleton
-    internal fun providesPreviewNoteDataStorage(impl: PreviewNoteDataStorageImpl): PreviewNoteDataStorage = impl
-
-    @Provides
-    @Singleton
-    internal fun providesFullNoteDataStorage(impl: FullNoteDataStorageImpl): FullNoteDataStorage = impl
+    internal fun providesFullNoteDataStorage(impl: NoteDataStorageImpl): NoteDataStorage = impl
 }

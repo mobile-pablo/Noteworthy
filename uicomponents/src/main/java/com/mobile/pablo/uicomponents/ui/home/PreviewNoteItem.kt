@@ -12,7 +12,6 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -20,7 +19,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
-import com.mobile.pablo.domain.data.home.PreviewNote
+import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.uicomponents.R
 import com.mobile.pablo.uicomponents.ui.theme.*
 import me.saket.swipe.SwipeAction
@@ -29,7 +28,7 @@ import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun PreviewNoteItem(
-    previewNote: PreviewNote,
+    note: Note,
     onClick: () -> Unit,
     onPin: () -> Unit,
     onDelete: () -> Unit,
@@ -66,7 +65,7 @@ fun PreviewNoteItem(
         ) {
             Column {
                 Text(
-                    text = previewNote.title,
+                    text = note.title,
                     fontSize = Theme.font.font_15,
                     color = Theme.colors.Text
                 )
@@ -76,7 +75,7 @@ fun PreviewNoteItem(
                     constraintSet = previewConstraints
                 ) {
                     Text(
-                        text = dayMonthYearFormat(previewNote.date),
+                        text = dayMonthYearFormat(note.date),
                         fontSize = Theme.font.font_9,
                         color = Theme.colors.Text,
                         modifier = Modifier
@@ -85,7 +84,7 @@ fun PreviewNoteItem(
                     )
 
                     Text(
-                        text = previewNote.description,
+                        text = note.description[0]?.noteText ?: "",
                         fontSize = Theme.font.font_9,
                         color = Theme.colors.Text,
                         modifier = Modifier

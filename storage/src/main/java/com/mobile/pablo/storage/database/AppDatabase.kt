@@ -6,15 +6,13 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.mobile.pablo.storage.database.converter.DateTypeConverter
-import com.mobile.pablo.storage.database.dao.home.PreviewNoteDao
-import com.mobile.pablo.storage.database.dao.note.FullNoteDao
-import com.mobile.pablo.storage.database.entity.FullNoteEntity
+import com.mobile.pablo.storage.database.dao.note.NoteDao
+import com.mobile.pablo.storage.database.entity.NoteEntity
 import com.mobile.pablo.storage.database.entity.NoteLineEntity
-import com.mobile.pablo.storage.database.entity.PreviewNoteEntity
 
 @Database(
     entities = [
-        FullNoteEntity::class, PreviewNoteEntity::class, NoteLineEntity::class,
+        NoteEntity::class, NoteLineEntity::class,
     ],
     version = 1,
     exportSchema = false
@@ -24,8 +22,7 @@ import com.mobile.pablo.storage.database.entity.PreviewNoteEntity
 )
 internal abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun fullNoteDao(): FullNoteDao
-    abstract fun previewNote(): PreviewNoteDao
+    abstract fun fullNoteDao(): NoteDao
 
     companion object {
 

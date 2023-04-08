@@ -18,7 +18,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.mobile.pablo.domain.data.home.PreviewNote
 import com.mobile.pablo.iosnotes.ui.destinations.NoteScreenDestination
 import com.mobile.pablo.uicomponents.ui.home.HomeBottomBar
 import com.mobile.pablo.uicomponents.ui.home.HomeTopBar
@@ -35,7 +34,7 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
 
-    val notes by homeViewModel.previewNotes.collectAsState()
+    val notes by homeViewModel.notes.collectAsState()
     val emptyNoteId = homeViewModel.emptyNoteId
 
     LaunchedEffect(
@@ -71,12 +70,7 @@ fun HomeScreen(
                 notes?.let { saveNotes ->
                     items(saveNotes) { note ->
                         PreviewNoteItem(
-                            previewNote = PreviewNote(
-                                note!!.id,
-                                note.title,
-                                note.date,
-                                note.description
-                            ),
+                            note = note!!,
                             onClick = {
                                 navigateToNote(
                                     navigator,
