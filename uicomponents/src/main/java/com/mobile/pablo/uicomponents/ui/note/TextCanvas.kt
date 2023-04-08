@@ -24,7 +24,7 @@ fun TextCanvas(
     val listState = rememberLazyListState()
     var title = remember { mutableStateOf("") }
 
-    val defaultDescription = if (note.description.isNotEmpty()) note.description else null
+    val defaultDescription = if (note.description?.isNotEmpty() == true) note.description else null
     var noteLines = remember { mutableStateOf(defaultDescription) }
 
     LazyColumn(
@@ -38,28 +38,28 @@ fun TextCanvas(
             )
         }
 
-        noteLines.value.let { noteLines ->
-            if (noteLines != null) {
-                if (noteLines.isNotEmpty()) {
-                    items(noteLines) { noteLine ->
-                        updateCorrectlyNote(
+        noteLines.value.let { noteL ->
+            if (noteL != null) {
+                if (noteL.isNotEmpty()) {
+                    items(noteL) { noteLine ->
+                        noteLines.value = updateCorrectlyNote(
                             NoteField(
                                 modifier = Modifier.fillMaxWidth(),
                                 noteLine = noteLine.copy(parentNoteId = noteId),
                             ),
-                            noteLines
+                            noteL
                         )
                     }
-                }
-            } else {
-                item {
-                    updateCorrectlyNote(
-                        NoteField(
-                            modifier = Modifier.fillMaxWidth(),
-                            noteLine = NoteLine(parentNoteId = noteId),
-                        ),
-                        listOf()
-                    )
+                } else {
+                    item {
+                        noteLines.value = updateCorrectlyNote(
+                            NoteField(
+                                modifier = Modifier.fillMaxWidth(),
+                                noteLine = NoteLine(parentNoteId = noteId),
+                            ),
+                            noteL
+                        )
+                    }
                 }
             }
         }
@@ -70,7 +70,7 @@ fun TextCanvas(
 fun updateCorrectlyNote(
     returnedNoteLine: NoteLine,
     noteList: List<NoteLine>
-): List<NoteLine> {
+): MutableList<NoteLine> {
     val foundNote = noteList.find { it.id == returnedNoteLine.id }
 
     return if (foundNote != null && noteList.isNotEmpty()) {
@@ -79,6 +79,6 @@ fun updateCorrectlyNote(
         newNoteList[oldNoteId] = returnedNoteLine
         newNoteList
     } else {
-        listOf(returnedNoteLine)
+        mutableListOf(returnedNoteLine)
     }
 }
