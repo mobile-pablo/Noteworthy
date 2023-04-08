@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
@@ -23,7 +24,6 @@ import com.mobile.pablo.uicomponents.ui.note.TextCanvas
 import com.mobile.pablo.uicomponents.ui.theme.NoteBackground
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import okhttp3.internal.platform.Platform.Companion.get
 
 @Destination
 @Composable
@@ -32,7 +32,9 @@ fun NoteScreen(
     noteId: Int,
     viewModel: NoteViewModel = hiltViewModel()
 ) {
+    val scope = rememberCoroutineScope()
     val note = viewModel.note.collectAsState().value
+    val emptyNoteLineId = viewModel.emptyNoteLineId.collectAsState().value
     val context = LocalContext.current
     LaunchedEffect(
         key1 = note
@@ -68,7 +70,9 @@ fun NoteScreen(
                         .layoutId(ID_TEXT_CANVAS)
                         .fillMaxWidth(),
                     note = it,
-                    noteId = noteId
+                    noteId = noteId,
+                    createEmptyNoteLine =
+                    { createEmptyNoteLine(noteId, viewModel, emptyNoteLineId) }
                 )
             )
         }
@@ -85,6 +89,11 @@ fun NoteScreen(
             )
         )
     }
+}
+
+fun createEmptyNoteLine(noteId: Int, viewModel: NoteViewModel, emptyNoteLineId: Long): Long {
+    viewModel.createEmptyNoteLine(noteId)
+    return emptyNoteLineId
 }
 
 private val constraints = ConstraintSet {

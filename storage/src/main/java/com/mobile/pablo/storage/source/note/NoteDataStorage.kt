@@ -14,5 +14,7 @@ interface NoteDataStorage {
 
     suspend fun insertEmptyNote() : Long
 
+    suspend fun insertEmptyNoteLine(parentId : Int) : Long
+
     suspend fun clearNotes()
 }

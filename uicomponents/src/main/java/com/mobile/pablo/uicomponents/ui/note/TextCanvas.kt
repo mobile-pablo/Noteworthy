@@ -9,6 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.mobile.pablo.domain.data.note.Note
@@ -21,7 +22,7 @@ fun TextCanvas(
     modifier: Modifier = Modifier,
     note: Note,
     noteId: Int,
-    createEmptyNoteLine : () ->NoteLine
+    createEmptyNoteLine : () ->Long
 ): Note {
 
     val listState = rememberLazyListState()
@@ -45,12 +46,10 @@ fun TextCanvas(
             if (noteL != null) {
                 if (noteL.isNotEmpty()) {
                     items(noteL) { noteLine ->
-                       // val notes = createEmptyNoteLine()
                         noteLines.value = updateCorrectlyNote(
                             NoteField(
                                 modifier = Modifier.fillMaxWidth(),
-                                noteLine = noteLine.copy(parentNoteId = noteId),
-                                hasCheckbox = true
+                                noteLine = noteLine.copy(parentNoteId = noteId)
                             ),
                             noteL
                         )
@@ -62,6 +61,7 @@ fun TextCanvas(
                         NoteField(
                             modifier = Modifier.fillMaxWidth(),
                             noteLine = NoteLine(parentNoteId = noteId),
+                            createEmptyNoteLine = createEmptyNoteLine,
                         )
                     )
                 }

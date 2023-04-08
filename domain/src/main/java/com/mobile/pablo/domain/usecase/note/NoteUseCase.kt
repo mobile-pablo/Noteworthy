@@ -49,6 +49,13 @@ sealed class NoteUseCase {
         suspend operator fun invoke(): DataTransfer<Long> = DataTransfer(noteDataStorage.insertEmptyNote())
     }
 
+    class InsertEmptyNoteLine @Inject constructor(
+        private val noteDataStorage: NoteDataStorage,
+    ) {
+        suspend operator fun invoke(parentNoteId : Int): Long =noteDataStorage
+            .insertEmptyNoteLine(parentNoteId)
+    }
+
     class DeleteNote @Inject constructor(
         private val noteDataStorage: NoteDataStorage,
     ) {

@@ -15,9 +15,10 @@ import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
 class NoteViewModel @Inject constructor(
-    private var getNote: NoteUseCase.GetNote,
-    private var insertNote: NoteUseCase.InsertNote,
-    private val deleteNote: NoteUseCase.DeleteNote
+    private var getNoteUseCase: NoteUseCase.GetNote,
+    private var insertNoteUseCase: NoteUseCase.InsertNote,
+    private var createEmptyNoteLineUseCase: NoteUseCase.InsertEmptyNoteLine,
+    private val deleteNoteUseCase: NoteUseCase.DeleteNote
 ) : ViewModel(), NoteInterface {
 
     private var noteJob: Job? = null
@@ -28,10 +29,13 @@ class NoteViewModel @Inject constructor(
     private val _viewState = SingleLiveEvent<ViewState>()
     val viewState: LiveData<ViewState> = _viewState
 
+    private val _emptyNoteLineId: MutableStateFlow<Long> = MutableStateFlow(0L)
+    val emptyNoteLineId: StateFlow<Long> = _emptyNoteLineId.asStateFlow()
+
     override fun downloadNote(noteId: Int) {
         noteJob?.cancel()
         noteJob = launch {
-            val notesResult = getNote(noteId)
+            val notesResult = getNoteUseCase(noteId)
             notesResult.run {
                 if (isSuccessful && data != null)
                     _note.emit(data)
@@ -39,10 +43,18 @@ class NoteViewModel @Inject constructor(
         }
     }
 
+    override fun createEmptyNoteLine(parentNoteId: Int) {
+        noteJob?.cancel()
+        noteJob = launch {
+            val notesResult = createEmptyNoteLineUseCase(parentNoteId)
+            _emptyNoteLineId.emit(notesResult)
+        }
+    }
+
     override fun saveNote(note: Note) {
         noteJob?.cancel()
         noteJob = launch {
-            insertNote(note)
+            insertNoteUseCase(note)
         }
     }
 

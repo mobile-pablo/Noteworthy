@@ -23,8 +23,10 @@ fun NoteField(
     modifier: Modifier = Modifier,
     noteLine: NoteLine,
     placeHolder: String = "",
-    hasCheckbox: Boolean = false
+    createEmptyNoteLine: () -> Long = { 0L }
 ): NoteLine {
+
+    val noteId = remember { createEmptyNoteLine() }
     val focusManager = LocalFocusManager.current
 
     var noteText by remember { mutableStateOf(noteLine.noteText) }
@@ -33,7 +35,7 @@ fun NoteField(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        if (hasCheckbox) {
+        if (noteLine.isCheckbox) {
             Checkbox(
                 checked = isCheckbox,
                 onCheckedChange = { isCheckbox = it }
@@ -62,7 +64,7 @@ fun NoteField(
     }
 
     return NoteLine(
-        id = noteLine.id,
+        id = noteId.toInt(),
         isCheckbox = isCheckbox,
         noteText = noteText,
         parentNoteId = noteLine.parentNoteId

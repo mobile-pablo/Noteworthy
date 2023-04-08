@@ -48,5 +48,7 @@ internal class NoteDataStorageImpl @Inject constructor(
 
     override suspend fun insertEmptyNote(): Long = noteDao.insertEmptyNote()
 
+    override suspend fun insertEmptyNoteLine(parentId : Int): Long = noteDao.insertEmptyNoteLineWithId(parentId)
+
     override suspend fun clearNotes(): Unit = noteDao.clearNotesWithDescriptions()
 }
