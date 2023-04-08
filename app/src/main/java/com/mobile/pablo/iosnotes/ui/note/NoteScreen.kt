@@ -32,7 +32,7 @@ fun NoteScreen(
     noteId: Int,
     viewModel: NoteViewModel = hiltViewModel()
 ) {
-    val note = viewModel.note.collectAsState()
+    val note = viewModel.note.collectAsState().value
     val context = LocalContext.current
     LaunchedEffect(
         key1 = note
@@ -55,13 +55,13 @@ fun NoteScreen(
                 { (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed() },
                 onShareItem = { viewModel.shareNote() },
                 onDoneItem = {
-                    note.value?.let { viewModel.saveNote(it) }
+                    note?.let { viewModel.saveNote(it) }
                     (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
                 }
             )
         )
 
-        note.value?.let {
+        note?.let {
             viewModel.saveNote(
                 TextCanvas(
                     modifier = Modifier
