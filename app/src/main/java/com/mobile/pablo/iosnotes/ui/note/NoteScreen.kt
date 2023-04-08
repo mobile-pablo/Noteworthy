@@ -63,7 +63,9 @@ fun NoteScreen(
                 .layoutId(ID_TEXT_CANVAS)
                 .fillMaxWidth(),
             fullNote = fullNote.value
-        )
+        )?.let {
+            viewModel.saveNote(it)
+        }
         NoteBottomBar(
             modifier = Modifier
                 .layoutId(ID_NOTE_BOTTOM_BAR)

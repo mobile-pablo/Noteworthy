@@ -65,7 +65,7 @@ fun HomeScreen(
                                 note.date,
                                 note.description
                             ),
-                            onClick = { navigateToNote(navigator, note!!.id) },
+                            onClick = { navigateToNote(navigator, note.id) },
                             onDelete = { homeViewModel.deleteNote(note.id) },
                             onPin = { }
                         )

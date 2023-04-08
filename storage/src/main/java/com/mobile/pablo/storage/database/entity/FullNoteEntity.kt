@@ -8,8 +8,8 @@ import java.util.Date
     tableName = "notes"
 )
 data class FullNoteEntity(
-    @PrimaryKey
-    val id: String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int? = null,
     val title: String,
     val date: Date
 )

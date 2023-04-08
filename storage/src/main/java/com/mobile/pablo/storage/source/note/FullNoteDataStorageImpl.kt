@@ -2,9 +2,11 @@ package com.mobile.pablo.storage.source.note
 
 import com.mobile.pablo.core.model.note.FullNoteDTO
 import com.mobile.pablo.storage.database.dao.note.FullNoteDao
+import com.mobile.pablo.storage.database.entity.FullNoteEntity
 import com.mobile.pablo.storage.database.entity.FullNoteWithDescriptionEntity
 import com.mobile.pablo.storage.mapper.note.FullNoteDTOMapper
 import com.mobile.pablo.storage.mapper.note.NoteLineDTOMapper
+import java.util.Date
 import javax.inject.Inject
 
 internal class FullNoteDataStorageImpl @Inject constructor(

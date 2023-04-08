@@ -17,9 +17,8 @@ class FullNoteMapper @Inject constructor(
         )
     }
 
-    fun map(fullNote: FullNote?): FullNoteDTO? = fullNote?.run {
-        FullNoteDTO(
-            id,
+    fun map(fullNote: FullNoteWrapper?): FullNoteWrapperDTO? = fullNote?.run {
+        FullNoteWrapperDTO(
             title,
             date,
             fullDescription.map(noteLineMapper::map)

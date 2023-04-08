@@ -17,11 +17,12 @@ import kotlinx.coroutines.flow.asStateFlow
 @HiltViewModel
 class NoteViewModel @Inject constructor(
     private var getFullNote: FullNoteUseCase.GetFullNote,
+    private var insertFullNote: FullNoteUseCase.InsertFullNote,
     private val deletePreviewNote: PreviewNoteUseCase.DeletePreviewNote,
     private val deleteFullNote: FullNoteUseCase.DeleteFullNote
 ) : ViewModel(), NoteInterface {
 
-    private var getFullNoteJob: Job? = null
+    private var noteJob: Job? = null
 
     private val _fullNote: MutableStateFlow<FullNote?> = MutableStateFlow(null)
     val fullNote: StateFlow<FullNote?> = _fullNote.asStateFlow()
@@ -30,14 +31,18 @@ class NoteViewModel @Inject constructor(
     val viewState: LiveData<ViewState> = _viewState
 
     override fun downloadNote(noteId: String) {
-        getFullNoteJob?.cancel()
-        getFullNoteJob = launch {
+        noteJob?.cancel()
+        noteJob = launch {
             val notesResult = getFullNote(noteId)
             _fullNote.emit(notesResult)
         }
     }
 
     override fun saveNote(fullNote: FullNote) {
+        noteJob?.cancel()
+        noteJob = launch {
+            val result = insertFullNote(fullNote)
+        }
     }
 
     override fun pinNote(noteId: String) {
