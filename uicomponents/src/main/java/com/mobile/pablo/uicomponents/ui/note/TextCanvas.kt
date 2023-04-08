@@ -35,8 +35,8 @@ fun TextCanvas(
                 title = ""
             )
         }
-        note?.let { fullNote ->
-            fullNote.description.map { note ->
+        note?.let { currentNote ->
+            currentNote.description.map { note ->
                 item {
                     note?.let {
                         NoteField(
@@ -53,7 +53,7 @@ fun TextCanvas(
                     id = 0,
                     isCheckbox = false,
                     noteText = "",
-                    fullNoteId = noteId
+                    parentNoteId = noteId
                 ),
             )
         }

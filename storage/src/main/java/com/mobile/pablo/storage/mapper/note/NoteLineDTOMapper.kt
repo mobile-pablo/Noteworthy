@@ -9,7 +9,7 @@ internal class NoteLineDTOMapper @Inject constructor() {
     fun map(entity: NoteLineEntity?): NoteLineDTO? = entity?.run {
         NoteLineDTO(
             id,
-            fullNoteId,
+            parentNoteId,
             isCheckbox,
             noteText
         )
@@ -18,7 +18,7 @@ internal class NoteLineDTOMapper @Inject constructor() {
     fun map(dto: NoteLineDTO?): NoteLineEntity? = dto?.run {
         NoteLineEntity(
             id,
-            fullNoteId,
+            parentNoteId,
             isCheckbox,
             noteText
         )

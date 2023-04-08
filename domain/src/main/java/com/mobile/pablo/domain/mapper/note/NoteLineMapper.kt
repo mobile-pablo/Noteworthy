@@ -9,7 +9,7 @@ class NoteLineMapper @Inject constructor() {
     fun map(dto: NoteLineDTO?): NoteLine? = dto?.run {
         NoteLine(
             id,
-            fullNoteId,
+            parentNoteId,
             isCheckbox,
             noteText
         )
@@ -18,7 +18,7 @@ class NoteLineMapper @Inject constructor() {
     fun map(noteLine: NoteLine?): NoteLineDTO? = noteLine?.run {
         NoteLineDTO(
             id,
-            fullNoteId,
+            parentNoteId,
             isCheckbox,
             noteText
         )

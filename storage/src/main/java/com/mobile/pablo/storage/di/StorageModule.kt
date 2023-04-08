@@ -22,8 +22,9 @@ object StorageModule {
 
     @Provides
     @Singleton
-    internal fun providesFullNotesDao(database: AppDatabase) = database.fullNoteDao()
+    internal fun providesNotesDao(database: AppDatabase) = database.noteDao()
+
     @Provides
     @Singleton
-    internal fun providesFullNoteDataStorage(impl: NoteDataStorageImpl): NoteDataStorage = impl
+    internal fun providesNoteDataStorage(impl: NoteDataStorageImpl): NoteDataStorage = impl
 }

@@ -8,7 +8,7 @@ internal data class NoteWithDescriptionEntity(
     val noteEntity: NoteEntity?,
     @Relation(
         parentColumn = "id",
-        entityColumn = "fullNoteId"
+        entityColumn = "parentNoteId"
     )
     val noteLineEntityList: List<NoteLineEntity?>
 )

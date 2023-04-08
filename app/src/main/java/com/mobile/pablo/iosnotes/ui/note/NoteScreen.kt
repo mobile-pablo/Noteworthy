@@ -31,10 +31,10 @@ fun NoteScreen(
     noteId: Int,
     viewModel: NoteViewModel = hiltViewModel()
 ) {
-    val fullNote = viewModel.note.collectAsState()
+    val note = viewModel.note.collectAsState()
     val context = LocalContext.current
     LaunchedEffect(
-        key1 = fullNote
+        key1 = note
     ) {
         viewModel.downloadNote(noteId)
     }
@@ -53,7 +53,7 @@ fun NoteScreen(
                 onBackItem =
                 { (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed() },
                 onShareItem = { viewModel.shareNote() },
-                onDoneItem = { fullNote.value?.let { viewModel.saveNote(it) } }
+                onDoneItem = { note.value?.let { viewModel.saveNote(it) } }
             )
         )
         viewModel.saveNote(
@@ -61,7 +61,7 @@ fun NoteScreen(
                 modifier = Modifier
                     .layoutId(ID_TEXT_CANVAS)
                     .fillMaxWidth(),
-                note = fullNote.value,
+                note = note.value,
                 noteId = noteId
             )
         )

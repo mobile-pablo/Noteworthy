@@ -9,12 +9,12 @@ import androidx.room.PrimaryKey
 data class NoteLineEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val fullNoteId: Int,
+    val parentNoteId: Int,
     val isCheckbox: Boolean = false,
     val noteText: String = "0"
 ) {
 
     override fun toString(): String {
-        return "$id,$fullNoteId,$isCheckbox,$noteText"
+        return "$id,$parentNoteId,$isCheckbox,$noteText"
     }
 }

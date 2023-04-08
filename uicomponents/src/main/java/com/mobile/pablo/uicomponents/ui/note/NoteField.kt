@@ -62,7 +62,7 @@ fun NoteField(
         id = noteLine.id,
         isCheckbox = isCheckbox,
         noteText = noteText,
-        fullNoteId = noteLine.fullNoteId
+        parentNoteId = noteLine.parentNoteId
     )
 }
 

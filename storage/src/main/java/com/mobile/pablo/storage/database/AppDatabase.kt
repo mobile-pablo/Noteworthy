@@ -22,7 +22,7 @@ import com.mobile.pablo.storage.database.entity.NoteLineEntity
 )
 internal abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun fullNoteDao(): NoteDao
+    abstract fun noteDao(): NoteDao
 
     companion object {
 

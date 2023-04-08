@@ -10,31 +10,31 @@ import java.util.Date
 internal abstract class NoteDao {
 
     @Query("SELECT * FROM notes")
-    abstract suspend fun getFullNotes(): List<NoteEntity>
+    abstract suspend fun getNotes(): List<NoteEntity>
 
     @Query("SELECT * FROM notes WHERE id = :id")
-    abstract suspend fun getFullNote(id: Int?): NoteEntity
+    abstract suspend fun getNote(id: Int?): NoteEntity
 
-    @Query("SELECT * FROM note_line WHERE fullNoteId = :id")
+    @Query("SELECT * FROM note_line WHERE parentNoteId = :id")
     abstract suspend fun getNoteLines(id: Int?): List<NoteLineEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertFullNote(noteEntity: NoteEntity?)
+    abstract suspend fun insertNote(noteEntity: NoteEntity?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertEmptyWithId(noteEntity: NoteEntity?) : Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertNoteLine(fullNoteEntity: NoteLineEntity?)
+    abstract suspend fun insertNoteLine(noteEntity: NoteLineEntity?)
 
     @Query("DELETE FROM notes where id = :noteId")
-    abstract suspend fun deleteFullNote(noteId: Int)
+    abstract suspend fun deleteNote(noteId: Int)
 
-    @Query("DELETE FROM note_line WHERE fullNoteId = :fullNoteId")
-    abstract suspend fun deleteNoteLine(fullNoteId: Int)
+    @Query("DELETE FROM note_line WHERE parentNoteId = :parentNoteId")
+    abstract suspend fun deleteNoteLine(parentNoteId: Int)
 
     @Query("DELETE FROM notes")
-    abstract suspend fun clearFullNotes()
+    abstract suspend fun clearNotes()
 
     @Query("DELETE FROM note_line")
     abstract suspend fun clearNoteLines()
@@ -43,7 +43,7 @@ internal abstract class NoteDao {
     open suspend fun insertNoteWithDescription(
         noteWithDescriptionEntity: NoteWithDescriptionEntity
     ) {
-        insertFullNote(noteWithDescriptionEntity.noteEntity)
+        insertNote(noteWithDescriptionEntity.noteEntity)
         noteWithDescriptionEntity.noteLineEntityList.forEach {
             insertNoteLine(it)
         }
@@ -53,30 +53,26 @@ internal abstract class NoteDao {
     open  suspend fun insertEmptyNote() : Long =  insertEmptyWithId(NoteEntity(title = "", date = Date()))
 
     @Transaction
-    open suspend fun getNotesWithDescriptions(): List<NoteWithDescriptionEntity> {
-        val fullNotes = getFullNotes()
-
-        return fullNotes.map {
+    open suspend fun getNotesWithDescriptions(): List<NoteWithDescriptionEntity> = getNotes().map {
             getNotesWithDescriptions(it.id)
-        }
     }
 
     @Transaction
     open suspend fun getNotesWithDescriptions(id: Int?): NoteWithDescriptionEntity =
         NoteWithDescriptionEntity(
-            noteEntity = getFullNote(id),
+            noteEntity = getNote(id),
             noteLineEntityList = getNoteLines(id)
         )
 
     @Transaction
     open suspend fun clearNotesWithDescriptions() {
-        clearFullNotes()
+        clearNotes()
         clearNoteLines()
     }
 
     @Transaction
     open suspend fun deleteNoteWithDescription(id: Int) {
-        deleteFullNote(id)
+        deleteNote(id)
         deleteNoteLine(id)
     }
 }
