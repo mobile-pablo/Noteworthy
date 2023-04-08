@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.data.note.NoteLine
 import com.mobile.pablo.uicomponents.ui.theme.spacing
-import java.util.Date
 
 @Composable
 fun TextCanvas(
@@ -24,7 +23,6 @@ fun TextCanvas(
 
     val listState = rememberLazyListState()
     var title = remember { mutableStateOf("") }
-    val date = Date()
 
     val defaultDescription = if (note.description.isNotEmpty()) note.description else null
     var noteLines = remember { mutableStateOf(defaultDescription) }
@@ -40,25 +38,47 @@ fun TextCanvas(
             )
         }
 
-        noteLines.value.let {
-            if (it != null) {
-                if (it.isNotEmpty()) {
-                    items(it) { noteLine ->
-                        NoteField(
-                            modifier = Modifier.fillMaxWidth(),
-                            noteLine = noteLine!!
+        noteLines.value.let { noteLines ->
+            if (noteLines != null) {
+                if (noteLines.isNotEmpty()) {
+                    items(noteLines) { noteLine ->
+                        updateCorrectlyNote(
+                            NoteField(
+                                modifier = Modifier.fillMaxWidth(),
+                                noteLine = noteLine.copy(parentNoteId = noteId),
+                            ),
+                            noteLines
                         )
                     }
                 }
             } else {
                 item {
-                    NoteField(
-                        modifier = Modifier.fillMaxWidth(),
-                        noteLine = NoteLine(),
+                    updateCorrectlyNote(
+                        NoteField(
+                            modifier = Modifier.fillMaxWidth(),
+                            noteLine = NoteLine(parentNoteId = noteId),
+                        ),
+                        listOf()
                     )
                 }
             }
         }
     }
     return note
+}
+
+fun updateCorrectlyNote(
+    returnedNoteLine: NoteLine,
+    noteList: List<NoteLine>
+): List<NoteLine> {
+    val foundNote = noteList.find { it.id == returnedNoteLine.id }
+
+    return if (foundNote != null && noteList.isNotEmpty()) {
+        val oldNoteId = noteList.indexOf(foundNote)
+        val newNoteList = noteList.toMutableList()
+        newNoteList[oldNoteId] = returnedNoteLine
+        newNoteList
+    } else {
+        listOf(returnedNoteLine)
+    }
 }

@@ -36,7 +36,7 @@ internal class NoteDataStorageImpl @Inject constructor(
 
     override suspend fun insertNote(dto: NoteDTO?) {
         val entity = noteDTOMapper.map(dto)
-        val description = dto?.description!!.map(noteLineDTOMapper::map)
+        val description = dto?.description?.map(noteLineDTOMapper::map)
 
         noteDao.insertNoteWithDescription(
             NoteWithDescriptionEntity(

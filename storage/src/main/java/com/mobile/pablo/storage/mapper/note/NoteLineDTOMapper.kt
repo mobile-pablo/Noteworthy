@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 internal class NoteLineDTOMapper @Inject constructor() {
 
-    fun map(entity: NoteLineEntity?): NoteLineDTO? = entity?.run {
+    fun map(entity: NoteLineEntity): NoteLineDTO = entity.run {
         NoteLineDTO(
             id,
             parentNoteId,
@@ -15,7 +15,7 @@ internal class NoteLineDTOMapper @Inject constructor() {
         )
     }
 
-    fun map(dto: NoteLineDTO?): NoteLineEntity? = dto?.run {
+    fun map(dto: NoteLineDTO): NoteLineEntity = dto.run {
         NoteLineEntity(
             id,
             parentNoteId,

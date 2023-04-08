@@ -44,7 +44,7 @@ internal abstract class NoteDao {
         noteWithDescriptionEntity: NoteWithDescriptionEntity
     ) {
         insertNote(noteWithDescriptionEntity.noteEntity)
-        noteWithDescriptionEntity.noteLineEntityList.forEach {
+        noteWithDescriptionEntity.noteLineEntityList?.forEach {
             insertNoteLine(it)
         }
     }

@@ -13,7 +13,7 @@ class NoteMapper @Inject constructor(
             id,
             title,
             date,
-            description.map(noteLineMapper::map)
+            description?.map(noteLineMapper::map)
         )
     }
 
@@ -22,7 +22,7 @@ class NoteMapper @Inject constructor(
             id,
             title,
             date,
-            description.map(noteLineMapper::map)
+            description?.map(noteLineMapper::map)
         )
     }
 }

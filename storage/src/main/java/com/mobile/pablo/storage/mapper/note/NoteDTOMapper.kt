@@ -11,13 +11,13 @@ internal class NoteDTOMapper @Inject constructor(
 
     fun map(
         entity: NoteEntity?,
-        description: List<NoteLineEntity?>
+        description: List<NoteLineEntity>?
     ): NoteDTO? = entity?.run {
         NoteDTO(
             id,
             title,
             date,
-            description.map(noteLineDTOMapper::map)
+            description?.map(noteLineDTOMapper::map)
         )
     }
 

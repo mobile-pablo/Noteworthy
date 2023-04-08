@@ -6,5 +6,5 @@ data class Note(
     val id: Int,
     val title: String,
     val date: Date,
-    val description: List<NoteLine?>
+    val description: List<NoteLine>?
 )
