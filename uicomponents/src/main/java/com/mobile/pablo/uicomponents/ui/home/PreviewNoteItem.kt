@@ -84,7 +84,7 @@ fun PreviewNoteItem(
                     )
 
                     Text(
-                        text = note.description[0]?.noteText ?: "",
+                        text =  "",
                         fontSize = Theme.font.font_9,
                         color = Theme.colors.Text,
                         modifier = Modifier

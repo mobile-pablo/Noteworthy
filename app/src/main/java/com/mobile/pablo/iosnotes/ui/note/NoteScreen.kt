@@ -56,15 +56,19 @@ fun NoteScreen(
                 onDoneItem = { note.value?.let { viewModel.saveNote(it) } }
             )
         )
-        viewModel.saveNote(
-            TextCanvas(
-                modifier = Modifier
-                    .layoutId(ID_TEXT_CANVAS)
-                    .fillMaxWidth(),
-                note = note.value,
-                noteId = noteId
+
+        note.value?.let {
+            viewModel.saveNote(
+                TextCanvas(
+                    modifier = Modifier
+                        .layoutId(ID_TEXT_CANVAS)
+                        .fillMaxWidth(),
+                    note = it,
+                    noteId = noteId
+                )
             )
-        )
+        }
+
         NoteBottomBar(
             modifier = Modifier
                 .layoutId(ID_NOTE_BOTTOM_BAR)
