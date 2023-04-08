@@ -49,7 +49,7 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    override fun deleteNote(noteId: String) {
+    override fun deleteNote(noteId: Int) {
         deleteNoteJob?.cancel()
         deleteNoteJob = launch {
             deletePreviewNote(noteId)

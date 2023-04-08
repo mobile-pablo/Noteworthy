@@ -35,7 +35,7 @@ sealed class PreviewNoteUseCase {
         private val previewNoteDataStorage: PreviewNoteDataStorage,
     ) {
 
-        suspend operator fun invoke(noteId: String) = previewNoteDataStorage.deleteNote(noteId)
+        suspend operator fun invoke(noteId: Int) = previewNoteDataStorage.deleteNote(noteId)
     }
 
     class ClearPreviewNotes @Inject constructor(

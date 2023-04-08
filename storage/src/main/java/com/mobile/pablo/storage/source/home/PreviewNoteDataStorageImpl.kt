@@ -13,7 +13,7 @@ internal class PreviewNoteDataStorageImpl @Inject constructor(
     override suspend fun getNotes(): List<PreviewNoteDTO?> =
         previewNoteDao.getNotes().map(previewNoteDTOMapper::map)
 
-    override suspend fun deleteNote(noteId: String): Unit = previewNoteDao.deleteNote(noteId)
+    override suspend fun deleteNote(noteId: Int): Unit = previewNoteDao.deleteNote(noteId)
 
     override suspend fun insertNote(previewNoteDTO: PreviewNoteDTO?) {
         val entity = previewNoteDTOMapper.map(previewNoteDTO)

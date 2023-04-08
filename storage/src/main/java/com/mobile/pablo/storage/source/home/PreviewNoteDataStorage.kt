@@ -6,7 +6,7 @@ interface PreviewNoteDataStorage {
 
     suspend fun getNotes(): List<PreviewNoteDTO?>
 
-    suspend fun deleteNote(noteId: String)
+    suspend fun deleteNote(noteId: Int)
 
     suspend fun insertNote(previewNoteDTO: PreviewNoteDTO?)
 

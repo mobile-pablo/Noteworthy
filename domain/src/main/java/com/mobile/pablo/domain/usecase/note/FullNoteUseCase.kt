@@ -12,7 +12,7 @@ sealed class FullNoteUseCase {
         private val fullNoteDataStorage: FullNoteDataStorage
     ) {
 
-        suspend operator fun invoke(noteId: String): FullNote? {
+        suspend operator fun invoke(noteId: Int): FullNote? {
             val response = fullNoteDataStorage.getNote(noteId)
             return fullNoteMapper.map(response)
         }
@@ -34,7 +34,7 @@ sealed class FullNoteUseCase {
         private val fullNoteDataStorage: FullNoteDataStorage,
     ) {
 
-        suspend operator fun invoke(noteId: String) =
+        suspend operator fun invoke(noteId: Int) =
             fullNoteDataStorage.deleteNote(noteId)
     }
 

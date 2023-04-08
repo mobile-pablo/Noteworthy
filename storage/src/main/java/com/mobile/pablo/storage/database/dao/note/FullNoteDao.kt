@@ -12,10 +12,10 @@ internal abstract class FullNoteDao {
     abstract suspend fun getFullNotes(): List<FullNoteEntity>
 
     @Query("SELECT * FROM notes WHERE id = :id")
-    abstract suspend fun getFullNote(id: String): FullNoteEntity
+    abstract suspend fun getFullNote(id: Int?): FullNoteEntity
 
     @Query("SELECT * FROM note_line WHERE fullNoteId = :id")
-    abstract suspend fun getNoteLines(id: String): List<NoteLineEntity>
+    abstract suspend fun getNoteLines(id: Int?): List<NoteLineEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertFullNote(fullNoteEntity: FullNoteEntity?)
@@ -24,10 +24,10 @@ internal abstract class FullNoteDao {
     abstract suspend fun insertNoteLine(fullNoteEntity: NoteLineEntity?)
 
     @Query("DELETE FROM notes where id = :noteId")
-    abstract suspend fun deleteFullNote(noteId: String)
+    abstract suspend fun deleteFullNote(noteId: Int)
 
     @Query("DELETE FROM note_line WHERE fullNoteId = :fullNoteId")
-    abstract suspend fun deleteNoteLine(fullNoteId: String)
+    abstract suspend fun deleteNoteLine(fullNoteId: Int)
 
     @Query("DELETE FROM notes")
     abstract suspend fun clearFullNotes()
@@ -55,7 +55,7 @@ internal abstract class FullNoteDao {
     }
 
     @Transaction
-    open suspend fun getNotesWithDescriptions(id: String): FullNoteWithDescriptionEntity =
+    open suspend fun getNotesWithDescriptions(id: Int?): FullNoteWithDescriptionEntity =
         FullNoteWithDescriptionEntity(
             fullNoteEntity = getFullNote(id),
             noteLineEntityList = getNoteLines(id)
@@ -68,7 +68,7 @@ internal abstract class FullNoteDao {
     }
 
     @Transaction
-    open suspend fun deleteNoteWithDescription(id: String) {
+    open suspend fun deleteNoteWithDescription(id: Int) {
         deleteFullNote(id)
         deleteNoteLine(id)
     }

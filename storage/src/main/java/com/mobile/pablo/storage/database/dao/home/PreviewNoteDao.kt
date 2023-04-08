@@ -13,7 +13,7 @@ internal abstract class PreviewNoteDao {
     abstract suspend fun getNotes(): List<PreviewNoteEntity?>
 
     @Query("DELETE FROM notes where id = :noteId")
-    abstract suspend fun deleteNote(noteId: String)
+    abstract suspend fun deleteNote(noteId: Int)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertNote(previewNoteEntity: PreviewNoteEntity?)

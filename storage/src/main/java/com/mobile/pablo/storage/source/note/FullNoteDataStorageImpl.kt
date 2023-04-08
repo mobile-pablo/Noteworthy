@@ -15,7 +15,7 @@ internal class FullNoteDataStorageImpl @Inject constructor(
     private val noteLineDTOMapper: NoteLineDTOMapper
 ) : FullNoteDataStorage {
 
-    override suspend fun getNote(noteId: String): FullNoteDTO? {
+    override suspend fun getNote(noteId: Int): FullNoteDTO? {
         val dao = fullNoteDao.getNotesWithDescriptions(noteId)
         return fullNoteDTOMapper.map(
                 dao.fullNoteEntity,
@@ -23,7 +23,7 @@ internal class FullNoteDataStorageImpl @Inject constructor(
             )
     }
 
-    override suspend fun deleteNote(noteId: String): Unit = fullNoteDao.deleteNoteWithDescription(noteId)
+    override suspend fun deleteNote(noteId: Int): Unit = fullNoteDao.deleteNoteWithDescription(noteId)
 
     override suspend fun insertNote(dto: FullNoteDTO?) {
         val entity = fullNoteDTOMapper.map(dto)

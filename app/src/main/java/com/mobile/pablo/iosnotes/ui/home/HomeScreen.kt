@@ -66,7 +66,7 @@ fun HomeScreen(
                                 note.description
                             ),
                             onClick = { navigateToNote(navigator, note.id) },
-                            onDelete = { homeViewModel.deleteNote(note.id) },
+                            onDelete = { note.id?.let { homeViewModel.deleteNote(it) } },
                             onPin = { }
                         )
                     }
@@ -85,7 +85,7 @@ fun HomeScreen(
 
 fun navigateToNote(
     navigator: DestinationsNavigator,
-    noteId: String? = null
+    noteId: Int? = null
 ) {
     navigator.navigate(NoteScreenDestination(noteId = noteId))
 }

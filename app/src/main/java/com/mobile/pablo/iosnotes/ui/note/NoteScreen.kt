@@ -28,7 +28,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 fun NoteScreen(
     navigator: DestinationsNavigator,
-    noteId: String?,
+    noteId: Int?,
     viewModel: NoteViewModel = hiltViewModel()
 ) {
     val fullNote = viewModel.fullNote.collectAsState()

@@ -4,5 +4,5 @@ interface HomeInterface {
 
     fun downloadNotes()
 
-    fun deleteNote(noteId: String)
+    fun deleteNote(noteId: Int)
 }

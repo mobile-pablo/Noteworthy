@@ -30,7 +30,7 @@ class NoteViewModel @Inject constructor(
     private val _viewState = SingleLiveEvent<ViewState>()
     val viewState: LiveData<ViewState> = _viewState
 
-    override fun downloadNote(noteId: String) {
+    override fun downloadNote(noteId: Int) {
         noteJob?.cancel()
         noteJob = launch {
             val notesResult = getFullNote(noteId)
@@ -45,7 +45,7 @@ class NoteViewModel @Inject constructor(
         }
     }
 
-    override fun pinNote(noteId: String) {
+    override fun pinNote(noteId: Int) {
         TODO("Not yet implemented")
     }
 
