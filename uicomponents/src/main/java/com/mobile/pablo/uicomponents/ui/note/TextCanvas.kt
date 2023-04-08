@@ -37,7 +37,6 @@ fun TextCanvas(
                 title = note.title
             )
         }
-
         noteLines.value.let { noteL ->
             if (noteL != null) {
                 if (noteL.isNotEmpty()) {
@@ -50,16 +49,15 @@ fun TextCanvas(
                             noteL
                         )
                     }
-                } else {
-                    item {
-                        noteLines.value = updateCorrectlyNote(
-                            NoteField(
-                                modifier = Modifier.fillMaxWidth(),
-                                noteLine = NoteLine(parentNoteId = noteId),
-                            ),
-                            noteL
+                }
+            } else {
+                item {
+                    noteLines.value = updateCorrectlyNote(
+                        NoteField(
+                            modifier = Modifier.fillMaxWidth(),
+                            noteLine = NoteLine(parentNoteId = noteId),
                         )
-                    }
+                    )
                 }
             }
         }
@@ -69,7 +67,7 @@ fun TextCanvas(
 
 fun updateCorrectlyNote(
     returnedNoteLine: NoteLine,
-    noteList: List<NoteLine>
+    noteList: List<NoteLine> = listOf()
 ): MutableList<NoteLine> {
     val foundNote = noteList.find { it.id == returnedNoteLine.id }
 

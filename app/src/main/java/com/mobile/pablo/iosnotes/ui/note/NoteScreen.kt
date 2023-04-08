@@ -23,6 +23,7 @@ import com.mobile.pablo.uicomponents.ui.note.TextCanvas
 import com.mobile.pablo.uicomponents.ui.theme.NoteBackground
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import okhttp3.internal.platform.Platform.Companion.get
 
 @Destination
 @Composable
@@ -53,7 +54,10 @@ fun NoteScreen(
                 onBackItem =
                 { (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed() },
                 onShareItem = { viewModel.shareNote() },
-                onDoneItem = { note.value?.let { viewModel.saveNote(it) } }
+                onDoneItem = {
+                    note.value?.let { viewModel.saveNote(it) }
+                    (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
+                }
             )
         )
 

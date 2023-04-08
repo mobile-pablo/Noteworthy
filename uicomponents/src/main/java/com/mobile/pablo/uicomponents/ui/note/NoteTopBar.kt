@@ -69,7 +69,7 @@ fun NoteTopBar(
         Box(
             modifier = Modifier
                 .layoutId(ID_DONE)
-                .clickable { noteTopWrapper.onDoneItem }
+                .clickable { noteTopWrapper.onDoneItem() }
                 .padding(Theme.spacing.spacing_7),
             contentAlignment = Alignment.Center,
         ) {
