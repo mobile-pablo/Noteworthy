@@ -22,10 +22,10 @@ fun TextCanvas(
 ): Note {
 
     val listState = rememberLazyListState()
-    var title = remember { mutableStateOf("") }
+    val title = remember { mutableStateOf("") }
 
     val defaultDescription = if (note.description?.isNotEmpty() == true) note.description else null
-    var noteLines = remember { mutableStateOf(defaultDescription) }
+    val noteLines = remember { mutableStateOf(defaultDescription) }
 
     LazyColumn(
         state = listState,
@@ -62,7 +62,8 @@ fun TextCanvas(
             }
         }
     }
-    return note
+
+    return note.copy(title = title.value, description = noteLines.value)
 }
 
 fun updateCorrectlyNote(

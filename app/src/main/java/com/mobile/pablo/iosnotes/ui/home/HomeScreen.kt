@@ -11,7 +11,6 @@ import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -34,7 +33,7 @@ fun HomeScreen(
     homeViewModel: HomeViewModel = hiltViewModel()
 ) {
 
-    val notes by homeViewModel.notes.collectAsState()
+    val notes = homeViewModel.notes.collectAsState().value
     val emptyNoteId = homeViewModel.emptyNoteId
 
     LaunchedEffect(
