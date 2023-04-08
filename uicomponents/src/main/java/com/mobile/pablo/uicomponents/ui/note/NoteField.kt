@@ -22,6 +22,7 @@ import androidx.compose.material.MaterialTheme as Theme
 fun NoteField(
     modifier: Modifier = Modifier,
     noteLine: NoteLine,
+    hasCheckbox: Boolean = false,
     placeHolder: String = "",
     createEmptyNoteLine: () -> Long = { 0L }
 ): NoteLine {
@@ -35,7 +36,7 @@ fun NoteField(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        if (noteLine.isCheckbox) {
+        if (hasCheckbox) {
             Checkbox(
                 checked = isCheckbox,
                 onCheckedChange = { isCheckbox = it }

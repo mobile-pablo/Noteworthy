@@ -39,7 +39,7 @@ fun TextCanvas(
             title.value = NoteField(
                 modifier = Modifier.fillMaxWidth(),
                 title = note.title,
-                placeHolder = stringResource(id = R.string.search)
+                placeHolder = stringResource(id = R.string.title)
             )
         }
         noteLines.value.let { noteL ->
@@ -49,7 +49,8 @@ fun TextCanvas(
                         noteLines.value = updateCorrectlyNote(
                             NoteField(
                                 modifier = Modifier.fillMaxWidth(),
-                                noteLine = noteLine.copy(parentNoteId = noteId)
+                                noteLine = noteLine.copy(parentNoteId = noteId),
+                                hasCheckbox = true
                             ),
                             noteL
                         )
