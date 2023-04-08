@@ -17,8 +17,9 @@ import java.util.Date
 @Composable
 fun TextCanvas(
     modifier: Modifier = Modifier,
-    fullNote: FullNote? = null
-): FullNote? {
+    fullNote: FullNote? = null,
+    noteId: Int
+): FullNote {
 
     val listState = rememberLazyListState()
     var title = remember { mutableStateOf("") }
@@ -34,7 +35,7 @@ fun TextCanvas(
                 title = ""
             )
         }
-        fullNote?.let {fullNote ->
+        fullNote?.let { fullNote ->
             fullNote.fullDescription.map { note ->
                 item {
                     note?.let {
@@ -49,9 +50,10 @@ fun TextCanvas(
             NoteField(
                 modifier = Modifier.fillMaxWidth(),
                 noteLine = NoteLine(
+                    id = 0,
                     isCheckbox = false,
                     noteText = "",
-                    fullNoteId = 0
+                    fullNoteId = noteId
                 ),
             )
         }
@@ -59,6 +61,7 @@ fun TextCanvas(
 
     return fullNote
         ?: FullNote(
+            id = noteId,
             title = title.value,
             date = date,
             fullDescription = listOf()

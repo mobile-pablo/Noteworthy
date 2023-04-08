@@ -3,7 +3,7 @@ package com.mobile.pablo.core.model.note
 import java.util.Date
 
 data class FullNoteDTO(
-    val id: Int? = null,
+    val id: Int,
     val title: String,
     val date: Date,
     val fullDescription: List<NoteLineDTO?>

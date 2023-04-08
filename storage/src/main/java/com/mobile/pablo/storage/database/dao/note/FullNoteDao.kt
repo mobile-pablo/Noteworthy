@@ -4,6 +4,7 @@ import androidx.room.*
 import com.mobile.pablo.storage.database.entity.FullNoteEntity
 import com.mobile.pablo.storage.database.entity.FullNoteWithDescriptionEntity
 import com.mobile.pablo.storage.database.entity.NoteLineEntity
+import java.util.Date
 
 @Dao
 internal abstract class FullNoteDao {
@@ -19,6 +20,9 @@ internal abstract class FullNoteDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertFullNote(fullNoteEntity: FullNoteEntity?)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertEmptyWithId(fullNoteEntity: FullNoteEntity?) : Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertNoteLine(fullNoteEntity: NoteLineEntity?)
@@ -44,6 +48,9 @@ internal abstract class FullNoteDao {
             insertNoteLine(it)
         }
     }
+
+    @Transaction
+    open  suspend fun insertEmptyNote() : Long =  insertEmptyWithId(FullNoteEntity(title = "", date = Date()))
 
     @Transaction
     open suspend fun getNotesWithDescriptions(): List<FullNoteWithDescriptionEntity> {

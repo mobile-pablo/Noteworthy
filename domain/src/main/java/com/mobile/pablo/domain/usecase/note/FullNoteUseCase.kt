@@ -30,6 +30,12 @@ sealed class FullNoteUseCase {
         }
     }
 
+    class InsertEmptyNote @Inject constructor(
+        private val fullNoteDataStorage: FullNoteDataStorage,
+    ) {
+        suspend operator fun invoke(): Long = fullNoteDataStorage.insertEmptyNote()
+    }
+
     class DeleteFullNote @Inject constructor(
         private val fullNoteDataStorage: FullNoteDataStorage,
     ) {

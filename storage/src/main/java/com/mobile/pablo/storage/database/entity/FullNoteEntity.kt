@@ -9,7 +9,7 @@ import java.util.Date
 )
 data class FullNoteEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+    val id: Int = 0,
     val title: String,
     val date: Date
 )

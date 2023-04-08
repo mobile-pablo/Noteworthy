@@ -5,4 +5,6 @@ interface HomeInterface {
     fun downloadNotes()
 
     fun deleteNote(noteId: Int)
+
+    fun insertEmptyNote()
 }

@@ -10,5 +10,7 @@ interface FullNoteDataStorage {
 
     suspend fun insertNote(dto: FullNoteDTO?)
 
+    suspend fun insertEmptyNote() : Long
+
     suspend fun clearNotes()
 }

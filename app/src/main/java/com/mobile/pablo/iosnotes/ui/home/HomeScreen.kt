@@ -9,6 +9,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -35,6 +36,17 @@ fun HomeScreen(
 ) {
 
     val notes by homeViewModel.previewNotes.collectAsState()
+    val emptyNoteId = homeViewModel.emptyNoteId
+
+    LaunchedEffect(
+        key1 = emptyNoteId
+    ) {
+        emptyNoteId.collect {
+            it?.let {
+                navigator.navigate(NoteScreenDestination(noteId = it.toInt()))
+            }
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -65,8 +77,13 @@ fun HomeScreen(
                                 note.date,
                                 note.description
                             ),
-                            onClick = { navigateToNote(navigator, note.id) },
-                            onDelete = { note.id?.let { homeViewModel.deleteNote(it) } },
+                            onClick = {
+                                navigateToNote(
+                                    navigator,
+                                    note.id
+                                )
+                            },
+                            onDelete = { homeViewModel.deleteNote(note.id) },
                             onPin = { }
                         )
                     }
@@ -77,7 +94,7 @@ fun HomeScreen(
                 modifier = Modifier
                     .layoutId(ID_HOME_BOTTOM_BAR)
                     .fillMaxWidth(),
-                onClickNewNote = { navigateToNote(navigator) }
+                onClickNewNote = { homeViewModel.insertEmptyNote() }
             )
         }
     }
@@ -85,7 +102,7 @@ fun HomeScreen(
 
 fun navigateToNote(
     navigator: DestinationsNavigator,
-    noteId: Int? = null
+    noteId: Int
 ) {
     navigator.navigate(NoteScreenDestination(noteId = noteId))
 }

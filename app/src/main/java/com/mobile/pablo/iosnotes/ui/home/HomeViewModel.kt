@@ -19,7 +19,8 @@ import kotlinx.coroutines.flow.asStateFlow
 class HomeViewModel @Inject constructor(
     private val getPreviewNotes: PreviewNoteUseCase.GetPreviewNotes,
     private val deletePreviewNote: PreviewNoteUseCase.DeletePreviewNote,
-    private val deleteFullNote: FullNoteUseCase.DeleteFullNote
+    private val deleteFullNote: FullNoteUseCase.DeleteFullNote,
+    private val insertEmptyFullNote: FullNoteUseCase.InsertEmptyNote
 ) : ViewModel(), HomeInterface {
 
     private var getNotesJob: Job? = null
@@ -27,6 +28,9 @@ class HomeViewModel @Inject constructor(
 
     private val _previewNotes: MutableStateFlow<List<PreviewNote?>?> = MutableStateFlow(null)
     val previewNotes: StateFlow<List<PreviewNote?>?> = _previewNotes.asStateFlow()
+
+    private val _emptyNoteId: MutableStateFlow<Long?> = MutableStateFlow(null)
+    val emptyNoteId: StateFlow<Long?> = _emptyNoteId.asStateFlow()
 
     private val _viewState = SingleLiveEvent<ViewState>()
     val viewState: LiveData<ViewState> = _viewState
@@ -54,6 +58,13 @@ class HomeViewModel @Inject constructor(
         deleteNoteJob = launch {
             deletePreviewNote(noteId)
             deleteFullNote(noteId)
+        }
+    }
+
+    override fun insertEmptyNote() {
+        deleteNoteJob?.cancel()
+        deleteNoteJob = launch {
+            _emptyNoteId.emit(insertEmptyFullNote())
         }
     }
 }

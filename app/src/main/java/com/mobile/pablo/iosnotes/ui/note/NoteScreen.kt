@@ -28,7 +28,7 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Composable
 fun NoteScreen(
     navigator: DestinationsNavigator,
-    noteId: Int?,
+    noteId: Int,
     viewModel: NoteViewModel = hiltViewModel()
 ) {
     val fullNote = viewModel.fullNote.collectAsState()
@@ -36,9 +36,7 @@ fun NoteScreen(
     LaunchedEffect(
         key1 = fullNote
     ) {
-        if (noteId != null) {
-            viewModel.downloadNote(noteId)
-        }
+        viewModel.downloadNote(noteId)
     }
 
     ConstraintLayout(
@@ -58,14 +56,15 @@ fun NoteScreen(
                 onDoneItem = { fullNote.value?.let { viewModel.saveNote(it) } }
             )
         )
-        TextCanvas(
-            modifier = Modifier
-                .layoutId(ID_TEXT_CANVAS)
-                .fillMaxWidth(),
-            fullNote = fullNote.value
-        )?.let {
-            viewModel.saveNote(it)
-        }
+        viewModel.saveNote(
+            TextCanvas(
+                modifier = Modifier
+                    .layoutId(ID_TEXT_CANVAS)
+                    .fillMaxWidth(),
+                fullNote = fullNote.value,
+                noteId = noteId
+            )
+        )
         NoteBottomBar(
             modifier = Modifier
                 .layoutId(ID_NOTE_BOTTOM_BAR)

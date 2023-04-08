@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 )
 data class NoteLineEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int? = null,
+    val id: Int = 0,
     val fullNoteId: Int,
     val isCheckbox: Boolean = false,
     val noteText: String = "0"

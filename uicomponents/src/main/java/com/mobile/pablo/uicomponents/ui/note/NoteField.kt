@@ -59,6 +59,7 @@ fun NoteField(
     }
 
     return NoteLine(
+        id = noteLine.id,
         isCheckbox = isCheckbox,
         noteText = noteText,
         fullNoteId = noteLine.fullNoteId

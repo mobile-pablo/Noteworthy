@@ -37,5 +37,7 @@ internal class FullNoteDataStorageImpl @Inject constructor(
         )
     }
 
+    override suspend fun insertEmptyNote(): Long = fullNoteDao.insertEmptyNote()
+
     override suspend fun clearNotes(): Unit = fullNoteDao.clearNotesWithDescriptions()
 }
