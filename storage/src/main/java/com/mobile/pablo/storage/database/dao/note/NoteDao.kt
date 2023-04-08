@@ -2,8 +2,8 @@ package com.mobile.pablo.storage.database.dao.note
 
 import androidx.room.*
 import com.mobile.pablo.storage.database.entity.NoteEntity
-import com.mobile.pablo.storage.database.entity.NoteWithDescriptionEntity
 import com.mobile.pablo.storage.database.entity.NoteLineEntity
+import com.mobile.pablo.storage.database.entity.NoteWithDescriptionEntity
 import java.util.Date
 
 @Dao
@@ -22,7 +22,10 @@ internal abstract class NoteDao {
     abstract suspend fun insertNote(noteEntity: NoteEntity?)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertEmptyWithId(noteEntity: NoteEntity?) : Long
+    abstract suspend fun insertEmptyWithId(noteEntity: NoteEntity?): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertEmptytNoteLineWithId(noteEntity: NoteLineEntity?): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertNoteLine(noteEntity: NoteLineEntity?)
@@ -50,11 +53,20 @@ internal abstract class NoteDao {
     }
 
     @Transaction
-    open  suspend fun insertEmptyNote() : Long =  insertEmptyWithId(NoteEntity(title = "", date = Date()))
+    open suspend fun insertEmptyNote(): Long = insertEmptyWithId(
+        NoteEntity(
+            title = "",
+            date = Date()
+        )
+    )
+
+    @Transaction
+    open suspend fun insertEmptyNoteLineWithId(parentNoteId: Int): Long =
+        insertEmptytNoteLineWithId(NoteLineEntity(parentNoteId = parentNoteId))
 
     @Transaction
     open suspend fun getNotesWithDescriptions(): List<NoteWithDescriptionEntity> = getNotes().map {
-            getNotesWithDescriptions(it.id)
+        getNotesWithDescriptions(it.id)
     }
 
     @Transaction

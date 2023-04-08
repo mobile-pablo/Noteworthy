@@ -14,6 +14,7 @@ buildscript {
 
     //core
     ext.hilt = '2.45'
+    ext.hilt_compose = '1.1.0-alpha01'
     ext.coroutines = '1.5.2'
 
     ext.coil = '2.2.2'

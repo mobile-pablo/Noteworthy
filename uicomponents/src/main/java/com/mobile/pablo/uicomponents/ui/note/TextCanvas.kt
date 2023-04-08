@@ -10,15 +10,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.data.note.NoteLine
+import com.mobile.pablo.uicomponents.R
 import com.mobile.pablo.uicomponents.ui.theme.spacing
 
 @Composable
 fun TextCanvas(
     modifier: Modifier = Modifier,
     note: Note,
-    noteId: Int
+    noteId: Int,
+    createEmptyNoteLine : () ->NoteLine
 ): Note {
 
     val listState = rememberLazyListState()
@@ -34,17 +37,20 @@ fun TextCanvas(
         item {
             title.value = NoteField(
                 modifier = Modifier.fillMaxWidth(),
-                title = note.title
+                title = note.title,
+                placeHolder = stringResource(id = R.string.search)
             )
         }
         noteLines.value.let { noteL ->
             if (noteL != null) {
                 if (noteL.isNotEmpty()) {
                     items(noteL) { noteLine ->
+                       // val notes = createEmptyNoteLine()
                         noteLines.value = updateCorrectlyNote(
                             NoteField(
                                 modifier = Modifier.fillMaxWidth(),
                                 noteLine = noteLine.copy(parentNoteId = noteId),
+                                hasCheckbox = true
                             ),
                             noteL
                         )

@@ -11,7 +11,7 @@ data class NoteLineEntity(
     val id: Int = 0,
     val parentNoteId: Int,
     val isCheckbox: Boolean = false,
-    val noteText: String = "0"
+    val noteText: String = ""
 ) {
 
     override fun toString(): String {

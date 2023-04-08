@@ -13,10 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import com.mobile.pablo.domain.data.note.NoteLine
-import com.mobile.pablo.uicomponents.R
 import com.mobile.pablo.uicomponents.ui.theme.Text
 import androidx.compose.material.MaterialTheme as Theme
 
@@ -24,6 +22,8 @@ import androidx.compose.material.MaterialTheme as Theme
 fun NoteField(
     modifier: Modifier = Modifier,
     noteLine: NoteLine,
+    placeHolder: String = "",
+    hasCheckbox: Boolean = false
 ): NoteLine {
     val focusManager = LocalFocusManager.current
 
@@ -33,14 +33,17 @@ fun NoteField(
         modifier = modifier,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Checkbox(
-            checked = isCheckbox,
-            onCheckedChange = { isCheckbox = it }
-        )
+        if (hasCheckbox) {
+            Checkbox(
+                checked = isCheckbox,
+                onCheckedChange = { isCheckbox = it }
+            )
+        }
+
         TextField(
             value = noteText,
             onValueChange = { noteText = it },
-            placeholder = { Text(stringResource(id = R.string.search)) },
+            placeholder = { Text(placeHolder) },
             colors = TextFieldDefaults.textFieldColors(
                 textColor = Theme.colors.Text,
                 disabledTextColor = Color.Transparent,
@@ -69,7 +72,8 @@ fun NoteField(
 @Composable
 fun NoteField(
     modifier: Modifier = Modifier,
-    title : String
+    title: String,
+    placeHolder: String
 ): String {
     val focusManager = LocalFocusManager.current
 
@@ -81,7 +85,7 @@ fun NoteField(
         TextField(
             value = noteText,
             onValueChange = { noteText = it },
-            placeholder = { Text(stringResource(id = R.string.search)) },
+            placeholder = { Text(placeHolder) },
             colors = TextFieldDefaults.textFieldColors(
                 textColor = Theme.colors.Text,
                 disabledTextColor = Color.Transparent,
