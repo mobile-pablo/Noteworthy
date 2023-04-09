@@ -24,6 +24,7 @@ import com.mobile.pablo.uicomponents.ui.note.TextCanvas
 import com.mobile.pablo.uicomponents.ui.theme.NoteBackground
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import kotlinx.coroutines.launch
 
 @Destination
 @Composable
@@ -33,11 +34,13 @@ fun NoteScreen(
     viewModel: NoteViewModel = hiltViewModel()
 ) {
     val scope = rememberCoroutineScope()
-    val note = viewModel.note.collectAsState().value
-    val emptyNoteLineId = viewModel.emptyNoteLineId.collectAsState().value
+    val note = viewModel.note.collectAsState()
+    val emptyNoteLineId = viewModel.emptyNoteLineId.collectAsState()
     val context = LocalContext.current
+
     LaunchedEffect(
-        key1 = note
+        key1 = note,
+        key2 = emptyNoteLineId
     ) {
         viewModel.downloadNote(noteId)
     }
@@ -54,16 +57,22 @@ fun NoteScreen(
                 .fillMaxWidth(),
             noteTopWrapper = NoteTopWrapper(
                 onBackItem =
-                { (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed() },
-                onShareItem = { viewModel.shareNote() },
+                {
+                    scope.launch {
+                        (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
+                    }
+                },
+                onShareItem = { scope.launch { viewModel.shareNote() } },
                 onDoneItem = {
-                    note?.let { viewModel.saveNote(it) }
-                    (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
+                    scope.launch {
+                        note.value?.let { viewModel.saveNote(it) }
+                        (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
+                    }
                 }
             )
         )
 
-        note?.let {
+        note.value?.let {
             viewModel.saveNote(
                 TextCanvas(
                     modifier = Modifier
@@ -72,7 +81,13 @@ fun NoteScreen(
                     note = it,
                     noteId = noteId,
                     createEmptyNoteLine =
-                    { createEmptyNoteLine(noteId, viewModel, emptyNoteLineId) }
+                    {
+                        createEmptyNoteLine(
+                            noteId,
+                            viewModel,
+                            emptyNoteLineId.value
+                        )
+                    }
                 )
             )
         }
@@ -82,16 +97,20 @@ fun NoteScreen(
                 .layoutId(ID_NOTE_BOTTOM_BAR)
                 .fillMaxWidth(),
             noteBottomWrapper = NoteBottomWrapper(
-                {},
-                {},
-                {},
-                {}
+                { scope.launch {} },
+                { scope.launch {} },
+                { scope.launch {} },
+                { scope.launch {} }
             )
         )
     }
 }
 
-fun createEmptyNoteLine(noteId: Int, viewModel: NoteViewModel, emptyNoteLineId: Long): Long {
+fun createEmptyNoteLine(
+    noteId: Int,
+    viewModel: NoteViewModel,
+    emptyNoteLineId: Long
+): Long {
     viewModel.createEmptyNoteLine(noteId)
     return emptyNoteLineId
 }
