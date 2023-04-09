@@ -76,7 +76,10 @@ fun HomeScreen(
                                     note.id
                                 )
                             },
-                            onDelete = { homeViewModel.deleteNote(note.id) },
+                            onDelete = {
+                                homeViewModel.deleteNote(note.id)
+                                homeViewModel.downloadNotes()
+                            },
                             onPin = { }
                         )
                     }
