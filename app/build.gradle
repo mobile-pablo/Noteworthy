@@ -81,32 +81,31 @@ dependencies {
     implementation project('::uicomponents')
     implementation project('::domain')
 
-    implementation "androidx.core:core-ktx:$rootProject.androidx_core"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.lifecycle"
-    implementation "androidx.activity:activity-compose:$rootProject.activity_compose_version"
-    implementation "androidx.compose.ui:ui:$rootProject.compose_version"
-    implementation "androidx.constraintlayout:constraintlayout-compose:$rootProject.compose_constraint"
-    implementation "me.saket.swipe:swipe:$rootProject.compose_swipe"
-    implementation "androidx.compose.ui:ui-tooling-preview:$rootProject.compose_version"
-    implementation "androidx.compose.material:material:$rootProject.compose_material"
-    implementation "io.coil-kt:coil-compose:$rootProject.coil"
-    implementation "androidx.compose.runtime:runtime-livedata:$rootProject.compose_version"
+    implementation libs.androidX.core
+    implementation libs.androidX.lifecycle
 
-    implementation "androidx.lifecycle:lifecycle-runtime-compose:$rootProject.lifecycle"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:$rootProject.compose_version"
-    implementation "androidx.hilt:hilt-navigation-compose:$rootProject.hilt_compose"
+    implementation libs.compose.activity
+    implementation libs.compose.ui
+    implementation libs.compose.constraint
+    implementation libs.compose.swipe
+    implementation libs.compose.tooling.preview
+    implementation libs.compose.material
+    implementation libs.compose.coil
+    implementation libs.compose.lifecycle
+    implementation libs.compose.viewmodel
+    implementation libs.compose.hiltNavigation
 
-    implementation "com.google.dagger:hilt-android:$rootProject.hilt"
-    kapt "com.google.dagger:hilt-compiler:$rootProject.hilt"
-    implementation "com.github.AraujoJordan:ExcuseMe:$rootProject.excuseMe"
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
+    implementation libs.excuseMe
 
-    testImplementation "junit:junit:$rootProject.junit"
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.junitExt"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso"
-    androidTestImplementation "androidx.compose.ui:ui-test-junit4:$rootProject.compose_version"
-    debugImplementation "androidx.compose.ui:ui-tooling:$rootProject.compose_version"
-    debugImplementation "androidx.compose.ui:ui-test-manifest:$rootProject.compose_version"
+    testImplementation libs.junit
+    androidTestImplementation libs.junit.ext
+    androidTestImplementation libs.espresso.core
+    androidTestImplementation libs.compose.junit
+    debugImplementation libs.compose.tooling
+    debugImplementation libs.compose.testManifest
 
-    implementation "io.github.raamcosta.compose-destinations:core:$navigation_compose"
-    ksp "io.github.raamcosta.compose-destinations:ksp:$navigation_compose"
+    implementation libs.compose.destination
+    ksp libs.compose.destination.ksp
 }
