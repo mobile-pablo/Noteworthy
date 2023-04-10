@@ -1,8 +1,8 @@
-package com.mobile.pablo.iosnotes.ui.note
+package com.mobile.pablo.editnote
 
 import com.mobile.pablo.domain.data.note.Note
 
-interface NoteInterface {
+interface EditNoteInterface {
 
     fun downloadNote(noteId: Int)
 

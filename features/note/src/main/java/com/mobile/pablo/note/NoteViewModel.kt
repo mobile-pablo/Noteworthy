@@ -1,4 +1,4 @@
-package com.mobile.pablo.iosnotes.ui.home
+package com.mobile.pablo.note
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -15,11 +15,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(
+class NoteViewModel @Inject constructor(
     private val getNotesUseCase: NoteUseCase.GetNotes,
     private val deleteNoteUseCase: NoteUseCase.DeleteNote,
     private val insertEmptyNoteUseCase: NoteUseCase.InsertEmptyNote
-) : ViewModel(), HomeInterface {
+) : ViewModel(), NoteInterface {
 
     private var getNotesJob: Job? = null
     private var deleteNoteJob: Job? = null
@@ -30,8 +30,8 @@ class HomeViewModel @Inject constructor(
     private val _emptyNoteId: MutableStateFlow<Long?> = MutableStateFlow(null)
     val emptyNoteId: StateFlow<Long?> = _emptyNoteId.asStateFlow()
 
-    private val _viewState = SingleLiveEvent<ViewState>()
-    val viewState: LiveData<ViewState> = _viewState
+    private val _viewState = SingleLiveEvent<com.mobile.pablo.editnote.ViewState>()
+    val viewState: LiveData<com.mobile.pablo.editnote.ViewState> = _viewState
 
     init {
         downloadNotes()
@@ -44,8 +44,8 @@ class HomeViewModel @Inject constructor(
             _viewState.value = noteResult.run {
                 if (isSuccessful && data != null) {
                     _notes.emit(data)
-                    ViewState.DownloadSuccessful
-                } else ViewState.Error(INTERNET_ISSUE)
+                    com.mobile.pablo.editnote.ViewState.DownloadSuccessful
+                } else com.mobile.pablo.editnote.ViewState.Error(INTERNET_ISSUE)
             }
         }
     }
@@ -64,15 +64,15 @@ class HomeViewModel @Inject constructor(
             _viewState.value = noteResult.run {
                 if (isSuccessful && data != null) {
                     _emptyNoteId.emit(data)
-                    ViewState.InsertSuccessful
-                } else ViewState.Error(INTERNET_ISSUE)
+                    com.mobile.pablo.editnote.ViewState.InsertSuccessful
+                } else com.mobile.pablo.editnote.ViewState.Error(INTERNET_ISSUE)
             }
         }
     }
 }
 
 sealed class ViewState {
-    object DownloadSuccessful : ViewState()
-    object InsertSuccessful : ViewState()
-    class Error(val message: String) : ViewState()
+    object DownloadSuccessful : com.mobile.pablo.editnote.ViewState()
+    object InsertSuccessful : com.mobile.pablo.editnote.ViewState()
+    class Error(val message: String) : com.mobile.pablo.editnote.ViewState()
 }

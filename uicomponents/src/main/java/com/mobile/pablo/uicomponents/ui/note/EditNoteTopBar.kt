@@ -22,7 +22,7 @@ import com.mobile.pablo.uicomponents.ui.theme.spacing
 import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
-fun NoteTopBar(
+fun EditNoteTopBar(
     modifier: Modifier = Modifier,
     noteTopWrapper: NoteTopWrapper
 ) {

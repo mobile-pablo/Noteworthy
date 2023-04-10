@@ -15,7 +15,7 @@ import com.mobile.pablo.uicomponents.ui.theme.CTA
 import com.mobile.pablo.uicomponents.ui.theme.spacing
 
 @Composable
-fun NoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper : NoteBottomWrapper) {
+fun EditNoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper : NoteBottomWrapper) {
     Row(modifier = modifier) {
         Box(
             modifier = Modifier

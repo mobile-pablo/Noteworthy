@@ -1,4 +1,4 @@
-package com.mobile.pablo.iosnotes.util
+package com.mobile.pablo.core.utils
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel

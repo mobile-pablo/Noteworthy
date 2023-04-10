@@ -11,6 +11,7 @@ activity_compose = '1.7.0'
 compose_material = '1.4.0'
 androidx_core = '1.9.0'
 lifecycle = '2.3.1'
+lifecycle_viewmodel = '2.4.0'
 excuse_me = '0.9.5'
 hilt_compose = '1.1.0-alpha01'
 coroutines = '1.5.2'
@@ -35,6 +36,7 @@ benchmarkPlugin = { module = "androidx.benchmark:benchmark-gradle-plugin", versi
 # project modules
 androidX-core = { module = "androidx.core:core-ktx", version.ref = "androidx_core" }
 androidX-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidX-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycle_viewmodel" }
 
 compose-activity = { module = "androidx.activity:activity-compose", version.ref = "activity_compose" }
 compose-ui = { module = "androidx.compose.ui:ui", version.ref = "compose" }

@@ -1,4 +1,4 @@
-package com.mobile.pablo.iosnotes.ui.home
+package com.mobile.pablo.note
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -28,9 +28,9 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 @Destination(start = true)
 @Composable
-fun HomeScreen(
+fun NoteScreen(
     navigator: DestinationsNavigator,
-    homeViewModel: HomeViewModel = hiltViewModel()
+    homeViewModel: NoteViewModel = hiltViewModel()
 ) {
 
     val notes = homeViewModel.notes.collectAsState().value
@@ -41,7 +41,7 @@ fun HomeScreen(
     ) {
         emptyNoteId.collect {
             it?.let {
-                navigator.navigate(NoteScreenDestination(noteId = it.toInt()))
+                navigator.navigate(EditNoteScreenDestination(noteId = it.toInt()))
             }
         }
     }
@@ -53,17 +53,17 @@ fun HomeScreen(
     ) {
         ConstraintLayout(
             modifier = Modifier.fillMaxSize(),
-            constraintSet = homeConstraints
+            constraintSet = noteConstraints
         ) {
             HomeTopBar(
                 Modifier
-                    .layoutId(ID_HOME_TOP_BAR)
+                    .layoutId(ID_NOTE_TOP_BAR)
                     .padding(horizontal = Theme.spacing.spacing_14)
                     .fillMaxWidth()
             )
             LazyColumn(
                 modifier = Modifier
-                    .layoutId(ID_PREVIEW_NOTE_LISTS)
+                    .layoutId(ID_NOTE_LISTS)
                     .padding(horizontal = Theme.spacing.spacing_14),
             ) {
                 notes?.let { saveNotes ->
@@ -88,7 +88,7 @@ fun HomeScreen(
             HomeBottomBar(
                 5,
                 modifier = Modifier
-                    .layoutId(ID_HOME_BOTTOM_BAR)
+                    .layoutId(ID_NOTE_BOTTOM_BAR)
                     .fillMaxWidth(),
                 onClickNewNote = { homeViewModel.insertEmptyNote() }
             )
@@ -103,27 +103,27 @@ fun navigateToNote(
     navigator.navigate(NoteScreenDestination(noteId = noteId))
 }
 
-private val homeConstraints = ConstraintSet {
+private val noteConstraints = ConstraintSet {
 
-    val homeTopBar = createRefFor(ID_HOME_TOP_BAR)
-    val previewNoteLists = createRefFor(ID_PREVIEW_NOTE_LISTS)
-    val homeBottomBar = createRefFor(ID_HOME_BOTTOM_BAR)
+    val noteTopBar = createRefFor(ID_NOTE_TOP_BAR)
+    val noteLists = createRefFor(ID_NOTE_LISTS)
+    val noteBottomBar = createRefFor(ID_NOTE_BOTTOM_BAR)
 
-    constrain(homeTopBar) {
+    constrain(noteTopBar) {
         top.linkTo(parent.top)
         start.linkTo(parent.start)
         end.linkTo(parent.end)
     }
 
-    constrain(previewNoteLists) {
-        top.linkTo(homeTopBar.bottom)
+    constrain(noteLists) {
+        top.linkTo(noteTopBar.bottom)
         start.linkTo(parent.start)
         end.linkTo(parent.end)
         height = Dimension.fillToConstraints
-        bottom.linkTo(homeBottomBar.top)
+        bottom.linkTo(noteBottomBar.top)
     }
 
-    constrain(homeBottomBar) {
+    constrain(noteBottomBar) {
         bottom.linkTo(parent.bottom)
         start.linkTo(parent.start)
         end.linkTo(parent.end)
@@ -131,6 +131,6 @@ private val homeConstraints = ConstraintSet {
 }
 
 // Layout ids
-private const val ID_HOME_TOP_BAR = "homeTopBar"
-private const val ID_PREVIEW_NOTE_LISTS = "previewNoteLists"
-private const val ID_HOME_BOTTOM_BAR = "HomeBottomBar"
+private const val ID_NOTE_TOP_BAR = "noteTopBar"
+private const val ID_NOTE_LISTS = "previewNoteLists"
+private const val ID_NOTE_BOTTOM_BAR = "noteBottomBar"

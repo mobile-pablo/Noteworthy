@@ -1,6 +1,6 @@
-package com.mobile.pablo.iosnotes.ui.home
+package com.mobile.pablo.note
 
-interface HomeInterface {
+interface NoteInterface {
 
     fun downloadNotes()
 

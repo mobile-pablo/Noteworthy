@@ -1,11 +1,11 @@
-package com.mobile.pablo.iosnotes.ui.note
+package com.mobile.pablo.editnote
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.mobile.pablo.core.utils.SingleLiveEvent
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.usecase.note.NoteUseCase
-import com.mobile.pablo.iosnotes.util.launch
+import com.mobile.pablo.core.utils.launch
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Job
@@ -14,12 +14,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
-class NoteViewModel @Inject constructor(
+class EditNoteViewModel @Inject constructor(
     private var getNoteUseCase: NoteUseCase.GetNote,
     private var insertNoteUseCase: NoteUseCase.InsertNote,
     private var createEmptyNoteLineUseCase: NoteUseCase.InsertEmptyNoteLine,
     private val deleteNoteUseCase: NoteUseCase.DeleteNote
-) : ViewModel(), NoteInterface {
+) : ViewModel(), EditNoteInterface {
 
     private var noteJob: Job? = null
 

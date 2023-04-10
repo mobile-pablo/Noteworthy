@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.devtools.ksp' version '1.8.0-1.0.9'
 }
 
 android {
@@ -62,4 +63,7 @@ dependencies {
     androidTestImplementation libs.compose.junit
     debugImplementation libs.compose.tooling
     debugImplementation libs.compose.testManifest
+
+    implementation libs.compose.destination
+    ksp libs.compose.destination.ksp
 }
