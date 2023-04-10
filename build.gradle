@@ -38,10 +38,10 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$build_gradle"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_gradle"
-        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt"
-        classpath 'androidx.benchmark:benchmark-gradle-plugin:1.1.0-beta04'
+        classpath libs.buildGradlePlugin
+        classpath libs.kotlinGradlePlugin
+        classpath libs.hilt.plugin
+        classpath libs.benchmarkPlugin
     }
 }
 

@@ -1,0 +1,12 @@
+[versions]
+build_gradle = "7.4.1"
+kotlin_gradle = "1.8.10"
+hilt = "2.45"
+benchmark = "1.2.0-alpha13"
+
+
+[libraries]
+buildGradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "build_gradle"}
+kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin_gradle"}
+hilt-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt"}
+benchmarkPlugin = { module = "androidx.benchmark:benchmark-gradle-plugin", version.ref = "benchmark"}
