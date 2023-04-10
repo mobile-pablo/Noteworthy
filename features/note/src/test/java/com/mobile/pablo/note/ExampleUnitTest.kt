@@ -1,4 +1,4 @@
-package com.mobile.pablo.features
+package com.mobile.pablo.note
 
 import org.junit.Test
 

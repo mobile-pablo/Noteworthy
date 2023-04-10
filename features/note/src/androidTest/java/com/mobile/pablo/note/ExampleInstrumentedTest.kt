@@ -1,4 +1,4 @@
-package com.mobile.pablo.features
+package com.mobile.pablo.note
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -21,7 +21,7 @@ class ExampleInstrumentedTest {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals(
-            "com.mobile.pablo.features.test",
+            "com.mobile.pablo.note.test",
             appContext.packageName
         )
     }
