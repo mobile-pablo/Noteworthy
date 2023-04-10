@@ -1,12 +1,35 @@
 [versions]
+# project classpath
 build_gradle = "7.4.1"
 kotlin_gradle = "1.8.10"
 hilt = "2.45"
 benchmark = "1.2.0-alpha13"
 
+# project modules
+compose = '1.4.0'
+activity_compose = '1.7.0'
+compose_material = '1.4.0'
+androidx_core = '1.9.0'
+lifecycle = '2.3.1'
+excuseMe = '0.9.5'
+hilt_compose = '1.1.0-alpha01'
+coroutines = '1.5.2'
+coil = '2.2.2'
+navigation_compose = '1.8.38-beta'
+compose_constraint = '1.0.1'
+compose_swipe = '1.1.1'
+room = '2.5.1'
+junit = '4.13.2'
+junitExt = '1.1.5'
+espresso = '3.5.1'
+mockitoKotlin = '2.2.0'
+runner = '1.4.0'
 
 [libraries]
+# project classpath
 buildGradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "build_gradle"}
 kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin_gradle"}
 hilt-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt"}
 benchmarkPlugin = { module = "androidx.benchmark:benchmark-gradle-plugin", version.ref = "benchmark"}
+
+# project modules
