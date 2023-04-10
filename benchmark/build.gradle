@@ -39,10 +39,10 @@ android {
 }
 
 dependencies {
-    androidTestImplementation "androidx.test:runner:$rootProject.runner"
-    testImplementation "junit:junit:$rootProject.junit"
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.junitExt"
-    androidTestImplementation "androidx.benchmark:benchmark-junit4:$rootProject.benchmark"
+    androidTestImplementation libs.testRunner
+    testImplementation libs.junit
+    androidTestImplementation libs.junit.ext
+    androidTestImplementation libs.benchmark
 
     // Add your dependencies here. Note that you cannot benchmark code
     // in an app module this way - you will need to move any code you

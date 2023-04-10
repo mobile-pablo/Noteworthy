@@ -26,10 +26,10 @@ android {
 dependencies {
     api project('::storage')
 
-    implementation "com.google.dagger:hilt-android:$rootProject.hilt"
-    kapt "com.google.dagger:hilt-compiler:$rootProject.hilt"
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
 
-    testImplementation "junit:junit:$rootProject.junit"
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.junitExt"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso"
+    testImplementation libs.junit
+    androidTestImplementation libs.junit.ext
+    androidTestImplementation libs.espresso.core
 }

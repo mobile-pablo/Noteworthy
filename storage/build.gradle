@@ -31,13 +31,13 @@ android {
 dependencies {
     api project('::core')
 
-    implementation "com.google.dagger:hilt-android:$rootProject.hilt"
-    kapt "com.google.dagger:hilt-compiler:$rootProject.hilt"
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
 
-    api "androidx.room:room-ktx:$rootProject.room"
-    kapt "androidx.room:room-compiler:$rootProject.room"
+    api libs.room.ktx
+    kapt libs.room.compiler
 
-    testImplementation "junit:junit:$rootProject.junit"
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.junitExt"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espresso"
+    testImplementation libs.junit
+    androidTestImplementation libs.junit.ext
+    androidTestImplementation libs.espresso.core
 }
