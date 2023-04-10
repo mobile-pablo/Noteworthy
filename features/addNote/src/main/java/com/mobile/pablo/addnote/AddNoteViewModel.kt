@@ -1,4 +1,4 @@
-package com.mobile.pablo.editnote
+package com.mobile.pablo.addnote
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -14,14 +14,17 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
-class EditNoteViewModel @Inject constructor(
+class AddNoteViewModel @Inject constructor(
     private var getNoteUseCase: NoteUseCase.GetNote,
     private var insertNoteUseCase: NoteUseCase.InsertNote,
     private var createEmptyNoteLineUseCase: NoteUseCase.InsertEmptyNoteLine,
     private val deleteNoteUseCase: NoteUseCase.DeleteNote
-) : ViewModel(), EditNoteInterface {
+) : ViewModel(), AddNoteInterface {
 
     private var noteJob: Job? = null
+
+    private val _note: MutableStateFlow<Note?> = MutableStateFlow(null)
+    val note: StateFlow<Note?> = _note.asStateFlow()
 
     private val _viewState = SingleLiveEvent<ViewState>()
     val viewState: LiveData<ViewState> = _viewState
@@ -29,6 +32,16 @@ class EditNoteViewModel @Inject constructor(
     private val _emptyNoteLineId: MutableStateFlow<Long> = MutableStateFlow(0L)
     val emptyNoteLineId: StateFlow<Long> = _emptyNoteLineId.asStateFlow()
 
+    override fun downloadNote(noteId: Int) {
+        noteJob?.cancel()
+        noteJob = launch {
+            val notesResult = getNoteUseCase(noteId)
+            notesResult.run {
+                if (isSuccessful && data != null)
+                    _note.emit(data)
+            }
+        }
+    }
 
     override fun createEmptyNoteLine(parentNoteId: Int) {
         noteJob?.cancel()

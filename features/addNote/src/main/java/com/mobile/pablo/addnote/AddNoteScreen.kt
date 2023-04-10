@@ -1,4 +1,4 @@
-package com.mobile.pablo.editnote
+package com.mobile.pablo.addnote
 
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -16,7 +15,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.uicomponents.common.theme.NoteBackground
 import com.mobile.pablo.uicomponents.common.ui.CommonNoteBottomBar
 import com.mobile.pablo.uicomponents.common.ui.CommonNoteTopBar
@@ -24,18 +22,20 @@ import com.mobile.pablo.uicomponents.common.ui.TextCanvas
 import com.mobile.pablo.uicomponents.common.data.NoteBottomWrapper
 import com.mobile.pablo.uicomponents.common.data.NoteTopWrapper
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
 
 @Destination
 @Composable
-fun EditNoteScreen(
-    note: Note,
-    viewModel: EditNoteViewModel = hiltViewModel()
+fun AddNoteScreen(
+    noteId: Int,
+    viewModel: AddNoteViewModel = hiltViewModel()
 ) {
-    val scope = rememberCoroutineScope()
-    val context = LocalContext.current
+    viewModel.downloadNote(noteId)
 
+    val scope = rememberCoroutineScope()
+    val note = viewModel.note.collectAsState()
+    val emptyNoteLineId = viewModel.emptyNoteLineId.collectAsState()
+    val context = LocalContext.current
 
     ConstraintLayout(
         modifier = Modifier
@@ -43,9 +43,9 @@ fun EditNoteScreen(
             .background(Theme.colors.NoteBackground),
         constraintSet = constraints
     ) {
-        CommonNoteTopBar(
+       CommonNoteTopBar(
             modifier = Modifier
-                .layoutId(ID_EDIT_NOTE_TOP_BAR)
+                .layoutId(ID_ADD_NOTE_TOP_BAR)
                 .fillMaxWidth(),
             noteTopWrapper = NoteTopWrapper(
                 onBackItem =
@@ -63,17 +63,27 @@ fun EditNoteScreen(
             )
         )
 
-        TextCanvas(
-            modifier = Modifier
-                .layoutId(ID_TEXT_CANVAS)
-                .fillMaxWidth(),
-            note = note,
-            noteId = note.id,
-        )
+        note.value?.let {
+            TextCanvas(
+                modifier = Modifier
+                    .layoutId(ID_TEXT_CANVAS)
+                    .fillMaxWidth(),
+                note = it,
+                noteId = noteId,
+                createEmptyNoteLine =
+                {
+                    createEmptyNoteLine(
+                        noteId,
+                        viewModel,
+                        emptyNoteLineId.value
+                    )
+                }
+            )
+        }
 
         CommonNoteBottomBar(
             modifier = Modifier
-                .layoutId(ID_EDIT_NOTE_BOTTOM_BAR)
+                .layoutId(ID_ADD_NOTE_BOTTOM_BAR)
                 .fillMaxWidth(),
             noteBottomWrapper = NoteBottomWrapper(
                 { scope.launch {} },
@@ -85,10 +95,19 @@ fun EditNoteScreen(
     }
 }
 
+fun createEmptyNoteLine(
+    noteId: Int,
+    viewModel: AddNoteViewModel,
+    emptyNoteLineId: Long
+): Long {
+    viewModel.createEmptyNoteLine(noteId)
+    return emptyNoteLineId
+}
+
 private val constraints = ConstraintSet {
-    val noteTopBar = createRefFor(ID_EDIT_NOTE_TOP_BAR)
+    val noteTopBar = createRefFor(ID_ADD_NOTE_TOP_BAR)
     val textCanvas = createRefFor(ID_TEXT_CANVAS)
-    val noteBottomBar = createRefFor(ID_EDIT_NOTE_BOTTOM_BAR)
+    val noteBottomBar = createRefFor(ID_ADD_NOTE_BOTTOM_BAR)
 
     constrain(noteTopBar) {
         top.linkTo(parent.top)
@@ -112,6 +131,6 @@ private val constraints = ConstraintSet {
 }
 
 // Layout ids
-private const val ID_EDIT_NOTE_TOP_BAR = "edit_note_top_bar"
+private const val ID_ADD_NOTE_TOP_BAR = "add_note_top_bar"
 private const val ID_TEXT_CANVAS = "text_canvas"
-private const val ID_EDIT_NOTE_BOTTOM_BAR = "edit_note_bottom_bar"
+private const val ID_ADD_NOTE_BOTTOM_BAR = "dd_note_bottom_bar"

@@ -22,7 +22,7 @@ fun TextCanvas(
     modifier: Modifier = Modifier,
     note: Note,
     noteId: Int,
-    createEmptyNoteLine : () ->Long
+    createEmptyNoteLine : () ->Long = {0L}
 ): Note {
 
     val listState = rememberLazyListState()

@@ -16,6 +16,9 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mobile.pablo.addnote.destinations.AddNoteScreenDestination
+import com.mobile.pablo.domain.data.note.Note
+import com.mobile.pablo.editnote.destinations.EditNoteScreenDestination
 import com.mobile.pablo.uicomponents.common.theme.HomeBackground
 import com.mobile.pablo.uicomponents.common.theme.spacing
 import com.mobile.pablo.uicomponents.note.NoteBottomBar
@@ -43,7 +46,10 @@ fun NoteScreen(
     ) {
         emptyNoteId.collect {
             it?.let {
-              //  navigator.navigate(EditNoteScreenDestination(noteId = it.toInt()))
+                navigateToAddNote(
+                    navigator,
+                    it.toInt()
+                )
             }
         }
     }
@@ -73,9 +79,9 @@ fun NoteScreen(
                         PreviewNoteItem(
                             note = note!!,
                             onClick = {
-                                navigateToNote(
+                                navigateToEditNote(
                                     navigator,
-                                    note.id
+                                    note
                                 )
                             },
                             onDelete = {
@@ -98,11 +104,18 @@ fun NoteScreen(
     }
 }
 
-fun navigateToNote(
+fun navigateToEditNote(
+    navigator: DestinationsNavigator,
+    note: Note
+) {
+    navigator.navigate(EditNoteScreenDestination(note = note))
+}
+
+fun navigateToAddNote(
     navigator: DestinationsNavigator,
     noteId: Int
 ) {
-  //  navigator.navigate(EditNoteScreenDestination(noteId = noteId))
+    navigator.navigate(AddNoteScreenDestination(noteId = noteId))
 }
 
 private val noteConstraints = ConstraintSet {
