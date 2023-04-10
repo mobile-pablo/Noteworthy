@@ -8,14 +8,14 @@
 * Compose
 * Compose Navigation
 * Ktlint
-* Multi-Module
+* StateFlow 
+* Side Effect Handlers
+* Multi-Module & inner module
+* Migrate dependencies to toml
 * Dagger + Hilt
 
 
-Tasks to be done 
-* Finish UI
+Tasks to be done
 * Clean Readme.MD with splash photos
 * Long press Actions
-* Swipe actions Home + UI
-* Editable Checkpoints
 * Publish on Google Play
