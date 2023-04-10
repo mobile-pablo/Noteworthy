@@ -6,7 +6,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import com.mobile.pablo.iosnotes.nav.RootNavGraph
+import com.mobile.pablo.note.NoteNavGraph
 import com.mobile.pablo.uicomponents.common.theme.IOSNotesTheme
+import com.ramcosta.composedestinations.DestinationsNavHost
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,8 +20,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             IOSNotesTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    // DestinationsNavHost(navGraph = NavGraphs.root)
+                val navController = rememberNavController()
+                Surface(
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    DestinationsNavHost(
+                        navController = navController,
+                        navGraph = RootNavGraph,
+                        startRoute = NoteNavGraph
+                    )
                 }
             }
         }

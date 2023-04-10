@@ -22,11 +22,13 @@ import com.mobile.pablo.uicomponents.note.NoteBottomBar
 import com.mobile.pablo.uicomponents.note.NoteTopBar
 import com.mobile.pablo.uicomponents.note.PreviewNoteItem
 import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.annotation.RootNavGraph
 
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import androidx.compose.material.MaterialTheme as Theme
 
-@Destination(start = true)
+@RootNavGraph(start = true)
+@Destination
 @Composable
 fun NoteScreen(
     navigator: DestinationsNavigator,

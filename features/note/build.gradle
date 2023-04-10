@@ -33,11 +33,15 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    ksp {
+        arg("compose-destinations.moduleName", "note")
+        arg("compose-destinations.mode", "navgraphs")
+    }
 }
 
 dependencies {
     implementation project('::domain')
-    implementation project('::features::editNote')
     implementation project('::features::addNote')
     implementation project('::uicomponents::note')
     implementation project('::uicomponents::common')
