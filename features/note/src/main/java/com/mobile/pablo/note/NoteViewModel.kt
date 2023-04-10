@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.mobile.pablo.core.utils.SingleLiveEvent
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.usecase.note.NoteUseCase
-import com.mobile.pablo.common.StringRes.INTERNET_ISSUE
+import com.mobile.pablo.uicomponents.common.util.StringRes.INTERNET_ISSUE
 import com.mobile.pablo.core.utils.launch
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -30,8 +30,8 @@ class NoteViewModel @Inject constructor(
     private val _emptyNoteId: MutableStateFlow<Long?> = MutableStateFlow(null)
     val emptyNoteId: StateFlow<Long?> = _emptyNoteId.asStateFlow()
 
-    private val _viewState = SingleLiveEvent<com.mobile.pablo.editnote.ViewState>()
-    val viewState: LiveData<com.mobile.pablo.editnote.ViewState> = _viewState
+    private val _viewState = SingleLiveEvent<ViewState>()
+    val viewState: LiveData<ViewState> = _viewState
 
     init {
         downloadNotes()
@@ -44,8 +44,8 @@ class NoteViewModel @Inject constructor(
             _viewState.value = noteResult.run {
                 if (isSuccessful && data != null) {
                     _notes.emit(data)
-                    com.mobile.pablo.editnote.ViewState.DownloadSuccessful
-                } else com.mobile.pablo.editnote.ViewState.Error(INTERNET_ISSUE)
+                    ViewState.DownloadSuccessful
+                } else ViewState.Error(INTERNET_ISSUE)
             }
         }
     }
@@ -64,15 +64,15 @@ class NoteViewModel @Inject constructor(
             _viewState.value = noteResult.run {
                 if (isSuccessful && data != null) {
                     _emptyNoteId.emit(data)
-                    com.mobile.pablo.editnote.ViewState.InsertSuccessful
-                } else com.mobile.pablo.editnote.ViewState.Error(INTERNET_ISSUE)
+                   ViewState.InsertSuccessful
+                } else ViewState.Error(INTERNET_ISSUE)
             }
         }
     }
 }
 
 sealed class ViewState {
-    object DownloadSuccessful : com.mobile.pablo.editnote.ViewState()
-    object InsertSuccessful : com.mobile.pablo.editnote.ViewState()
-    class Error(val message: String) : com.mobile.pablo.editnote.ViewState()
+    object DownloadSuccessful : ViewState()
+    object InsertSuccessful : ViewState()
+    class Error(val message: String) : ViewState()
 }

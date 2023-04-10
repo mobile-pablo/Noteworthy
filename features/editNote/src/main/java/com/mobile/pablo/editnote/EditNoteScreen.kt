@@ -16,12 +16,12 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.mobile.pablo.common.data.NoteBottomWrapper
-import com.mobile.pablo.common.data.NoteTopWrapper
-import com.mobile.pablo.uicomponents.ui.note.EditNoteBottomBar
-import com.mobile.pablo.uicomponents.ui.note.EditNoteTopBar
-import com.mobile.pablo.uicomponents.ui.note.TextCanvas
-import com.mobile.pablo.common.theme.NoteBackground
+import com.mobile.pablo.uicomponents.common.theme.NoteBackground
+import com.mobile.pablo.uicomponents.common.ui.CommonNoteBottomBar
+import com.mobile.pablo.uicomponents.common.ui.CommonNoteTopBar
+import com.mobile.pablo.uicomponents.common.ui.TextCanvas
+import com.mobile.pablo.uicomponents.common.data.NoteBottomWrapper
+import com.mobile.pablo.uicomponents.common.data.NoteTopWrapper
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
@@ -29,7 +29,6 @@ import kotlinx.coroutines.launch
 @Destination
 @Composable
 fun EditNoteScreen(
-    navigator: DestinationsNavigator,
     noteId: Int,
     viewModel: EditNoteViewModel = hiltViewModel()
 ) {
@@ -51,11 +50,11 @@ fun EditNoteScreen(
             .background(Theme.colors.NoteBackground),
         constraintSet = constraints
     ) {
-        EditNoteTopBar(
+       CommonNoteTopBar(
             modifier = Modifier
                 .layoutId(ID_EDIT_NOTE_TOP_BAR)
                 .fillMaxWidth(),
-            noteTopWrapper = com.mobile.pablo.common.data.NoteTopWrapper(
+            noteTopWrapper = NoteTopWrapper(
                 onBackItem =
                 {
                     scope.launch {
@@ -92,11 +91,11 @@ fun EditNoteScreen(
             )
         }
 
-        EditNoteBottomBar(
+        CommonNoteBottomBar(
             modifier = Modifier
                 .layoutId(ID_EDIT_NOTE_BOTTOM_BAR)
                 .fillMaxWidth(),
-            noteBottomWrapper = com.mobile.pablo.common.data.NoteBottomWrapper(
+            noteBottomWrapper = NoteBottomWrapper(
                 { scope.launch {} },
                 { scope.launch {} },
                 { scope.launch {} },

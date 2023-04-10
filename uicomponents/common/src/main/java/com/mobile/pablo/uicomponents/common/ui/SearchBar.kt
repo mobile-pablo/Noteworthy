@@ -1,4 +1,4 @@
-package com.mobile.pablo.common.ui
+package com.mobile.pablo.uicomponents.common.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -14,8 +14,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
-import com.mobile.pablo.common.R
-import com.mobile.pablo.common.theme.*
+import com.mobile.pablo.uicomponents.common.R
+import com.mobile.pablo.uicomponents.common.theme.*
+import com.mobile.pablo.uicomponents.common.theme.SearchBackground
+import com.mobile.pablo.uicomponents.common.theme.Text
+import com.mobile.pablo.uicomponents.common.theme.font
+import com.mobile.pablo.uicomponents.common.theme.spacing
 import androidx.compose.material.MaterialTheme as Theme
 
 @Composable

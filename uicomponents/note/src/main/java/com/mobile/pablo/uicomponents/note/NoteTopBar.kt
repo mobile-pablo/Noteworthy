@@ -1,4 +1,4 @@
-package com.mobile.pablo.note
+package com.mobile.pablo.uicomponents.note
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,10 +11,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
-import com.mobile.pablo.common.ui.SearchBar
-import com.mobile.pablo.uicomponents.ui.theme.Text
-import com.mobile.pablo.uicomponents.ui.theme.font
-import com.mobile.pablo.uicomponents.ui.theme.spacing
+import com.mobile.pablo.uicomponents.common.ui.SearchBar
+import com.mobile.pablo.uicomponents.common.theme.Text
+import com.mobile.pablo.uicomponents.common.theme.font
+import com.mobile.pablo.uicomponents.common.theme.spacing
 import androidx.compose.material.MaterialTheme as Theme
 
 @Composable

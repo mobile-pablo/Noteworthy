@@ -1,4 +1,4 @@
-package com.mobile.pablo.common.ui
+package com.mobile.pablo.uicomponents.common.ui
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -11,8 +11,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.mobile.pablo.common.R
-import com.mobile.pablo.common.theme.spacing
+import com.mobile.pablo.uicomponents.common.R
+import com.mobile.pablo.uicomponents.common.theme.spacing
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.data.note.NoteLine
 

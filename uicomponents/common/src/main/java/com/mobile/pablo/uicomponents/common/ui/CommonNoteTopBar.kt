@@ -1,4 +1,4 @@
-package com.mobile.pablo.common.ui
+package com.mobile.pablo.uicomponents.common.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,10 +15,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
-import com.mobile.pablo.uicomponents.R
-import com.mobile.pablo.uicomponents.data.NoteTopWrapper
-import com.mobile.pablo.uicomponents.ui.theme.CTA
-import com.mobile.pablo.uicomponents.ui.theme.spacing
+import com.mobile.pablo.uicomponents.common.R
+import com.mobile.pablo.uicomponents.common.data.NoteTopWrapper
+import com.mobile.pablo.uicomponents.common.theme.CTA
+import com.mobile.pablo.uicomponents.common.theme.spacing
 import androidx.compose.material.MaterialTheme as Theme
 
 @Composable

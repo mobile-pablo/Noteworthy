@@ -1,4 +1,4 @@
-package com.mobile.pablo.common.ui
+package com.mobile.pablo.uicomponents.common.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,10 +9,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.mobile.pablo.common.R
-import com.mobile.pablo.common.data.NoteBottomWrapper
-import com.mobile.pablo.common.theme.CTA
-import com.mobile.pablo.common.theme.spacing
+import com.mobile.pablo.uicomponents.common.R
+import com.mobile.pablo.uicomponents.common.data.NoteBottomWrapper
+import com.mobile.pablo.uicomponents.common.theme.CTA
+import com.mobile.pablo.uicomponents.common.theme.spacing
 
 @Composable
 fun CommonNoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper : NoteBottomWrapper) {

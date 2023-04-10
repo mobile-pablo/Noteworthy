@@ -1,4 +1,4 @@
-package com.mobile.pablo.common.theme
+package com.mobile.pablo.uicomponents.common.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.Colors

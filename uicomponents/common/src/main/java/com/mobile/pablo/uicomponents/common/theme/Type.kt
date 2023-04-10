@@ -1,4 +1,4 @@
-package com.mobile.pablo.common.theme
+package com.mobile.pablo.uicomponents.common.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.mobile.pablo.common.R
+import com.mobile.pablo.uicomponents.common.R
 
 val SF_PRO = FontFamily(
     listOf(

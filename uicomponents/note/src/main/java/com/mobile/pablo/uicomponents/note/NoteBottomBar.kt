@@ -1,4 +1,4 @@
-package com.mobile.pablo.note
+package com.mobile.pablo.uicomponents.note
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,8 +16,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
-import com.mobile.pablo.uicomponents.ui.theme.*
-import com.mobile.pablo.uicomponents.ui.util.topRectBorder
+import com.mobile.pablo.uicomponents.common.theme.*
+import com.mobile.pablo.uicomponents.common.util.topRectBorder
 import kotlinx.coroutines.launch
 import androidx.compose.material.MaterialTheme as Theme
 

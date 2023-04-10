@@ -36,8 +36,11 @@ android {
 }
 
 dependencies {
-    implementation project('::uicomponents')
     implementation project('::domain')
+    implementation project('::features::editNote')
+    implementation project('::features::addNote')
+    implementation project('::uicomponents::note')
+    implementation project('::uicomponents::common')
 
     implementation libs.androidX.core
     implementation libs.androidX.lifecycle

@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.mobile.pablo.common'
+    namespace 'com.mobile.pablo.uicomponents.common'
     compileSdk 33
 
     defaultConfig {
@@ -53,12 +53,4 @@ dependencies {
 
     implementation libs.hilt.android
     kapt libs.hilt.compiler
-    implementation libs.excuseMe
-
-    testImplementation libs.junit
-    androidTestImplementation libs.junit.ext
-    androidTestImplementation libs.espresso.core
-    androidTestImplementation libs.compose.junit
-    debugImplementation libs.compose.tooling
-    debugImplementation libs.compose.testManifest
 }

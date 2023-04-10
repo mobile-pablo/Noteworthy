@@ -1,4 +1,4 @@
-package com.mobile.pablo.note
+package com.mobile.pablo.uicomponents.note
 
 import DateUtils.dayMonthYearFormat
 import androidx.compose.foundation.background
@@ -19,8 +19,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
+import com.mobile.pablo.uicomponents.common.theme.*
 import com.mobile.pablo.domain.data.note.Note
-import com.mobile.pablo.uicomponents.ui.theme.*
+import com.mobile.pablo.uicomponents.common.theme.*
 import me.saket.swipe.SwipeAction
 import me.saket.swipe.SwipeableActionsBox
 import androidx.compose.material.MaterialTheme as Theme

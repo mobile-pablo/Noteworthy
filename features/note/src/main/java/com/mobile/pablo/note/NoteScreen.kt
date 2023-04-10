@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -17,14 +16,15 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.mobile.pablo.iosnotes.ui.destinations.NoteScreenDestination
-import com.mobile.pablo.uicomponents.ui.home.NoteBottomBar
-import com.mobile.pablo.uicomponents.ui.home.NoteTopBar
-import com.mobile.pablo.uicomponents.ui.home.PreviewNoteItem
-import com.mobile.pablo.common.theme.HomeBackground
-import com.mobile.pablo.common.theme.spacing
+import com.mobile.pablo.uicomponents.common.theme.HomeBackground
+import com.mobile.pablo.uicomponents.common.theme.spacing
+import com.mobile.pablo.uicomponents.note.NoteBottomBar
+import com.mobile.pablo.uicomponents.note.NoteTopBar
+import com.mobile.pablo.uicomponents.note.PreviewNoteItem
 import com.ramcosta.composedestinations.annotation.Destination
+
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import androidx.compose.material.MaterialTheme as Theme
 
 @Destination(start = true)
 @Composable
@@ -41,7 +41,7 @@ fun NoteScreen(
     ) {
         emptyNoteId.collect {
             it?.let {
-                navigator.navigate(EditNoteScreenDestination(noteId = it.toInt()))
+              //  navigator.navigate(EditNoteScreenDestination(noteId = it.toInt()))
             }
         }
     }
@@ -100,7 +100,7 @@ fun navigateToNote(
     navigator: DestinationsNavigator,
     noteId: Int
 ) {
-    navigator.navigate(NoteScreenDestination(noteId = noteId))
+  //  navigator.navigate(EditNoteScreenDestination(noteId = noteId))
 }
 
 private val noteConstraints = ConstraintSet {

@@ -1,4 +1,4 @@
-package com.mobile.pablo.common.util
+package com.mobile.pablo.uicomponents.common.util
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

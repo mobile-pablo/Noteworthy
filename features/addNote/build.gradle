@@ -6,6 +6,19 @@ plugins {
     id 'com.google.devtools.ksp' version '1.8.0-1.0.9'
 }
 
+kotlin {
+    sourceSets {
+        debug {
+            kotlin.srcDir("build/generated/ksp/debug/kotlin")
+        }
+
+        release {
+            kotlin.srcDir("build/generated/ksp/release/kotlin")
+        }
+    }
+}
+
+
 android {
     namespace 'com.mobile.pablo.addNote'
     compileSdk 33
@@ -36,7 +49,7 @@ android {
 }
 
 dependencies {
-    implementation project('::uicomponents')
+    implementation project('::uicomponents::common')
     implementation project('::domain')
 
     implementation libs.androidX.core

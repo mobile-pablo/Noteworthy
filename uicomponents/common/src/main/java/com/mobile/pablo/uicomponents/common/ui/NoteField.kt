@@ -1,4 +1,4 @@
-package com.mobile.pablo.common.ui
+package com.mobile.pablo.uicomponents.common.ui
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.text.KeyboardActions
@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import com.mobile.pablo.domain.data.note.NoteLine
-import com.mobile.pablo.common.theme.Text
+import com.mobile.pablo.uicomponents.common.theme.Text
 import androidx.compose.material.MaterialTheme as Theme
 
 @Composable

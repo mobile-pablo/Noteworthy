@@ -1,4 +1,4 @@
-package com.mobile.pablo.common.data
+package com.mobile.pablo.uicomponents.common.data
 
 data class NoteBottomWrapper(
     val onCheckboxItem : () -> Unit,
