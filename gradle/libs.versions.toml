@@ -1,6 +1,6 @@
 [versions]
 # project classpath
-build_gradle = "7.4.1"
+build_gradle = "7.4.2"
 kotlin_gradle = "1.8.10"
 hilt = "2.45"
 benchmark = "1.2.0-alpha13"
