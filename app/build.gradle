@@ -78,8 +78,9 @@ ktlint {
 }
 
 dependencies {
-    implementation project('::uicomponents')
-    implementation project('::domain')
+    implementation project('::features::addNote')
+    implementation project('::features::editNote')
+    implementation project('::features::note')
 
     implementation libs.androidX.core
     implementation libs.androidX.lifecycle

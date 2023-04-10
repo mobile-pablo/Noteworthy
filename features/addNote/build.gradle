@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.mobile.pablo.note'
+    namespace 'com.mobile.pablo.addNote'
     compileSdk 33
 
     defaultConfig {

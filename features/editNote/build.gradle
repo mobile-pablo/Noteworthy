@@ -35,6 +35,9 @@ android {
 }
 
 dependencies {
+    implementation project('::uicomponents')
+    implementation project('::domain')
+
     implementation libs.androidX.core
     implementation libs.androidX.lifecycle
 
