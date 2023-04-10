@@ -29,6 +29,8 @@ buildscript {
     ext.junitExt = '1.1.5'
     ext.espresso = '3.5.1'
     ext.mockitoKotlin = '2.2.0'
+    ext.benchmark = '1.1.0-beta04'
+    ext.runner = '1.4.0'
 
     repositories {
         google()
@@ -39,6 +41,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$build_gradle"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_gradle"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt"
+        classpath 'androidx.benchmark:benchmark-gradle-plugin:1.1.0-beta04'
     }
 }
 
