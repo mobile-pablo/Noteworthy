@@ -16,12 +16,12 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.mobile.pablo.uicomponents.data.NoteBottomWrapper
-import com.mobile.pablo.uicomponents.data.NoteTopWrapper
+import com.mobile.pablo.common.data.NoteBottomWrapper
+import com.mobile.pablo.common.data.NoteTopWrapper
 import com.mobile.pablo.uicomponents.ui.note.EditNoteBottomBar
 import com.mobile.pablo.uicomponents.ui.note.EditNoteTopBar
 import com.mobile.pablo.uicomponents.ui.note.TextCanvas
-import com.mobile.pablo.uicomponents.ui.theme.NoteBackground
+import com.mobile.pablo.common.theme.NoteBackground
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
@@ -55,7 +55,7 @@ fun EditNoteScreen(
             modifier = Modifier
                 .layoutId(ID_EDIT_NOTE_TOP_BAR)
                 .fillMaxWidth(),
-            noteTopWrapper = NoteTopWrapper(
+            noteTopWrapper = com.mobile.pablo.common.data.NoteTopWrapper(
                 onBackItem =
                 {
                     scope.launch {
@@ -96,7 +96,7 @@ fun EditNoteScreen(
             modifier = Modifier
                 .layoutId(ID_EDIT_NOTE_BOTTOM_BAR)
                 .fillMaxWidth(),
-            noteBottomWrapper = NoteBottomWrapper(
+            noteBottomWrapper = com.mobile.pablo.common.data.NoteBottomWrapper(
                 { scope.launch {} },
                 { scope.launch {} },
                 { scope.launch {} },

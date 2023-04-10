@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import com.mobile.pablo.core.utils.SingleLiveEvent
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.usecase.note.NoteUseCase
-import com.mobile.pablo.iosnotes.util.launch
-import com.mobile.pablo.uicomponents.util.StringRes.INTERNET_ISSUE
+import com.mobile.pablo.common.StringRes.INTERNET_ISSUE
+import com.mobile.pablo.core.utils.launch
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Job

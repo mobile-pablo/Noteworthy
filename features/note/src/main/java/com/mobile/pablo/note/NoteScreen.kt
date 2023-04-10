@@ -18,11 +18,11 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mobile.pablo.iosnotes.ui.destinations.NoteScreenDestination
-import com.mobile.pablo.uicomponents.ui.home.HomeBottomBar
-import com.mobile.pablo.uicomponents.ui.home.HomeTopBar
+import com.mobile.pablo.uicomponents.ui.home.NoteBottomBar
+import com.mobile.pablo.uicomponents.ui.home.NoteTopBar
 import com.mobile.pablo.uicomponents.ui.home.PreviewNoteItem
-import com.mobile.pablo.uicomponents.ui.theme.HomeBackground
-import com.mobile.pablo.uicomponents.ui.theme.spacing
+import com.mobile.pablo.common.theme.HomeBackground
+import com.mobile.pablo.common.theme.spacing
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -55,7 +55,7 @@ fun NoteScreen(
             modifier = Modifier.fillMaxSize(),
             constraintSet = noteConstraints
         ) {
-            HomeTopBar(
+            NoteTopBar(
                 Modifier
                     .layoutId(ID_NOTE_TOP_BAR)
                     .padding(horizontal = Theme.spacing.spacing_14)
@@ -85,7 +85,7 @@ fun NoteScreen(
                     }
                 }
             }
-            HomeBottomBar(
+            NoteBottomBar(
                 5,
                 modifier = Modifier
                     .layoutId(ID_NOTE_BOTTOM_BAR)
