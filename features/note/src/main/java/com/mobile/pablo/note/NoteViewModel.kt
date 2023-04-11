@@ -3,17 +3,17 @@ package com.mobile.pablo.note
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.mobile.pablo.core.utils.SingleLiveEvent
+import com.mobile.pablo.core.utils.launch
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.usecase.note.NoteUseCase
 import com.mobile.pablo.uicomponents.common.util.StringRes.INTERNET_ISSUE
-import com.mobile.pablo.core.utils.launch
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
 @HiltViewModel
 class NoteViewModel @Inject constructor(
@@ -47,12 +47,13 @@ class NoteViewModel @Inject constructor(
             _viewState.value = noteResult.run {
                 if (isSuccessful && data != null) {
                     _emptyNoteId.emit(data)
-                   ViewState.InsertSuccessful
+                    ViewState.InsertSuccessful
                 } else ViewState.Error(INTERNET_ISSUE)
             }
         }
     }
-    fun setEmptyNote(noteId: Long?){
+
+    override fun setEmptyNote(noteId: Long?) {
         deleteNoteJob?.cancel()
         deleteNoteJob = launch {
             _emptyNoteId.emit(noteId)
@@ -61,7 +62,6 @@ class NoteViewModel @Inject constructor(
 }
 
 sealed class ViewState {
-    object DownloadSuccessful : ViewState()
     object InsertSuccessful : ViewState()
     class Error(val message: String) : ViewState()
 }

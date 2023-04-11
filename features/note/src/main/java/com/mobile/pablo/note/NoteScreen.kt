@@ -33,7 +33,6 @@ import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.utils.navGraph
 import androidx.compose.material.MaterialTheme as Theme
 
-@RootNavGraph(start = true)
 @Destination
 @Composable
 fun NoteScreen(

@@ -26,7 +26,7 @@ internal abstract class NoteDao {
     abstract suspend fun insertEmptyWithId(noteEntity: NoteEntity?): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    abstract suspend fun insertEmptytNoteLineWithId(noteEntity: NoteLineEntity?): Long
+    abstract suspend fun insertEmptyNoteLineWithId(noteEntity: NoteLineEntity?): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertNoteLine(noteEntity: NoteLineEntity?)
@@ -63,7 +63,7 @@ internal abstract class NoteDao {
 
     @Transaction
     open suspend fun insertEmptyNoteLineWithId(parentNoteId: Int): Long =
-        insertEmptytNoteLineWithId(NoteLineEntity(parentNoteId = parentNoteId))
+        insertEmptyNoteLineWithId(NoteLineEntity(parentNoteId = parentNoteId))
 
     @Transaction
     @Query("SELECT * FROM notes")
