@@ -24,7 +24,7 @@ fun NoteField(
     noteLine: NoteLine,
     hasCheckbox: Boolean = false,
     placeHolder: String = "",
-    createEmptyNoteLine: () -> Long = { 0L }
+    createEmptyNoteLine: () -> Long
 ): NoteLine {
 
     val noteId = remember { createEmptyNoteLine() }
@@ -66,6 +66,58 @@ fun NoteField(
 
     return NoteLine(
         id = noteId.toInt(),
+        isCheckbox = isCheckbox,
+        noteText = noteText,
+        parentNoteId = noteLine.parentNoteId
+    )
+}
+
+@Composable
+fun NoteField(
+    modifier: Modifier = Modifier,
+    noteLine: NoteLine,
+    hasCheckbox: Boolean = false,
+    placeHolder: String = ""
+): NoteLine {
+
+    val focusManager = LocalFocusManager.current
+
+    var noteText by remember { mutableStateOf(noteLine.noteText) }
+    var isCheckbox by remember { mutableStateOf(noteLine.isCheckbox) }
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        if (hasCheckbox) {
+            Checkbox(
+                checked = isCheckbox,
+                onCheckedChange = { isCheckbox = it }
+            )
+        }
+
+        TextField(
+            value = noteText,
+            onValueChange = { noteText = it },
+            placeholder = { Text(placeHolder) },
+            colors = TextFieldDefaults.textFieldColors(
+                textColor = Theme.colors.Text,
+                disabledTextColor = Color.Transparent,
+                backgroundColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent,
+                unfocusedIndicatorColor = Color.Transparent,
+                disabledIndicatorColor = Color.Transparent
+            ),
+            keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+            keyboardActions = KeyboardActions(
+                onNext = {
+                    focusManager.moveFocus(FocusDirection.Down)
+                }
+            )
+        )
+    }
+
+    return NoteLine(
+        id = noteLine.id,
         isCheckbox = isCheckbox,
         noteText = noteText,
         parentNoteId = noteLine.parentNoteId

@@ -33,7 +33,8 @@ fun NoteBottomBar(
     var notesText by remember { mutableStateOf("") }
 
     LaunchedEffect(amountNotes) {
-        notesText = "$amountNotes notes"
+        notesText = "$amountNotes "
+        notesText += if (amountNotes < 2) "note" else "notes"
     }
     ConstraintLayout(
         modifier = modifier

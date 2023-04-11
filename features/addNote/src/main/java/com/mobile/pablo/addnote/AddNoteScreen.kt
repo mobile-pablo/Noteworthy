@@ -49,12 +49,12 @@ fun AddNoteScreen(
             .background(Theme.colors.NoteBackground),
         constraintSet = constraints
     ) {
-        note.value?.let {
-          val updatedNote = TextCanvas(
+        note.value?.let { note ->
+            val updatedNote = TextCanvas(
                 modifier = Modifier
                     .layoutId(ID_TEXT_CANVAS)
                     .fillMaxWidth(),
-                note = it,
+                note = note,
                 noteId = noteId,
                 createEmptyNoteLine =
                 {

@@ -96,7 +96,7 @@ fun NoteScreen(
                 }
             }
             NoteBottomBar(
-                5,
+                notes?.size ?: 0,
                 modifier = Modifier
                     .layoutId(ID_NOTE_BOTTOM_BAR)
                     .fillMaxWidth(),
