@@ -4,6 +4,7 @@ import androidx.room.*
 import com.mobile.pablo.storage.database.entity.NoteEntity
 import com.mobile.pablo.storage.database.entity.NoteLineEntity
 import com.mobile.pablo.storage.database.entity.NoteWithDescriptionEntity
+import kotlinx.coroutines.flow.Flow
 import java.util.Date
 
 @Dao
@@ -65,16 +66,12 @@ internal abstract class NoteDao {
         insertEmptytNoteLineWithId(NoteLineEntity(parentNoteId = parentNoteId))
 
     @Transaction
-    open suspend fun getNotesWithDescriptions(): List<NoteWithDescriptionEntity> = getNotes().map {
-        getNotesWithDescriptions(it.id)
-    }
+    @Query("SELECT * FROM notes")
+    abstract fun getNotesWithDescriptions(): Flow<List<NoteWithDescriptionEntity>>
 
     @Transaction
-    open suspend fun getNotesWithDescriptions(id: Int?): NoteWithDescriptionEntity =
-        NoteWithDescriptionEntity(
-            noteEntity = getNote(id),
-            noteLineEntityList = getNoteLines(id)
-        )
+    @Query("SELECT * FROM notes WHERE id = :id")
+    abstract fun getNotesWithDescriptions(id: Int?): Flow<NoteWithDescriptionEntity>
 
     @Transaction
     open suspend fun clearNotesWithDescriptions() {

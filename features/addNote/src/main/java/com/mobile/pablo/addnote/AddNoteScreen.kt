@@ -4,7 +4,6 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
@@ -15,20 +14,22 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.mobile.pablo.uicomponents.common.data.NoteBottomWrapper
+import com.mobile.pablo.uicomponents.common.data.NoteTopWrapper
 import com.mobile.pablo.uicomponents.common.theme.NoteBackground
 import com.mobile.pablo.uicomponents.common.ui.CommonNoteBottomBar
 import com.mobile.pablo.uicomponents.common.ui.CommonNoteTopBar
 import com.mobile.pablo.uicomponents.common.ui.TextCanvas
-import com.mobile.pablo.uicomponents.common.data.NoteBottomWrapper
-import com.mobile.pablo.uicomponents.common.data.NoteTopWrapper
+import com.mobile.pablo.uicomponents.common.util.EmptyObjects.EMPTY_NOTE
 import com.ramcosta.composedestinations.annotation.Destination
 import kotlinx.coroutines.launch
+import androidx.compose.material.MaterialTheme as Theme
 
-data class AddNoteScreenNavArgs (
-    val noteId : Int
+data class AddNoteScreenNavArgs(
+    val noteId: Int
 )
 
-@Destination(  navArgsDelegate = AddNoteScreenNavArgs::class)
+@Destination(navArgsDelegate = AddNoteScreenNavArgs::class)
 @Composable
 fun AddNoteScreen(
     addNoteScreenNavArgs: AddNoteScreenNavArgs,
@@ -38,7 +39,7 @@ fun AddNoteScreen(
     viewModel.downloadNote(noteId)
 
     val scope = rememberCoroutineScope()
-    val note = viewModel.note.collectAsState()
+    val note = viewModel.note.collectAsState(EMPTY_NOTE)
     val emptyNoteLineId = viewModel.emptyNoteLineId.collectAsState()
     val context = LocalContext.current
 
@@ -48,7 +49,7 @@ fun AddNoteScreen(
             .background(Theme.colors.NoteBackground),
         constraintSet = constraints
     ) {
-       CommonNoteTopBar(
+        CommonNoteTopBar(
             modifier = Modifier
                 .layoutId(ID_ADD_NOTE_TOP_BAR)
                 .fillMaxWidth(),

@@ -1,12 +1,13 @@
 package com.mobile.pablo.storage.source.note
 
 import com.mobile.pablo.core.model.note.NoteDTO
+import kotlinx.coroutines.flow.Flow
 
 interface NoteDataStorage {
 
-    suspend fun getNote(noteId: Int): NoteDTO?
+    fun getNote(noteId: Int): Flow<NoteDTO?>
 
-    suspend fun getNotes(): List<NoteDTO?>
+     fun getNotes(): Flow<List<NoteDTO?>>
 
     suspend fun deleteNote(noteId: Int)
 

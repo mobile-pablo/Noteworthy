@@ -5,6 +5,8 @@ import com.mobile.pablo.storage.database.dao.note.NoteDao
 import com.mobile.pablo.storage.database.entity.NoteWithDescriptionEntity
 import com.mobile.pablo.storage.mapper.note.NoteDTOMapper
 import com.mobile.pablo.storage.mapper.note.NoteLineDTOMapper
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 internal class NoteDataStorageImpl @Inject constructor(
@@ -13,23 +15,27 @@ internal class NoteDataStorageImpl @Inject constructor(
     private val noteLineDTOMapper: NoteLineDTOMapper
 ) : NoteDataStorage {
 
-    override suspend fun getNotes(): List<NoteDTO?> {
+    override fun getNotes(): Flow<List<NoteDTO?>> {
         val dao = noteDao.getNotesWithDescriptions()
 
+        return dao.map {
+            it.map { note ->
+                noteDTOMapper.map(
+                    note.noteEntity,
+                    note.noteLineEntityList
+                )
+            }
+        }
+    }
+
+    override fun getNote(noteId: Int): Flow<NoteDTO?> {
+        val dao = noteDao.getNotesWithDescriptions(noteId)
         return dao.map {
             noteDTOMapper.map(
                 it.noteEntity,
                 it.noteLineEntityList
             )
         }
-    }
-
-    override suspend fun getNote(noteId: Int): NoteDTO? {
-        val dao = noteDao.getNotesWithDescriptions(noteId)
-        return noteDTOMapper.map(
-            dao.noteEntity,
-            dao.noteLineEntityList
-        )
     }
 
     override suspend fun deleteNote(noteId: Int): Unit = noteDao.deleteNoteWithDescription(noteId)
@@ -48,7 +54,7 @@ internal class NoteDataStorageImpl @Inject constructor(
 
     override suspend fun insertEmptyNote(): Long = noteDao.insertEmptyNote()
 
-    override suspend fun insertEmptyNoteLine(parentId : Int): Long = noteDao.insertEmptyNoteLineWithId(parentId)
+    override suspend fun insertEmptyNoteLine(parentId: Int): Long = noteDao.insertEmptyNoteLineWithId(parentId)
 
     override suspend fun clearNotes(): Unit = noteDao.clearNotesWithDescriptions()
 }

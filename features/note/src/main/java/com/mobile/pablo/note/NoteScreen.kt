@@ -29,8 +29,6 @@ import com.mobile.pablo.uicomponents.note.PreviewNoteItem
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.dynamic.within
-
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.utils.navGraph
 import androidx.compose.material.MaterialTheme as Theme
@@ -43,7 +41,7 @@ fun NoteScreen(
     homeViewModel: NoteViewModel = hiltViewModel()
 ) {
 
-    val notes = homeViewModel.notes.collectAsState().value
+    val notes = homeViewModel.notes.collectAsState(listOf()).value
     val emptyNoteId = homeViewModel.emptyNoteId
 
     LaunchedEffect(
@@ -91,7 +89,6 @@ fun NoteScreen(
                             },
                             onDelete = {
                                 homeViewModel.deleteNote(note.id)
-                                homeViewModel.downloadNotes()
                             },
                             onPin = { }
                         )

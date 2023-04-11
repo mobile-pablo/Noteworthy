@@ -9,9 +9,7 @@ import com.mobile.pablo.core.utils.launch
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.*
 
 @HiltViewModel
 class AddNoteViewModel @Inject constructor(
@@ -23,8 +21,7 @@ class AddNoteViewModel @Inject constructor(
 
     private var noteJob: Job? = null
 
-    private val _note: MutableStateFlow<Note?> = MutableStateFlow(null)
-    val note: StateFlow<Note?> = _note.asStateFlow()
+    var note: Flow<Note?> = flow { }
 
     private val _viewState = SingleLiveEvent<ViewState>()
     val viewState: LiveData<ViewState> = _viewState
@@ -33,14 +30,7 @@ class AddNoteViewModel @Inject constructor(
     val emptyNoteLineId: StateFlow<Long> = _emptyNoteLineId.asStateFlow()
 
     override fun downloadNote(noteId: Int) {
-        noteJob?.cancel()
-        noteJob = launch {
-            val notesResult = getNoteUseCase(noteId)
-            notesResult.run {
-                if (isSuccessful && data != null)
-                    _note.emit(data)
-            }
-        }
+        note = getNoteUseCase(noteId)
     }
 
     override fun createEmptyNoteLine(parentNoteId: Int) {

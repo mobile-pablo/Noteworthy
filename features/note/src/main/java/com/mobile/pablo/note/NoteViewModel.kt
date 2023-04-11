@@ -10,13 +10,14 @@ import com.mobile.pablo.core.utils.launch
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
 class NoteViewModel @Inject constructor(
-    private val getNotesUseCase: NoteUseCase.GetNotes,
+    getNotesUseCase: NoteUseCase.GetNotes,
     private val deleteNoteUseCase: NoteUseCase.DeleteNote,
     private val insertEmptyNoteUseCase: NoteUseCase.InsertEmptyNote
 ) : ViewModel(), NoteInterface {
@@ -24,31 +25,13 @@ class NoteViewModel @Inject constructor(
     private var getNotesJob: Job? = null
     private var deleteNoteJob: Job? = null
 
-    private val _notes: MutableStateFlow<List<Note?>?> = MutableStateFlow(null)
-    val notes: StateFlow<List<Note?>?> = _notes.asStateFlow()
+    val notes: Flow<List<Note?>?> = getNotesUseCase()
 
     private val _emptyNoteId: MutableStateFlow<Long?> = MutableStateFlow(null)
     val emptyNoteId: StateFlow<Long?> = _emptyNoteId.asStateFlow()
 
     private val _viewState = SingleLiveEvent<ViewState>()
     val viewState: LiveData<ViewState> = _viewState
-
-    init {
-        downloadNotes()
-    }
-
-    override fun downloadNotes() {
-        getNotesJob?.cancel()
-        getNotesJob = launch {
-            val noteResult = getNotesUseCase()
-            _viewState.value = noteResult.run {
-                if (isSuccessful && data != null) {
-                    _notes.emit(data)
-                    ViewState.DownloadSuccessful
-                } else ViewState.Error(INTERNET_ISSUE)
-            }
-        }
-    }
 
     override fun deleteNote(noteId: Int) {
         deleteNoteJob?.cancel()

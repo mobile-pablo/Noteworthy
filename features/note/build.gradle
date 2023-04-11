@@ -44,6 +44,8 @@ dependencies {
     implementation project('::domain')
     implementation project('::uicomponents::note')
     implementation project('::uicomponents::common')
+    implementation project(path: ':features:editNote')
+    implementation project(path: ':features:addNote')
 
     implementation libs.androidX.core
     implementation libs.androidX.lifecycle
@@ -60,9 +62,6 @@ dependencies {
     implementation libs.compose.hiltNavigation
 
     implementation libs.hilt.android
-    implementation project(path: ':features:editNote')
-    implementation project(path: ':features:addNote')
-    implementation project(path: ':features:addNote')
     kapt libs.hilt.compiler
     implementation libs.excuseMe
 
