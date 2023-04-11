@@ -28,9 +28,11 @@ import com.mobile.pablo.uicomponents.note.NoteTopBar
 import com.mobile.pablo.uicomponents.note.PreviewNoteItem
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
+import com.ramcosta.composedestinations.dynamic.within
 
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.navigation.navigate
+import com.ramcosta.composedestinations.utils.navGraph
 import androidx.compose.material.MaterialTheme as Theme
 
 @RootNavGraph(start = true)
@@ -111,14 +113,16 @@ fun navigateToEditNote(
     navController: NavController,
     note: Note
 ) {
-    navController.navigate(EditNoteScreenDestination(note = note))
+    val editNoteDestination = EditNoteScreenDestination(note = note)
+    navController.navigate(editNoteDestination within navController.currentBackStackEntry!!.navGraph())
 }
 
 fun navigateToAddNote(
     navController: NavController,
     noteId: Int
 ) {
-    navController.navigate(AddNoteScreenDestination(noteId = noteId))
+    val addNoteDestination = AddNoteScreenDestination(noteId = noteId)
+    navController.navigate(addNoteDestination within navController.currentBackStackEntry!!.navGraph())
 }
 
 private val noteConstraints = ConstraintSet {
