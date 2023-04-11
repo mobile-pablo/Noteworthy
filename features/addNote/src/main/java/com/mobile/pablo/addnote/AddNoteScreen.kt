@@ -49,28 +49,8 @@ fun AddNoteScreen(
             .background(Theme.colors.NoteBackground),
         constraintSet = constraints
     ) {
-        CommonNoteTopBar(
-            modifier = Modifier
-                .layoutId(ID_ADD_NOTE_TOP_BAR)
-                .fillMaxWidth(),
-            noteTopWrapper = NoteTopWrapper(
-                onBackItem =
-                {
-                    scope.launch {
-                        (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
-                    }
-                },
-                onShareItem = { scope.launch { viewModel.shareNote() } },
-                onDoneItem = {
-                    scope.launch {
-                        (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
-                    }
-                }
-            )
-        )
-
         note.value?.let {
-            TextCanvas(
+          val updatedNote = TextCanvas(
                 modifier = Modifier
                     .layoutId(ID_TEXT_CANVAS)
                     .fillMaxWidth(),
@@ -85,19 +65,41 @@ fun AddNoteScreen(
                     )
                 }
             )
-        }
 
-        CommonNoteBottomBar(
-            modifier = Modifier
-                .layoutId(ID_ADD_NOTE_BOTTOM_BAR)
-                .fillMaxWidth(),
-            noteBottomWrapper = NoteBottomWrapper(
-                { scope.launch {} },
-                { scope.launch {} },
-                { scope.launch {} },
-                { scope.launch {} }
+            CommonNoteTopBar(
+                modifier = Modifier
+                    .layoutId(ID_ADD_NOTE_TOP_BAR)
+                    .fillMaxWidth(),
+                noteTopWrapper = NoteTopWrapper(
+                    onBackItem =
+                    {
+                        scope.launch {
+                            (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
+                        }
+                    },
+                    onShareItem = { scope.launch { viewModel.shareNote() } },
+                    onDoneItem = {
+                        scope.launch {
+                            viewModel.saveNote(updatedNote).also {
+                                (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
+                            }
+                        }
+                    }
+                )
             )
-        )
+
+            CommonNoteBottomBar(
+                modifier = Modifier
+                    .layoutId(ID_ADD_NOTE_BOTTOM_BAR)
+                    .fillMaxWidth(),
+                noteBottomWrapper = NoteBottomWrapper(
+                    { scope.launch {} },
+                    { scope.launch {} },
+                    { scope.launch {} },
+                    { scope.launch {} }
+                )
+            )
+        }
     }
 }
 
