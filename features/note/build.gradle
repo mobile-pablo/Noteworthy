@@ -36,14 +36,12 @@ android {
 
     ksp {
         arg("compose-destinations.moduleName", "note")
-        arg("compose-destinations.mode", "navgraphs")
+        arg("compose-destinations.mode", "destinations")
     }
 }
 
 dependencies {
     implementation project('::domain')
-    implementation project(':features:addNote')
-    implementation project(':features:editNote')
     implementation project('::uicomponents::note')
     implementation project('::uicomponents::common')
 
@@ -62,6 +60,9 @@ dependencies {
     implementation libs.compose.hiltNavigation
 
     implementation libs.hilt.android
+    implementation project(path: ':features:editNote')
+    implementation project(path: ':features:addNote')
+    implementation project(path: ':features:addNote')
     kapt libs.hilt.compiler
     implementation libs.excuseMe
 

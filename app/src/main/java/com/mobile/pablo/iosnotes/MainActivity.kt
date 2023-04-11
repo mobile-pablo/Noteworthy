@@ -7,8 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
-import com.mobile.pablo.iosnotes.nav.RootNavGraph
-import com.mobile.pablo.note.NoteNavGraph
+import com.mobile.pablo.iosnotes.nav.NavGraphs
 import com.mobile.pablo.uicomponents.common.theme.IOSNotesTheme
 import com.ramcosta.composedestinations.DestinationsNavHost
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,8 +25,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     DestinationsNavHost(
                         navController = navController,
-                        navGraph = RootNavGraph,
-                        startRoute = NoteNavGraph
+                        navGraph = NavGraphs.root
                     )
                 }
             }

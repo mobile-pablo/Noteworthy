@@ -50,7 +50,7 @@ android {
 
     ksp {
         arg("compose-destinations.moduleName", "editNote")
-        arg("compose-destinations.mode", "navgraphs")
+        arg("compose-destinations.mode", "destinations")
     }
 }
 
@@ -84,4 +84,5 @@ dependencies {
     debugImplementation libs.compose.testManifest
 
     implementation libs.compose.destination
+    ksp libs.compose.destination.ksp
 }

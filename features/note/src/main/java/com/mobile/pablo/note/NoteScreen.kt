@@ -16,6 +16,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.mobile.pablo.addnote.destinations.AddNoteScreenDestination
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.editnote.destinations.EditNoteScreenDestination
@@ -28,13 +30,14 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.annotation.RootNavGraph
 
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.navigate
 import androidx.compose.material.MaterialTheme as Theme
 
 @RootNavGraph(start = true)
 @Destination
 @Composable
 fun NoteScreen(
-    navigator: DestinationsNavigator,
+    navController: NavController = rememberNavController(),
     homeViewModel: NoteViewModel = hiltViewModel()
 ) {
 
@@ -47,7 +50,7 @@ fun NoteScreen(
         emptyNoteId.collect {
             it?.let {
                 navigateToAddNote(
-                    navigator,
+                    navController,
                     it.toInt()
                 )
             }
@@ -80,7 +83,7 @@ fun NoteScreen(
                             note = note!!,
                             onClick = {
                                 navigateToEditNote(
-                                    navigator,
+                                    navController,
                                     note
                                 )
                             },
@@ -105,17 +108,17 @@ fun NoteScreen(
 }
 
 fun navigateToEditNote(
-    navigator: DestinationsNavigator,
+    navController: NavController,
     note: Note
 ) {
-    navigator.navigate(EditNoteScreenDestination(note = note))
+    navController.navigate(EditNoteScreenDestination(note = note))
 }
 
 fun navigateToAddNote(
-    navigator: DestinationsNavigator,
+    navController: NavController,
     noteId: Int
 ) {
-    navigator.navigate(AddNoteScreenDestination(noteId = noteId))
+    navController.navigate(AddNoteScreenDestination(noteId = noteId))
 }
 
 private val noteConstraints = ConstraintSet {

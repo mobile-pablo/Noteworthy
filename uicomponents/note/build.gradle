@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation project(path: ':domain')
     api project('::uicomponents::common')
 
     implementation libs.androidX.core
@@ -60,6 +61,5 @@ dependencies {
     implementation libs.compose.hiltNavigation
 
     implementation libs.hilt.android
-    implementation project(path: ':domain')
     kapt libs.hilt.compiler
 }

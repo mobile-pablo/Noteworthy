@@ -24,12 +24,17 @@ import com.mobile.pablo.uicomponents.common.data.NoteTopWrapper
 import com.ramcosta.composedestinations.annotation.Destination
 import kotlinx.coroutines.launch
 
-@Destination
+data class AddNoteScreenNavArgs (
+    val noteId : Int
+)
+
+@Destination(  navArgsDelegate = AddNoteScreenNavArgs::class)
 @Composable
 fun AddNoteScreen(
-    noteId: Int,
+    addNoteScreenNavArgs: AddNoteScreenNavArgs,
     viewModel: AddNoteViewModel = hiltViewModel()
 ) {
+    val noteId = addNoteScreenNavArgs.noteId
     viewModel.downloadNote(noteId)
 
     val scope = rememberCoroutineScope()

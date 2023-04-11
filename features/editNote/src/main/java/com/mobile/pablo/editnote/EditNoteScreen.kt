@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
@@ -27,12 +25,17 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
 
-@Destination
+data class EditNoteScreenNavArgs (
+    val note: Note
+)
+
+@Destination(navArgsDelegate = EditNoteScreenNavArgs::class)
 @Composable
 fun EditNoteScreen(
-    note: Note,
+    editNoteScreenNavArgs: EditNoteScreenNavArgs,
     viewModel: EditNoteViewModel = hiltViewModel()
 ) {
+    val note = editNoteScreenNavArgs.note
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
