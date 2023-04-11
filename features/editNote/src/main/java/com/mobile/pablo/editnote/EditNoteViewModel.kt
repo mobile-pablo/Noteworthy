@@ -26,18 +26,6 @@ class EditNoteViewModel @Inject constructor(
     private val _viewState = SingleLiveEvent<ViewState>()
     val viewState: LiveData<ViewState> = _viewState
 
-    private val _emptyNoteLineId: MutableStateFlow<Long> = MutableStateFlow(0L)
-    val emptyNoteLineId: StateFlow<Long> = _emptyNoteLineId.asStateFlow()
-
-
-    override fun createEmptyNoteLine(parentNoteId: Int) {
-        noteJob?.cancel()
-        noteJob = launch {
-            val notesResult = createEmptyNoteLineUseCase(parentNoteId)
-            _emptyNoteLineId.emit(notesResult)
-        }
-    }
-
     override fun saveNote(note: Note) {
         noteJob?.cancel()
         noteJob = launch {
