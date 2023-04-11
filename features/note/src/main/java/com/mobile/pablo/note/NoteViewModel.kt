@@ -52,6 +52,12 @@ class NoteViewModel @Inject constructor(
             }
         }
     }
+    fun setEmptyNote(noteId: Long?){
+        deleteNoteJob?.cancel()
+        deleteNoteJob = launch {
+            _emptyNoteId.emit(noteId)
+        }
+    }
 }
 
 sealed class ViewState {

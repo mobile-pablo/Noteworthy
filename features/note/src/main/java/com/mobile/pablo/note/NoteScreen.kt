@@ -38,11 +38,11 @@ import androidx.compose.material.MaterialTheme as Theme
 @Composable
 fun NoteScreen(
     navController: NavController = rememberNavController(),
-    homeViewModel: NoteViewModel = hiltViewModel()
+    noteViewModel: NoteViewModel = hiltViewModel()
 ) {
 
-    val notes = homeViewModel.notes.collectAsState(listOf()).value
-    val emptyNoteId = homeViewModel.emptyNoteId
+    val notes = noteViewModel.notes.collectAsState(listOf()).value
+    val emptyNoteId = noteViewModel.emptyNoteId
 
     LaunchedEffect(
         key1 = emptyNoteId
@@ -53,6 +53,7 @@ fun NoteScreen(
                     navController,
                     it.toInt()
                 )
+                noteViewModel.setEmptyNote(null)
             }
         }
     }
@@ -88,7 +89,7 @@ fun NoteScreen(
                                 )
                             },
                             onDelete = {
-                                homeViewModel.deleteNote(note.id)
+                                noteViewModel.deleteNote(note.id)
                             },
                             onPin = { }
                         )
@@ -100,7 +101,7 @@ fun NoteScreen(
                 modifier = Modifier
                     .layoutId(ID_NOTE_BOTTOM_BAR)
                     .fillMaxWidth(),
-                onClickNewNote = { homeViewModel.insertEmptyNote() }
+                onClickNewNote = { noteViewModel.insertEmptyNote() }
             )
         }
     }
