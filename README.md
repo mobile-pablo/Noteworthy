@@ -1,6 +1,7 @@
 ## iOS - Notes
 
 # Tech stack
+* Jenkins via GCP  'http://34.30.54.198:8080/'
 * Room
 * MVVM
 * Coil
