@@ -19,7 +19,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
-import com.mobile.pablo.uicomponents.common.theme.*
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.uicomponents.common.theme.*
 import me.saket.swipe.SwipeAction
@@ -80,19 +79,16 @@ fun PreviewNoteItem(
                         color = Theme.colors.Text,
                         modifier = Modifier
                             .layoutId(ID_DATE_TEXT)
-                            .padding(end = Theme.spacing.spacing_20)
+                            .padding(end = Theme.spacing.spacing_10)
                     )
 
                     Text(
-                        text =  "",
+                        text = note.description?.get(0)?.noteText ?: "",
                         fontSize = Theme.font.font_9,
                         color = Theme.colors.Text,
                         modifier = Modifier
                             .layoutId(ID_DESCRIPTION)
-                            .padding(
-                                start = Theme.spacing.spacing_20,
-                                end = Theme.spacing.spacing_20
-                            ),
+                            .padding(horizontal = Theme.spacing.spacing_12),
                         textAlign = TextAlign.Start,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
@@ -115,9 +111,9 @@ private val previewConstraints = ConstraintSet {
 
     constrain(description) {
         top.linkTo(parent.top)
-        end.linkTo(parent.end)
         start.linkTo(dateText.end)
-        height = Dimension.wrapContent
+        height = Dimension.fillToConstraints
+        end.linkTo(parent.end)
         bottom.linkTo(parent.bottom)
     }
 }

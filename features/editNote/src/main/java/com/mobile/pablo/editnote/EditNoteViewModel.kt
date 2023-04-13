@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.asStateFlow
 class EditNoteViewModel @Inject constructor(
     private var getNoteUseCase: NoteUseCase.GetNote,
     private var insertNoteUseCase: NoteUseCase.InsertNote,
-    private var createEmptyNoteLineUseCase: NoteUseCase.InsertEmptyNoteLine,
     private val deleteNoteUseCase: NoteUseCase.DeleteNote
 ) : ViewModel(), EditNoteInterface {
 
