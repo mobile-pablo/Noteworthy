@@ -1,6 +1,7 @@
 package com.mobile.pablo.storage.database.dao.note
 
 import androidx.room.*
+import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
 import com.mobile.pablo.storage.database.entity.NoteEntity
 import com.mobile.pablo.storage.database.entity.NoteLineEntity
 import com.mobile.pablo.storage.database.entity.NoteWithDescriptionEntity
@@ -56,7 +57,7 @@ internal abstract class NoteDao {
     @Transaction
     open suspend fun insertEmptyNote(): Long = insertEmptyWithId(
         NoteEntity(
-            title = "",
+            title = EMPTY_STRING,
             date = Date()
         )
     )

@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
+import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
 import com.mobile.pablo.uicomponents.common.R
 import com.mobile.pablo.uicomponents.common.theme.*
 import com.mobile.pablo.uicomponents.common.theme.SearchBackground
@@ -39,11 +40,11 @@ fun SearchBar(
             fontSize = Theme.font.font_14,
         ),
         leadingIcon = {
-            if (state.value != TextFieldValue("")) {
+            if (state.value != TextFieldValue(EMPTY_STRING)) {
                 IconButton(
                     onClick = {
                         state.value =
-                            TextFieldValue("")
+                            TextFieldValue(EMPTY_STRING)
                     }
                 ) {
                     Icon(

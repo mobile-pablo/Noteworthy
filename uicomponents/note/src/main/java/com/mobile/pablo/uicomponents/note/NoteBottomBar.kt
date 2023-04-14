@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
+import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
 import com.mobile.pablo.uicomponents.common.theme.*
 import com.mobile.pablo.uicomponents.common.util.topRectBorder
 import kotlinx.coroutines.launch
@@ -30,7 +31,7 @@ fun NoteBottomBar(
 
     val buttonScope = rememberCoroutineScope()
 
-    var notesText by remember { mutableStateOf("") }
+    var notesText by remember { mutableStateOf(EMPTY_STRING) }
 
     LaunchedEffect(amountNotes) {
         notesText = "$amountNotes "

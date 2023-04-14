@@ -14,6 +14,7 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
+import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
 import com.mobile.pablo.domain.data.note.NoteLine
 import com.mobile.pablo.uicomponents.common.theme.Text
 import androidx.compose.material.MaterialTheme as Theme
@@ -23,7 +24,7 @@ fun NoteField(
     modifier: Modifier = Modifier,
     noteLine: NoteLine,
     hasCheckbox: Boolean = false,
-    placeHolder: String = "",
+    placeHolder: String = EMPTY_STRING,
     createEmptyNoteLine: () -> Long
 ): NoteLine {
 
@@ -77,7 +78,7 @@ fun NoteField(
     modifier: Modifier = Modifier,
     noteLine: NoteLine,
     hasCheckbox: Boolean = false,
-    placeHolder: String = ""
+    placeHolder: String = EMPTY_STRING
 ): NoteLine {
 
     val focusManager = LocalFocusManager.current

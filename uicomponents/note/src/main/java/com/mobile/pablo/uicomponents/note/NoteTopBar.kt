@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
+import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
 import com.mobile.pablo.uicomponents.common.ui.SearchBar
 import com.mobile.pablo.uicomponents.common.theme.Text
 import com.mobile.pablo.uicomponents.common.theme.font
@@ -22,7 +23,7 @@ fun NoteTopBar(
     modifier: Modifier = Modifier
 ) {
     Column(modifier = modifier) {
-        val textState = remember { mutableStateOf(TextFieldValue("")) }
+        val textState = remember { mutableStateOf(TextFieldValue(EMPTY_STRING)) }
         Text(
             text = stringResource(id = R.string.all_notes),
             fontSize = Theme.font.font_28,

@@ -11,11 +11,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
 import com.mobile.pablo.uicomponents.common.R
 import com.mobile.pablo.uicomponents.common.theme.spacing
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.data.note.NoteLine
-
 
 @Composable
 fun TextCanvas(
@@ -26,7 +26,7 @@ fun TextCanvas(
 ): Note {
 
     val listState = rememberLazyListState()
-    val title = remember { mutableStateOf("") }
+    val title = remember { mutableStateOf(EMPTY_STRING) }
 
     val defaultDescription = if (note.description?.isNotEmpty() == true) note.description else null
     val noteLines = remember { mutableStateOf(defaultDescription) }
