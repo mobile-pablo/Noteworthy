@@ -15,15 +15,20 @@
 * Migrate dependencies to toml
 * Dagger + Hilt
 * Benchmark
+* Kotlin DSL 
 
 
 Tasks to be done
-* Clean Readme.MD with splash photos
-* Long press Actions
+* Migrate to Kotlin DSL
 * Benchmark tests
-* Pipeline setup
+* Permissions (exucse me or https://google.github.io/accompanist/permissions/)
 * Espresso tests
-* Publish on Google Play
 * Notifications 
-* Deeplink (maybe)
+* Deeplink
+* Better config with KtLint 
+* Add settings with dark mode 
 * Add DataStore + Probuff
+* Config R8
+* Config AWS Devices with Jenkins on Google Cloud Platform
+* Publish on Google Play
+* Clean Readme.MD with splash photos
