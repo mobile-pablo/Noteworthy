@@ -2,4 +2,8 @@
 <resources>
     <string name="all_notes">All Notes</string>
     <string name="write">Write</string>
+
+    <string name="test_id_title">title</string>
+    <string name="test_id_date">date</string>
+    <string name="test_id_description">description</string>
 </resources>
