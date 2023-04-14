@@ -12,7 +12,6 @@ compose_material = '1.4.0'
 androidx_core = '1.9.0'
 lifecycle = '2.3.1'
 lifecycle_viewmodel = '2.4.0'
-excuse_me = '0.9.5'
 hilt_compose = '1.1.0-alpha01'
 coroutines = '1.5.2'
 coil = '2.2.2'
@@ -26,12 +25,13 @@ espresso = '3.5.1'
 mockitoKotlin = '2.2.0'
 runner = '1.4.0'
 uiautomator = '2.3.0-alpha02'
+ktLint = '0.36.0'
 
 [libraries]
 # project classpath
 buildGradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "build_gradle" }
 kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin_gradle" }
-hilt-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
+hiltPlugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 benchmarkPlugin = { module = "androidx.benchmark:benchmark-gradle-plugin", version.ref = "benchmark" }
 
 # project modules
@@ -57,8 +57,7 @@ compose-destination-ksp = { module = "io.github.raamcosta.compose-destinations:k
 
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
-
-excuseMe = { module = "com.github.AraujoJordan:ExcuseMe", version.ref = "excuse_me" }
+ktLint = { module = "com.pinterest:ktlint", version.ref = "ktLint" }
 
 junit = { module = "junit:junit", version.ref = "junit" }
 junit-ext = { module = "androidx.test.ext:junit", version.ref = "junit_ext" }

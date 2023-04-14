@@ -21,7 +21,7 @@ class AddNoteViewModel @Inject constructor(
 
     private var noteJob: Job? = null
 
-    var note: Flow<Note?> = flow { }
+    var note: Flow<Note?> = emptyFlow()
 
     private val _viewState = SingleLiveEvent<ViewState>()
     val viewState: LiveData<ViewState> = _viewState

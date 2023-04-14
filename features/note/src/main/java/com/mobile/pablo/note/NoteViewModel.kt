@@ -1,8 +1,6 @@
 package com.mobile.pablo.note
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.mobile.pablo.core.utils.SingleLiveEvent
 import com.mobile.pablo.core.utils.launch
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.usecase.note.NoteUseCase
@@ -27,11 +25,8 @@ class NoteViewModel @Inject constructor(
 
     val notes: Flow<List<Note?>?> = getNotesUseCase()
 
-    private val _emptyNoteId: MutableStateFlow<Long?> = MutableStateFlow(null)
-    val emptyNoteId: StateFlow<Long?> = _emptyNoteId.asStateFlow()
-
-    private val _viewState = SingleLiveEvent<ViewState>()
-    val viewState: LiveData<ViewState> = _viewState
+    private val _viewState: MutableStateFlow<ViewState> = MutableStateFlow(ViewState.Default)
+    val viewState: StateFlow<ViewState> = _viewState.asStateFlow()
 
     override fun deleteNote(noteId: Int) {
         deleteNoteJob?.cancel()
@@ -46,8 +41,8 @@ class NoteViewModel @Inject constructor(
             val noteResult = insertEmptyNoteUseCase()
             _viewState.value = noteResult.run {
                 if (isSuccessful && data != null) {
-                    _emptyNoteId.emit(data)
-                    ViewState.InsertSuccessful
+                    ViewState.InsertSuccessful(data)
+
                 } else ViewState.Error(INTERNET_ISSUE)
             }
         }
@@ -56,12 +51,13 @@ class NoteViewModel @Inject constructor(
     override fun setEmptyNote(noteId: Long?) {
         deleteNoteJob?.cancel()
         deleteNoteJob = launch {
-            _emptyNoteId.emit(noteId)
+            _viewState.emit(ViewState.InsertSuccessful(noteId))
         }
     }
 }
 
 sealed class ViewState {
-    object InsertSuccessful : ViewState()
+    object Default : ViewState()
+    class InsertSuccessful(val noteId: Long?) : ViewState()
     class Error(val message: String) : ViewState()
 }

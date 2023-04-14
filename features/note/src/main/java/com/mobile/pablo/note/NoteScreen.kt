@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.ScaffoldState
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -27,7 +29,6 @@ import com.mobile.pablo.uicomponents.note.NoteBottomBar
 import com.mobile.pablo.uicomponents.note.NoteTopBar
 import com.mobile.pablo.uicomponents.note.PreviewNoteItem
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.annotation.RootNavGraph
 import com.ramcosta.composedestinations.dynamic.within
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.utils.navGraph
@@ -41,19 +42,29 @@ fun NoteScreen(
 ) {
 
     val notes = noteViewModel.notes.collectAsState(listOf()).value
-    val emptyNoteId = noteViewModel.emptyNoteId
-
+    val viewState = noteViewModel.viewState.collectAsState().value
+    val scaffoldState: ScaffoldState = rememberScaffoldState()
     LaunchedEffect(
-        key1 = emptyNoteId
+        key1 = viewState,
     ) {
-        emptyNoteId.collect {
-            it?.let {
-                navigateToAddNote(
-                    navController,
-                    it.toInt()
-                )
-                noteViewModel.setEmptyNote(null)
+        when (viewState) {
+            is ViewState.InsertSuccessful -> {
+                viewState.noteId?.let { noteID ->
+                    navigateToAddNote(
+                        navController,
+                        noteID.toInt()
+                    )
+                    noteViewModel.setEmptyNote(null)
+                }
             }
+
+            is ViewState.Error -> {
+                scaffoldState.snackbarHostState.showSnackbar(
+                    message = viewState.message
+                )
+            }
+
+            else -> {}
         }
     }
 
@@ -79,19 +90,21 @@ fun NoteScreen(
             ) {
                 notes?.let { saveNotes ->
                     items(saveNotes) { note ->
-                        PreviewNoteItem(
-                            note = note!!,
-                            onClick = {
-                                navigateToEditNote(
-                                    navController,
-                                    note
-                                )
-                            },
-                            onDelete = {
-                                noteViewModel.deleteNote(note.id)
-                            },
-                            onPin = { }
-                        )
+                        note?.let {
+                            PreviewNoteItem(
+                                note = it,
+                                onClick = {
+                                    navigateToEditNote(
+                                        navController,
+                                        it
+                                    )
+                                },
+                                onDelete = {
+                                    noteViewModel.deleteNote(it.id)
+                                },
+                                onPin = { }
+                            )
+                        }
                     }
                 }
             }

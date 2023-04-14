@@ -1,11 +1,9 @@
 package com.mobile.pablo.iosnotes.tests
 
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.mobile.pablo.iosnotes.ext.isDisplayed
-import com.mobile.pablo.uicomponents.note.R
 import com.mobile.pablo.iosnotes.ext.isNotDisplayed
 import com.mobile.pablo.iosnotes.screens.NoteScreen
 import com.mobile.pablo.note.mock.MOCK_NOTE_LIST

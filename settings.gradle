@@ -17,15 +17,15 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "iOS Notes"
-include ':app'
-include ':core'
-include ':domain'
-include ':storage'
-include ':benchmark'
-include ':features'
-include ':features:note'
-include ':features:editNote'
-include ':features:addNote'
-include ':playground'
-include ':uicomponents:note'
-include ':uicomponents:common'
+include ":app"
+include ":core"
+include ":domain"
+include ":storage"
+include ":benchmark"
+include ":features"
+include ":features:note"
+include ":features:editNote"
+include ":features:addNote"
+include ":playground"
+include ":uicomponents:note"
+include ":uicomponents:common"
