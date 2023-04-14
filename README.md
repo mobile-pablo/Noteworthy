@@ -20,6 +20,7 @@
 
 Tasks to be done
 * Migrate to Kotlin DSL
+* Add animation for navigation
 * Benchmark tests
 * Permissions (exucse me or https://google.github.io/accompanist/permissions/)
 * Espresso tests
@@ -27,7 +28,7 @@ Tasks to be done
 * Notifications  / FCM
 * Crashalitics
 * Multidex
-* Deeplink
+* Deeplink / Google dynamic link
 * Google Analytics
 * Better config with KtLint 
 * Add settings with dark mode 
