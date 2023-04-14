@@ -1,5 +1,6 @@
 package com.mobile.pablo.storage.source.note
 
+import com.mobile.pablo.core.data.DataTransfer
 import com.mobile.pablo.core.model.note.NoteDTO
 import kotlinx.coroutines.flow.Flow
 

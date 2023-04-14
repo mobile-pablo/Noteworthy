@@ -58,7 +58,7 @@ fun NoteScreen(
                 }
             }
 
-            is ViewState.Error -> {
+            is ViewState.Message -> {
                 scaffoldState.snackbarHostState.showSnackbar(
                     message = viewState.message
                 )

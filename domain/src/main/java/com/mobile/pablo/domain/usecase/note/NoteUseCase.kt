@@ -50,27 +50,31 @@ sealed class NoteUseCase {
         private val noteDataStorage: NoteDataStorage,
     ) {
 
-        suspend operator fun invoke(): DataTransfer<Long> = DataTransfer(noteDataStorage.insertEmptyNote())
+        suspend operator fun invoke(): DataTransfer<Long> =
+            DataTransfer(noteDataStorage.insertEmptyNote())
     }
 
     class InsertEmptyNoteLine @Inject constructor(
         private val noteDataStorage: NoteDataStorage,
     ) {
 
-        suspend operator fun invoke(parentNoteId: Int): Long = noteDataStorage.insertEmptyNoteLine(parentNoteId)
+        suspend operator fun invoke(parentNoteId: Int): Long =
+            noteDataStorage.insertEmptyNoteLine(parentNoteId)
     }
 
     class DeleteNote @Inject constructor(
         private val noteDataStorage: NoteDataStorage,
     ) {
 
-        suspend operator fun invoke(noteId: Int) = noteDataStorage.deleteNote(noteId)
+        suspend operator fun invoke(noteId: Int): DataTransfer<Unit> =
+            DataTransfer(noteDataStorage.deleteNote(noteId))
     }
 
     class ClearNotes @Inject constructor(
         private val noteDataStorage: NoteDataStorage,
     ) {
 
-        suspend operator fun invoke() = noteDataStorage.clearNotes()
+        suspend operator fun invoke() =
+            noteDataStorage.clearNotes()
     }
 }

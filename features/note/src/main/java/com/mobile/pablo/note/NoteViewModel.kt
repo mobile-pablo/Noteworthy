@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.mobile.pablo.core.utils.launch
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.usecase.note.NoteUseCase
+import com.mobile.pablo.uicomponents.common.util.StringRes.DELETE_SUCCESSFUL
 import com.mobile.pablo.uicomponents.common.util.StringRes.INTERNET_ISSUE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
@@ -31,7 +32,13 @@ class NoteViewModel @Inject constructor(
     override fun deleteNote(noteId: Int) {
         deleteNoteJob?.cancel()
         deleteNoteJob = launch {
-            deleteNoteUseCase(noteId)
+            val noteResult = deleteNoteUseCase(noteId)
+            _viewState.value = noteResult.run {
+                if (isSuccessful && data != null) {
+                    ViewState.Message(DELETE_SUCCESSFUL)
+
+                } else ViewState.Message(INTERNET_ISSUE)
+            }
         }
     }
 
@@ -43,7 +50,7 @@ class NoteViewModel @Inject constructor(
                 if (isSuccessful && data != null) {
                     ViewState.InsertSuccessful(data)
 
-                } else ViewState.Error(INTERNET_ISSUE)
+                } else ViewState.Message(INTERNET_ISSUE)
             }
         }
     }
@@ -59,5 +66,5 @@ class NoteViewModel @Inject constructor(
 sealed class ViewState {
     object Default : ViewState()
     class InsertSuccessful(val noteId: Long?) : ViewState()
-    class Error(val message: String) : ViewState()
+    class Message(val message: String) : ViewState()
 }

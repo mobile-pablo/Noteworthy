@@ -5,24 +5,24 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
-import com.mobile.pablo.uicomponents.common.R
-import com.mobile.pablo.uicomponents.common.theme.spacing
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.data.note.NoteLine
+import com.mobile.pablo.uicomponents.common.R
+import com.mobile.pablo.uicomponents.common.theme.spacing
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun TextCanvas(
     modifier: Modifier = Modifier,
     note: Note,
     noteId: Int,
-    createEmptyNoteLine : () ->Long = {0L}
+    createEmptyNoteLine: () -> Long = { 0L }
 ): Note {
 
     val listState = rememberLazyListState()
@@ -70,7 +70,10 @@ fun TextCanvas(
         }
     }
 
-    return note.copy(title = title.value, description = noteLines.value)
+    return note.copy(
+        title = title.value,
+        description = noteLines.value
+    )
 }
 
 fun updateCorrectlyNote(
