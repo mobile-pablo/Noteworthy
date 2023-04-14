@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -27,6 +28,7 @@ import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun PreviewNoteItem(
+    modifier: Modifier = Modifier,
     note: Note,
     onClick: () -> Unit,
     onPin: () -> Unit,
@@ -49,7 +51,7 @@ fun PreviewNoteItem(
     SwipeableActionsBox(
         startActions = listOf(pinAction),
         endActions = listOf(deleteAction),
-        modifier = Modifier.clip(RoundedCornerShape(Theme.spacing.spacing_6))
+        modifier = modifier.clip(RoundedCornerShape(Theme.spacing.spacing_6))
     ) {
         Box(
             modifier = Modifier
@@ -66,7 +68,8 @@ fun PreviewNoteItem(
                 Text(
                     text = note.title,
                     fontSize = Theme.font.font_15,
-                    color = Theme.colors.Text
+                    color = Theme.colors.Text,
+                    modifier = Modifier.testTag(TEST_ID_TITLE)
                 )
 
                 ConstraintLayout(
@@ -80,6 +83,7 @@ fun PreviewNoteItem(
                         modifier = Modifier
                             .layoutId(ID_DATE_TEXT)
                             .padding(end = Theme.spacing.spacing_10)
+                            .testTag(TEST_ID_DATE)
                     )
 
                     Text(
@@ -88,7 +92,8 @@ fun PreviewNoteItem(
                         color = Theme.colors.Text,
                         modifier = Modifier
                             .layoutId(ID_DESCRIPTION)
-                            .padding(horizontal = Theme.spacing.spacing_12),
+                            .padding(horizontal = Theme.spacing.spacing_12)
+                            .testTag(TEST_ID_DESCRIPTION_PREVIEW),
                         textAlign = TextAlign.Start,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
@@ -121,3 +126,7 @@ private val previewConstraints = ConstraintSet {
 // Layout ids
 private const val ID_DATE_TEXT = "dateText"
 private const val ID_DESCRIPTION = "description"
+
+const val TEST_ID_TITLE = "title"
+const val TEST_ID_DATE = "date"
+const val TEST_ID_DESCRIPTION_PREVIEW = "description_preview"
