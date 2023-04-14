@@ -104,6 +104,7 @@ dependencies {
     testImplementation libs.junit
     androidTestImplementation libs.junit.ext
     androidTestImplementation libs.espresso.core
+    androidTestImplementation  libs.uiautomator
     androidTestImplementation libs.compose.junit
     debugImplementation libs.compose.tooling
     debugImplementation libs.compose.testManifest

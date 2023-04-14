@@ -3,6 +3,9 @@ package com.mobile.pablo.iosnotes.tests
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.mobile.pablo.iosnotes.ext.isDisplayed
+import com.mobile.pablo.iosnotes.ext.isNotDisplayed
+import com.mobile.pablo.iosnotes.screens.NoteScreen
 import com.mobile.pablo.note.mock.MOCK_NOTE_LIST
 import com.mobile.pablo.note.mock.MockNoteScreen
 import com.mobile.pablo.uicomponents.common.theme.IOSNotesTheme
@@ -15,11 +18,13 @@ import org.junit.runner.RunWith
 class NoteTest {
 
     @get:Rule
-    val composeTestRule = createComposeRule()
+    val testRule = createComposeRule()
+
+    val noteScreen = NoteScreen(testRule)
 
     @Before
     fun setup() {
-        composeTestRule.setContent {
+        testRule.setContent {
             IOSNotesTheme {
                 MockNoteScreen()
             }
@@ -28,10 +33,17 @@ class NoteTest {
 
     @Test
     fun noteListIsDisplayed() {
-        composeTestRule.apply {
+        testRule.apply {
             MOCK_NOTE_LIST.withIndex().forEachIndexed { index, _ ->
-                composeTestRule.onNodeWithTag("note-$index").assertIsDisplayed()
+                testRule.onNodeWithTag("note-$index").isDisplayed()
             }
         }
+    }
+
+    @Test
+    fun removeNoteIsntDisplayed() {
+        val item = MOCK_NOTE_LIST.withIndex().first()
+        noteScreen.removeItemAt(0)
+        testRule.onNodeWithTag("note-${item.index}").isNotDisplayed()
     }
 }
