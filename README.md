@@ -23,8 +23,12 @@ Tasks to be done
 * Benchmark tests
 * Permissions (exucse me or https://google.github.io/accompanist/permissions/)
 * Espresso tests
-* Notifications 
+* Compose - gestures
+* Notifications  / FCM
+* Crashalitics
+* Multidex
 * Deeplink
+* Google Analytics
 * Better config with KtLint 
 * Add settings with dark mode 
 * Add DataStore + Probuff
