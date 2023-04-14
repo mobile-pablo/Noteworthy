@@ -88,18 +88,20 @@ fun PreviewNoteItem(
                     )
 
                   note.description?.let {
-                          Text(
-                              text = it[0].noteText,
-                              fontSize = Theme.font.font_9,
-                              color = Theme.colors.Text,
-                              modifier = Modifier
-                                  .layoutId(ID_DESCRIPTION)
-                                  .padding(horizontal = Theme.spacing.spacing_12)
-                                  .testTag(stringResource(id = R.string.test_id_description)),
-                              textAlign = TextAlign.Start,
-                              maxLines = 1,
-                              overflow = TextOverflow.Ellipsis
-                          )
+                        if(it.isNotEmpty()){
+                            Text(
+                                text = it[0].noteText,
+                                fontSize = Theme.font.font_9,
+                                color = Theme.colors.Text,
+                                modifier = Modifier
+                                    .layoutId(ID_DESCRIPTION)
+                                    .padding(horizontal = Theme.spacing.spacing_12)
+                                    .testTag(stringResource(id = R.string.test_id_description)),
+                                textAlign = TextAlign.Start,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis
+                            )
+                        }
                   }
                 }
             }

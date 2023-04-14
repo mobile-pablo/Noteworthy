@@ -24,7 +24,7 @@ class NoteViewModel @Inject constructor(
     private var getNotesJob: Job? = null
     private var deleteNoteJob: Job? = null
 
-    val notes: Flow<List<Note?>?> = getNotesUseCase()
+    val notes: Flow<List<Note?>> = getNotesUseCase()
 
     private val _viewState: MutableStateFlow<ViewState> = MutableStateFlow(ViewState.Default)
     val viewState: StateFlow<ViewState> = _viewState.asStateFlow()

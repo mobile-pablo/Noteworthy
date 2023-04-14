@@ -1,10 +1,7 @@
 package com.mobile.pablo.note
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ScaffoldState
@@ -46,6 +43,7 @@ fun NoteScreen(
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     LaunchedEffect(
         key1 = viewState,
+        key2 = notes
     ) {
         when (viewState) {
             is ViewState.InsertSuccessful -> {
@@ -88,10 +86,9 @@ fun NoteScreen(
                     .layoutId(ID_NOTE_LISTS)
                     .padding(horizontal = Theme.spacing.spacing_14),
             ) {
-                notes?.let { saveNotes ->
-                    if(saveNotes.isNotEmpty())
-                    items(saveNotes) { note ->
-                        note?.let {
+                if (notes.isNotEmpty()) {
+                    items(notes) { saveNotes ->
+                        saveNotes?.let {
                             PreviewNoteItem(
                                 note = it,
                                 onClick = {
@@ -110,7 +107,7 @@ fun NoteScreen(
                 }
             }
             NoteBottomBar(
-                notes?.size ?: 0,
+                notes.size,
                 modifier = Modifier
                     .layoutId(ID_NOTE_BOTTOM_BAR)
                     .fillMaxWidth(),
