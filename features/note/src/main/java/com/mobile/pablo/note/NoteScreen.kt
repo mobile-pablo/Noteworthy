@@ -11,13 +11,13 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.mobile.pablo.addnote.destinations.AddNoteScreenDestination
@@ -41,8 +41,8 @@ fun NoteScreen(
     noteViewModel: NoteViewModel = hiltViewModel()
 ) {
 
-    val notes = noteViewModel.notes.collectAsState(listOf()).value
-    val viewState = noteViewModel.viewState.collectAsState().value
+    val notes = noteViewModel.notes.collectAsStateWithLifecycle(listOf()).value
+    val viewState = noteViewModel.viewState.collectAsStateWithLifecycle().value
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     LaunchedEffect(
         key1 = viewState,
@@ -89,6 +89,7 @@ fun NoteScreen(
                     .padding(horizontal = Theme.spacing.spacing_14),
             ) {
                 notes?.let { saveNotes ->
+                    if(saveNotes.isNotEmpty())
                     items(saveNotes) { note ->
                         note?.let {
                             PreviewNoteItem(

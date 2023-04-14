@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
@@ -14,6 +13,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mobile.pablo.uicomponents.common.data.NoteBottomWrapper
 import com.mobile.pablo.uicomponents.common.data.NoteTopWrapper
 import com.mobile.pablo.uicomponents.common.theme.NoteBackground
@@ -39,8 +39,8 @@ fun AddNoteScreen(
     viewModel.downloadNote(noteId)
 
     val scope = rememberCoroutineScope()
-    val note = viewModel.note.collectAsState(EMPTY_NOTE)
-    val emptyNoteLineId = viewModel.emptyNoteLineId.collectAsState()
+    val note = viewModel.note.collectAsStateWithLifecycle(EMPTY_NOTE)
+    val emptyNoteLineId = viewModel.emptyNoteLineId.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
     ConstraintLayout(
