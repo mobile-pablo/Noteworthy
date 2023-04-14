@@ -15,14 +15,25 @@
 * Migrate dependencies to toml
 * Dagger + Hilt
 * Benchmark
+* Kotlin DSL 
 
 
 Tasks to be done
-* Clean Readme.MD with splash photos
-* Long press Actions
+* Migrate to Kotlin DSL
+* Add animation for navigation
 * Benchmark tests
-* Pipeline setup
+* Permissions (exucse me or https://google.github.io/accompanist/permissions/)
 * Espresso tests
+* Compose - gestures
+* Notifications  / FCM
+* Crashalitics
+* Multidex
+* Deeplink / Google dynamic link
+* Google Analytics
+* Better config with KtLint 
+* Add settings with dark mode 
+* Add DataStore + Probuff
+* Config R8
+* Config AWS Devices with Jenkins on Google Cloud Platform
 * Publish on Google Play
-* Notifications 
-* Deeplink (maybe)
+* Clean Readme.MD with splash photos
