@@ -31,6 +31,7 @@ import com.mobile.pablo.uicomponents.note.NoteTopBar
 import com.mobile.pablo.uicomponents.note.PreviewNoteItem
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.dynamic.within
+import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.utils.navGraph
 
 @Destination
@@ -91,8 +92,7 @@ fun NoteScreen(
                 if (notes.isNotEmpty()) {
                     items(notes) { saveNotes ->
                         saveNotes?.let {
-                            PreviewNoteItem(
-                                note = it,
+                            PreviewNoteItem(note = it,
                                 onClick = {
                                     navigateToEditNote(
                                         navController,
@@ -102,19 +102,16 @@ fun NoteScreen(
                                 onDelete = {
                                     noteViewModel.deleteNote(it.id)
                                 },
-                                onPin = { }
-                            )
+                                onPin = { })
                         }
                     }
                 }
             }
-            NoteBottomBar(
-                notes.size,
+            NoteBottomBar(notes.size,
                 modifier = Modifier
                     .layoutId(ID_NOTE_BOTTOM_BAR)
                     .fillMaxWidth(),
-                onClickNewNote = { noteViewModel.insertEmptyNote() }
-            )
+                onClickNewNote = { noteViewModel.insertEmptyNote() })
         }
     }
 }
