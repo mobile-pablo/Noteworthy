@@ -12,6 +12,7 @@ android {
     compileSdk = 33
 
     defaultConfig {
+        multiDexEnabled = true
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments["room.schemaLocation"] = "${projectDir}/schemas"
@@ -46,4 +47,6 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.junit.ext)
     androidTestImplementation(libs.espresso.core)
+
+    implementation(libs.multidex)
 }

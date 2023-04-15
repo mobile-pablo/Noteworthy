@@ -14,6 +14,7 @@ android {
     defaultConfig {
         minSdk = 28
         targetSdk = 33
+        multiDexEnabled = true
     }
 
     buildTypes {
@@ -85,4 +86,6 @@ dependencies {
 
     implementation(libs.compose.destination)
     ksp(libs.compose.destination.ksp)
+
+    implementation(libs.multidex)
 }

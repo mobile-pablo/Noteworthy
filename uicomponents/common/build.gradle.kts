@@ -14,6 +14,7 @@ android {
     defaultConfig {
         minSdk = 28
         targetSdk = 33
+        multiDexEnabled = true
     }
 
     buildTypes {
@@ -60,4 +61,6 @@ dependencies {
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
+
+    implementation(libs.multidex)
 }

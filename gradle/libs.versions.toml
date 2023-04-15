@@ -27,6 +27,7 @@ runner = '1.4.0'
 uiautomator = '2.3.0-alpha02'
 ktLint = '0.36.0'
 ktLint-reporter = '0.48.2'
+multidex = '2.0.1'
 
 [libraries]
 # project classpath
@@ -71,3 +72,5 @@ benchmark = { module = "androidx.benchmark:benchmark-junit4", version.ref = "ben
 
 room-ktx = { module = "androidx.room:room-ktx", version.ref ="room"}
 room-compiler = { module = "androidx.room:room-compiler", version.ref ="room"}
+
+multidex = { module = "androidx.multidex:multidex", version.ref ="multidex"}

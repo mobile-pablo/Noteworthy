@@ -22,6 +22,7 @@ android {
     defaultConfig {
         minSdk =28
         targetSdk =33
+        multiDexEnabled = true
 
         testInstrumentationRunner ="androidx.benchmark.junit4.AndroidBenchmarkRunner"
     }
@@ -47,6 +48,7 @@ dependencies {
     testImplementation (libs.junit)
     androidTestImplementation (libs.junit.ext)
     androidTestImplementation (libs.benchmark)
+    implementation(libs.multidex)
 
     // Add your dependencies here. Note that you cannot benchmark code
     // in an app module this way - you will need to move any code you
