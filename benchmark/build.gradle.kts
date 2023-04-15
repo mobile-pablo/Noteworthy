@@ -2,12 +2,14 @@ apply(from = "../ktlint.gradle.kts")
 
 plugins {
     id("com.android.library")
-    id("androidx.benchmark")
+    id("kotlin-android")
+    id("kotlin-kapt")
+    id("kotlin-parcelize")
     id("org.jetbrains.kotlin.android")
 }
 
 android {
-    namespace ="com.mobile.pablo.benchmark"
+    namespace = "com.mobile.pablo.benchmark"
     compileSdk = 33
 
     compileOptions {
@@ -20,39 +22,39 @@ android {
     }
 
     defaultConfig {
-        minSdk =28
-        targetSdk =33
+        minSdk = 28
+        targetSdk = 33
         multiDexEnabled = true
 
-        testInstrumentationRunner ="androidx.benchmark.junit4.AndroidBenchmarkRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    testBuildType = "release"
     buildTypes {
-        debug {
-            // Since debuggable can"t be modified by gradle for library modules,
-            // it must be done in a manifest - see src/androidTest/AndroidManifest.xml
-            isMinifyEnabled = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "benchmark-proguard-rules.pro")
-        }
         getByName("release") {
-            isDefault = true
+            isMinifyEnabled = true
+            isShrinkResources = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
+        }
+
+        create("benchmark") {
+            initWith(getByName("release"))
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    experimentalProperties["android.experimental.self-instrumenting"] = true
 }
 
-tasks.getByPath("preBuild").dependsOn("ktlint")
-
 dependencies {
-    androidTestImplementation(libs.testRunner)
-    testImplementation (libs.junit)
-    androidTestImplementation (libs.junit.ext)
-    androidTestImplementation (libs.benchmark)
+    implementation(libs.junit.ext)
+    implementation(libs.espresso.core)
+    implementation(libs.uiautomator)
+    implementation(libs.junit.macroBenchmark)
     implementation(libs.multidex)
+}
 
-    // Add your dependencies here. Note that you cannot benchmark code
-    // in an app module this way - you will need to move any code you
-    // want to benchmark to a library module:
-    // https://developer.android.com/studio/projects/android-library#Convert
-
+androidComponents {
+    beforeVariants(selector().all()) {
+        it.enabled = it.buildType == "benchmark"
+    }
 }

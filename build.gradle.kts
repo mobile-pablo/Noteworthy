@@ -10,7 +10,6 @@ buildscript {
         classpath(libs.buildGradlePlugin)
         classpath(libs.kotlinGradlePlugin)
         classpath(libs.hiltPlugin)
-        classpath(libs.benchmarkPlugin)
     }
 }
 

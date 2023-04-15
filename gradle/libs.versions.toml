@@ -3,7 +3,6 @@
 build_gradle = "7.4.2"
 kotlin_gradle = "1.8.10"
 hilt = "2.45"
-benchmark = "1.2.0-alpha13"
 
 # project modules
 compose = '1.4.0'
@@ -21,6 +20,7 @@ compose_swipe = '1.1.1'
 room = '2.5.1'
 junit = '4.13.2'
 junit_ext = '1.1.5'
+junit_macro = '1.1.1'
 espresso = '3.5.1'
 mockitoKotlin = '2.2.0'
 runner = '1.4.0'
@@ -34,7 +34,6 @@ multidex = '2.0.1'
 buildGradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "build_gradle" }
 kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin_gradle" }
 hiltPlugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
-benchmarkPlugin = { module = "androidx.benchmark:benchmark-gradle-plugin", version.ref = "benchmark" }
 
 # project modules
 androidX-core = { module = "androidx.core:core-ktx", version.ref = "androidx_core" }
@@ -65,10 +64,10 @@ ktLint-reporter = { module = "com.pinterest.ktlint:ktlint-reporter-html", versio
 
 junit = { module = "junit:junit", version.ref = "junit" }
 junit-ext = { module = "androidx.test.ext:junit", version.ref = "junit_ext" }
+junit-macroBenchmark = { module = "androidx.benchmark:benchmark-macro-junit4", version.ref = "junit_macro" }
 testRunner = { module = "androidx.test:runner", version.ref = "runner" }
 uiautomator = { module = "androidx.test.uiautomator:uiautomator", version.ref = "uiautomator" }
 espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso" }
-benchmark = { module = "androidx.benchmark:benchmark-junit4", version.ref = "benchmark" }
 
 room-ktx = { module = "androidx.room:room-ktx", version.ref ="room"}
 room-compiler = { module = "androidx.room:room-compiler", version.ref ="room"}
