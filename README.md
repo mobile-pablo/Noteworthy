@@ -19,7 +19,6 @@
 
 
 Tasks to be done
-* Migrate to Kotlin DSL
 * Add animation for navigation
 * Benchmark tests
 * Permissions (exucse me or https://google.github.io/accompanist/permissions/)
@@ -30,7 +29,6 @@ Tasks to be done
 * Multidex
 * Deeplink / Google dynamic link
 * Google Analytics
-* Better config with KtLint 
 * Add settings with dark mode 
 * Add DataStore + Probuff
 * Config R8
