@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.*
 class AddNoteViewModel @Inject constructor(
     private var getNoteUseCase: NoteUseCase.GetNote,
     private var insertNoteUseCase: NoteUseCase.InsertNote,
-    private var createEmptyNoteLineUseCase: NoteUseCase.InsertEmptyNoteLine,
+    private var createEmptyNoteLineUseCase: NoteUseCase.InsertEmptyNoteLine
 ) : ViewModel(), AddNoteInterface {
 
     private var noteJob: Job? = null

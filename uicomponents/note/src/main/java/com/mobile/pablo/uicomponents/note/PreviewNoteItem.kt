@@ -1,5 +1,6 @@
 package com.mobile.pablo.uicomponents.note
 
+import androidx.compose.material.MaterialTheme as Theme
 import DateUtils.dayMonthYearFormat
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -25,7 +26,6 @@ import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.uicomponents.common.theme.*
 import me.saket.swipe.SwipeAction
 import me.saket.swipe.SwipeableActionsBox
-import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun PreviewNoteItem(
@@ -33,21 +33,17 @@ fun PreviewNoteItem(
     note: Note,
     onClick: () -> Unit,
     onPin: () -> Unit,
-    onDelete: () -> Unit,
+    onDelete: () -> Unit
 ) {
 
-    val pinAction = SwipeAction(
-        icon = painterResource(id = R.drawable.pin),
+    val pinAction = SwipeAction(icon = painterResource(id = R.drawable.pin),
         background = Theme.colors.SwipeStart,
-        onSwipe = { onPin() }
-    )
+        onSwipe = { onPin() })
 
-    val deleteAction = SwipeAction(
-        icon = painterResource(id = R.drawable.trash),
+    val deleteAction = SwipeAction(icon = painterResource(id = R.drawable.trash),
         background = Theme.colors.SwipeEnd,
         isUndo = true,
-        onSwipe = { onDelete() },
-    )
+        onSwipe = { onDelete() })
 
     SwipeableActionsBox(
         startActions = listOf(pinAction),
@@ -87,8 +83,8 @@ fun PreviewNoteItem(
                             .testTag(stringResource(id = R.string.test_id_date))
                     )
 
-                  note.description?.let {
-                        if(it.isNotEmpty()){
+                    note.description?.let {
+                        if (it.isNotEmpty()) {
                             Text(
                                 text = it[0].noteText,
                                 fontSize = Theme.font.font_9,
@@ -102,7 +98,7 @@ fun PreviewNoteItem(
                                 overflow = TextOverflow.Ellipsis
                             )
                         }
-                  }
+                    }
                 }
             }
         }

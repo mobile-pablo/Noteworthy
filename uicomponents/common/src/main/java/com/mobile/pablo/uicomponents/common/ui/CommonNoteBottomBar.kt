@@ -15,7 +15,7 @@ import com.mobile.pablo.uicomponents.common.theme.CTA
 import com.mobile.pablo.uicomponents.common.theme.spacing
 
 @Composable
-fun CommonNoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper : NoteBottomWrapper) {
+fun CommonNoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper: NoteBottomWrapper) {
     Row(modifier = modifier) {
         Box(
             modifier = Modifier
@@ -23,7 +23,7 @@ fun CommonNoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper : NoteB
                 .weight(1f)
                 .clickable { noteBottomWrapper.onCheckboxItem() }
                 .padding(vertical = Theme.spacing.spacing_6),
-            contentAlignment = Alignment.Center,
+            contentAlignment = Alignment.Center
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.list),
@@ -38,7 +38,7 @@ fun CommonNoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper : NoteB
                 .weight(1f)
                 .clickable { noteBottomWrapper.onCameraItem }
                 .padding(vertical = Theme.spacing.spacing_6),
-            contentAlignment = Alignment.Center,
+            contentAlignment = Alignment.Center
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.image),
@@ -53,7 +53,7 @@ fun CommonNoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper : NoteB
                 .weight(1f)
                 .clickable { noteBottomWrapper.onPin }
                 .padding(vertical = Theme.spacing.spacing_6),
-            contentAlignment = Alignment.Center,
+            contentAlignment = Alignment.Center
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.pin),
@@ -68,7 +68,7 @@ fun CommonNoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper : NoteB
                 .weight(1f)
                 .clickable { noteBottomWrapper.onNew }
                 .padding(vertical = Theme.spacing.spacing_6),
-            contentAlignment = Alignment.Center,
+            contentAlignment = Alignment.Center
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.write),

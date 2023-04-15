@@ -12,7 +12,7 @@ import com.mobile.pablo.storage.database.entity.NoteLineEntity
 
 @Database(
     entities = [
-        NoteEntity::class, NoteLineEntity::class,
+        NoteEntity::class, NoteLineEntity::class
     ],
     version = 1,
     exportSchema = false

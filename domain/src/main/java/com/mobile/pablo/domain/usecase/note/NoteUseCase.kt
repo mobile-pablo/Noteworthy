@@ -4,9 +4,9 @@ import com.mobile.pablo.core.data.DataTransfer
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.mapper.note.NoteMapper
 import com.mobile.pablo.storage.source.note.NoteDataStorage
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
 sealed class NoteUseCase {
 
@@ -32,15 +32,14 @@ sealed class NoteUseCase {
             val response = noteDataStorage.getNote(noteId)
             return response.map(noteMapper::map)
         }
-
     }
 
     class InsertNote @Inject constructor(
         private val noteMapper: NoteMapper,
-        private val noteDataStorage: NoteDataStorage,
+        private val noteDataStorage: NoteDataStorage
     ) {
 
-        suspend operator fun invoke(note: Note) : DataTransfer<Unit>{
+        suspend operator fun invoke(note: Note): DataTransfer<Unit> {
             val response = noteMapper.map(note)
             val storageResult = noteDataStorage.insertNote(response)
             return DataTransfer(storageResult)
@@ -48,7 +47,7 @@ sealed class NoteUseCase {
     }
 
     class InsertEmptyNote @Inject constructor(
-        private val noteDataStorage: NoteDataStorage,
+        private val noteDataStorage: NoteDataStorage
     ) {
 
         suspend operator fun invoke(): DataTransfer<Long> =
@@ -56,7 +55,7 @@ sealed class NoteUseCase {
     }
 
     class InsertEmptyNoteLine @Inject constructor(
-        private val noteDataStorage: NoteDataStorage,
+        private val noteDataStorage: NoteDataStorage
     ) {
 
         suspend operator fun invoke(parentNoteId: Int): Long =
@@ -64,7 +63,7 @@ sealed class NoteUseCase {
     }
 
     class DeleteNote @Inject constructor(
-        private val noteDataStorage: NoteDataStorage,
+        private val noteDataStorage: NoteDataStorage
     ) {
 
         suspend operator fun invoke(noteId: Int): DataTransfer<Unit> =
@@ -72,7 +71,7 @@ sealed class NoteUseCase {
     }
 
     class ClearNotes @Inject constructor(
-        private val noteDataStorage: NoteDataStorage,
+        private val noteDataStorage: NoteDataStorage
     ) {
 
         suspend operator fun invoke() =

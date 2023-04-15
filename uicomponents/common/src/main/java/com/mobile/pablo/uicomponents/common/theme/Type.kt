@@ -17,7 +17,7 @@ val SF_PRO = FontFamily(
         Font(R.font.sf_pro_ultra_thin, FontWeight.ExtraLight),
         Font(R.font.sf_pro_thin, FontWeight.Thin),
         Font(R.font.sf_pro_light, FontWeight.Light),
-        Font(R.font.sf_pro_semi_bold, FontWeight.SemiBold),
+        Font(R.font.sf_pro_semi_bold, FontWeight.SemiBold)
     )
 )
 // Set of Material typography styles to start with

@@ -62,7 +62,7 @@ fun TextCanvas(
                         NoteField(
                             modifier = Modifier.fillMaxWidth(),
                             noteLine = NoteLine(parentNoteId = noteId),
-                            createEmptyNoteLine = createEmptyNoteLine,
+                            createEmptyNoteLine = createEmptyNoteLine
                         )
                     )
                 }

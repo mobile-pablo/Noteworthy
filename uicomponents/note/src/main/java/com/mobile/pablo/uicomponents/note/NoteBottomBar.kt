@@ -1,5 +1,6 @@
 package com.mobile.pablo.uicomponents.note
 
+import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,7 +21,6 @@ import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
 import com.mobile.pablo.uicomponents.common.theme.*
 import com.mobile.pablo.uicomponents.common.util.topRectBorder
 import kotlinx.coroutines.launch
-import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun NoteBottomBar(
@@ -55,7 +55,7 @@ fun NoteBottomBar(
             Text(
                 text = notesText,
                 fontSize = Theme.font.font_15,
-                color = Theme.colors.Text,
+                color = Theme.colors.Text
             )
         }
 

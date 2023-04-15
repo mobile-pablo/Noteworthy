@@ -18,8 +18,16 @@ ij_kotlin_keep_blank_lines_in_declarations = 1
 ij_kotlin_keep_blank_lines_in_code = 1
 ij_kotlin_align_multiline_parameters = false
 ij_kotlin_imports_layout=* # alphabetical with capital letters before lower case letters (e.g. Z before a), no blank lines
-ij_kotlin_import_nested_classes = false
-disabled_rules=no-wildcard-imports,max-line-length
+disabled_rules=no-wildcard-imports,max-line-length,import-ordering
+
+[**/IOSNotesTheme.kt]
+charset = unset
+disabled_rules=paren-spacing
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
+indent_size = unset
 
 [*.md]
 trim_trailing_whitespace = false

@@ -36,7 +36,7 @@ fun SearchBar(
         modifier = modifier,
         textStyle = TextStyle(
             color = Theme.colors.Text,
-            fontSize = Theme.font.font_14,
+            fontSize = Theme.font.font_14
         ),
         leadingIcon = {
             if (state.value != TextFieldValue(EMPTY_STRING)) {

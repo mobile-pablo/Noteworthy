@@ -1,5 +1,6 @@
 package com.mobile.pablo.note.mock
 
+import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -24,12 +25,11 @@ import com.mobile.pablo.uicomponents.note.NoteBottomBar
 import com.mobile.pablo.uicomponents.note.NoteTopBar
 import com.mobile.pablo.uicomponents.note.PreviewNoteItem
 import java.util.Date
-import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun MockNoteScreen(
     navController: NavController = rememberNavController()
-)  {
+) {
 
     Box(
         modifier = Modifier
@@ -49,15 +49,13 @@ fun MockNoteScreen(
             LazyColumn(
                 modifier = Modifier
                     .layoutId(ID_NOTE_LISTS)
-                    .padding(horizontal = Theme.spacing.spacing_14),
+                    .padding(horizontal = Theme.spacing.spacing_14)
             ) {
                 items(MOCK_NOTE_LIST) { note ->
                     PreviewNoteItem(
                         modifier = Modifier.testTag("note-${note.id}"),
                         note = note,
-                        onClick = {
-
-                        },
+                        onClick = {},
                         onDelete = {
                             MOCK_NOTE_LIST.removeAt(note.id)
                         },
@@ -71,7 +69,7 @@ fun MockNoteScreen(
                     .layoutId(ID_NOTE_BOTTOM_BAR)
                     .fillMaxWidth(),
                 onClickNewNote = {
-                   var lastNoteId =  MOCK_NOTE_LIST.last().id
+                    var lastNoteId = MOCK_NOTE_LIST.last().id
                     lastNoteId++
                     MOCK_NOTE_LIST.add(
                         Note(
@@ -85,7 +83,7 @@ fun MockNoteScreen(
                                     true,
                                     "This is a checkbox"
                                 )
-                            ),
+                            )
                         )
                     )
                 }
@@ -93,7 +91,6 @@ fun MockNoteScreen(
         }
     }
 }
-
 
 private val noteConstraints = ConstraintSet {
 

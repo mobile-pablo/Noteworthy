@@ -1,5 +1,6 @@
 package com.mobile.pablo.uicomponents.common.ui
 
+import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -19,7 +20,6 @@ import com.mobile.pablo.uicomponents.common.R
 import com.mobile.pablo.uicomponents.common.data.NoteTopWrapper
 import com.mobile.pablo.uicomponents.common.theme.CTA
 import com.mobile.pablo.uicomponents.common.theme.spacing
-import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun CommonNoteTopBar(
@@ -35,7 +35,10 @@ fun CommonNoteTopBar(
             modifier = Modifier
                 .layoutId(ID_GO_BACK)
                 .clickable { noteTopWrapper.onBackItem() }
-                .padding(vertical = Theme.spacing.spacing_7, horizontal = Theme.spacing.spacing_4),
+                .padding(
+                    vertical = Theme.spacing.spacing_7,
+                    horizontal = Theme.spacing.spacing_4
+                )
         ) {
             Icon(
                 imageVector = Icons.Default.KeyboardArrowLeft,
@@ -57,7 +60,7 @@ fun CommonNoteTopBar(
                 .layoutId(ID_SHARE)
                 .clickable { noteTopWrapper.onShareItem() }
                 .padding(Theme.spacing.spacing_7),
-            contentAlignment = Alignment.Center,
+            contentAlignment = Alignment.Center
         ) {
             Icon(
                 painter = painterResource(id = R.drawable.share),
@@ -71,7 +74,7 @@ fun CommonNoteTopBar(
                 .layoutId(ID_DONE)
                 .clickable { noteTopWrapper.onDoneItem() }
                 .padding(Theme.spacing.spacing_7),
-            contentAlignment = Alignment.Center,
+            contentAlignment = Alignment.Center
         ) {
             Text(
                 text = stringResource(id = R.string.done),

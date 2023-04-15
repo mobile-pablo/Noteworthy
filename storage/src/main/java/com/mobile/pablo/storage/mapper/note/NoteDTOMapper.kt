@@ -25,7 +25,7 @@ internal class NoteDTOMapper @Inject constructor(
         NoteEntity(
             id,
             title,
-            date,
+            date
         )
     }
 }
