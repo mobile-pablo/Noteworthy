@@ -4,6 +4,7 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -22,7 +23,6 @@ import com.mobile.pablo.uicomponents.common.ui.CommonNoteTopBar
 import com.mobile.pablo.uicomponents.common.ui.TextCanvas
 import com.ramcosta.composedestinations.annotation.Destination
 import kotlinx.coroutines.launch
-import androidx.compose.material.MaterialTheme as Theme
 
 data class EditNoteScreenNavArgs(
     val note: Note
@@ -37,7 +37,6 @@ fun EditNoteScreen(
     val note = editNoteScreenNavArgs.note
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
-
 
     ConstraintLayout(
         modifier = Modifier
@@ -68,7 +67,8 @@ fun EditNoteScreen(
                 onDoneItem = {
                     scope.launch {
                         viewModel.saveNote(updatedNote).also {
-                            (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
+                            (context as? ComponentActivity)
+                                ?.onBackPressedDispatcher?.onBackPressed()
                         }
                     }
                 }

@@ -7,12 +7,12 @@ import com.mobile.pablo.domain.usecase.note.NoteUseCase
 import com.mobile.pablo.uicomponents.common.util.StringRes.DELETE_SUCCESSFUL
 import com.mobile.pablo.uicomponents.common.util.StringRes.INTERNET_ISSUE
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import javax.inject.Inject
 
 @HiltViewModel
 class NoteViewModel @Inject constructor(
@@ -36,7 +36,6 @@ class NoteViewModel @Inject constructor(
             _viewState.value = noteResult.run {
                 if (isSuccessful && data != null) {
                     ViewState.Message(DELETE_SUCCESSFUL)
-
                 } else ViewState.Message(INTERNET_ISSUE)
             }
         }
@@ -49,7 +48,6 @@ class NoteViewModel @Inject constructor(
             _viewState.value = noteResult.run {
                 if (isSuccessful && data != null) {
                     ViewState.InsertSuccessful(data)
-
                 } else ViewState.Message(INTERNET_ISSUE)
             }
         }

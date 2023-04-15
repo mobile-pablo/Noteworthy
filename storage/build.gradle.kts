@@ -1,5 +1,4 @@
 apply(from = "../ktlint.gradle.kts")
-
 plugins {
     id("com.android.library")
     id("kotlin-android")
@@ -31,6 +30,8 @@ android {
         }
     }
 }
+
+tasks.getByPath("preBuild").dependsOn("ktlint")
 
 dependencies {
     api(project(":core"))

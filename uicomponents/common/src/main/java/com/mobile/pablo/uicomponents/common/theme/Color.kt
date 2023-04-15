@@ -17,14 +17,13 @@ val HomeBottomBarBackgroundDay = Color(0xfff6f6f6)
 val SwipeStartDay = Color(0xfffdba7f)
 val SwipeEndDay = Color(0xffa2daa3)
 
-
 // Night
 val TextNight = Color(0xfff2eadf)
 val NoteBackgroundNight = Color(0xff1f1f1f)
 val HomeBackgroundNight = Color(0xff010101)
 val SearchNight = Color(0xff1c1c1e)
 val PreviewNoteBackgroundNight = Color(0xff1c1c1e)
-val PreviewLineNight  = Color(0xff252527)
+val PreviewLineNight = Color(0xff252527)
 val CTANight = Color(0xffd6c04c)
 val HomeBottomBarBackgroundNight = Color(0xff29292b)
 val SwipeStartNight = Color(0xfffb8114)

@@ -1,30 +1,28 @@
 package com.mobile.pablo.addnote
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.mobile.pablo.core.utils.SingleLiveEvent
+import com.mobile.pablo.core.utils.launch
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.usecase.note.NoteUseCase
-import com.mobile.pablo.core.utils.launch
+import com.mobile.pablo.uicomponents.common.util.StringRes
 import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
 @HiltViewModel
 class AddNoteViewModel @Inject constructor(
     private var getNoteUseCase: NoteUseCase.GetNote,
     private var insertNoteUseCase: NoteUseCase.InsertNote,
     private var createEmptyNoteLineUseCase: NoteUseCase.InsertEmptyNoteLine,
-    private val deleteNoteUseCase: NoteUseCase.DeleteNote
 ) : ViewModel(), AddNoteInterface {
 
     private var noteJob: Job? = null
 
     var note: Flow<Note?> = emptyFlow()
 
-    private val _viewState = SingleLiveEvent<ViewState>()
-    val viewState: LiveData<ViewState> = _viewState
+    private val _viewState: MutableStateFlow<ViewState> = MutableStateFlow(ViewState.Default)
+    val viewState: StateFlow<ViewState> = _viewState.asStateFlow()
 
     private val _emptyNoteLineId: MutableStateFlow<Long> = MutableStateFlow(0L)
     val emptyNoteLineId: StateFlow<Long> = _emptyNoteLineId.asStateFlow()
@@ -44,7 +42,12 @@ class AddNoteViewModel @Inject constructor(
     override fun saveNote(note: Note) {
         noteJob?.cancel()
         noteJob = launch {
-            insertNoteUseCase(note)
+            val noteResult = insertNoteUseCase(note)
+            _viewState.value = noteResult.run {
+                if (isSuccessful && data != null) {
+                    ViewState.SaveSuccessful
+                } else ViewState.Message(StringRes.INTERNET_ISSUE)
+            }
         }
     }
 
@@ -58,6 +61,7 @@ class AddNoteViewModel @Inject constructor(
 }
 
 sealed class ViewState {
-    object DownloadSuccessful : ViewState()
-    class Error(val message: String) : ViewState()
+    object Default : ViewState()
+    object SaveSuccessful : ViewState()
+    class Message(val message: String) : ViewState()
 }

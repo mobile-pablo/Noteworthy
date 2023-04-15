@@ -1,4 +1,3 @@
-apply(from = "../ktlint.gradle.kts")
 
 plugins {
     id("com.android.library")
@@ -27,6 +26,8 @@ android {
         }
     }
 }
+
+tasks.getByPath("preBuild").dependsOn("ktlint")
 
 dependencies {
     api(project(":storage"))

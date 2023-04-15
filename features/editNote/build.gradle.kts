@@ -65,6 +65,8 @@ android {
     }
 }
 
+tasks.getByPath("preBuild").dependsOn("ktlint")
+
 dependencies {
     implementation(project(":uicomponents:common"))
     implementation(project(":domain"))

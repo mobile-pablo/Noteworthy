@@ -4,6 +4,8 @@ plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    id("org.jlleitschuh.gradle.ktlint") version "11.3.1"
+    id("org.jlleitschuh.gradle.ktlint-idea") version "11.3.1"
 }
 
 android {
@@ -43,6 +45,8 @@ android {
         jvmTarget = "1.8"
     }
 }
+
+tasks.getByPath("preBuild").dependsOn("ktlint")
 
 dependencies {
     implementation(project(":domain"))

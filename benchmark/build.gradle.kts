@@ -40,6 +40,8 @@ android {
     }
 }
 
+tasks.getByPath("preBuild").dependsOn("ktlint")
+
 dependencies {
     androidTestImplementation(libs.testRunner)
     testImplementation (libs.junit)

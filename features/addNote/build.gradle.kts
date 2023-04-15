@@ -1,3 +1,4 @@
+
 apply(from = "../../ktlint.gradle.kts")
 
 plugins {
@@ -64,6 +65,8 @@ android {
         )
     }
 }
+
+tasks.getByPath("preBuild").dependsOn("ktlint")
 
 dependencies {
     implementation(project(":uicomponents:common"))

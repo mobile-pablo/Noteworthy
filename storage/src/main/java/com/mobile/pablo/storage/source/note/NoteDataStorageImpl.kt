@@ -1,14 +1,13 @@
 package com.mobile.pablo.storage.source.note
 
-import com.mobile.pablo.core.data.DataTransfer
 import com.mobile.pablo.core.model.note.NoteDTO
 import com.mobile.pablo.storage.database.dao.note.NoteDao
 import com.mobile.pablo.storage.database.entity.NoteWithDescriptionEntity
 import com.mobile.pablo.storage.mapper.note.NoteDTOMapper
 import com.mobile.pablo.storage.mapper.note.NoteLineDTOMapper
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
 internal class NoteDataStorageImpl @Inject constructor(
     private val noteDao: NoteDao,

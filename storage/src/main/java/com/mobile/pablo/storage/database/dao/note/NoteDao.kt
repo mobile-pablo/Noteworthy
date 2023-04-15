@@ -5,8 +5,8 @@ import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
 import com.mobile.pablo.storage.database.entity.NoteEntity
 import com.mobile.pablo.storage.database.entity.NoteLineEntity
 import com.mobile.pablo.storage.database.entity.NoteWithDescriptionEntity
-import kotlinx.coroutines.flow.Flow
 import java.util.Date
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 internal abstract class NoteDao {

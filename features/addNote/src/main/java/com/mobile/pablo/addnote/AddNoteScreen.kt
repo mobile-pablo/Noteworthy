@@ -4,7 +4,11 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.MaterialTheme as Theme
+import androidx.compose.material.ScaffoldState
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
@@ -23,7 +27,6 @@ import com.mobile.pablo.uicomponents.common.ui.TextCanvas
 import com.mobile.pablo.uicomponents.common.util.EmptyObjects.EMPTY_NOTE
 import com.ramcosta.composedestinations.annotation.Destination
 import kotlinx.coroutines.launch
-import androidx.compose.material.MaterialTheme as Theme
 
 data class AddNoteScreenNavArgs(
     val noteId: Int
@@ -41,7 +44,28 @@ fun AddNoteScreen(
     val scope = rememberCoroutineScope()
     val note = viewModel.note.collectAsStateWithLifecycle(EMPTY_NOTE)
     val emptyNoteLineId = viewModel.emptyNoteLineId.collectAsStateWithLifecycle()
+    val viewState = viewModel.viewState.collectAsStateWithLifecycle().value
     val context = LocalContext.current
+    val scaffoldState: ScaffoldState = rememberScaffoldState()
+
+    LaunchedEffect(
+        key1 = viewState,
+        key2 = note
+    ) {
+        when (viewState) {
+            is ViewState.SaveSuccessful -> {
+                (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
+            }
+
+            is ViewState.Message -> {
+                scaffoldState.snackbarHostState.showSnackbar(
+                    message = viewState.message
+                )
+            }
+
+            is ViewState.Default -> {}
+        }
+    }
 
     ConstraintLayout(
         modifier = Modifier
@@ -74,15 +98,14 @@ fun AddNoteScreen(
                     onBackItem =
                     {
                         scope.launch {
-                            (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
+                            (context as? ComponentActivity)
+                                ?.onBackPressedDispatcher?.onBackPressed()
                         }
                     },
                     onShareItem = { scope.launch { viewModel.shareNote() } },
                     onDoneItem = {
                         scope.launch {
-                            viewModel.saveNote(updatedNote).also {
-                                (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
-                            }
+                            viewModel.saveNote(updatedNote)
                         }
                     }
                 )

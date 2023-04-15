@@ -1,11 +1,11 @@
 package com.mobile.pablo.uicomponents.common.theme
 
+import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
-import androidx.compose.material.MaterialTheme as Theme
 
 data class FontSize(
     val default: TextUnit = 0.sp,

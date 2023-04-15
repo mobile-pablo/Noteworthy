@@ -40,9 +40,10 @@ sealed class NoteUseCase {
         private val noteDataStorage: NoteDataStorage,
     ) {
 
-        suspend operator fun invoke(note: Note) {
+        suspend operator fun invoke(note: Note) : DataTransfer<Unit>{
             val response = noteMapper.map(note)
-            noteDataStorage.insertNote(response)
+            val storageResult = noteDataStorage.insertNote(response)
+            return DataTransfer(storageResult)
         }
     }
 

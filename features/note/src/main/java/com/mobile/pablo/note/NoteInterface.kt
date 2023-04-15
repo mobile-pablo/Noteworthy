@@ -6,5 +6,5 @@ interface NoteInterface {
 
     fun insertEmptyNote()
 
-    fun setEmptyNote(noteId : Long?)
+    fun setEmptyNote(noteId: Long?)
 }
