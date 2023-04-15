@@ -20,6 +20,7 @@ ij_kotlin_align_multiline_parameters = false
 ij_kotlin_imports_layout=* # alphabetical with capital letters before lower case letters (e.g. Z before a), no blank lines
 ij_kotlin_import_nested_classes = false
 ij_kotlin_packages_to_use_import_on_demand = org.junit.Assert.*
+disabled_rules= no-wildcard-imports
 
 [*.md]
 trim_trailing_whitespace = false

@@ -9,7 +9,7 @@ tasks.register<JavaExec>("ktlint") {
     description = "Check Kotlin code style."
     classpath = ktlint
     main = "com.pinterest.ktlint.Main"
-    args("--android","--reporter=html,artifact=com.pinterest.ktlint:ktlint-reporter-html:0.48.2,output=${buildDir}/ktlint.html","--reporter=plain","--reporter=sarif", "src/**/*.kt")
+    args("--android","--reporter=html,output=${buildDir}/ktlint.html","--reporter=plain","--reporter=checkstyle", "src/**/*.kt")
 }
 
 tasks.named("check") {
