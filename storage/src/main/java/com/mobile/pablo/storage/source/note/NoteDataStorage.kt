@@ -7,7 +7,7 @@ interface NoteDataStorage {
 
     fun getNote(noteId: Int): Flow<NoteDTO?>
 
-     fun getNotes(): Flow<List<NoteDTO?>>
+    fun getNotes(): Flow<List<NoteDTO?>>
 
     suspend fun deleteNote(noteId: Int)
 

@@ -1,5 +1,6 @@
 package com.mobile.pablo.uicomponents.common.ui
 
+import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -15,7 +16,6 @@ import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.data.note.NoteLine
 import com.mobile.pablo.uicomponents.common.R
 import com.mobile.pablo.uicomponents.common.theme.spacing
-import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun TextCanvas(

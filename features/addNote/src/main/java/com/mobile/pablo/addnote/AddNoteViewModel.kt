@@ -6,9 +6,9 @@ import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.usecase.note.NoteUseCase
 import com.mobile.pablo.uicomponents.common.util.StringRes
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
-import javax.inject.Inject
 
 @HiltViewModel
 class AddNoteViewModel @Inject constructor(

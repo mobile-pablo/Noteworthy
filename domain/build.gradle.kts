@@ -1,3 +1,4 @@
+apply(from = "../ktlint.gradle.kts")
 
 plugins {
     id("com.android.library")
