@@ -1,6 +1,7 @@
 ## iOS - Notes
 
 # Tech stack
+
 * Jenkins via GCP  'http://34.30.54.198:8080/' + AWS Device farm
 * Room
 * MVVM
@@ -9,27 +10,26 @@
 * Compose
 * Compose Navigation
 * Ktlint
-* StateFlow 
+* StateFlow
 * Side Effect Handlers
 * Multi-Module & inner module
 * Migrate dependencies to toml
 * Dagger + Hilt
 * Benchmark
-* Kotlin DSL 
-
+* Kotlin DSL
 
 Tasks to be done
+
 * Add animation for navigation
 * Benchmark tests
 * Permissions (exucse me or https://google.github.io/accompanist/permissions/)
 * Espresso tests
-* Compose - gestures
-* Notifications  / FCM
+* Swipe with NoteLines  (checklist/delete)
+* Notifications / FCM
 * Crashalitics
-* Multidex
 * Deeplink / Google dynamic link
 * Google Analytics
-* Add settings with dark mode 
+* Add settings with dark mode
 * Add DataStore + Probuff
 * Config R8
 * Config AWS Devices with Jenkins on Google Cloud Platform
