@@ -1,6 +1,5 @@
 package com.mobile.pablo.uicomponents.common.ui
 
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -16,6 +15,8 @@ import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.data.note.NoteLine
 import com.mobile.pablo.uicomponents.common.R
 import com.mobile.pablo.uicomponents.common.theme.spacing
+import java.util.Date
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun TextCanvas(
@@ -29,8 +30,9 @@ fun TextCanvas(
     val title = remember { mutableStateOf(EMPTY_STRING) }
 
     val defaultDescription = if (note.description?.isNotEmpty() == true) note.description else null
-    val noteLines = remember { mutableStateOf(defaultDescription) }
+    val noteLines = remember { mutableStateOf(defaultDescription) }.value
 
+    val localNoteLines = mutableListOf<NoteLine>()
     LazyColumn(
         state = listState,
         modifier = modifier.padding(top = Theme.spacing.spacing_12)
@@ -42,52 +44,33 @@ fun TextCanvas(
                 placeHolder = stringResource(id = R.string.title)
             )
         }
-        noteLines.value.let { noteL ->
-            if (noteL != null) {
-                if (noteL.isNotEmpty()) {
-                    items(noteL) { noteLine ->
-                        noteLines.value = updateCorrectlyNote(
-                            NoteField(
-                                modifier = Modifier.fillMaxWidth(),
-                                noteLine = noteLine.copy(parentNoteId = noteId),
-                                hasCheckbox = true
-                            ),
-                            noteL
-                        )
-                    }
-                }
-            } else {
-                item {
-                    noteLines.value = updateCorrectlyNote(
-                        NoteField(
-                            modifier = Modifier.fillMaxWidth(),
-                            noteLine = NoteLine(parentNoteId = noteId),
-                            createEmptyNoteLine = createEmptyNoteLine
-                        )
+
+        if (noteLines != null) {
+                items(noteLines) { noteLine ->
+                    val localNoteLine = NoteField(
+                        modifier = Modifier.fillMaxWidth(),
+                        noteLine = noteLine.copy(parentNoteId = noteId),
+                        hasCheckbox = true
                     )
+
+                    localNoteLines.add(localNoteLine)
                 }
+        } else {
+            item {
+                val localNoteLine = NoteField(
+                    modifier = Modifier.fillMaxWidth(),
+                    noteLine = NoteLine(parentNoteId = noteId),
+                    createEmptyNoteLine = createEmptyNoteLine
+                )
+
+                localNoteLines.add(localNoteLine)
             }
         }
     }
 
     return note.copy(
         title = title.value,
-        description = noteLines.value
+        date = Date(),
+        description = localNoteLines
     )
-}
-
-fun updateCorrectlyNote(
-    returnedNoteLine: NoteLine,
-    noteList: List<NoteLine> = listOf()
-): MutableList<NoteLine> {
-    val foundNote = noteList.find { it.id == returnedNoteLine.id }
-
-    return if (foundNote != null && noteList.isNotEmpty()) {
-        val oldNoteId = noteList.indexOf(foundNote)
-        val newNoteList = noteList.toMutableList()
-        newNoteList[oldNoteId] = returnedNoteLine
-        newNoteList
-    } else {
-        mutableListOf(returnedNoteLine)
-    }
 }
