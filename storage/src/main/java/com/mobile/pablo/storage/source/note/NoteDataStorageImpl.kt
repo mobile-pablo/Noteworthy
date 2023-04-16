@@ -41,15 +41,17 @@ internal class NoteDataStorageImpl @Inject constructor(
     override suspend fun deleteNote(noteId: Int): Unit = noteDao.deleteNoteWithDescription(noteId)
 
     override suspend fun insertNote(dto: NoteDTO?) {
-        val entity = noteDTOMapper.map(dto)
-        val description = dto?.description?.map(noteLineDTOMapper::map)
+        dto?.apply {
+            val entity = noteDTOMapper.map(this)
+            val description = description.map(noteLineDTOMapper::map)
 
-        noteDao.insertNoteWithDescription(
-            NoteWithDescriptionEntity(
-                entity,
-                description
+            noteDao.insertNoteWithDescription(
+                NoteWithDescriptionEntity(
+                    entity,
+                    description
+                )
             )
-        )
+        }
     }
 
     override suspend fun insertEmptyNote(): Long = noteDao.insertEmptyNote()

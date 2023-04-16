@@ -10,5 +10,5 @@ internal data class NoteWithDescriptionEntity(
         parentColumn = "id",
         entityColumn = "parentNoteId"
     )
-    val noteLineEntityList: List<NoteLineEntity>?
+    val noteLineEntityList: List<NoteLineEntity>
 )

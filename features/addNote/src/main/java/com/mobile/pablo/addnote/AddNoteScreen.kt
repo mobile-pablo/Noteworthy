@@ -98,8 +98,7 @@ fun AddNoteScreen(
                     onBackItem =
                     {
                         scope.launch {
-                            (context as? ComponentActivity)
-                                ?.onBackPressedDispatcher?.onBackPressed()
+                            (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
                         }
                     },
                     onShareItem = { scope.launch { viewModel.shareNote() } },

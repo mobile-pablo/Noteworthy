@@ -6,5 +6,5 @@ data class NoteDTO(
     val id: Int,
     val title: String,
     val date: Date,
-    val description: List<NoteLineDTO>?
+    val description: List<NoteLineDTO>
 )
