@@ -105,7 +105,10 @@ fun AddNoteScreen(
                     onShareItem = { scope.launch { viewModel.shareNote() } },
                     onDoneItem = {
                         scope.launch {
-                            viewModel.saveNote(updatedNote)
+                            viewModel.saveNote(updatedNote).also {
+                                (context as? ComponentActivity)
+                                    ?.onBackPressedDispatcher?.onBackPressed()
+                            }
                         }
                     }
                 )

@@ -28,7 +28,6 @@ fun NoteField(
     createEmptyNoteLine: () -> Long
 ): NoteLine {
 
-    val noteId = remember { createEmptyNoteLine() }
     val focusManager = LocalFocusManager.current
 
     var noteText by remember { mutableStateOf(noteLine.noteText) }
@@ -66,7 +65,7 @@ fun NoteField(
     }
 
     return NoteLine(
-        id = noteId.toInt(),
+        id = createEmptyNoteLine().toInt(),
         isCheckbox = isCheckbox,
         noteText = noteText,
         parentNoteId = noteLine.parentNoteId
