@@ -29,8 +29,7 @@ fun TextCanvas(
     val listState = rememberLazyListState()
     val title = remember { mutableStateOf(EMPTY_STRING) }
 
-    val defaultDescription = if (note.description?.isNotEmpty() == true) note.description else null
-    val noteLines = remember { mutableStateOf(defaultDescription) }.value
+    val description = if (note.description?.isNotEmpty() == true) note.description else null
 
     val localNoteLines = mutableListOf<NoteLine>()
     LazyColumn(
@@ -45,8 +44,8 @@ fun TextCanvas(
             )
         }
 
-        if (noteLines != null) {
-                items(noteLines) { noteLine ->
+        if (description != null) {
+                items(description) { noteLine ->
                     val localNoteLine = NoteField(
                         modifier = Modifier.fillMaxWidth(),
                         noteLine = noteLine.copy(parentNoteId = noteId),
@@ -69,7 +68,8 @@ fun TextCanvas(
         }
     }
 
-    return note.copy(
+    return Note(
+        id = note.id,
         title = title.value,
         date = Date(),
         description = localNoteLines
