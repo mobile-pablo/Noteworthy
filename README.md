@@ -29,8 +29,8 @@
 * Deeplink / Google dynamic link
 * Google Analytics
 * Add settings with dark mode
+* OSS Libraries list
 * Add DataStore + Probuff
 * Config R8
-* Config AWS Devices with Jenkins on Google Cloud Platform
 * Publish on Google Play
 * Clean Readme.MD with splash photos
