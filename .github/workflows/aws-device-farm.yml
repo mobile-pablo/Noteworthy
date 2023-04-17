@@ -45,7 +45,7 @@ jobs:
         aws s3 cp $TEST_PACKAGE "$(jq -r '.upload.url' test_upload.json)"
         # Schedule the run
         aws devicefarm schedule-run \
-          --project-arn "$(jq -r '.upload.projectArn' app_upload.json)" \
+          --project-arn arn:aws:devicefarm:us-west-2:406524570672:project:d0311d9b-a860-4ed8-b577-874d773a0afb \
           --app-arn "$(jq -r '.upload.appArn' app_upload.json)" \
           --device-pool-arn "$(aws devicefarm list-device-pools --query "devicePools[?name=='$DEVICE_POOL'].arn | [0]" --output text)" \
           --name "GitHub Actions Run" \
