@@ -12,7 +12,7 @@
 *.dex
 
 # Hide my secret aws keys
-.github/workflows/aws-device-farm.yaml
+.github/workflows/aws-device-farm.yml
 
 # Java class files
 *.class
