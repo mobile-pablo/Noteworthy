@@ -1,0 +1,17 @@
+name: Lint Check
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: android lint statistics
+      uses: MeilCli/android-lint-statistics@v1.0.0
+  
