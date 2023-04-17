@@ -1,7 +1,6 @@
 ## iOS - Notes
 
 # Tech stack
-
 * <s>(Jenkins via GCP  'http://34.30.54.198:8080/'</s> (Migrated to Github CI) + AWS Device farm  
 * Room
 * MVVM
@@ -19,7 +18,6 @@
 * Kotlin DSL
 
 # Tasks to be done
-
 * Add animation for navigation
 * Benchmark tests
 * Permissions (exucse me or https://google.github.io/accompanist/permissions/)
