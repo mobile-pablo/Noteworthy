@@ -32,5 +32,11 @@
 * OSS Libraries list
 * Add DataStore + Probuff
 * Config R8
+* Use https://github.com/DevSrSouza/compose-icons
 * Publish on Google Play
 * Clean Readme.MD with splash photos
+
+
+## Maybe
+* https://github.com/ValeryPonomarenko/compose-shimmer
+* 
