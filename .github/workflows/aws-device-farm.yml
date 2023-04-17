@@ -1,0 +1,54 @@
+name: AWS Device Farm CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  device-farm-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install awscli
+
+    - name: Configure AWS CLI
+      run: |
+        aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws configure set region ${{ secrets.AWS_REGION }}
+
+    - name: Run tests on AWS Device Farm
+      run: |
+        # Replace the following placeholders with your actual values
+        PROJECT_NAME="<YOUR-DEVICE-FARM-PROJECT-NAME>"
+        DEVICE_POOL="<YOUR-DEVICE-POOL>"
+        TEST_PACKAGE="<YOUR-TEST-PACKAGE>"
+
+        # Create a new run in AWS Device Farm
+        aws devicefarm create-upload --project-name $PROJECT_NAME --name app.apk --type ANDROID_APP > app_upload.json
+        aws devicefarm create-upload --project-name $PROJECT_NAME --name tests.zip --type INSTRUMENTATION_TEST_PACKAGE > test_upload.json
+
+        # Upload the app and test package
+        aws s3 cp app/build/outputs/apk/debug/app-debug.apk "$(jq -r '.upload.url' app_upload.json)"
+        aws s3 cp $TEST_PACKAGE "$(jq -r '.upload.url' test_upload.json)"
+
+        # Schedule the run
+        aws devicefarm schedule-run \
+          --project-arn "$(jq -r '.upload.projectArn' app_upload.json)" \
+          --app-arn "$(jq -r '.upload.appArn' app_upload.json)" \
+          --device-pool-arn "$(aws devicefarm list-device-pools --query "devicePools[?name=='$DEVICE_POOL'].arn | [0]" --output text)" \
+          --name "GitHub Actions Run" \
+          --test "$(printf '{"type":"INSTRUMENTATION","testPackageArn":"%s"}' "$(jq -r '.upload.arn' test_upload.json)")"

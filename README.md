@@ -2,7 +2,7 @@
 
 # Tech stack
 
-* Jenkins via GCP  'http://34.30.54.198:8080/' + AWS Device farm
+* <s>(Jenkins via GCP  'http://34.30.54.198:8080/'<s> (Migrated to Github CI) + AWS Device farm  
 * Room
 * MVVM
 * Coil
