@@ -19,6 +19,10 @@ jobs:
       with:
         python-version: 3.x
 
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+    - name: Build with Gradle
+      run: ./gradlew assembleAndroidTest
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -30,10 +34,9 @@ jobs:
         aws configure set region ${{ secrets.AWS_REGION }}
     - name: Run tests on AWS Device Farm
       run: |
-        # Replace the following placeholders with your actual values
-        PROJECT_NAME="<YOUR-DEVICE-FARM-PROJECT-NAME>"
-        DEVICE_POOL="<YOUR-DEVICE-POOL>"
-        TEST_PACKAGE="<YOUR-TEST-PACKAGE>"
+        PROJECT_NAME="iOS Notes"
+        DEVICE_POOL="4 dev"
+        TEST_PACKAGE="com.mobile.pablo.iosnotes"
         # Create a new run in AWS Device Farm
         aws devicefarm create-upload --project-name $PROJECT_NAME --name app.apk --type ANDROID_APP > app_upload.json
         aws devicefarm create-upload --project-name $PROJECT_NAME --name tests.zip --type INSTRUMENTATION_TEST_PACKAGE > test_upload.json
