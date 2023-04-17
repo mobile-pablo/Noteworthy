@@ -11,6 +11,9 @@
 # Files for the ART/Dalvik VM
 *.dex
 
+# Hide my secret aws keys
+.gitignore/workflows-aws-device-farm
+
 # Java class files
 *.class
 
