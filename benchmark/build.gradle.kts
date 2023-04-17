@@ -24,7 +24,6 @@ android {
     defaultConfig {
         minSdk = 28
         targetSdk = 33
-        multiDexEnabled = true
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -50,7 +49,6 @@ dependencies {
     implementation(libs.espresso.core)
     implementation(libs.uiautomator)
     implementation(libs.junit.macroBenchmark)
-    implementation(libs.multidex)
 }
 
 androidComponents {

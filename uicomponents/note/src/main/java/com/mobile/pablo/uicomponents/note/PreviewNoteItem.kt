@@ -83,7 +83,7 @@ fun PreviewNoteItem(
                             .testTag(stringResource(id = R.string.test_id_date))
                     )
 
-                    note.description?.let {
+                    note.description.let {
                         if (it.isNotEmpty()) {
                             Text(
                                 text = it[0].noteText,

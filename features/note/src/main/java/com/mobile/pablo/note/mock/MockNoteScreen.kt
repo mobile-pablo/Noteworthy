@@ -15,8 +15,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.data.note.NoteLine
 import com.mobile.pablo.uicomponents.common.theme.HomeBackground
@@ -27,9 +25,7 @@ import com.mobile.pablo.uicomponents.note.PreviewNoteItem
 import java.util.Date
 
 @Composable
-fun MockNoteScreen(
-    navController: NavController = rememberNavController()
-) {
+fun MockNoteScreen() {
 
     Box(
         modifier = Modifier

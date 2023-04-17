@@ -64,6 +64,7 @@ fun NoteField(
         )
     }
 
+    // Problem to zapisuje sie automatycznie bez on click w kazdym z notefield
     return NoteLine(
         id = createEmptyNoteLine().toInt(),
         isCheckbox = isCheckbox,

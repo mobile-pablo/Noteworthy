@@ -27,6 +27,7 @@ Tasks to be done
 * Swipe with NoteLines  (checklist/delete)
 * Notifications / FCM
 * Crashalitics
+* Wiki
 * Deeplink / Google dynamic link
 * Google Analytics
 * Add settings with dark mode

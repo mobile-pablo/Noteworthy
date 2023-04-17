@@ -30,7 +30,6 @@ android {
         applicationId = "com.mobile.pablo.iosnotes"
         minSdk = 28
         targetSdk = 33
-        multiDexEnabled = true
 
         versionCode = 1
         versionName = "1.0"
@@ -110,6 +109,4 @@ dependencies {
 
     implementation(libs.compose.destination)
     ksp(libs.compose.destination.ksp)
-
-    implementation(libs.multidex)
 }

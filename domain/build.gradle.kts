@@ -15,7 +15,6 @@ android {
     defaultConfig {
         minSdk = 28
         targetSdk = 33
-        multiDexEnabled = true
     }
 
     buildTypes {
@@ -40,6 +39,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.junit.ext)
     androidTestImplementation(libs.espresso.core)
-
-    implementation(libs.multidex)
 }
