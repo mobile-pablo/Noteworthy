@@ -34,8 +34,4 @@ dependencies {
 
     implementation(libs.androidX.lifecycle)
     implementation(libs.androidX.lifecycle.viewmodel)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.junit.ext)
-    androidTestImplementation(libs.espresso.core)
 }

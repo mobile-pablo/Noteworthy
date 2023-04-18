@@ -44,18 +44,12 @@ tasks.getByPath("preBuild").dependsOn("ktlint")
 dependencies {
     implementation(project(":domain"))
 
-    implementation(libs.androidX.core)
-    implementation(libs.androidX.lifecycle)
-
-    implementation(libs.compose.activity)
     implementation(libs.compose.ui)
     implementation(libs.compose.constraint)
     implementation(libs.compose.swipe)
     implementation(libs.compose.tooling.preview)
     implementation(libs.compose.material)
     implementation(libs.compose.coil)
-    implementation(libs.compose.lifecycle)
-    implementation(libs.compose.viewmodel)
     implementation(libs.compose.hiltNavigation)
 
     implementation(libs.hilt.android)

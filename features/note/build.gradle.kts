@@ -58,29 +58,16 @@ dependencies {
     implementation(project(":features:editNote"))
     implementation(project(":features:addNote"))
 
-    implementation(libs.androidX.core)
-    implementation(libs.androidX.lifecycle)
-
-    implementation(libs.compose.activity)
     implementation(libs.compose.ui)
     implementation(libs.compose.constraint)
-    implementation(libs.compose.swipe)
     implementation(libs.compose.tooling.preview)
     implementation(libs.compose.material)
-    implementation(libs.compose.coil)
     implementation(libs.compose.lifecycle)
     implementation(libs.compose.viewmodel)
     implementation(libs.compose.hiltNavigation)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.junit.ext)
-    androidTestImplementation(libs.espresso.core)
-    androidTestImplementation(libs.compose.junit)
-    debugImplementation(libs.compose.tooling)
-    debugImplementation(libs.compose.testManifest)
 
     implementation(libs.compose.destination)
     ksp(libs.compose.destination.ksp)
