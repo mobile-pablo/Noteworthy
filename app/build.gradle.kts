@@ -110,4 +110,6 @@ dependencies {
 
     implementation(libs.compose.destination)
     ksp(libs.compose.destination.ksp)
+
+    implementation(libs.baseline.profile)
 }

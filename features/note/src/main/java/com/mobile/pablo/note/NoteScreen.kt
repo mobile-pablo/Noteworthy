@@ -12,8 +12,11 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
@@ -34,6 +37,7 @@ import com.ramcosta.composedestinations.dynamic.within
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.utils.navGraph
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Destination
 @Composable
 fun NoteScreen(
@@ -73,6 +77,9 @@ fun NoteScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(Theme.colors.HomeBackground)
+            .semantics {
+                testTagsAsResourceId = true
+            }
     ) {
         ConstraintLayout(
             modifier = Modifier.fillMaxSize(),
