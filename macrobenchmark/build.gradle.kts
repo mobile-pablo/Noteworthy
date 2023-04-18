@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.ManagedVirtualDevice
+
 apply(from = "../ktlint.gradle.kts")
 
 plugins {
@@ -23,6 +25,19 @@ android {
         targetSdk = 33
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    // Config app for baseline runs
+    testOptions {
+        managedDevices {
+            devices {
+                devices.create("pixel2Api31", ManagedVirtualDevice::class) {
+                    device = "Pixel 2"
+                    apiLevel = 31
+                    systemImageSource = "aosp"
+                }
+            }
+        }
     }
 
     buildTypes {

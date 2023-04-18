@@ -1,5 +1,6 @@
 package com.mobile.pablo.macrobenchmark.test
 
+import androidx.benchmark.macro.CompilationMode
 import androidx.benchmark.macro.FrameTimingMetric
 import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.StartupTimingMetric
@@ -29,22 +30,34 @@ class NoteBenchmarkTest {
     val benchmarkRule = MacrobenchmarkRule()
 
     @Test
-    fun startupApp() = benchmarkRule.measureRepeated(
+    fun startCompilationModeNone() = startupApp(mode = CompilationMode.None())
+
+    @Test
+    fun startCompilationModePartial() = startupApp(mode = CompilationMode.Partial())
+
+    @Test
+    fun addItemAndScrollListCompilationModeNone() = addItemAndScrollList(mode = CompilationMode.None())
+
+    @Test
+    fun addItemAndScrollListCompilationModePartial() = addItemAndScrollList(mode = CompilationMode.Partial())
+
+    fun startupApp(mode: CompilationMode) = benchmarkRule.measureRepeated(
         packageName = "com.mobile.pablo.iosnotes",
         metrics = listOf(StartupTimingMetric()),
         iterations = 5,
-        startupMode = StartupMode.COLD
+        startupMode = StartupMode.COLD,
+        compilationMode = mode
     ) {
         pressHome()
         startActivityAndWait()
     }
 
-    @Test
-    fun addItemAndScrollList() = benchmarkRule.measureRepeated(
+    fun addItemAndScrollList(mode: CompilationMode) = benchmarkRule.measureRepeated(
         packageName = "com.mobile.pablo.iosnotes",
         metrics = listOf(FrameTimingMetric()),
         iterations = 5,
-        startupMode = StartupMode.COLD
+        startupMode = StartupMode.COLD,
+        compilationMode = mode
     ) {
         pressHome()
         startActivityAndWait()

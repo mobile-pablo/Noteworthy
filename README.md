@@ -14,7 +14,7 @@
 * Multi-Module & inner module
 * Migrate dependencies to toml
 * Dagger + Hilt
-* Benchmark
+* Benchmark + Baseline
 * Kotlin DSL
 
 # Tasks to be done
