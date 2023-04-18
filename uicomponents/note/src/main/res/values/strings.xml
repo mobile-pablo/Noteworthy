@@ -6,4 +6,6 @@
     <string name="test_id_title">title</string>
     <string name="test_id_date">date</string>
     <string name="test_id_description">description</string>
+
+    <string name="test_id_add_note_btn">add_note_btn</string>
 </resources>

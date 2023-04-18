@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -69,7 +70,9 @@ fun NoteBottomBar(
                     painter = painterResource(id = R.drawable.write),
                     contentDescription = stringResource(id = R.string.write),
                     tint = Theme.colors.CTA,
-                    modifier = Modifier.size(Theme.spacing.spacing_24)
+                    modifier = Modifier
+                        .size(Theme.spacing.spacing_24)
+                        .testTag(stringResource(id = R.string.test_id_add_note_btn))
                 )
             }
         }

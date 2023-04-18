@@ -50,7 +50,7 @@ class NoteBenchmarkTest {
         startActivityAndWait()
 
         noteBenchmark {
-
+            clickAddItemBtn()
         }
     }
 }

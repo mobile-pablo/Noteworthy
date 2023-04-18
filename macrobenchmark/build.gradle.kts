@@ -44,6 +44,9 @@ android {
 tasks.getByPath("preBuild").dependsOn("ktlint")
 
 dependencies {
+    implementation(project(":uicomponents:common"))
+    implementation(project(":uicomponents:note"))
+
     implementation(libs.junit.ext)
     implementation(libs.espresso.core)
     implementation(libs.uiautomator)

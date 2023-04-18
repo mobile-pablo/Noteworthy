@@ -1,6 +1,6 @@
 package com.mobile.pablo.macrobenchmark.screens
 
-import com.mobile.pablo.macrobenchmark.R
+import com.mobile.pablo.uicomponents.note.R
 import com.mobile.pablo.macrobenchmark.ext.getResByString
 
 class NoteBenchmarkScreen {
@@ -13,6 +13,6 @@ class NoteBenchmarkScreen {
 
     object NoteBenchmarkScreenViews {
 
-        val addItemBtn = getResByString(R.string.id_add_note_btn)
+        val addItemBtn = getResByString(R.string.test_id_add_note_btn)
     }
 }
