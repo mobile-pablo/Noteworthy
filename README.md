@@ -30,6 +30,7 @@
 * Google Analytics
 * Add settings with dark mode
 * OSS Libraries list
+* Biometric login / PIN / Face recognision\
 * Add DataStore + Probuff
 * Config R8
 * Use https://github.com/DevSrSouza/compose-icons
@@ -39,4 +40,3 @@
 
 ## Maybe
 * https://github.com/ValeryPonomarenko/compose-shimmer
-* 
