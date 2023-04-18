@@ -6,7 +6,9 @@ import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.mobile.pablo.macrobenchmark.ext.addNoteBenchmark
 import com.mobile.pablo.macrobenchmark.ext.noteBenchmark
+import com.mobile.pablo.macrobenchmark.screens.NoteBenchmarkScreen
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -62,8 +64,9 @@ class NoteBenchmarkTest {
         pressHome()
         startActivityAndWait()
 
-        noteBenchmark {
-            clickAddItemBtn()
+        NoteBenchmarkScreen().clickAddItemBtn()
+        addNoteBenchmark {
+            clickNoteLineAtPosition(0)
         }
     }
 }

@@ -8,8 +8,12 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.data.note.NoteLine
@@ -19,6 +23,7 @@ import com.mobile.pablo.uicomponents.common.util.testTag
 import java.util.Date
 import androidx.compose.material.MaterialTheme as Theme
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun TextCanvas(
     modifier: Modifier = Modifier,
@@ -36,6 +41,9 @@ fun TextCanvas(
     LazyColumn(
         state = listState,
         modifier = modifier.padding(top = Theme.spacing.spacing_12)
+            .semantics {
+                testTagsAsResourceId = true
+            }
     ) {
         item {
             title.value = NoteField(
@@ -50,7 +58,7 @@ fun TextCanvas(
         if (description.isNotEmpty()) {
             items(description) { noteLine ->
                 val localNoteLine = NoteField(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().testTag("noteLine-${noteLine.id}"),
                     noteLine = noteLine.copy(parentNoteId = noteId),
                     hasCheckbox = true
                 )

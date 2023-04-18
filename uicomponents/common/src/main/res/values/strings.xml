@@ -12,6 +12,7 @@
     <string name="close">Close</string>
 
     <string name="title_id">title_id</string>
+    <string name="note_line_id">noteLine-</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet,

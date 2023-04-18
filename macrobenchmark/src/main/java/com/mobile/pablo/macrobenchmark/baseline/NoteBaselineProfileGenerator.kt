@@ -1,4 +1,4 @@
-package com.mobile.pablo.macrobenchmark.utils
+package com.mobile.pablo.macrobenchmark.baseline
 
 import androidx.benchmark.macro.ExperimentalBaselineProfilesApi
 import androidx.benchmark.macro.junit4.BaselineProfileRule
@@ -10,7 +10,7 @@ import org.junit.runner.RunWith
 
 @OptIn(ExperimentalBaselineProfilesApi::class)
 @RunWith(AndroidJUnit4::class)
-class BaselineProfileGenerator {
+class NoteBaselineProfileGenerator {
 
     @get:Rule
     val baseLineRule = BaselineProfileRule()

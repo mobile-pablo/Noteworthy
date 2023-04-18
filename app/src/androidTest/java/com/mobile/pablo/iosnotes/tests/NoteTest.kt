@@ -8,7 +8,7 @@ import com.mobile.pablo.iosnotes.ext.isNotDisplayed
 import com.mobile.pablo.iosnotes.screens.NoteScreen
 import com.mobile.pablo.note.mock.MOCK_NOTE_LIST
 import com.mobile.pablo.note.mock.MockNoteScreen
-import com.mobile.pablo.uicomponents.note.theme.IOSNotesTheme
+import com.mobile.pablo.uicomponents.common.theme.IOSNotesTheme
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -25,7 +25,7 @@ class NoteTest {
     @Before
     fun setup() {
         testRule.setContent {
-            com.mobile.pablo.uicomponents.note.theme.IOSNotesTheme {
+            IOSNotesTheme {
                 MockNoteScreen()
             }
         }
@@ -35,7 +35,7 @@ class NoteTest {
     fun noteListIsDisplayed() {
         testRule.apply {
             MOCK_NOTE_LIST.withIndex().forEachIndexed { index, _ ->
-                testRule.onNodeWithTag("note-$index").isDisplayed()
+                testRule.onNodeWithTag("previewNote-$index").isDisplayed()
             }
         }
     }
@@ -44,6 +44,6 @@ class NoteTest {
     fun removeNoteIsntDisplayed() {
         val item = MOCK_NOTE_LIST.withIndex().first()
         noteScreen.removeItemAt(0)
-        testRule.onNodeWithTag("note-${item.index}").isNotDisplayed()
+        testRule.onNodeWithTag("previewNote-${item.index}").isNotDisplayed()
     }
 }

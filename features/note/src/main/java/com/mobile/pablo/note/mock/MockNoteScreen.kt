@@ -49,7 +49,7 @@ fun MockNoteScreen() {
             ) {
                 items(MOCK_NOTE_LIST) { note ->
                     PreviewNoteItem(
-                        modifier = Modifier.testTag("note-${note.id}"),
+                        modifier = Modifier.testTag("previewNote-${note.id}"),
                         note = note,
                         onClick = {},
                         onDelete = {
