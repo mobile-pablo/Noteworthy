@@ -1,15 +1,12 @@
 apply(from = "../ktlint.gradle.kts")
 
 plugins {
-    id("com.android.library")
-    id("kotlin-android")
-    id("kotlin-kapt")
-    id("kotlin-parcelize")
+    id("com.android.test")
     id("org.jetbrains.kotlin.android")
 }
 
 android {
-    namespace = "com.mobile.pablo.benchmark"
+    namespace = "com.mobile.pablo.macrobenchmark"
     compileSdk = 33
 
     compileOptions {
@@ -29,20 +26,22 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
-            isMinifyEnabled = true
-            isShrinkResources = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"))
-        }
-
+        // This benchmark buildType is used for benchmarking, and should function like your
+        // release build (for example, with minification on). It"s signed with a debug key
+        // for easy local/CI testing.
         create("benchmark") {
-            initWith(getByName("release"))
-            signingConfig = signingConfigs.getByName("debug")
+            isDebuggable = true
+            signingConfig = getByName("debug").signingConfig
+            matchingFallbacks += listOf("release")
+            proguardFiles("benchmark-rules.pro")
         }
     }
 
+    targetProjectPath = ":app"
     experimentalProperties["android.experimental.self-instrumenting"] = true
 }
+
+tasks.getByPath("preBuild").dependsOn("ktlint")
 
 dependencies {
     implementation(libs.junit.ext)
