@@ -27,11 +27,11 @@ import androidx.navigation.compose.rememberNavController
 import com.mobile.pablo.addnote.destinations.AddNoteScreenDestination
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.editnote.destinations.EditNoteScreenDestination
-import com.mobile.pablo.uicomponents.common.theme.HomeBackground
-import com.mobile.pablo.uicomponents.common.theme.spacing
-import com.mobile.pablo.uicomponents.note.NoteBottomBar
-import com.mobile.pablo.uicomponents.note.NoteTopBar
-import com.mobile.pablo.uicomponents.note.PreviewNoteItem
+import com.mobile.pablo.uicomponents.note.theme.HomeBackground
+import com.mobile.pablo.uicomponents.note.theme.spacing
+import com.mobile.pablo.uicomponents.note.ui.NoteBottomBar
+import com.mobile.pablo.uicomponents.note.ui.NoteTopBar
+import com.mobile.pablo.uicomponents.note.ui.PreviewNoteItem
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.dynamic.within
 import com.ramcosta.composedestinations.navigation.navigate

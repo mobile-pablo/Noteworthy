@@ -1,10 +1,9 @@
-package com.mobile.pablo.uicomponents.note
+package com.mobile.pablo.uicomponents.note.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -13,10 +12,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.TextFieldValue
 import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
-import com.mobile.pablo.uicomponents.common.theme.Text
-import com.mobile.pablo.uicomponents.common.theme.font
-import com.mobile.pablo.uicomponents.common.theme.spacing
-import com.mobile.pablo.uicomponents.common.ui.SearchBar
+import com.mobile.pablo.uicomponents.note.R
+import com.mobile.pablo.uicomponents.note.theme.Text
+import com.mobile.pablo.uicomponents.note.theme.font
+import com.mobile.pablo.uicomponents.note.theme.spacing
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun NoteTopBar(

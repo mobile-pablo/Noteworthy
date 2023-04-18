@@ -55,7 +55,6 @@ tasks.getByPath("preBuild").dependsOn("ktlint")
 dependencies {
     implementation(project(":domain"))
     implementation(project(":uicomponents:note"))
-    implementation(project(":uicomponents:common"))
     implementation(project(":features:editNote"))
     implementation(project(":features:addNote"))
 

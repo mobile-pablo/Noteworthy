@@ -1,4 +1,4 @@
-package com.mobile.pablo.uicomponents.common.ui
+package com.mobile.pablo.uicomponents.note.ui
 
 import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.foundation.layout.padding
@@ -16,11 +16,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
-import com.mobile.pablo.uicomponents.common.R
-import com.mobile.pablo.uicomponents.common.theme.SearchBackground
-import com.mobile.pablo.uicomponents.common.theme.Text
-import com.mobile.pablo.uicomponents.common.theme.font
-import com.mobile.pablo.uicomponents.common.theme.spacing
+import com.mobile.pablo.uicomponents.note.R
+import com.mobile.pablo.uicomponents.note.theme.SearchBackground
+import com.mobile.pablo.uicomponents.note.theme.Text
+import com.mobile.pablo.uicomponents.note.theme.font
+import com.mobile.pablo.uicomponents.note.theme.spacing
 
 @Composable
 fun SearchBar(

@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import com.mobile.pablo.core.utils.launch
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.usecase.note.NoteUseCase
-import com.mobile.pablo.uicomponents.common.util.StringRes.DELETE_SUCCESSFUL
-import com.mobile.pablo.uicomponents.common.util.StringRes.INTERNET_ISSUE
+import com.mobile.pablo.uicomponents.note.util.StringRes.DELETE_SUCCESSFUL
+import com.mobile.pablo.uicomponents.note.util.StringRes.INTERNET_ISSUE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Job

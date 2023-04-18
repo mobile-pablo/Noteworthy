@@ -15,6 +15,7 @@ import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.data.note.NoteLine
 import com.mobile.pablo.uicomponents.common.R
 import com.mobile.pablo.uicomponents.common.theme.spacing
+import com.mobile.pablo.uicomponents.common.util.testTag
 import java.util.Date
 import androidx.compose.material.MaterialTheme as Theme
 
@@ -38,22 +39,24 @@ fun TextCanvas(
     ) {
         item {
             title.value = NoteField(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .testTag(R.string.title_id),
                 title = note.title,
                 placeHolder = stringResource(id = R.string.title)
             )
         }
 
         if (description.isNotEmpty()) {
-                items(description) { noteLine ->
-                    val localNoteLine = NoteField(
-                        modifier = Modifier.fillMaxWidth(),
-                        noteLine = noteLine.copy(parentNoteId = noteId),
-                        hasCheckbox = true
-                    )
+            items(description) { noteLine ->
+                val localNoteLine = NoteField(
+                    modifier = Modifier.fillMaxWidth(),
+                    noteLine = noteLine.copy(parentNoteId = noteId),
+                    hasCheckbox = true
+                )
 
-                    localNoteLines.add(localNoteLine)
-                }
+                localNoteLines.add(localNoteLine)
+            }
         } else {
             item {
                 val localNoteLine = NoteField(

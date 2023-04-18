@@ -1,6 +1,5 @@
-package com.mobile.pablo.uicomponents.note
+package com.mobile.pablo.uicomponents.note.ui
 
-import androidx.compose.material.MaterialTheme as Theme
 import DateUtils.dayMonthYearFormat
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,18 +13,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.layoutId
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.mobile.pablo.domain.data.note.Note
-import com.mobile.pablo.uicomponents.common.theme.*
+import com.mobile.pablo.uicomponents.note.R
+import com.mobile.pablo.uicomponents.note.util.testTag
+import com.mobile.pablo.uicomponents.note.theme.*
 import me.saket.swipe.SwipeAction
 import me.saket.swipe.SwipeableActionsBox
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun PreviewNoteItem(
@@ -66,7 +66,7 @@ fun PreviewNoteItem(
                     text = note.title,
                     fontSize = Theme.font.font_15,
                     color = Theme.colors.Text,
-                    modifier = Modifier.testTag(stringResource(id = R.string.test_id_title))
+                    modifier = Modifier.testTag(R.string.test_id_title)
                 )
 
                 ConstraintLayout(
@@ -80,7 +80,7 @@ fun PreviewNoteItem(
                         modifier = Modifier
                             .layoutId(ID_DATE_TEXT)
                             .padding(end = Theme.spacing.spacing_10)
-                            .testTag(stringResource(id = R.string.test_id_date))
+                            .testTag(R.string.test_id_date)
                     )
 
                     note.description.let {
@@ -92,7 +92,7 @@ fun PreviewNoteItem(
                                 modifier = Modifier
                                     .layoutId(ID_DESCRIPTION)
                                     .padding(horizontal = Theme.spacing.spacing_12)
-                                    .testTag(stringResource(id = R.string.test_id_description)),
+                                    .testTag(R.string.test_id_description),
                                 textAlign = TextAlign.Start,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis

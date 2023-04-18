@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Checkbox
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -18,6 +17,7 @@ import androidx.compose.ui.text.input.ImeAction
 import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
 import com.mobile.pablo.domain.data.note.NoteLine
 import com.mobile.pablo.uicomponents.common.theme.Text
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun NoteField(

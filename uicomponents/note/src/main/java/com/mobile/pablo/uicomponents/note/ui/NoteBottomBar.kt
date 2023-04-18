@@ -1,6 +1,5 @@
-package com.mobile.pablo.uicomponents.note
+package com.mobile.pablo.uicomponents.note.ui
 
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,15 +12,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.layoutId
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
-import com.mobile.pablo.uicomponents.common.theme.*
-import com.mobile.pablo.uicomponents.common.util.topRectBorder
+import com.mobile.pablo.uicomponents.note.R
+import com.mobile.pablo.uicomponents.note.util.testTag
+import com.mobile.pablo.uicomponents.note.util.topRectBorder
+import com.mobile.pablo.uicomponents.note.theme.*
 import kotlinx.coroutines.launch
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun NoteBottomBar(
@@ -72,7 +73,7 @@ fun NoteBottomBar(
                     tint = Theme.colors.CTA,
                     modifier = Modifier
                         .size(Theme.spacing.spacing_24)
-                        .testTag(stringResource(id = R.string.test_id_add_note_btn))
+                        .testTag(R.string.test_id_add_note_btn)
                 )
             }
         }

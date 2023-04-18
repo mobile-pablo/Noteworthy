@@ -17,11 +17,11 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.data.note.NoteLine
-import com.mobile.pablo.uicomponents.common.theme.HomeBackground
-import com.mobile.pablo.uicomponents.common.theme.spacing
-import com.mobile.pablo.uicomponents.note.NoteBottomBar
-import com.mobile.pablo.uicomponents.note.NoteTopBar
-import com.mobile.pablo.uicomponents.note.PreviewNoteItem
+import com.mobile.pablo.uicomponents.note.theme.HomeBackground
+import com.mobile.pablo.uicomponents.note.theme.spacing
+import com.mobile.pablo.uicomponents.note.ui.NoteBottomBar
+import com.mobile.pablo.uicomponents.note.ui.NoteTopBar
+import com.mobile.pablo.uicomponents.note.ui.PreviewNoteItem
 import java.util.Date
 
 @Composable

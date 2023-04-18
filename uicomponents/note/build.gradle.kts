@@ -43,7 +43,6 @@ tasks.getByPath("preBuild").dependsOn("ktlint")
 
 dependencies {
     implementation(project(":domain"))
-    api(project(":uicomponents:common"))
 
     implementation(libs.androidX.core)
     implementation(libs.androidX.lifecycle)
