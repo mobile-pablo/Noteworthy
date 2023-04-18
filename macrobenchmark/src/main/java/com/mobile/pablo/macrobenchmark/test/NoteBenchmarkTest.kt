@@ -1,9 +1,11 @@
-package com.mobile.pablo.macrobenchmark
+package com.mobile.pablo.macrobenchmark.test
 
+import androidx.benchmark.macro.FrameTimingMetric
 import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.mobile.pablo.macrobenchmark.ext.noteBenchmark
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,13 +23,13 @@ import org.junit.runner.RunWith
  * for investigating your app's performance.
  */
 @RunWith(AndroidJUnit4::class)
-class ExampleStartupBenchmark {
+class NoteBenchmarkTest {
 
     @get:Rule
     val benchmarkRule = MacrobenchmarkRule()
 
     @Test
-    fun startup() = benchmarkRule.measureRepeated(
+    fun startupApp() = benchmarkRule.measureRepeated(
         packageName = "com.mobile.pablo.iosnotes",
         metrics = listOf(StartupTimingMetric()),
         iterations = 5,
@@ -35,5 +37,20 @@ class ExampleStartupBenchmark {
     ) {
         pressHome()
         startActivityAndWait()
+    }
+
+    @Test
+    fun addItemAndScrollList() = benchmarkRule.measureRepeated(
+        packageName = "com.mobile.pablo.iosnotes",
+        metrics = listOf(FrameTimingMetric()),
+        iterations = 5,
+        startupMode = StartupMode.COLD
+    ) {
+        pressHome()
+        startActivityAndWait()
+
+        noteBenchmark {
+
+        }
     }
 }
