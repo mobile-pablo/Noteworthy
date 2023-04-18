@@ -1,0 +1,45 @@
+name: KtLint Check
+# I already have KtLint in a project built in Gradle, This is for practice and just in case
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  ktlint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+
+      - name: Download KtLint
+        run: |
+          curl -sSLO https://github.com/pinterest/ktlint/releases/download/<VERSION>/ktlint
+          chmod a+x ktlint
+
+      - name: Run KtLint
+        run: ./ktlint --reporter=checkstyle --color src/**/*.kt > ktlint.xml || true
+
+      - name: Upload KtLint report
+        uses: actions/upload-artifact@v2
+        with:
+          name: ktlint-report
+          path: ktlint.xml
+
+      - name: Reviewdog
+        uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+
+      - name: Analyze KtLint report
+        run: cat ktlint.xml | reviewdog -f=checkstyle -name="KtLint" -reporter=github-pr-review -level=warning
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.REVIEWDOG_TOKEN }}
+
