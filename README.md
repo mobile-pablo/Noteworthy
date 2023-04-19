@@ -19,7 +19,6 @@
 
 # Tasks to be done
 * Add animation for navigation
-* Benchmark tests
 * Permissions (exucse me or https://google.github.io/accompanist/permissions/)
 * Espresso tests
 * Swipe with NoteLines  (checklist/delete)
@@ -30,7 +29,7 @@
 * Google Analytics
 * Add settings with dark mode
 * OSS Libraries list
-* Biometric login / PIN / Face recognision\
+* Biometric login / PIN / Face recognision
 * Add DataStore + Probuff
 * Config R8
 * Use https://github.com/DevSrSouza/compose-icons
