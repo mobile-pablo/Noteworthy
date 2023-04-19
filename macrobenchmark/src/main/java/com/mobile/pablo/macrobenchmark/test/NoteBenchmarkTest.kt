@@ -70,8 +70,8 @@ class NoteBenchmarkTest {
     }
 
     fun startCompilationModePartial(mode: CompilationMode) = benchmarkSetup(mode = mode)
+
     fun addItemAndOpenListCompilation(mode: CompilationMode) = benchmarkSetup(mode = mode) {
         addItemAndOpenList()
     }
-
 }
