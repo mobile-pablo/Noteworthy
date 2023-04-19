@@ -3,7 +3,6 @@ package com.mobile.pablo.macrobenchmark.test
 import androidx.benchmark.macro.CompilationMode
 import androidx.benchmark.macro.FrameTimingMetric
 import androidx.benchmark.macro.StartupMode
-import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.mobile.pablo.macrobenchmark.ext.addNoteBenchmark
@@ -32,29 +31,22 @@ class NoteBenchmarkTest {
     val benchmarkRule = MacrobenchmarkRule()
 
     @Test
-    fun startCompilationModeNone() = startupApp(mode = CompilationMode.None())
+    fun startCompilationModeNone() = startCompilationModePartial(mode = CompilationMode.None())
 
     @Test
-    fun startCompilationModePartial() = startupApp(mode = CompilationMode.Partial())
+    fun startCompilationModePartial() = startCompilationModePartial(mode = CompilationMode.Partial())
 
     @Test
-    fun addItemAndScrollListCompilationModeNone() = addItemAndScrollList(mode = CompilationMode.None())
+    fun addItemAndScrollListCompilationModeNone() = addItemAndOpenListCompilation(mode = CompilationMode.None())
 
     @Test
-    fun addItemAndScrollListCompilationModePartial() = addItemAndScrollList(mode = CompilationMode.Partial())
+    fun addItemAndScrollListCompilationModePartial() = addItemAndOpenListCompilation(mode = CompilationMode.Partial())
 
-    fun startupApp(mode: CompilationMode) = benchmarkRule.measureRepeated(
-        packageName = "com.mobile.pablo.iosnotes",
-        metrics = listOf(StartupTimingMetric()),
-        iterations = 5,
-        startupMode = StartupMode.COLD,
-        compilationMode = mode
-    ) {
-        pressHome()
-        startActivityAndWait()
-    }
-
-    fun addItemAndScrollList(mode: CompilationMode) = benchmarkRule.measureRepeated(
+    // Setup for the benchmark
+    fun benchmarkSetup(
+        mode: CompilationMode,
+        func: () -> Unit = {}
+    ) = benchmarkRule.measureRepeated(
         packageName = "com.mobile.pablo.iosnotes",
         metrics = listOf(FrameTimingMetric()),
         iterations = 5,
@@ -63,7 +55,10 @@ class NoteBenchmarkTest {
     ) {
         pressHome()
         startActivityAndWait()
+        func()
+    }
 
+    fun addItemAndOpenList() {
         NoteBenchmarkScreen().clickAddItemBtn()
         addNoteBenchmark {
             assertText(
@@ -73,4 +68,10 @@ class NoteBenchmarkTest {
             clickNoteLineAtPosition(0)
         }
     }
+
+    fun startCompilationModePartial(mode: CompilationMode) = benchmarkSetup(mode = mode)
+    fun addItemAndOpenListCompilation(mode: CompilationMode) = benchmarkSetup(mode = mode) {
+        addItemAndOpenList()
+    }
+
 }
