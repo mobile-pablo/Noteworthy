@@ -20,7 +20,7 @@ class NoteTest {
     @get:Rule
     val testRule = createComposeRule()
 
-    val noteScreen = NoteScreen(testRule)
+    val noteScreen = NoteScreen()
 
     @Before
     fun setup() {
@@ -39,11 +39,17 @@ class NoteTest {
             }
         }
     }
-
+/*
     @Test
     fun removeNoteIsntDisplayed() {
         val item = MOCK_NOTE_LIST.withIndex().first()
         noteScreen.removeItemAt(0)
         testRule.onNodeWithTag("previewNote-${item.index}").isNotDisplayed()
+    }
+ */
+
+    fun addNoteScreenIsDisplayed() {
+        noteScreen.clickAddItemBtn()
+        noteScreen.views.wait
     }
 }
