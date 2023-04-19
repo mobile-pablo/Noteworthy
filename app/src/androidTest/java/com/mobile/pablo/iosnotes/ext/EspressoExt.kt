@@ -34,6 +34,7 @@ fun assertView(
 ): ViewInteraction = onView(withId(viewId)).check(matches(matcher))
 
 // https://stackoverflow.com/questions/49796132/android-espresso-wait-for-text-to-appear
+// https://www.repeato.app/espresso-wait-for-view/
 fun waitId(
     viewId: Int,
     millis: Long = 5000L
