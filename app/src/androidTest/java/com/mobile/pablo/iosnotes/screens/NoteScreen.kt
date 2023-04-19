@@ -1,8 +1,7 @@
 package com.mobile.pablo.iosnotes.screens
 
-import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.test.espresso.action.ViewActions.click
-import com.mobile.pablo.macrobenchmark.ext.waitForViewIsDisplayed
+import com.mobile.pablo.iosnotes.ext.waitForViewIsDisplayed
 import com.mobile.pablo.uicomponents.note.R
 
 class NoteScreen{
