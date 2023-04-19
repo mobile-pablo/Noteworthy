@@ -4,7 +4,7 @@ import androidx.test.espresso.action.ViewActions.click
 import com.mobile.pablo.iosnotes.ext.waitForViewIsDisplayed
 import com.mobile.pablo.uicomponents.note.R
 
-class NoteScreen{
+class NoteScreen {
 
     val views = NoteScreenViews
 

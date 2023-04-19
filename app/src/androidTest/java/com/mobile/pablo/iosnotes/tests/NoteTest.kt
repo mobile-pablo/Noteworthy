@@ -50,8 +50,5 @@ class NoteTest {
 
     fun addNoteScreenIsDisplayed() {
         noteScreen.clickAddItemBtn()
-        noteScreen.views.assertions {
-
-        }
     }
 }
