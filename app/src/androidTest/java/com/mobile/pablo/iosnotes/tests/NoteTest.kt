@@ -4,7 +4,7 @@ import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.mobile.pablo.iosnotes.ext.isDisplayed
-import com.mobile.pablo.iosnotes.ext.waitForAssertions
+import com.mobile.pablo.iosnotes.ext.assertions
 import com.mobile.pablo.iosnotes.screens.NoteScreen
 import com.mobile.pablo.note.mock.MOCK_NOTE_LIST
 import com.mobile.pablo.note.mock.MockNoteScreen
@@ -50,7 +50,7 @@ class NoteTest {
 
     fun addNoteScreenIsDisplayed() {
         noteScreen.clickAddItemBtn()
-        noteScreen.views.waitForAssertions {
+        noteScreen.views.assertions {
 
         }
     }
