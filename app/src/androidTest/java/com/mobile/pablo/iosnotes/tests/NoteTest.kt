@@ -1,12 +1,13 @@
 package com.mobile.pablo.iosnotes.tests
 
 import androidx.activity.ComponentActivity
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.mobile.pablo.iosnotes.ext.isDisplayed
+import com.mobile.pablo.iosnotes.ext.isNotDisplayed
 import com.mobile.pablo.iosnotes.ext.sleepView
 import com.mobile.pablo.iosnotes.ext.swipeLeft
-import com.mobile.pablo.iosnotes.ext.swipeRight
 import com.mobile.pablo.iosnotes.screens.NoteTestScreen
 import com.mobile.pablo.note.mock.FakeNoteScreen
 import com.mobile.pablo.note.mock.FakeNoteViewModel
@@ -61,11 +62,20 @@ class NoteTest {
 
     @Test
     fun itemNoteIsRemoved() {
+        testRule.onNodeWithTag(
+            "previewNote-0",
+            useUnmergedTree = true
+        ).assertIsDisplayed()
+
         swipeLeft("previewNote-0")
+
+        testRule.onNodeWithTag(
+            "previewNote-0",
+            useUnmergedTree = true
+        ).isNotDisplayed()
     }
 
     @Test
     fun itemNoteIsPinned() {
-        swipeRight("previewNote-0")
     }
 }

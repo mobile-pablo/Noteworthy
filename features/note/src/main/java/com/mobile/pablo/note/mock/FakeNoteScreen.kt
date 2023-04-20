@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -14,6 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -97,18 +97,20 @@ fun FakeNoteScreen(
                     .layoutId(ID_NOTE_LISTS)
                     .padding(horizontal = Theme.spacing.spacing_14)
             ) {
-                if (notes.isNotEmpty()) {
-                    items(notes) { saveNotes ->
-                        saveNotes?.let {
-                            PreviewNoteItem(note = it,
+                notes.forEachIndexed { index, note ->
+                    item {
+                        if (note != null) {
+                            PreviewNoteItem(
+                                modifier = Modifier.testTag("previewNote-$index"),
+                                note = note,
                                 onClick = {
                                     navigateToEditNote(
                                         navController,
-                                        it
+                                        note
                                     )
                                 },
                                 onDelete = {
-                                    fakeNoteViewModel.deleteNote(it.id)
+                                    fakeNoteViewModel.deleteNote(note.id)
                                 },
                                 onPin = { })
                         }

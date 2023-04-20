@@ -16,7 +16,7 @@ class FakeNoteViewModel @Inject constructor() : ViewModel() {
 
     private var deleteNoteJob: Job? = null
 
-    val notes: Flow<List<Note?>> = flow { MOCK_NOTE_LIST }
+    val notes: Flow<List<Note?>> = flow { emit(MOCK_NOTE_LIST) }
 
     private val _viewState: MutableStateFlow<ViewState> = MutableStateFlow(ViewState.Default)
     val viewState: StateFlow<ViewState> = _viewState.asStateFlow()
