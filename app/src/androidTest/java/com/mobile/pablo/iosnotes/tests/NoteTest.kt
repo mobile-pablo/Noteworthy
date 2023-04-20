@@ -1,11 +1,9 @@
 package com.mobile.pablo.iosnotes.tests
 
 import androidx.activity.ComponentActivity
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithTag
 import com.mobile.pablo.iosnotes.ext.isDisplayed
-import com.mobile.pablo.iosnotes.ext.isNotDisplayed
 import com.mobile.pablo.iosnotes.ext.sleepView
 import com.mobile.pablo.iosnotes.screens.NoteTestScreen
 import com.mobile.pablo.note.mock.FakeNoteScreen
