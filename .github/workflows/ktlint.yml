@@ -2,10 +2,10 @@ name: KtLint Check
 # I already have KtLint in a project built in Gradle, This is for practice and just in case
 on:
   push:
-    branches: [ main ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ main ]
-
+    branches: [ "master" ]
+    
 jobs:
   ktlint:
     runs-on: ubuntu-latest
