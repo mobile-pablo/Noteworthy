@@ -18,10 +18,18 @@ fun ViewModel.launch(
     context: CoroutineContext = EmptyCoroutineContext,
     start: CoroutineStart = CoroutineStart.DEFAULT,
     block: suspend CoroutineScope.() -> Unit
-) = viewModelScope.launch(context, start, block)
+) = viewModelScope.launch(
+    context,
+    start,
+    block
+)
 
 fun ViewModel.launchAsync(
     context: CoroutineContext = Dispatchers.IO,
     start: CoroutineStart = CoroutineStart.DEFAULT,
     block: suspend CoroutineScope.() -> Unit
-) = viewModelScope.launch(context, start, block)
+) = viewModelScope.launch(
+    context,
+    start,
+    block
+)

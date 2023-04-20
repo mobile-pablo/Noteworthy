@@ -4,7 +4,6 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -23,6 +22,7 @@ import com.mobile.pablo.uicomponents.common.ui.CommonNoteTopBar
 import com.mobile.pablo.uicomponents.common.ui.TextCanvas
 import com.ramcosta.composedestinations.annotation.Destination
 import kotlinx.coroutines.launch
+import androidx.compose.material.MaterialTheme as Theme
 
 data class EditNoteScreenNavArgs(
     val note: Note

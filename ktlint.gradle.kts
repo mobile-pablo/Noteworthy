@@ -9,7 +9,13 @@ tasks.register<JavaExec>("ktlint") {
     description = "Check Kotlin code style."
     classpath = ktlint
     main = "com.pinterest.ktlint.Main"
-    args("--android","--reporter=html,output=${buildDir}/ktlint.html","--reporter=plain","--reporter=checkstyle", "src/**/*.kt")
+    args(
+        "--android",
+        "--reporter=html,output=${buildDir}/ktlint.html",
+        "--reporter=plain",
+        "--reporter=checkstyle",
+        "src/**/*.kt"
+    )
 }
 
 tasks.named("check") {
@@ -21,5 +27,9 @@ tasks.register<JavaExec>("ktlintFormat") {
     description = "Fix Kotlin code style deviations."
     classpath = ktlint
     main = "com.pinterest.ktlint.Main"
-    args("--android", "-F", "src/**/*.kt")
+    args(
+        "--android",
+        "-F",
+        "src/**/*.kt"
+    )
 }

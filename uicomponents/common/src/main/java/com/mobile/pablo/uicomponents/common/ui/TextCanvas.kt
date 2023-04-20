@@ -40,7 +40,8 @@ fun TextCanvas(
     val localNoteLines = mutableListOf<NoteLine>()
     LazyColumn(
         state = listState,
-        modifier = modifier.padding(top = Theme.spacing.spacing_12)
+        modifier = modifier
+            .padding(top = Theme.spacing.spacing_12)
             .semantics {
                 testTagsAsResourceId = true
             }
@@ -58,7 +59,9 @@ fun TextCanvas(
         if (description.isNotEmpty()) {
             items(description) { noteLine ->
                 val localNoteLine = NoteField(
-                    modifier = Modifier.fillMaxWidth().testTag("noteLine-${noteLine.id}"),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .testTag("noteLine-${noteLine.id}"),
                     noteLine = noteLine.copy(parentNoteId = noteId),
                     hasCheckbox = true
                 )

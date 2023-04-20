@@ -1,4 +1,4 @@
-package com.mobile.pablo.note
+package com.mobile.pablo.note.mock
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -14,6 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import com.mobile.pablo.addnote.destinations.AddNoteScreenDestination
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.editnote.destinations.EditNoteScreenDestination
+import com.mobile.pablo.note.ViewState
 import com.mobile.pablo.uicomponents.note.theme.HomeBackground
 import com.mobile.pablo.uicomponents.note.theme.spacing
 import com.mobile.pablo.uicomponents.note.ui.NoteBottomBar
@@ -40,13 +41,13 @@ import androidx.compose.material.MaterialTheme as Theme
 @OptIn(ExperimentalComposeUiApi::class)
 @Destination
 @Composable
-fun NoteScreen(
+fun FakeNoteScreen(
     navController: NavController = rememberNavController(),
-    noteViewModel: NoteViewModel = hiltViewModel()
+    fakeNoteViewModel: FakeNoteViewModel = hiltViewModel()
 ) {
 
-    val notes = noteViewModel.notes.collectAsStateWithLifecycle(listOf()).value
-    val viewState = noteViewModel.viewState.collectAsStateWithLifecycle().value
+    val notes = fakeNoteViewModel.notes.collectAsStateWithLifecycle(listOf()).value
+    val viewState = fakeNoteViewModel.viewState.collectAsStateWithLifecycle().value
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     LaunchedEffect(
         key1 = viewState,
@@ -59,7 +60,7 @@ fun NoteScreen(
                         navController,
                         noteID.toInt()
                     )
-                    noteViewModel.setEmptyNote(null)
+                    fakeNoteViewModel.setEmptyNote(null)
                 }
             }
 
@@ -96,18 +97,20 @@ fun NoteScreen(
                     .layoutId(ID_NOTE_LISTS)
                     .padding(horizontal = Theme.spacing.spacing_14)
             ) {
-                if (notes.isNotEmpty()) {
-                    items(notes) { saveNotes ->
-                        saveNotes?.let {
-                            PreviewNoteItem(note = it,
+                notes.forEachIndexed { index, note ->
+                    item {
+                        if (note != null) {
+                            PreviewNoteItem(
+                                modifier = Modifier.testTag("previewNote-${note.id}"),
+                                note = note,
                                 onClick = {
                                     navigateToEditNote(
                                         navController,
-                                        it
+                                        note
                                     )
                                 },
                                 onDelete = {
-                                    noteViewModel.deleteNote(it.id)
+                                    fakeNoteViewModel.deleteNote(note.id)
                                 },
                                 onPin = { })
                         }
@@ -118,7 +121,7 @@ fun NoteScreen(
                 modifier = Modifier
                     .layoutId(ID_NOTE_BOTTOM_BAR)
                     .fillMaxWidth(),
-                onClickNewNote = { noteViewModel.insertEmptyNote() })
+                onClickNewNote = { fakeNoteViewModel.insertEmptyNote() })
         }
     }
 }

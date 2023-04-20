@@ -1,6 +1,5 @@
 package com.mobile.pablo.uicomponents.common.ui
 
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -20,6 +19,7 @@ import com.mobile.pablo.uicomponents.common.R
 import com.mobile.pablo.uicomponents.common.data.NoteTopWrapper
 import com.mobile.pablo.uicomponents.common.theme.CTA
 import com.mobile.pablo.uicomponents.common.theme.spacing
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun CommonNoteTopBar(

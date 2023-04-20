@@ -1,7 +1,7 @@
 package com.mobile.pablo.macrobenchmark.screens
 
-import com.mobile.pablo.uicomponents.note.R
 import com.mobile.pablo.macrobenchmark.ext.getResByString
+import com.mobile.pablo.uicomponents.note.R
 
 class NoteBenchmarkScreen {
 

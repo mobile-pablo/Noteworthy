@@ -21,7 +21,6 @@ class NoteViewModel @Inject constructor(
     private val insertEmptyNoteUseCase: NoteUseCase.InsertEmptyNote
 ) : ViewModel(), NoteInterface {
 
-    private var getNotesJob: Job? = null
     private var deleteNoteJob: Job? = null
 
     val notes: Flow<List<Note?>> = getNotesUseCase()

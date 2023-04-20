@@ -5,6 +5,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("kotlin-parcelize")
+    id("com.google.gms.google-services")
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
     id("com.google.devtools.ksp") version "1.8.0-1.0.9"
@@ -34,7 +35,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.mobile.pablo.iosnotes.runner.CustomTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -79,9 +80,11 @@ tasks.getByPath("preBuild").dependsOn("ktlint")
 
 dependencies {
     implementation(project(":features:note"))
+    androidTestImplementation(project(":domain"))
     implementation(project(":features:addNote"))
     implementation(project(":features:editNote"))
     implementation(project(":uicomponents:common"))
+    androidTestImplementation(libs.compose.swipe)
 
     implementation(libs.androidX.core)
     implementation(libs.androidX.lifecycle)
@@ -96,8 +99,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.junit.ext)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.espresso.barista.compose)
+    androidTestImplementation(libs.espresso.barista) {
+        exclude(group = "org.jetbrains.kotlin")
+    }
     androidTestImplementation(libs.uiautomator)
     androidTestImplementation(libs.compose.junit)
+    androidTestImplementation(libs.hilt.testing)
+    kaptAndroidTest(libs.hilt.android.compiler)
+    androidTestAnnotationProcessor(libs.hilt.android.compiler)
+
     debugImplementation(libs.compose.tooling)
     debugImplementation(libs.compose.testManifest)
 
@@ -105,4 +116,9 @@ dependencies {
     ksp(libs.compose.destination.ksp)
 
     implementation(libs.baseline.profile)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+
+    implementation(libs.ar.core)
 }

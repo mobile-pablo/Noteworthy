@@ -1,4 +1,4 @@
-package com.mobile.pablo.macrobenchmark.ext
+package com.mobile.pablo.iosnotes.ext
 
 import android.view.View
 import androidx.test.espresso.Espresso.onView
@@ -20,18 +20,12 @@ fun viewIsDisplayed(view: Matcher<View>): ViewInteraction = onView(view).check(m
 fun waitForViewIsDisplayed(
     viewId: Int,
     millis: Long = 5000L
-): ViewInteraction =
-    onView(withId(viewId)).perform(
-        waitId(
-            viewId,
-            millis
-        )
+): ViewInteraction = onView(withId(viewId)).perform(
+    waitId(
+        viewId,
+        millis
     )
-
-fun assertView(
-    viewId: Int,
-    matcher: Matcher<View>
-): ViewInteraction = onView(withId(viewId)).check(matches(matcher))
+)
 
 // https://stackoverflow.com/questions/49796132/android-espresso-wait-for-text-to-appear
 // https://www.repeato.app/espresso-wait-for-view/
@@ -71,5 +65,15 @@ fun waitId(
                 .withCause(TimeoutException())
                 .build()
         }
+    }
+}
+
+fun sleepView(millis: Long = 3000L) {
+    try {
+        Thread.sleep(millis)
+    } catch (e: InterruptedException) {
+        e.printStackTrace()
+    } catch (e: IllegalArgumentException) {
+        e.printStackTrace()
     }
 }

@@ -1,6 +1,5 @@
 package com.mobile.pablo.uicomponents.note.ui
 
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,6 +20,7 @@ import com.mobile.pablo.uicomponents.note.theme.SearchBackground
 import com.mobile.pablo.uicomponents.note.theme.Text
 import com.mobile.pablo.uicomponents.note.theme.font
 import com.mobile.pablo.uicomponents.note.theme.spacing
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun SearchBar(

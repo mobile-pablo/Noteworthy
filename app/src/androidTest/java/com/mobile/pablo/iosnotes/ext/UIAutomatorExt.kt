@@ -1,12 +1,10 @@
-package com.mobile.pablo.macrobenchmark.ext
+package com.mobile.pablo.iosnotes.ext
 
 import android.app.Instrumentation
 import androidx.annotation.StringRes
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
-import androidx.test.uiautomator.UiObject
 import androidx.test.uiautomator.UiSelector
-import org.junit.Assert.assertEquals
 
 val instrumentation: Instrumentation = InstrumentationRegistry.getInstrumentation()
 val uiDevice: UiDevice = UiDevice.getInstance(instrumentation)
@@ -22,17 +20,3 @@ fun getResByString(@StringRes resId: Int) = uiDevice.findObject(
 fun getResFromId(id: String) = uiDevice.findObject(
     uiSelector.resourceId(id)
 )
-
-fun getResByContainedString(string: String) = uiDevice.findObject(
-    uiSelector.textContains(string)
-)
-
-fun assertText(
-    uiObject: UiObject,
-    text: String
-) {
-    assertEquals(
-        uiObject.text,
-        text
-    )
-}
