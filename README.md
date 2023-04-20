@@ -16,6 +16,7 @@
 * Dagger + Hilt
 * Benchmark + Baseline
 * Kotlin DSL
+* Jira board at https://mobile-pablo.atlassian.net/
 
 # Tasks to be done
 * Add animation for navigation
