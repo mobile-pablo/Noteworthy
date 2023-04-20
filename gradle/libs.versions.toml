@@ -76,8 +76,8 @@ espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref =
 espresso-barista = { module = "com.adevinta.android:barista", version.ref = "barista" }
 espresso-barista-compose = { module = "com.adevinta.android:barista-compose", version.ref = "barista" }
 
-room-ktx = { module = "androidx.room:room-ktx", version.ref ="room"}
-room-compiler = { module = "androidx.room:room-compiler", version.ref ="room"}
+room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
+room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebase_bom" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics-ktx" }

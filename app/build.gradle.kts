@@ -1,5 +1,3 @@
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
-
 apply(from = "../ktlint.gradle.kts")
 
 plugins {

@@ -1,7 +1,7 @@
 package com.mobile.pablo.storage.database.converter
 
 import androidx.room.TypeConverter
-import java.util.*
+import java.util.Date
 
 object DateTypeConverter {
 

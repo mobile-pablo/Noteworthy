@@ -1,11 +1,11 @@
 package com.mobile.pablo.uicomponents.common.theme
 
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.material.MaterialTheme as Theme
 
 data class Spacing(
     val default: Dp = 0.dp,

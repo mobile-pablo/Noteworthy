@@ -18,9 +18,9 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
 import com.mobile.pablo.uicomponents.note.R
+import com.mobile.pablo.uicomponents.note.theme.*
 import com.mobile.pablo.uicomponents.note.util.testTag
 import com.mobile.pablo.uicomponents.note.util.topRectBorder
-import com.mobile.pablo.uicomponents.note.theme.*
 import kotlinx.coroutines.launch
 import androidx.compose.material.MaterialTheme as Theme
 

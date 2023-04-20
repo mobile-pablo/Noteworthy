@@ -29,32 +29,42 @@ val HomeBottomBarBackgroundNight = Color(0xff29292b)
 val SwipeStartNight = Color(0xfffb8114)
 val SwipeEndNight = Color(0xff55bc57)
 
-val Colors.Text: Color @Composable
+val Colors.Text: Color
+    @Composable
     get() = if (isSystemInDarkTheme()) TextNight else TextDay
 
-val Colors.NoteBackground: Color @Composable
+val Colors.NoteBackground: Color
+    @Composable
     get() = if (isSystemInDarkTheme()) NoteBackgroundNight else NoteBackgroundDay
 
-val Colors.HomeBackground: Color @Composable
+val Colors.HomeBackground: Color
+    @Composable
     get() = if (isSystemInDarkTheme()) HomeBackgroundNight else HomeBackgroundDay
 
-val Colors.SearchBackground: Color @Composable
+val Colors.SearchBackground: Color
+    @Composable
     get() = if (isSystemInDarkTheme()) SearchNight else SearchDay
 
-val Colors.PreviewNoteBackground: Color @Composable
+val Colors.PreviewNoteBackground: Color
+    @Composable
     get() = if (isSystemInDarkTheme()) PreviewNoteBackgroundNight else PreviewNoteBackgroundDay
 
-val Colors.PreviewLine: Color @Composable
+val Colors.PreviewLine: Color
+    @Composable
     get() = if (isSystemInDarkTheme()) PreviewLineNight else PreviewLineDay
 
-val Colors.CTA: Color @Composable
+val Colors.CTA: Color
+    @Composable
     get() = if (isSystemInDarkTheme()) CTANight else CTADay
 
-val Colors.HomeBottomBarBackground: Color @Composable
+val Colors.HomeBottomBarBackground: Color
+    @Composable
     get() = if (isSystemInDarkTheme()) HomeBottomBarBackgroundNight else HomeBottomBarBackgroundDay
 
-val Colors.SwipeStart: Color @Composable
+val Colors.SwipeStart: Color
+    @Composable
     get() = if (isSystemInDarkTheme()) SwipeStartNight else SwipeStartDay
 
-val Colors.SwipeEnd: Color @Composable
+val Colors.SwipeEnd: Color
+    @Composable
     get() = if (isSystemInDarkTheme()) SwipeEndNight else SwipeEndDay

@@ -4,7 +4,6 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -27,6 +26,7 @@ import com.mobile.pablo.uicomponents.common.ui.TextCanvas
 import com.mobile.pablo.uicomponents.common.util.EmptyObjects.EMPTY_NOTE
 import com.ramcosta.composedestinations.annotation.Destination
 import kotlinx.coroutines.launch
+import androidx.compose.material.MaterialTheme as Theme
 
 data class AddNoteScreenNavArgs(
     val noteId: Int

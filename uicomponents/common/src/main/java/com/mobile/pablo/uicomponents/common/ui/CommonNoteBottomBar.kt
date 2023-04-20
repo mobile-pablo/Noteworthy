@@ -1,9 +1,11 @@
 package com.mobile.pablo.uicomponents.common.ui
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,9 +15,13 @@ import com.mobile.pablo.uicomponents.common.R
 import com.mobile.pablo.uicomponents.common.data.NoteBottomWrapper
 import com.mobile.pablo.uicomponents.common.theme.CTA
 import com.mobile.pablo.uicomponents.common.theme.spacing
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
-fun CommonNoteBottomBar(modifier: Modifier = Modifier, noteBottomWrapper: NoteBottomWrapper) {
+fun CommonNoteBottomBar(
+    modifier: Modifier = Modifier,
+    noteBottomWrapper: NoteBottomWrapper
+) {
     Row(modifier = modifier) {
         Box(
             modifier = Modifier

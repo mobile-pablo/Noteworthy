@@ -21,8 +21,8 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.uicomponents.note.R
-import com.mobile.pablo.uicomponents.note.util.testTag
 import com.mobile.pablo.uicomponents.note.theme.*
+import com.mobile.pablo.uicomponents.note.util.testTag
 import me.saket.swipe.SwipeAction
 import me.saket.swipe.SwipeableActionsBox
 import androidx.compose.material.MaterialTheme as Theme

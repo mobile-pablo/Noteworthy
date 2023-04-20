@@ -20,13 +20,12 @@ fun viewIsDisplayed(view: Matcher<View>): ViewInteraction = onView(view).check(m
 fun waitForViewIsDisplayed(
     viewId: Int,
     millis: Long = 5000L
-): ViewInteraction =
-    onView(withId(viewId)).perform(
-        waitId(
-            viewId,
-            millis
-        )
+): ViewInteraction = onView(withId(viewId)).perform(
+    waitId(
+        viewId,
+        millis
     )
+)
 
 // https://stackoverflow.com/questions/49796132/android-espresso-wait-for-text-to-appear
 // https://www.repeato.app/espresso-wait-for-view/

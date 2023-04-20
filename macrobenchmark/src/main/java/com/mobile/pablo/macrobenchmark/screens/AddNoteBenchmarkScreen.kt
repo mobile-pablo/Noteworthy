@@ -14,6 +14,7 @@ class AddNoteBenchmarkScreen {
     fun clickNoteLineAtPosition(position: Int) = getNoteLineAtPosition(position).click()
 
     object AddNoteBenchmarkScreenViews {
+
         val title = getResByString(R.string.title_id)
         val noteLine = getString(R.string.note_line_id)
     }

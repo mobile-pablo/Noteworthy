@@ -5,9 +5,7 @@ import androidx.benchmark.macro.FrameTimingMetric
 import androidx.benchmark.macro.StartupMode
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.mobile.pablo.macrobenchmark.ext.addNoteBenchmark
-import com.mobile.pablo.macrobenchmark.ext.assertText
-import com.mobile.pablo.macrobenchmark.screens.NoteBenchmarkScreen
+import com.mobile.pablo.macrobenchmark.viewAssertions.addItemAndOpenList
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -56,17 +54,6 @@ class NoteBenchmarkTest {
         pressHome()
         startActivityAndWait()
         func()
-    }
-
-    fun addItemAndOpenList() {
-        NoteBenchmarkScreen().clickAddItemBtn()
-        addNoteBenchmark {
-            assertText(
-                views.title,
-                "Title"
-            )
-            clickNoteLineAtPosition(0)
-        }
     }
 
     fun startCompilationModePartial(mode: CompilationMode) = benchmarkSetup(mode = mode)

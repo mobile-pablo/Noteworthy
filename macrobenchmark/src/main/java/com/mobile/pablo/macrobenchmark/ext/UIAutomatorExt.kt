@@ -26,6 +26,12 @@ fun getResByContainedString(string: String) = uiDevice.findObject(
     uiSelector.textContains(string)
 )
 
-fun assertText(uiObject: UiObject, text: String) {
-    assertEquals(uiObject.text, text)
+fun assertText(
+    uiObject: UiObject,
+    text: String
+) {
+    assertEquals(
+        uiObject.text,
+        text
+    )
 }

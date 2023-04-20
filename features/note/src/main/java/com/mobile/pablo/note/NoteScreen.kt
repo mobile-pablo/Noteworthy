@@ -1,6 +1,5 @@
 package com.mobile.pablo.note
 
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -36,6 +35,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.dynamic.within
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.utils.navGraph
+import androidx.compose.material.MaterialTheme as Theme
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Destination

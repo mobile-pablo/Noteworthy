@@ -31,24 +31,22 @@ class NoteTest {
     }
 
     @Test
-    fun noteListIsDisplayed() {
+    fun notesAreDisplayed() {
         testRule.apply {
             MOCK_NOTE_LIST.withIndex().forEachIndexed { index, _ ->
                 testRule.onNodeWithTag("previewNote-$index").isDisplayed()
             }
         }
     }
-/*
-    @Test
-    fun removeNoteIsntDisplayed() {
-        val item = MOCK_NOTE_LIST.withIndex().first()
-        noteScreen.removeItemAt(0)
-        testRule.onNodeWithTag("previewNote-${item.index}").isNotDisplayed()
-    }
- */
 
     @Test
-    fun addNoteScreenIsDisplayed() {
+    fun itemNoteScreenIsOpened() {
         noteScreen.clickAddItemBtn()
     }
+
+    @Test
+    fun itemNoteIsRemoved() {}
+
+    @Test
+    fun itemNoteIsPinned() {}
 }

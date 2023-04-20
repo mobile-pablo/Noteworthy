@@ -1,6 +1,5 @@
 package com.mobile.pablo.note.mock
 
-import androidx.compose.material.MaterialTheme as Theme
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,6 +22,7 @@ import com.mobile.pablo.uicomponents.note.ui.NoteBottomBar
 import com.mobile.pablo.uicomponents.note.ui.NoteTopBar
 import com.mobile.pablo.uicomponents.note.ui.PreviewNoteItem
 import java.util.Date
+import androidx.compose.material.MaterialTheme as Theme
 
 @Composable
 fun MockNoteScreen() {
