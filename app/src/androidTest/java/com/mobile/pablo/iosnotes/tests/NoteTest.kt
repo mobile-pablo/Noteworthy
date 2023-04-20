@@ -5,6 +5,8 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import com.mobile.pablo.iosnotes.ext.isDisplayed
 import com.mobile.pablo.iosnotes.ext.sleepView
+import com.mobile.pablo.iosnotes.ext.swipeLeft
+import com.mobile.pablo.iosnotes.ext.swipeRight
 import com.mobile.pablo.iosnotes.screens.NoteTestScreen
 import com.mobile.pablo.note.mock.FakeNoteScreen
 import com.mobile.pablo.note.mock.FakeNoteViewModel
@@ -59,9 +61,11 @@ class NoteTest {
 
     @Test
     fun itemNoteIsRemoved() {
+        swipeLeft("previewNote-0")
     }
 
     @Test
     fun itemNoteIsPinned() {
+        swipeRight("previewNote-0")
     }
 }

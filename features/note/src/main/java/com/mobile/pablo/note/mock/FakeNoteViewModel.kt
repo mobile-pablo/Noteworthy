@@ -55,6 +55,12 @@ val MOCK_NOTE_LIST = mutableListOf(
                 0,
                 true,
                 "This is a checkbox"
+            ),
+            NoteLine(
+                1,
+                0,
+                true,
+                "This is a checkbox"
             )
         )
     ),
@@ -65,6 +71,12 @@ val MOCK_NOTE_LIST = mutableListOf(
         description = listOf(
             NoteLine(
                 2,
+                1,
+                true,
+                "This is a checkbox"
+            ),
+            NoteLine(
+                3,
                 1,
                 true,
                 "This is a checkbox"
