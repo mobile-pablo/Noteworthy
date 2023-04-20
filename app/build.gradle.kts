@@ -1,3 +1,5 @@
+import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
+
 apply(from = "../ktlint.gradle.kts")
 
 plugins {
@@ -5,6 +7,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("kotlin-parcelize")
+    id("com.google.gms.google-services")
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
     id("com.google.devtools.ksp") version "1.8.0-1.0.9"
@@ -96,6 +99,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.junit.ext)
     androidTestImplementation(libs.espresso.core)
+    androidTestImplementation(libs.espresso.barista.compose)
+    androidTestImplementation(libs.espresso.barista) {
+        exclude(group = "org.jetbrains.kotlin")
+    }
     androidTestImplementation(libs.uiautomator)
     androidTestImplementation(libs.compose.junit)
     debugImplementation(libs.compose.tooling)
@@ -105,4 +112,7 @@ dependencies {
     ksp(libs.compose.destination.ksp)
 
     implementation(libs.baseline.profile)
+
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
 }

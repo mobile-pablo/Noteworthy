@@ -19,7 +19,7 @@ class NoteTest {
     @get:Rule
     val testRule = createComposeRule()
 
-    val noteScreen = NoteScreen()
+    val noteScreen = NoteScreen(testRule)
 
     @Before
     fun setup() {
@@ -47,6 +47,7 @@ class NoteTest {
     }
  */
 
+    @Test
     fun addNoteScreenIsDisplayed() {
         noteScreen.clickAddItemBtn()
     }

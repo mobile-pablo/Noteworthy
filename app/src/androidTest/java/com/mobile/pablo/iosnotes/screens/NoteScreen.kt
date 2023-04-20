@@ -1,16 +1,15 @@
 package com.mobile.pablo.iosnotes.screens
 
-import androidx.test.espresso.action.ViewActions.click
-import com.mobile.pablo.iosnotes.ext.waitForViewIsDisplayed
+import androidx.compose.ui.test.junit4.ComposeContentTestRule
+import com.adevinta.android.barista.interaction.BaristaClickInteractions.clickOn
 import com.mobile.pablo.uicomponents.note.R
 
-class NoteScreen {
+class NoteScreen constructor(val rule: ComposeContentTestRule) {
 
     val views = NoteScreenViews
 
     fun clickAddItemBtn() {
-        waitForViewIsDisplayed(views.addItemBtn)
-            .perform(click())
+        clickOn(views.addItemBtn)
     }
 
     object NoteScreenViews {
