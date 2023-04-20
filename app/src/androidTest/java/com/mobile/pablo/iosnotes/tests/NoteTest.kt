@@ -1,31 +1,41 @@
 package com.mobile.pablo.iosnotes.tests
 
-import androidx.compose.ui.test.*
-import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.activity.ComponentActivity
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
+import androidx.compose.ui.test.onNodeWithTag
 import com.mobile.pablo.iosnotes.ext.isDisplayed
-import com.mobile.pablo.iosnotes.screens.NoteScreen
-import com.mobile.pablo.note.mock.MOCK_NOTE_LIST
-import com.mobile.pablo.note.mock.MockNoteScreen
+import com.mobile.pablo.iosnotes.ext.sleepView
+import com.mobile.pablo.iosnotes.screens.NoteTestScreen
+import com.mobile.pablo.note.mock.FakeNoteScreen
+import com.mobile.pablo.note.mock.FakeNoteViewModel
 import com.mobile.pablo.uicomponents.common.theme.IOSNotesTheme
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.withIndex
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
+@HiltAndroidTest
 class NoteTest {
 
-    @get:Rule
-    val testRule = createComposeRule()
+    @get:Rule(order = 0)
+    val hiltAndroidRule = HiltAndroidRule(this)
 
-    val noteScreen = NoteScreen(testRule)
+    @get:Rule(order = 1)
+    val testRule = createAndroidComposeRule<ComponentActivity>()
+
+    private val noteTestScreen get() = NoteTestScreen(testRule)
+
+    private val fakeNoteViewModel = FakeNoteViewModel()
 
     @Before
     fun setup() {
+        hiltAndroidRule.inject()
         testRule.setContent {
             IOSNotesTheme {
-                MockNoteScreen()
+                FakeNoteScreen(fakeNoteViewModel = fakeNoteViewModel)
             }
         }
     }
@@ -33,20 +43,25 @@ class NoteTest {
     @Test
     fun notesAreDisplayed() {
         testRule.apply {
-            MOCK_NOTE_LIST.withIndex().forEachIndexed { index, _ ->
-                testRule.onNodeWithTag("previewNote-$index").isDisplayed()
+            fakeNoteViewModel.notes.withIndex().map {
+                it.value.forEachIndexed { index, note ->
+                    testRule.onNodeWithTag("previewNote-$index").isDisplayed()
+                }
             }
         }
     }
 
     @Test
     fun itemNoteScreenIsOpened() {
-        noteScreen.clickAddItemBtn()
+        sleepView()
+        noteTestScreen.clickAddItemBtn()
     }
 
     @Test
-    fun itemNoteIsRemoved() {}
+    fun itemNoteIsRemoved() {
+    }
 
     @Test
-    fun itemNoteIsPinned() {}
+    fun itemNoteIsPinned() {
+    }
 }

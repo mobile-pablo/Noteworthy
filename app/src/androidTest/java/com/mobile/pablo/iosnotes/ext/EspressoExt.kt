@@ -67,3 +67,13 @@ fun waitId(
         }
     }
 }
+
+fun sleepView(millis: Long = 3000L) {
+    try {
+        Thread.sleep(millis)
+    } catch (e: InterruptedException) {
+        e.printStackTrace()
+    } catch (e: IllegalArgumentException) {
+        e.printStackTrace()
+    }
+}

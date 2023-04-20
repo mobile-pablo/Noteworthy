@@ -35,7 +35,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.mobile.pablo.iosnotes.runner.CustomTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -103,6 +103,10 @@ dependencies {
     }
     androidTestImplementation(libs.uiautomator)
     androidTestImplementation(libs.compose.junit)
+    androidTestImplementation(libs.hilt.testing)
+    kaptAndroidTest(libs.hilt.android.compiler)
+    androidTestAnnotationProcessor(libs.hilt.android.compiler)
+
     debugImplementation(libs.compose.tooling)
     debugImplementation(libs.compose.testManifest)
 
@@ -113,4 +117,6 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+
+    implementation(libs.ar.core)
 }
