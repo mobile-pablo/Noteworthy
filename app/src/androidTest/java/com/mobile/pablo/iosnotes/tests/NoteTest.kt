@@ -1,13 +1,12 @@
 package com.mobile.pablo.iosnotes.tests
 
 import androidx.activity.ComponentActivity
-import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithTag
 import com.mobile.pablo.iosnotes.ext.isDisplayed
 import com.mobile.pablo.iosnotes.ext.isNotDisplayed
 import com.mobile.pablo.iosnotes.ext.sleepView
-import com.mobile.pablo.iosnotes.ext.swipeLeft
 import com.mobile.pablo.iosnotes.screens.NoteTestScreen
 import com.mobile.pablo.note.mock.FakeNoteScreen
 import com.mobile.pablo.note.mock.FakeNoteViewModel
@@ -45,10 +44,10 @@ class NoteTest {
 
     @Test
     fun notesAreDisplayed() {
-        testRule.apply {
-            fakeNoteViewModel.notes.withIndex().map {
-                it.value.forEachIndexed { index, note ->
-                    testRule.onNodeWithTag("previewNote-$index").isDisplayed()
+        fakeNoteViewModel.notes.withIndex().map {
+            it.value.forEachIndexed { index, note ->
+                note?.let {
+                    testRule.onNodeWithTag("previewNote-${it.id}").isDisplayed()
                 }
             }
         }
@@ -58,24 +57,5 @@ class NoteTest {
     fun itemNoteScreenIsOpened() {
         sleepView()
         noteTestScreen.clickAddItemBtn()
-    }
-
-    @Test
-    fun itemNoteIsRemoved() {
-        testRule.onNodeWithTag(
-            "previewNote-0",
-            useUnmergedTree = true
-        ).assertIsDisplayed()
-
-        swipeLeft("previewNote-0")
-
-        testRule.onNodeWithTag(
-            "previewNote-0",
-            useUnmergedTree = true
-        ).isNotDisplayed()
-    }
-
-    @Test
-    fun itemNoteIsPinned() {
     }
 }

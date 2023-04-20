@@ -101,7 +101,7 @@ fun FakeNoteScreen(
                     item {
                         if (note != null) {
                             PreviewNoteItem(
-                                modifier = Modifier.testTag("previewNote-$index"),
+                                modifier = Modifier.testTag("previewNote-${note.id}"),
                                 note = note,
                                 onClick = {
                                     navigateToEditNote(

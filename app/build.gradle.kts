@@ -80,9 +80,11 @@ tasks.getByPath("preBuild").dependsOn("ktlint")
 
 dependencies {
     implementation(project(":features:note"))
+    androidTestImplementation(project(":domain"))
     implementation(project(":features:addNote"))
     implementation(project(":features:editNote"))
     implementation(project(":uicomponents:common"))
+    androidTestImplementation(libs.compose.swipe)
 
     implementation(libs.androidX.core)
     implementation(libs.androidX.lifecycle)
