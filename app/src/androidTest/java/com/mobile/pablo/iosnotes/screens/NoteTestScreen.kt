@@ -15,7 +15,10 @@ class NoteTestScreen constructor(
     val views = NoteScreenViews(rule)
 
     fun clickAddItemBtn() {
-        rule.onNodeWithTag(views.addItemBtn).performClick()
+        rule.onNodeWithTag(
+            views.addItemBtn,
+            useUnmergedTree = true
+        ).performClick()
     }
 
     class NoteScreenViews(
