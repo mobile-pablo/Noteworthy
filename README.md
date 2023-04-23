@@ -6,8 +6,8 @@
 [![Mark stale issues and pull requests](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/stale.yml/badge.svg)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/stale.yml)
 <br/>
 
-🌟 Welcome to the ultimate notes app for Android, 
-designed with a sleek interface and packed with
+🌟 Welcome to the ultimate notes app for Android, <br/>
+designed with a sleek interface and packed with<br/>
 powerful features to help you stay organized! 🌟
 <br/>
 
