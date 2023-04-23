@@ -1,7 +1,10 @@
 ## iOS - Notes
+[![Android Test Apk](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/android.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/android.yml)
+[![AWS Device Farm CI](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/aws-device-farm.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/aws-device-farm.yml)
+[![CodeQL](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/codeql.yml)
+[![Mark stale issues and pull requests](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/stale.yml/badge.svg)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/stale.yml)
 
 # Tech stack
-
 * <s>(Jenkins via GCP  'http://34.30.54.198:8080/'</s> (Migrated to Github CI) + AWS Device farm  
 * Room
 * MVVM
