@@ -8,6 +8,7 @@ import com.mobile.pablo.uicomponents.common.util.StringRes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 
 @HiltViewModel
@@ -22,8 +23,8 @@ class AddNoteViewModel @Inject constructor(
 
     var note: Flow<Note?> = emptyFlow()
 
-    private val _viewState = MutableStateFlow<ViewState>(ViewState.Default)
-    val viewState: StateFlow<ViewState> = _viewState.asStateFlow()
+    private val _viewState: Channel<ViewState> = Channel()
+    val viewState: Flow<ViewState> = _viewState.receiveAsFlow()
 
     private val _emptyNoteLineId: MutableStateFlow<Long> = MutableStateFlow(0L)
     val emptyNoteLineId: StateFlow<Long> = _emptyNoteLineId.asStateFlow()
@@ -50,7 +51,7 @@ class AddNoteViewModel @Inject constructor(
                 } else ViewState.Message(StringRes.INTERNET_ISSUE)
             }
 
-            _viewState.emit(viewState)
+            _viewState.send(viewState)
         }
     }
 

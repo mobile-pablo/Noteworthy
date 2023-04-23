@@ -48,13 +48,12 @@ fun FakeNoteScreen(
 ) {
 
     val notes = fakeNoteViewModel.notes.collectAsStateWithLifecycle(listOf()).value
-    val viewState = fakeNoteViewModel.viewState
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     LaunchedEffect(
         key1 = Unit,
         key2 = notes
     ) {
-        viewState.collectLatest {
+        fakeNoteViewModel.viewState.collectLatest {
             when (it) {
                 is ViewState.InsertSuccessful -> {
                     it.noteId?.let { noteID ->
@@ -74,7 +73,7 @@ fun FakeNoteScreen(
 
                 is ViewState.Default -> {}
 
-                else -> throw IllegalArgumentException("Unknown view state: $viewState")
+                else -> throw IllegalArgumentException("Unknown view state: $it")
             }
         }
     }

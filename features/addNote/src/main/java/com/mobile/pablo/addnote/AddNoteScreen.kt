@@ -23,6 +23,7 @@ import com.mobile.pablo.uicomponents.common.ui.CommonNoteTopBar
 import com.mobile.pablo.uicomponents.common.ui.TextCanvas
 import com.mobile.pablo.uicomponents.common.util.EmptyObjects.EMPTY_NOTE
 import com.ramcosta.composedestinations.annotation.Destination
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import androidx.compose.material.MaterialTheme as Theme
 
@@ -42,28 +43,29 @@ fun AddNoteScreen(
     val scope = rememberCoroutineScope()
     val note = viewModel.note.collectAsStateWithLifecycle(EMPTY_NOTE)
     val emptyNoteLineId = viewModel.emptyNoteLineId.collectAsStateWithLifecycle()
-    val viewState = viewModel.viewState.collectAsStateWithLifecycle().value
     val context = LocalContext.current
     val scaffoldState: ScaffoldState = rememberScaffoldState()
 
     LaunchedEffect(
-        key1 = viewState,
+        key1 = Unit,
         key2 = note
     ) {
-        when (viewState) {
-            is ViewState.SaveSuccessful -> {
-                (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
+        viewModel.viewState.collectLatest {
+            when (it) {
+                is ViewState.SaveSuccessful -> {
+                    (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
+                }
+
+                is ViewState.Message -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = it.message
+                    )
+                }
+
+                is ViewState.Default -> {}
+
+                else -> throw IllegalAccessException("Invalid view state: $it")
             }
-
-            is ViewState.Message -> {
-                scaffoldState.snackbarHostState.showSnackbar(
-                    message = viewState.message
-                )
-            }
-
-            is ViewState.Default -> {}
-
-            else -> throw IllegalAccessException("Invalid view state: $viewState")
         }
     }
 
