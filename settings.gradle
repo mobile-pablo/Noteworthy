@@ -16,7 +16,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "iOS Notes"
+rootProject.name = "Noteworthy"
 include ":app"
 include ":core"
 include ":domain"

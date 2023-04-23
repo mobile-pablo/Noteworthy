@@ -1,10 +1,12 @@
-## iOS - Notes
+# iOS - Notes  - Android App 🚀
 [![Android Test Apk](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/android.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/android.yml)
 [![AWS Device Farm CI](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/aws-device-farm.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/aws-device-farm.yml)
 [![CodeQL](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/codeql.yml)
 [![Mark stale issues and pull requests](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/stale.yml/badge.svg)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/stale.yml)
 
-# Tech stack
+🌟 Welcome to the ultimate notes app for Android, designed with a sleek interface and packed with powerful features to help you stay organized! 🌟
+
+## Tech stack
 * <s>(Jenkins via GCP  'http://34.30.54.198:8080/'</s> (Migrated to Github CI) + AWS Device farm  
 * Room
 * MVVM
@@ -23,7 +25,11 @@
 * Kotlin DSL
 * Jira board at https://mobile-pablo.atlassian.net/
 
-# Tasks to be done
+
+## Screenshots
+* Will be added soon
+
+## Tasks to be done
 
 * Add animation for navigation
 * Espresso tests
