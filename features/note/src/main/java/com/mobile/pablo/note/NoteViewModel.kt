@@ -9,6 +9,7 @@ import com.mobile.pablo.uicomponents.note.util.StringRes.INTERNET_ISSUE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 
 @HiltViewModel
@@ -20,11 +21,12 @@ class NoteViewModel @Inject constructor(
 
     private var deleteJob: Job? = null
     private var insertJob: Job? = null
+    private val NOTE_DEBOUNCE_MILLIS = 100L
 
-    val notes: Flow<List<Note?>> = getNotesUseCase()
+    val notes: Flow<List<Note?>> = getNotesUseCase().debounce(NOTE_DEBOUNCE_MILLIS)
 
-    private val _viewState: MutableStateFlow<ViewState> = MutableStateFlow(ViewState.Default)
-    val viewState: StateFlow<ViewState> = _viewState.asStateFlow()
+    private val _viewState = Channel<ViewState>()
+    val viewState: Flow<ViewState> = _viewState.receiveAsFlow()
 
     override fun deleteNote(noteId: Int) {
         deleteJob?.cancel()
@@ -36,7 +38,7 @@ class NoteViewModel @Inject constructor(
                 } else ViewState.Message(INTERNET_ISSUE)
             }
 
-            _viewState.emit(viewState)
+            _viewState.send(viewState)
         }
     }
 
@@ -50,14 +52,14 @@ class NoteViewModel @Inject constructor(
                 } else ViewState.Message(INTERNET_ISSUE)
             }
 
-            _viewState.emit(viewState)
+            _viewState.send(viewState)
         }
     }
 
     override fun setEmptyNote(noteId: Long?) {
         insertJob?.cancel()
         insertJob = launchAsync {
-            _viewState.emit(ViewState.InsertSuccessful(noteId))
+            _viewState.send(ViewState.InsertSuccessful(noteId))
         }
     }
 }

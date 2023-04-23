@@ -5,5 +5,4 @@ package com.mobile.pablo.uicomponents.common.util
 object StringRes {
 
     const val INTERNET_ISSUE = "Something went wrong. Please check your connection"
-    const val INSERT_NOTE = "Note was added"
 }

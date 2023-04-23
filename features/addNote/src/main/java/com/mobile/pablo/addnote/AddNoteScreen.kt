@@ -23,7 +23,6 @@ import com.mobile.pablo.uicomponents.common.ui.CommonNoteTopBar
 import com.mobile.pablo.uicomponents.common.ui.TextCanvas
 import com.mobile.pablo.uicomponents.common.util.EmptyObjects.EMPTY_NOTE
 import com.ramcosta.composedestinations.annotation.Destination
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import androidx.compose.material.MaterialTheme as Theme
 
@@ -41,31 +40,30 @@ fun AddNoteScreen(
     viewModel.downloadNote(noteId)
 
     val scope = rememberCoroutineScope()
-    val note = viewModel.note.collectAsStateWithLifecycle(EMPTY_NOTE)
+    val note = viewModel.note.collectAsStateWithLifecycle(EMPTY_NOTE).value
+    val viewState = viewModel.viewState.collectAsStateWithLifecycle(ViewState.Default).value
     val emptyNoteLineId = viewModel.emptyNoteLineId.collectAsStateWithLifecycle()
     val context = LocalContext.current
     val scaffoldState: ScaffoldState = rememberScaffoldState()
 
     LaunchedEffect(
-        key1 = Unit,
+        key1 = viewState,
         key2 = note
     ) {
-        viewModel.viewState.collectLatest {
-            when (it) {
-                is ViewState.SaveSuccessful -> {
-                    (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
-                }
-
-                is ViewState.Message -> {
-                    scaffoldState.snackbarHostState.showSnackbar(
-                        message = it.message
-                    )
-                }
-
-                is ViewState.Default -> {}
-
-                else -> throw IllegalAccessException("Invalid view state: $it")
+        when (viewState) {
+            is ViewState.SaveSuccessful -> {
+                (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
             }
+
+            is ViewState.Message -> {
+                scaffoldState.snackbarHostState.showSnackbar(
+                    message = viewState.message
+                )
+            }
+
+            is ViewState.Default -> {}
+
+            else -> throw IllegalAccessException("Invalid view state: $viewState")
         }
     }
 
@@ -75,29 +73,24 @@ fun AddNoteScreen(
             .background(Theme.colors.NoteBackground),
         constraintSet = constraints
     ) {
-        note.value?.let { note ->
-            val updatedNote = TextCanvas(
-                modifier = Modifier
-                    .layoutId(ID_TEXT_CANVAS)
-                    .fillMaxWidth(),
+        note?.let { note ->
+            val updatedNote = TextCanvas(modifier = Modifier
+                .layoutId(ID_TEXT_CANVAS)
+                .fillMaxWidth(),
                 note = note,
                 noteId = noteId,
-                createEmptyNoteLine =
-                {
+                createEmptyNoteLine = {
                     createEmptyNoteLine(
                         noteId,
                         viewModel,
                         emptyNoteLineId.value
                     )
-                }
-            )
+                })
 
-            CommonNoteTopBar(
-                modifier = Modifier
-                    .layoutId(ID_ADD_NOTE_TOP_BAR)
-                    .fillMaxWidth(),
-                onBack =
-                {
+            CommonNoteTopBar(modifier = Modifier
+                .layoutId(ID_ADD_NOTE_TOP_BAR)
+                .fillMaxWidth(),
+                onBack = {
                     scope.launch {
                         (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
                     }
@@ -106,22 +99,18 @@ fun AddNoteScreen(
                 onDone = {
                     scope.launch {
                         viewModel.saveNote(updatedNote).also {
-                            (context as? ComponentActivity)
-                                ?.onBackPressedDispatcher?.onBackPressed()
+                            (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
                         }
                     }
-                }
-            )
+                })
 
-            CommonNoteBottomBar(
-                modifier = Modifier
-                    .layoutId(ID_ADD_NOTE_BOTTOM_BAR)
-                    .fillMaxWidth(),
+            CommonNoteBottomBar(modifier = Modifier
+                .layoutId(ID_ADD_NOTE_BOTTOM_BAR)
+                .fillMaxWidth(),
                 onCamera = { scope.launch {} },
                 onPin = { scope.launch {} },
                 onCheckbox = { scope.launch {} },
-                onNew = { scope.launch {} }
-            )
+                onNew = { scope.launch {} })
         }
     }
 }

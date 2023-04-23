@@ -4,7 +4,10 @@ import androidx.activity.ComponentActivity
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.ScaffoldState
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
@@ -13,6 +16,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.uicomponents.common.theme.NoteBackground
 import com.mobile.pablo.uicomponents.common.ui.CommonNoteBottomBar
@@ -34,7 +38,30 @@ fun EditNoteScreen(
 ) {
     val note = editNoteScreenNavArgs.note
     val scope = rememberCoroutineScope()
+    val viewState = viewModel.viewState.collectAsStateWithLifecycle(ViewState.Default).value
     val context = LocalContext.current
+    val scaffoldState: ScaffoldState = rememberScaffoldState()
+
+    LaunchedEffect(
+        key1 = viewState,
+        key2 = note
+    ) {
+        when (viewState) {
+            is ViewState.SaveSuccessful -> {
+                (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
+            }
+
+            is ViewState.Message -> {
+                scaffoldState.snackbarHostState.showSnackbar(
+                    message = viewState.message
+                )
+            }
+
+            is ViewState.Default -> {}
+
+            else -> throw IllegalAccessException("Invalid view state: $viewState")
+        }
+    }
 
     ConstraintLayout(
         modifier = Modifier

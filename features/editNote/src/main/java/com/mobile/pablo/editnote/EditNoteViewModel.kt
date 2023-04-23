@@ -4,14 +4,12 @@ import androidx.lifecycle.ViewModel
 import com.mobile.pablo.core.utils.launchAsync
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.usecase.note.NoteUseCase
-import com.mobile.pablo.uicomponents.common.util.StringRes.INSERT_NOTE
 import com.mobile.pablo.uicomponents.common.util.StringRes.INTERNET_ISSUE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.*
 
 @HiltViewModel
 class EditNoteViewModel @Inject constructor(
@@ -22,8 +20,8 @@ class EditNoteViewModel @Inject constructor(
 
     private var saveJob: Job? = null
 
-    private val _viewState = MutableStateFlow<ViewState>(ViewState.Default)
-    val viewState: StateFlow<ViewState> = _viewState.asStateFlow()
+    private val _viewState = Channel<ViewState>()
+    val viewState: Flow<ViewState> = _viewState.receiveAsFlow()
 
     override fun saveNote(note: Note) {
         saveJob?.cancel()
@@ -31,11 +29,11 @@ class EditNoteViewModel @Inject constructor(
             val noteResult = insertNoteUseCase(note)
             val viewState = noteResult.run {
                 if (isSuccessful && data != null) {
-                    ViewState.Message(INSERT_NOTE)
+                    ViewState.SaveSuccessful
                 } else ViewState.Message(INTERNET_ISSUE)
             }
 
-            _viewState.emit(viewState)
+            _viewState.send(viewState)
         }
     }
 
@@ -49,7 +47,7 @@ class EditNoteViewModel @Inject constructor(
 }
 
 sealed class ViewState {
-    object DownloadSuccessful : ViewState()
+    object SaveSuccessful : ViewState()
     class Message(val message: String) : ViewState()
     object Default : ViewState()
 }

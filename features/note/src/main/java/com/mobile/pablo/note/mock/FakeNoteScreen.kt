@@ -36,7 +36,6 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.dynamic.within
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.utils.navGraph
-import kotlinx.coroutines.flow.collectLatest
 import androidx.compose.material.MaterialTheme as Theme
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -44,37 +43,36 @@ import androidx.compose.material.MaterialTheme as Theme
 @Composable
 fun FakeNoteScreen(
     navController: NavController = rememberNavController(),
-    fakeNoteViewModel: FakeNoteViewModel = hiltViewModel()
+    viewModel: FakeNoteViewModel = hiltViewModel()
 ) {
 
-    val notes = fakeNoteViewModel.notes.collectAsStateWithLifecycle(listOf()).value
+    val notes = viewModel.notes.collectAsStateWithLifecycle(listOf()).value
+    val viewState = viewModel.viewState.collectAsStateWithLifecycle(ViewState.Default).value
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     LaunchedEffect(
-        key1 = Unit,
+        key1 = viewState,
         key2 = notes
     ) {
-        fakeNoteViewModel.viewState.collectLatest {
-            when (it) {
-                is ViewState.InsertSuccessful -> {
-                    it.noteId?.let { noteID ->
-                        navigateToAddNote(
-                            navController,
-                            noteID.toInt()
-                        )
-                        fakeNoteViewModel.setEmptyNote(null)
-                    }
-                }
-
-                is ViewState.Message -> {
-                    scaffoldState.snackbarHostState.showSnackbar(
-                        message = it.message
+        when (viewState) {
+            is ViewState.InsertSuccessful -> {
+                viewState.noteId?.let { noteID ->
+                    navigateToAddNote(
+                        navController,
+                        noteID.toInt()
                     )
+                    viewModel.setEmptyNote(null)
                 }
-
-                is ViewState.Default -> {}
-
-                else -> throw IllegalArgumentException("Unknown view state: $it")
             }
+
+            is ViewState.Message -> {
+                scaffoldState.snackbarHostState.showSnackbar(
+                    message = viewState.message
+                )
+            }
+
+            is ViewState.Default -> {}
+
+            else -> throw IllegalArgumentException("Unknown view state: $viewState")
         }
     }
 
@@ -114,7 +112,7 @@ fun FakeNoteScreen(
                                     )
                                 },
                                 onDelete = {
-                                    fakeNoteViewModel.deleteNote(note.id)
+                                    viewModel.deleteNote(note.id)
                                 },
                                 onPin = { })
                         }
@@ -126,7 +124,7 @@ fun FakeNoteScreen(
                 modifier = Modifier
                     .layoutId(ID_NOTE_BOTTOM_BAR)
                     .fillMaxWidth()
-            ) { fakeNoteViewModel.insertEmptyNote() }
+            ) { viewModel.insertEmptyNote() }
         }
     }
 }
