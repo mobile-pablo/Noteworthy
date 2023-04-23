@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.Date
 import javax.inject.Inject
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 
 @HiltViewModel
@@ -19,8 +20,8 @@ class FakeNoteViewModel @Inject constructor() : ViewModel() {
 
     val notes: Flow<List<Note?>> = flow { emit(MOCK_NOTE_LIST) }
 
-    private val _viewState: MutableStateFlow<ViewState> = MutableStateFlow(ViewState.Default)
-    val viewState: StateFlow<ViewState> = _viewState.asStateFlow()
+    private val _viewState : Channel<ViewState> = Channel()
+    val viewState: Flow<ViewState> = _viewState.receiveAsFlow()
 
     fun deleteNote(noteId: Int) {
         deleteJob?.cancel()
@@ -40,7 +41,7 @@ class FakeNoteViewModel @Inject constructor() : ViewModel() {
     fun setEmptyNote(noteId: Long?) {
         insertJob?.cancel()
         insertJob = launchAsync {
-            _viewState.emit(ViewState.InsertSuccessful(noteId))
+            _viewState.send(ViewState.InsertSuccessful(noteId))
         }
     }
 }

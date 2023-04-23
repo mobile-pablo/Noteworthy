@@ -36,6 +36,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.dynamic.within
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.utils.navGraph
+import kotlinx.coroutines.flow.collectLatest
 import androidx.compose.material.MaterialTheme as Theme
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -47,32 +48,34 @@ fun FakeNoteScreen(
 ) {
 
     val notes = fakeNoteViewModel.notes.collectAsStateWithLifecycle(listOf()).value
-    val viewState = fakeNoteViewModel.viewState.collectAsStateWithLifecycle().value
+    val viewState = fakeNoteViewModel.viewState
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     LaunchedEffect(
-        key1 = viewState,
+        key1 = Unit,
         key2 = notes
     ) {
-        when (viewState) {
-            is ViewState.InsertSuccessful -> {
-                viewState.noteId?.let { noteID ->
-                    navigateToAddNote(
-                        navController,
-                        noteID.toInt()
-                    )
-                    fakeNoteViewModel.setEmptyNote(null)
+        viewState.collectLatest {
+            when (it) {
+                is ViewState.InsertSuccessful -> {
+                    it.noteId?.let { noteID ->
+                        navigateToAddNote(
+                            navController,
+                            noteID.toInt()
+                        )
+                        fakeNoteViewModel.setEmptyNote(null)
+                    }
                 }
+
+                is ViewState.Message -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = it.message
+                    )
+                }
+
+                is ViewState.Default -> {}
+
+                else -> throw IllegalArgumentException("Unknown view state: $viewState")
             }
-
-            is ViewState.Message -> {
-                scaffoldState.snackbarHostState.showSnackbar(
-                    message = viewState.message
-                )
-            }
-
-            is ViewState.Default -> {}
-
-            else -> throw IllegalArgumentException("Unknown view state: $viewState")
         }
     }
 
