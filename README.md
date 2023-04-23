@@ -1,6 +1,7 @@
 ## iOS - Notes
 
 # Tech stack
+
 * <s>(Jenkins via GCP  'http://34.30.54.198:8080/'</s> (Migrated to Github CI) + AWS Device farm  
 * Room
 * MVVM
@@ -20,6 +21,7 @@
 * Jira board at https://mobile-pablo.atlassian.net/
 
 # Tasks to be done
+
 * Add animation for navigation
 * Espresso tests
 * Swipe with NoteLines  (checklist/delete)
