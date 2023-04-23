@@ -1,12 +1,14 @@
-# iOS - Notes  - Android App 🚀
-[![Android Test Apk](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/android.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/android.yml)
-[![AWS Device Farm CI](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/aws-device-farm.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/aws-device-farm.yml)
-[![CodeQL](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/codeql.yml)
-[![Mark stale issues and pull requests](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/stale.yml/badge.svg)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/stale.yml)
+# iOS - Notes  - Android App 🚀 <a href="https://github.com/mobile-pablo/iOS-Notes/blob/master/LICENSE"><img src="https://img.shields.io/github/license/DAVFoundation/captain-n3m0.svg?style=flat-square"/></a>[![Android Test Apk](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/android.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/android.yml) 
+[![AWS Device Farm CI](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/aws-device-farm.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/aws-device-farm.yml) [![CodeQL](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/codeql.yml) [![Mark stale issues and pull requests](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/stale.yml/badge.svg)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/stale.yml)
 
 🌟 Welcome to the ultimate notes app for Android, designed with a sleek interface and packed with powerful features to help you stay organized! 🌟
 
-## Tech stack
+## 🎯 Features
+* Image loading
+* Unlock via face recognition
+* Edit checkpoints
+
+## 🛠️ Tech stack
 * <s>(Jenkins via GCP  'http://34.30.54.198:8080/'</s> (Migrated to Github CI) + AWS Device farm  
 * Room
 * MVVM
@@ -26,10 +28,10 @@
 * Jira board at https://mobile-pablo.atlassian.net/
 
 
-## Screenshots
+## 🎨 Screenshots
 * Will be added soon
 
-## Tasks to be done
+## 📈 Tasks to be done
 
 * Add animation for navigation
 * Espresso tests
@@ -47,7 +49,8 @@
 * Use https://github.com/DevSrSouza/compose-icons
 * Publish on Google Play
 * Clean Readme.MD with splash photos
-
-
-## Maybe
 * https://github.com/ValeryPonomarenko/compose-shimmer
+
+
+## 📖 License
+
