@@ -11,23 +11,37 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import com.mobile.pablo.uicomponents.common.R
-import com.mobile.pablo.uicomponents.common.data.NoteBottomWrapper
 import com.mobile.pablo.uicomponents.common.theme.CTA
 import com.mobile.pablo.uicomponents.common.theme.spacing
 import androidx.compose.material.MaterialTheme as Theme
 
+typealias onCameraItem = () -> Unit
+typealias onCheckboxItem = () -> Unit
+typealias onPinItem = () -> Unit
+typealias onNewItem = () -> Unit
+
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun CommonNoteBottomBar(
     modifier: Modifier = Modifier,
-    noteBottomWrapper: NoteBottomWrapper
+    onCamera: onCameraItem,
+    onCheckbox: onCheckboxItem,
+    onPin: onPinItem,
+    onNew: onNewItem
 ) {
+    val cameraPermission = rememberPermissionState(
+        android.Manifest.permission.CAMERA
+    )
     Row(modifier = modifier) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .clickable { noteBottomWrapper.onCheckboxItem() }
+                .clickable { onCheckbox() }
                 .padding(vertical = Theme.spacing.spacing_6),
             contentAlignment = Alignment.Center
         ) {
@@ -42,7 +56,12 @@ fun CommonNoteBottomBar(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .clickable { noteBottomWrapper.onCameraItem }
+                .clickable {
+                    cameraPermission.launchPermissionRequest()
+
+                    if (cameraPermission.status.isGranted)
+                        onCamera()
+                }
                 .padding(vertical = Theme.spacing.spacing_6),
             contentAlignment = Alignment.Center
         ) {
@@ -57,7 +76,7 @@ fun CommonNoteBottomBar(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .clickable { noteBottomWrapper.onPin }
+                .clickable { onPin() }
                 .padding(vertical = Theme.spacing.spacing_6),
             contentAlignment = Alignment.Center
         ) {
@@ -72,7 +91,7 @@ fun CommonNoteBottomBar(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .clickable { noteBottomWrapper.onNew }
+                .clickable { onNew() }
                 .padding(vertical = Theme.spacing.spacing_6),
             contentAlignment = Alignment.Center
         ) {

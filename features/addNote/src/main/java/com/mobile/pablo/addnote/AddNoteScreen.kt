@@ -17,8 +17,6 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.mobile.pablo.uicomponents.common.data.NoteBottomWrapper
-import com.mobile.pablo.uicomponents.common.data.NoteTopWrapper
 import com.mobile.pablo.uicomponents.common.theme.NoteBackground
 import com.mobile.pablo.uicomponents.common.ui.CommonNoteBottomBar
 import com.mobile.pablo.uicomponents.common.ui.CommonNoteTopBar
@@ -42,9 +40,9 @@ fun AddNoteScreen(
     viewModel.downloadNote(noteId)
 
     val scope = rememberCoroutineScope()
-    val note = viewModel.note.collectAsStateWithLifecycle(EMPTY_NOTE)
+    val note = viewModel.note.collectAsStateWithLifecycle(EMPTY_NOTE).value
+    val viewState = viewModel.viewState.collectAsStateWithLifecycle(ViewState.Default).value
     val emptyNoteLineId = viewModel.emptyNoteLineId.collectAsStateWithLifecycle()
-    val viewState = viewModel.viewState.collectAsStateWithLifecycle().value
     val context = LocalContext.current
     val scaffoldState: ScaffoldState = rememberScaffoldState()
 
@@ -64,6 +62,8 @@ fun AddNoteScreen(
             }
 
             is ViewState.Default -> {}
+
+            else -> throw IllegalAccessException("Invalid view state: $viewState")
         }
     }
 
@@ -73,57 +73,44 @@ fun AddNoteScreen(
             .background(Theme.colors.NoteBackground),
         constraintSet = constraints
     ) {
-        note.value?.let { note ->
-            val updatedNote = TextCanvas(
-                modifier = Modifier
-                    .layoutId(ID_TEXT_CANVAS)
-                    .fillMaxWidth(),
+        note?.let { note ->
+            val updatedNote = TextCanvas(modifier = Modifier
+                .layoutId(ID_TEXT_CANVAS)
+                .fillMaxWidth(),
                 note = note,
                 noteId = noteId,
-                createEmptyNoteLine =
-                {
+                createEmptyNoteLine = {
                     createEmptyNoteLine(
                         noteId,
                         viewModel,
                         emptyNoteLineId.value
                     )
-                }
-            )
+                })
 
-            CommonNoteTopBar(
-                modifier = Modifier
-                    .layoutId(ID_ADD_NOTE_TOP_BAR)
-                    .fillMaxWidth(),
-                noteTopWrapper = NoteTopWrapper(
-                    onBackItem =
-                    {
-                        scope.launch {
+            CommonNoteTopBar(modifier = Modifier
+                .layoutId(ID_ADD_NOTE_TOP_BAR)
+                .fillMaxWidth(),
+                onBack = {
+                    scope.launch {
+                        (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
+                    }
+                },
+                onShare = { scope.launch { viewModel.shareNote() } },
+                onDone = {
+                    scope.launch {
+                        viewModel.saveNote(updatedNote).also {
                             (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
                         }
-                    },
-                    onShareItem = { scope.launch { viewModel.shareNote() } },
-                    onDoneItem = {
-                        scope.launch {
-                            viewModel.saveNote(updatedNote).also {
-                                (context as? ComponentActivity)
-                                    ?.onBackPressedDispatcher?.onBackPressed()
-                            }
-                        }
                     }
-                )
-            )
+                })
 
-            CommonNoteBottomBar(
-                modifier = Modifier
-                    .layoutId(ID_ADD_NOTE_BOTTOM_BAR)
-                    .fillMaxWidth(),
-                noteBottomWrapper = NoteBottomWrapper(
-                    { scope.launch {} },
-                    { scope.launch {} },
-                    { scope.launch {} },
-                    { scope.launch {} }
-                )
-            )
+            CommonNoteBottomBar(modifier = Modifier
+                .layoutId(ID_ADD_NOTE_BOTTOM_BAR)
+                .fillMaxWidth(),
+                onCamera = { scope.launch {} },
+                onPin = { scope.launch {} },
+                onCheckbox = { scope.launch {} },
+                onNew = { scope.launch {} })
         }
     }
 }

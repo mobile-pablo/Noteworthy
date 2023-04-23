@@ -73,7 +73,7 @@ fun TextCanvas(
                 val localNoteLine = NoteField(
                     modifier = Modifier.fillMaxWidth(),
                     noteLine = NoteLine(parentNoteId = noteId),
-                    createEmptyNoteLine = createEmptyNoteLine,
+                    onEmptyNoteLine = createEmptyNoteLine,
                     hasCheckbox = true
                 )
 

@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
@@ -31,6 +30,7 @@ import com.mobile.pablo.uicomponents.note.theme.spacing
 import com.mobile.pablo.uicomponents.note.ui.NoteBottomBar
 import com.mobile.pablo.uicomponents.note.ui.NoteTopBar
 import com.mobile.pablo.uicomponents.note.ui.PreviewNoteItem
+import com.mobile.pablo.uicomponents.note.util.observeWithLifecycle
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.dynamic.within
 import com.ramcosta.composedestinations.navigation.navigate
@@ -42,34 +42,32 @@ import androidx.compose.material.MaterialTheme as Theme
 @Composable
 fun NoteScreen(
     navController: NavController = rememberNavController(),
-    noteViewModel: NoteViewModel = hiltViewModel()
+    viewModel: NoteViewModel = hiltViewModel()
 ) {
 
-    val notes = noteViewModel.notes.collectAsStateWithLifecycle(listOf()).value
-    val viewState = noteViewModel.viewState.collectAsStateWithLifecycle().value
+    val notes = viewModel.notes.collectAsStateWithLifecycle(listOf()).value
     val scaffoldState: ScaffoldState = rememberScaffoldState()
-    LaunchedEffect(
-        key1 = viewState,
-        key2 = notes
-    ) {
-        when (viewState) {
+    viewModel.viewState.observeWithLifecycle(key2 = notes) {
+        when (it) {
             is ViewState.InsertSuccessful -> {
-                viewState.noteId?.let { noteID ->
+                it.noteId?.let { noteID ->
                     navigateToAddNote(
                         navController,
                         noteID.toInt()
                     )
-                    noteViewModel.setEmptyNote(null)
+                    viewModel.setEmptyNote(null)
                 }
             }
 
             is ViewState.Message -> {
                 scaffoldState.snackbarHostState.showSnackbar(
-                    message = viewState.message
+                    message = it.message
                 )
             }
 
             is ViewState.Default -> {}
+
+            else -> throw IllegalArgumentException("Unknown view state: $it")
         }
     }
 
@@ -107,18 +105,19 @@ fun NoteScreen(
                                     )
                                 },
                                 onDelete = {
-                                    noteViewModel.deleteNote(it.id)
+                                    viewModel.deleteNote(it.id)
                                 },
                                 onPin = { })
                         }
                     }
                 }
             }
-            NoteBottomBar(notes.size,
+            NoteBottomBar(
+                notes.size,
                 modifier = Modifier
                     .layoutId(ID_NOTE_BOTTOM_BAR)
-                    .fillMaxWidth(),
-                onClickNewNote = { noteViewModel.insertEmptyNote() })
+                    .fillMaxWidth()
+            ) { viewModel.insertEmptyNote() }
         }
     }
 }

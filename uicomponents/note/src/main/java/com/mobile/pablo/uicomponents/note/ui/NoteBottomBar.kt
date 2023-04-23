@@ -24,11 +24,13 @@ import com.mobile.pablo.uicomponents.note.util.topRectBorder
 import kotlinx.coroutines.launch
 import androidx.compose.material.MaterialTheme as Theme
 
+typealias onNewItem = () -> Unit
+
 @Composable
-fun NoteBottomBar(
+inline fun NoteBottomBar(
     amountNotes: Int,
     modifier: Modifier = Modifier,
-    onClickNewNote: () -> Unit
+    crossinline onNew: onNewItem
 ) {
 
     val buttonScope = rememberCoroutineScope()
@@ -62,11 +64,9 @@ fun NoteBottomBar(
         }
 
         Box(modifier = Modifier.layoutId(ID_ADD_USER)) {
-            IconButton(
-                onClick = {
-                    buttonScope.launch { onClickNewNote() }
-                }
-            ) {
+            IconButton(onClick = {
+                buttonScope.launch { onNew() }
+            }) {
                 Icon(
                     painter = painterResource(id = R.drawable.write),
                     contentDescription = stringResource(id = R.string.write),
@@ -80,7 +80,7 @@ fun NoteBottomBar(
     }
 }
 
-private val homeBottomConstraints = ConstraintSet {
+val homeBottomConstraints = ConstraintSet {
     val amountTitle = createRefFor(ID_AMOUNT_TITLE)
     val addUser = createRefFor(ID_ADD_USER)
 
@@ -99,5 +99,5 @@ private val homeBottomConstraints = ConstraintSet {
 }
 
 // Layout ids
-private const val ID_AMOUNT_TITLE = "amount_title"
-private const val ID_ADD_USER = "add_user"
+const val ID_AMOUNT_TITLE = "amount_title"
+const val ID_ADD_USER = "add_user"

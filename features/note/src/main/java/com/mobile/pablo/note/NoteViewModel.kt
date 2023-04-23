@@ -1,7 +1,7 @@
 package com.mobile.pablo.note
 
 import androidx.lifecycle.ViewModel
-import com.mobile.pablo.core.utils.launch
+import com.mobile.pablo.core.utils.launchAsync
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.usecase.note.NoteUseCase
 import com.mobile.pablo.uicomponents.note.util.StringRes.DELETE_SUCCESSFUL
@@ -9,10 +9,10 @@ import com.mobile.pablo.uicomponents.note.util.StringRes.INTERNET_ISSUE
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.receiveAsFlow
 
 @HiltViewModel
 class NoteViewModel @Inject constructor(
@@ -21,41 +21,47 @@ class NoteViewModel @Inject constructor(
     private val insertEmptyNoteUseCase: NoteUseCase.InsertEmptyNote
 ) : ViewModel(), NoteInterface {
 
-    private var deleteNoteJob: Job? = null
+    private var deleteJob: Job? = null
+    private var insertJob: Job? = null
+    private val NOTE_DEBOUNCE_MILLIS = 100L
 
-    val notes: Flow<List<Note?>> = getNotesUseCase()
+    val notes: Flow<List<Note?>> = getNotesUseCase().debounce(NOTE_DEBOUNCE_MILLIS)
 
-    private val _viewState: MutableStateFlow<ViewState> = MutableStateFlow(ViewState.Default)
-    val viewState: StateFlow<ViewState> = _viewState.asStateFlow()
+    private val _viewState: Channel<ViewState> = Channel()
+    val viewState: Flow<ViewState> = _viewState.receiveAsFlow()
 
     override fun deleteNote(noteId: Int) {
-        deleteNoteJob?.cancel()
-        deleteNoteJob = launch {
+        deleteJob?.cancel()
+        deleteJob = launchAsync {
             val noteResult = deleteNoteUseCase(noteId)
-            _viewState.value = noteResult.run {
+            val viewState = noteResult.run {
                 if (isSuccessful && data != null) {
                     ViewState.Message(DELETE_SUCCESSFUL)
                 } else ViewState.Message(INTERNET_ISSUE)
             }
+
+            _viewState.send(viewState)
         }
     }
 
     override fun insertEmptyNote() {
-        deleteNoteJob?.cancel()
-        deleteNoteJob = launch {
+        insertJob?.cancel()
+        insertJob = launchAsync {
             val noteResult = insertEmptyNoteUseCase()
-            _viewState.value = noteResult.run {
+            val viewState = noteResult.run {
                 if (isSuccessful && data != null) {
                     ViewState.InsertSuccessful(data)
                 } else ViewState.Message(INTERNET_ISSUE)
             }
+
+            _viewState.send(viewState)
         }
     }
 
     override fun setEmptyNote(noteId: Long?) {
-        deleteNoteJob?.cancel()
-        deleteNoteJob = launch {
-            _viewState.emit(ViewState.InsertSuccessful(noteId))
+        insertJob?.cancel()
+        insertJob = launchAsync {
+            _viewState.send(ViewState.InsertSuccessful(noteId))
         }
     }
 }

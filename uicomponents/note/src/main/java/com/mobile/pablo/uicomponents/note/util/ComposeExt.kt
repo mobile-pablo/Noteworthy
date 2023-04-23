@@ -1,6 +1,7 @@
 package com.mobile.pablo.uicomponents.note.util
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawWithCache
@@ -10,10 +11,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
 /**
  * Found solution on
@@ -172,3 +180,24 @@ fun Dp.dpToPx() = with(LocalDensity.current) { this@dpToPx.toPx() }
 fun Modifier.testTag(
     @androidx.annotation.StringRes resId: Int
 ) = testTag(stringResource(id = resId))
+
+// https://stackoverflow.com/a/70185157/13770601
+@Composable
+inline fun <reified T> Flow<T>.observeWithLifecycle(
+    lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
+    minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
+    key2: Any? = null,
+    noinline action: suspend (T) -> Unit
+) {
+    LaunchedEffect(
+        key1 = Unit,
+        key2 = key2
+    ) {
+        lifecycleOwner.lifecycleScope.launch {
+            flowWithLifecycle(
+                lifecycleOwner.lifecycle,
+                minActiveState
+            ).collect(action)
+        }
+    }
+}

@@ -36,6 +36,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.dynamic.within
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.utils.navGraph
+import kotlinx.coroutines.flow.collectLatest
 import androidx.compose.material.MaterialTheme as Theme
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -43,34 +44,37 @@ import androidx.compose.material.MaterialTheme as Theme
 @Composable
 fun FakeNoteScreen(
     navController: NavController = rememberNavController(),
-    fakeNoteViewModel: FakeNoteViewModel = hiltViewModel()
+    viewModel: FakeNoteViewModel = hiltViewModel()
 ) {
 
-    val notes = fakeNoteViewModel.notes.collectAsStateWithLifecycle(listOf()).value
-    val viewState = fakeNoteViewModel.viewState.collectAsStateWithLifecycle().value
+    val notes = viewModel.notes.collectAsStateWithLifecycle(listOf()).value
     val scaffoldState: ScaffoldState = rememberScaffoldState()
     LaunchedEffect(
-        key1 = viewState,
+        key1 = viewModel.viewState,
         key2 = notes
     ) {
-        when (viewState) {
-            is ViewState.InsertSuccessful -> {
-                viewState.noteId?.let { noteID ->
-                    navigateToAddNote(
-                        navController,
-                        noteID.toInt()
-                    )
-                    fakeNoteViewModel.setEmptyNote(null)
+        viewModel.viewState.collectLatest {
+            when (it) {
+                is ViewState.InsertSuccessful -> {
+                    it.noteId?.let { noteID ->
+                        navigateToAddNote(
+                            navController,
+                            noteID.toInt()
+                        )
+                        viewModel.setEmptyNote(null)
+                    }
                 }
-            }
 
-            is ViewState.Message -> {
-                scaffoldState.snackbarHostState.showSnackbar(
-                    message = viewState.message
-                )
-            }
+                is ViewState.Message -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = it.message
+                    )
+                }
 
-            is ViewState.Default -> {}
+                is ViewState.Default -> {}
+
+                else -> throw IllegalArgumentException("Unknown view state: $it")
+            }
         }
     }
 
@@ -110,18 +114,19 @@ fun FakeNoteScreen(
                                     )
                                 },
                                 onDelete = {
-                                    fakeNoteViewModel.deleteNote(note.id)
+                                    viewModel.deleteNote(note.id)
                                 },
                                 onPin = { })
                         }
                     }
                 }
             }
-            NoteBottomBar(notes.size,
+            NoteBottomBar(
+                notes.size,
                 modifier = Modifier
                     .layoutId(ID_NOTE_BOTTOM_BAR)
-                    .fillMaxWidth(),
-                onClickNewNote = { fakeNoteViewModel.insertEmptyNote() })
+                    .fillMaxWidth()
+            ) { viewModel.insertEmptyNote() }
         }
     }
 }

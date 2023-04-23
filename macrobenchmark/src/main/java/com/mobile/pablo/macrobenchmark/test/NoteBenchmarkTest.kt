@@ -22,6 +22,9 @@ import org.junit.runner.RunWith
  * Run this benchmark from Studio to see startup measurements, and captured system traces
  * for investigating your app's performance.
  */
+
+typealias funcInvoke = () -> Unit
+
 @RunWith(AndroidJUnit4::class)
 class NoteBenchmarkTest {
 
@@ -43,7 +46,7 @@ class NoteBenchmarkTest {
     // Setup for the benchmark
     fun benchmarkSetup(
         mode: CompilationMode,
-        func: () -> Unit = {}
+        func : funcInvoke = {}
     ) = benchmarkRule.measureRepeated(
         packageName = "com.mobile.pablo.iosnotes",
         metrics = listOf(FrameTimingMetric()),
