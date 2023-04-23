@@ -20,7 +20,6 @@
 
 # Tasks to be done
 * Add animation for navigation
-* Permissions (exucse me or https://google.github.io/accompanist/permissions/)
 * Espresso tests
 * Swipe with NoteLines  (checklist/delete)
 * Notifications / FCM

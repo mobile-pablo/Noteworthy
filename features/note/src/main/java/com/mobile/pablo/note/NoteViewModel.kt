@@ -10,7 +10,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.receiveAsFlow
 
 @HiltViewModel
 class NoteViewModel @Inject constructor(
@@ -25,7 +27,7 @@ class NoteViewModel @Inject constructor(
 
     val notes: Flow<List<Note?>> = getNotesUseCase().debounce(NOTE_DEBOUNCE_MILLIS)
 
-    private val _viewState = Channel<ViewState>()
+    private val _viewState: Channel<ViewState> = Channel()
     val viewState: Flow<ViewState> = _viewState.receiveAsFlow()
 
     override fun deleteNote(noteId: Int) {
