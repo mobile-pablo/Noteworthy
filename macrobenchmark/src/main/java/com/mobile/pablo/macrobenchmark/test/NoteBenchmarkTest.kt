@@ -44,9 +44,9 @@ class NoteBenchmarkTest {
     fun addItemAndScrollListCompilationModePartial() = addItemAndOpenListCompilation(mode = CompilationMode.Partial())
 
     // Setup for the benchmark
-    fun benchmarkSetup(
+    private inline fun benchmarkSetup(
         mode: CompilationMode,
-        func : funcInvoke = {}
+        crossinline func: funcInvoke = {}
     ) = benchmarkRule.measureRepeated(
         packageName = "com.mobile.pablo.iosnotes",
         metrics = listOf(FrameTimingMetric()),
@@ -59,9 +59,9 @@ class NoteBenchmarkTest {
         func()
     }
 
-    fun startCompilationModePartial(mode: CompilationMode) = benchmarkSetup(mode = mode)
+    private fun startCompilationModePartial(mode: CompilationMode) = benchmarkSetup(mode = mode)
 
-    fun addItemAndOpenListCompilation(mode: CompilationMode) = benchmarkSetup(mode = mode) {
+    private fun addItemAndOpenListCompilation(mode: CompilationMode) = benchmarkSetup(mode = mode) {
         addItemAndOpenList()
     }
 }

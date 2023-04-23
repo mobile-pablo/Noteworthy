@@ -13,10 +13,10 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "master", main ]
+    branches: [ "master", main, draft ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "master" ]
+    branches: [ "master", draft, main ]
   schedule:
     - cron: '31 9 * * 2'
 
@@ -45,9 +45,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-    -name: Clean gradlew
-      run: gradlew --no-daemon clean
-
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v2
@@ -63,8 +60,11 @@ jobs:
 
       # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
       # If this step fails, then you should remove it and run the build manually (see below)
-      - name: Autobuild
-        uses: github/codeql-action/autobuild@v2
+      - name: Check Java version
+        run: java -version
+
+      - name: Build with Gradle
+        run: ./gradlew --no-daemon clean build
 
       # ℹ️ Command-line programs to run using the OS shell.
       # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
@@ -80,3 +80,4 @@ jobs:
         uses: github/codeql-action/analyze@v2
         with:
           category: "/language:${{matrix.language}}"
+
