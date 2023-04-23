@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
@@ -31,11 +30,11 @@ import com.mobile.pablo.uicomponents.note.theme.spacing
 import com.mobile.pablo.uicomponents.note.ui.NoteBottomBar
 import com.mobile.pablo.uicomponents.note.ui.NoteTopBar
 import com.mobile.pablo.uicomponents.note.ui.PreviewNoteItem
+import com.mobile.pablo.uicomponents.note.util.observeWithLifecycle
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.dynamic.within
 import com.ramcosta.composedestinations.navigation.navigate
 import com.ramcosta.composedestinations.utils.navGraph
-import kotlinx.coroutines.flow.collectLatest
 import androidx.compose.material.MaterialTheme as Theme
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -48,32 +47,27 @@ fun NoteScreen(
 
     val notes = viewModel.notes.collectAsStateWithLifecycle(listOf()).value
     val scaffoldState: ScaffoldState = rememberScaffoldState()
-    LaunchedEffect(
-        key1 = viewModel.viewState,
-        key2 = notes
-    ) {
-        viewModel.viewState.collectLatest {
-            when (it) {
-                is ViewState.InsertSuccessful -> {
-                    it.noteId?.let { noteID ->
-                        navigateToAddNote(
-                            navController,
-                            noteID.toInt()
-                        )
-                        viewModel.setEmptyNote(null)
-                    }
-                }
-
-                is ViewState.Message -> {
-                    scaffoldState.snackbarHostState.showSnackbar(
-                        message = it.message
+    viewModel.viewState.observeWithLifecycle(key2 = notes) {
+        when (it) {
+            is ViewState.InsertSuccessful -> {
+                it.noteId?.let { noteID ->
+                    navigateToAddNote(
+                        navController,
+                        noteID.toInt()
                     )
+                    viewModel.setEmptyNote(null)
                 }
-
-                is ViewState.Default -> {}
-
-                else -> throw IllegalArgumentException("Unknown view state: $it")
             }
+
+            is ViewState.Message -> {
+                scaffoldState.snackbarHostState.showSnackbar(
+                    message = it.message
+                )
+            }
+
+            is ViewState.Default -> {}
+
+            else -> throw IllegalArgumentException("Unknown view state: $it")
         }
     }
 

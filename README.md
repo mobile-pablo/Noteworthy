@@ -9,10 +9,11 @@
 * Compose
 * Compose Navigation
 * Ktlint
-* StateFlow
+* StateFlow / Flows / Channels
 * Side Effect Handlers
 * Multi-Module & inner module
 * Migrate dependencies to toml
+* Permissions via Accompanist
 * Dagger + Hilt
 * Benchmark + Baseline
 * Kotlin DSL
