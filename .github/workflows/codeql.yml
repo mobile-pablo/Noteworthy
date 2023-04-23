@@ -13,10 +13,10 @@ name: "CodeQL"
 
 on:
   push:
-    branches: [ "master", main ]
+    branches: [ "master", main, draft ]
   pull_request:
     # The branches below must be a subset of the branches above
-    branches: [ "master", draft ]
+    branches: [ "master", draft, main ]
   schedule:
     - cron: '31 9 * * 2'
 
@@ -45,8 +45,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      -name: Clean gradlew
-        run: gradlew --no-daemon clean
 
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
@@ -80,3 +78,4 @@ jobs:
         uses: github/codeql-action/analyze@v2
         with:
           category: "/language:${{matrix.language}}"
+
