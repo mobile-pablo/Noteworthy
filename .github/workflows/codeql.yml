@@ -45,6 +45,11 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Check Java version
+        run: java -version
+
+      - name: Build with Gradle
+        run: ./gradlew --no-daemon clean
 
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
@@ -59,11 +64,10 @@ jobs:
           # queries: security-extended,security-and-quality
 
 
-      - name: Check Java version
-        run: java -version
-
-      - name: Build with Gradle
-        run: ./gradlew build
+      # Autobuild attempts to build any compiled languages  (C/C++, C#, Go, or Java).
+      # If this step fails, then you should remove it and run the build manually (see below)
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v2
 
       # ℹ️ Command-line programs to run using the OS shell.
       # 📚 See https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idstepsrun
