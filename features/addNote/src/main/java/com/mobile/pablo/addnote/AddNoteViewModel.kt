@@ -1,7 +1,7 @@
 package com.mobile.pablo.addnote
 
 import androidx.lifecycle.ViewModel
-import com.mobile.pablo.core.utils.launch
+import com.mobile.pablo.core.utils.launchAsync
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.usecase.note.NoteUseCase
 import com.mobile.pablo.uicomponents.common.util.StringRes
@@ -17,11 +17,12 @@ class AddNoteViewModel @Inject constructor(
     private var createEmptyNoteLineUseCase: NoteUseCase.InsertEmptyNoteLine
 ) : ViewModel(), AddNoteInterface {
 
-    private var noteJob: Job? = null
+    private var saveJob: Job? = null
+    private var emptyJob: Job? = null
 
     var note: Flow<Note?> = emptyFlow()
 
-    private val _viewState: MutableStateFlow<ViewState> = MutableStateFlow(ViewState.Default)
+    private val _viewState = MutableStateFlow<ViewState>(ViewState.Default)
     val viewState: StateFlow<ViewState> = _viewState.asStateFlow()
 
     private val _emptyNoteLineId: MutableStateFlow<Long> = MutableStateFlow(0L)
@@ -32,22 +33,24 @@ class AddNoteViewModel @Inject constructor(
     }
 
     override fun createEmptyNoteLine(parentNoteId: Int) {
-        noteJob?.cancel()
-        noteJob = launch {
+        emptyJob?.cancel()
+        emptyJob = launchAsync {
             val notesResult = createEmptyNoteLineUseCase(parentNoteId)
             _emptyNoteLineId.emit(notesResult)
         }
     }
 
     override fun saveNote(note: Note) {
-        noteJob?.cancel()
-        noteJob = launch {
+        saveJob?.cancel()
+        saveJob = launchAsync {
             val noteResult = insertNoteUseCase(note)
-            _viewState.value = noteResult.run {
+            val viewState = noteResult.run {
                 if (isSuccessful && data != null) {
                     ViewState.SaveSuccessful
                 } else ViewState.Message(StringRes.INTERNET_ISSUE)
             }
+
+            _viewState.emit(viewState)
         }
     }
 

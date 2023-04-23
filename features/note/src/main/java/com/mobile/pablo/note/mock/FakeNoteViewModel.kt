@@ -1,7 +1,7 @@
 package com.mobile.pablo.note.mock
 
 import androidx.lifecycle.ViewModel
-import com.mobile.pablo.core.utils.launch
+import com.mobile.pablo.core.utils.launchAsync
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.data.note.NoteLine
 import com.mobile.pablo.note.ViewState
@@ -14,7 +14,8 @@ import kotlinx.coroutines.flow.*
 @HiltViewModel
 class FakeNoteViewModel @Inject constructor() : ViewModel() {
 
-    private var deleteNoteJob: Job? = null
+    private var deleteJob: Job? = null
+    private var insertJob: Job? = null
 
     val notes: Flow<List<Note?>> = flow { emit(MOCK_NOTE_LIST) }
 
@@ -22,23 +23,23 @@ class FakeNoteViewModel @Inject constructor() : ViewModel() {
     val viewState: StateFlow<ViewState> = _viewState.asStateFlow()
 
     fun deleteNote(noteId: Int) {
-        deleteNoteJob?.cancel()
-        deleteNoteJob = launch {
+        deleteJob?.cancel()
+        deleteJob = launchAsync {
             MOCK_NOTE_LIST.removeAt(noteId)
         }
     }
 
     fun insertEmptyNote() {
-        deleteNoteJob?.cancel()
-        deleteNoteJob = launch {
+        insertJob?.cancel()
+        insertJob = launchAsync {
             val lastId = MOCK_NOTE_LIST.last().id + 1
             MOCK_NOTE_LIST.add(Note(id = lastId))
         }
     }
 
     fun setEmptyNote(noteId: Long?) {
-        deleteNoteJob?.cancel()
-        deleteNoteJob = launch {
+        insertJob?.cancel()
+        insertJob = launchAsync {
             _viewState.emit(ViewState.InsertSuccessful(noteId))
         }
     }
