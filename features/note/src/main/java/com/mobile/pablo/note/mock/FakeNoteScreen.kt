@@ -71,6 +71,8 @@ fun FakeNoteScreen(
             }
 
             is ViewState.Default -> {}
+
+            else -> throw IllegalArgumentException("Unknown view state: $viewState")
         }
     }
 
@@ -117,11 +119,12 @@ fun FakeNoteScreen(
                     }
                 }
             }
-            NoteBottomBar(notes.size,
+            NoteBottomBar(
+                notes.size,
                 modifier = Modifier
                     .layoutId(ID_NOTE_BOTTOM_BAR)
-                    .fillMaxWidth(),
-                onClickNewNote = { fakeNoteViewModel.insertEmptyNote() })
+                    .fillMaxWidth()
+            ) { fakeNoteViewModel.insertEmptyNote() }
         }
     }
 }

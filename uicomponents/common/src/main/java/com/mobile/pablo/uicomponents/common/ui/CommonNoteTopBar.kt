@@ -16,15 +16,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import com.mobile.pablo.uicomponents.common.R
-import com.mobile.pablo.uicomponents.common.data.NoteTopWrapper
 import com.mobile.pablo.uicomponents.common.theme.CTA
 import com.mobile.pablo.uicomponents.common.theme.spacing
 import androidx.compose.material.MaterialTheme as Theme
 
+typealias onBackItem = () -> Unit
+typealias onShareItem = () -> Unit
+typealias onDoneItem = () -> Unit
+
 @Composable
 fun CommonNoteTopBar(
     modifier: Modifier = Modifier,
-    noteTopWrapper: NoteTopWrapper
+    onBack: onBackItem,
+    onShare: onShareItem,
+    onDone: onDoneItem
 ) {
     ConstraintLayout(
         modifier = modifier
@@ -34,7 +39,7 @@ fun CommonNoteTopBar(
         Row(
             modifier = Modifier
                 .layoutId(ID_GO_BACK)
-                .clickable { noteTopWrapper.onBackItem() }
+                .clickable { onBack() }
                 .padding(
                     vertical = Theme.spacing.spacing_7,
                     horizontal = Theme.spacing.spacing_4
@@ -58,7 +63,7 @@ fun CommonNoteTopBar(
         Box(
             modifier = Modifier
                 .layoutId(ID_SHARE)
-                .clickable { noteTopWrapper.onShareItem() }
+                .clickable { onShare() }
                 .padding(Theme.spacing.spacing_7),
             contentAlignment = Alignment.Center
         ) {
@@ -72,7 +77,7 @@ fun CommonNoteTopBar(
         Box(
             modifier = Modifier
                 .layoutId(ID_DONE)
-                .clickable { noteTopWrapper.onDoneItem() }
+                .clickable { onDone() }
                 .padding(Theme.spacing.spacing_7),
             contentAlignment = Alignment.Center
         ) {

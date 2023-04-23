@@ -70,6 +70,8 @@ fun NoteScreen(
             }
 
             is ViewState.Default -> {}
+
+            else -> throw IllegalArgumentException("Unknown view state: $viewState")
         }
     }
 
@@ -114,11 +116,12 @@ fun NoteScreen(
                     }
                 }
             }
-            NoteBottomBar(notes.size,
+            NoteBottomBar(
+                notes.size,
                 modifier = Modifier
                     .layoutId(ID_NOTE_BOTTOM_BAR)
-                    .fillMaxWidth(),
-                onClickNewNote = { noteViewModel.insertEmptyNote() })
+                    .fillMaxWidth()
+            ) { noteViewModel.insertEmptyNote() }
         }
     }
 }

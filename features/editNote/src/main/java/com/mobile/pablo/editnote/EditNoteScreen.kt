@@ -14,8 +14,6 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.mobile.pablo.domain.data.note.Note
-import com.mobile.pablo.uicomponents.common.data.NoteBottomWrapper
-import com.mobile.pablo.uicomponents.common.data.NoteTopWrapper
 import com.mobile.pablo.uicomponents.common.theme.NoteBackground
 import com.mobile.pablo.uicomponents.common.ui.CommonNoteBottomBar
 import com.mobile.pablo.uicomponents.common.ui.CommonNoteTopBar
@@ -56,35 +54,30 @@ fun EditNoteScreen(
             modifier = Modifier
                 .layoutId(ID_EDIT_NOTE_TOP_BAR)
                 .fillMaxWidth(),
-            noteTopWrapper = NoteTopWrapper(
-                onBackItem =
-                {
-                    scope.launch {
-                        (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
-                    }
-                },
-                onShareItem = { scope.launch { viewModel.shareNote() } },
-                onDoneItem = {
-                    scope.launch {
-                        viewModel.saveNote(updatedNote).also {
-                            (context as? ComponentActivity)
-                                ?.onBackPressedDispatcher?.onBackPressed()
-                        }
+            onBack = {
+                scope.launch {
+                    (context as? ComponentActivity)?.onBackPressedDispatcher?.onBackPressed()
+                }
+            },
+            onShare = { scope.launch { viewModel.shareNote() } },
+            onDone = {
+                scope.launch {
+                    viewModel.saveNote(updatedNote).also {
+                        (context as? ComponentActivity)
+                            ?.onBackPressedDispatcher?.onBackPressed()
                     }
                 }
-            )
+            }
         )
 
         CommonNoteBottomBar(
             modifier = Modifier
                 .layoutId(ID_EDIT_NOTE_BOTTOM_BAR)
                 .fillMaxWidth(),
-            noteBottomWrapper = NoteBottomWrapper(
-                { scope.launch {} },
-                { scope.launch {} },
-                { scope.launch {} },
-                { scope.launch {} }
-            )
+            onCamera = { scope.launch {} },
+            onPin = { scope.launch {} },
+            onCheckbox = { scope.launch {} },
+            onNew = { scope.launch {} }
         )
     }
 }

@@ -19,13 +19,15 @@ import com.mobile.pablo.domain.data.note.NoteLine
 import com.mobile.pablo.uicomponents.common.theme.Text
 import androidx.compose.material.MaterialTheme as Theme
 
+typealias onEmptyNoteLineItem = () -> Long
+
 @Composable
 fun NoteField(
     modifier: Modifier = Modifier,
     noteLine: NoteLine,
     hasCheckbox: Boolean = false,
     placeHolder: String = EMPTY_STRING,
-    createEmptyNoteLine: () -> Long
+    onEmptyNoteLine: onEmptyNoteLineItem
 ): NoteLine {
 
     val focusManager = LocalFocusManager.current
@@ -66,7 +68,7 @@ fun NoteField(
 
     // Problem to zapisuje sie automatycznie bez on click w kazdym z notefield
     return NoteLine(
-        id = createEmptyNoteLine().toInt(),
+        id = onEmptyNoteLine().toInt(),
         isCheckbox = isCheckbox,
         noteText = noteText,
         parentNoteId = noteLine.parentNoteId
