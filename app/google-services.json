@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "657181015378",
+    "project_id": "ios-notes-383510",
+    "storage_bucket": "ios-notes-383510.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657181015378:android:8574b7e1692a0430f70e8b",
+        "android_client_info": {
+          "package_name": "com.mobile.pablo.iosnotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657181015378-ucrpur133inmh67b961ui56mm6en7plj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDW1A5pGyJZWN6wwpAP2nMfRiYYdJ-3PfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657181015378-ucrpur133inmh67b961ui56mm6en7plj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
