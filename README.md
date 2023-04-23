@@ -11,7 +11,7 @@ designed with a sleek interface and packed with<br/>
 powerful features to help you stay organized! 🌟
 <br/>
 
-## 🎯 Features
+## 🎯 Features 
 
 * Image loading
 * Unlock via face recognition
