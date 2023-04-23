@@ -4,9 +4,11 @@
 [![AWS Device Farm CI](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/aws-device-farm.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/aws-device-farm.yml)
 [![CodeQL](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/codeql.yml)
 [![Mark stale issues and pull requests](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/stale.yml/badge.svg)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/stale.yml)
+<br/>
 
 🌟 Welcome to the ultimate notes app for Android, designed with a sleek interface and packed with
 powerful features to help you stay organized! 🌟
+<br/>
 
 ## 🎯 Features
 
