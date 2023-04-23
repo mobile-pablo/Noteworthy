@@ -35,7 +35,7 @@ class NoteTest {
         hiltAndroidRule.inject()
         testRule.setContent {
             IOSNotesTheme {
-                FakeNoteScreen(fakeNoteViewModel = fakeNoteViewModel)
+                FakeNoteScreen(viewModel = fakeNoteViewModel)
             }
         }
     }

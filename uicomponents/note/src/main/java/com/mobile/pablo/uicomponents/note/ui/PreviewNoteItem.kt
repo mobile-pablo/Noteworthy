@@ -27,13 +27,17 @@ import me.saket.swipe.SwipeAction
 import me.saket.swipe.SwipeableActionsBox
 import androidx.compose.material.MaterialTheme as Theme
 
+typealias onClickItem = () -> Unit
+typealias onPinItem = () -> Unit
+typealias onDeleteItem = () -> Unit
+
 @Composable
 fun PreviewNoteItem(
     modifier: Modifier = Modifier,
     note: Note,
-    onClick: () -> Unit,
-    onPin: () -> Unit,
-    onDelete: () -> Unit
+    onClick: onClickItem,
+    onPin: onPinItem,
+    onDelete: onDeleteItem
 ) {
 
     val pinAction = SwipeAction(icon = painterResource(id = R.drawable.pin),
