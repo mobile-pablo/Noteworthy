@@ -1,4 +1,5 @@
 apply(from = "../ktlint.gradle.kts")
+apply(from = "apkCopy.gradle.kts")
 
 plugins {
     id("com.android.application")
@@ -77,6 +78,8 @@ android {
 }
 
 tasks.getByPath("preBuild").dependsOn("ktlint")
+tasks.getByName("preBuild").dependsOn("copyApk")
+tasks.getByName("preBuild").dependsOn("copyUIApk")
 
 dependencies {
     implementation(project(":features:note"))
