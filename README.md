@@ -41,6 +41,7 @@ powerful features to help you stay organized! 🌟
 * Screenshots with templates be added soon
 
 ## 🪄 Jenkins setup
+<div align="center"><img src="readme_img/ci_works_4.png" width="70%"/><br/><br/></div>
 <div align="center"><img src="readme_img/ci_works_1.png" width="70%"/></div><br/><br/>
 <div align="center"><img src="readme_img/ci_works_2.png" width="70%"/><br/><br/></div>
 <div align="center"><img src="readme_img/ci_works_3.png" width="70%"/><br/><br/></div>
