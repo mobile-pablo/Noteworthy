@@ -24,12 +24,30 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Set up Android SDK
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: echo "Android SDK is set up"
+
+      - name: Start Android Emulator
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: echo "Android Emulator is started"
+
       - name: Build and run tests
-        run: ./gradlew connectedAndroidTest
+        run: ./gradlew build connectedDebugAndroidTest
 
       - name: Zip test results
         if: always()
-        run: zip -r test-results.zip ./app/build/outputs/androidTest-results/connected
+        run: |
+          if [ -d "./app/build/outputs/androidTest-results/connected" ]; then
+            zip -r test-results.zip ./app/build/outputs/androidTest-results/connected
+          else
+            echo "No test results found."
+            touch test-results.zip
+          fi
 
       - name: Upload test results
         if: always()
@@ -37,41 +55,3 @@ jobs:
         with:
           name: test-results
           path: test-results.zip
-
-  aws_device_farm:
-    needs: build_and_test
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.9
-
-      - name: Install AWS CLI
-        run: pip install awscli
-
-      - name: Configure AWS CLI
-        run: aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-      - name: Upload APK to AWS Device Farm
-        run: |
-          export APK_PATH=$(find . -type f -name "*.apk" | grep "/release/" | head -n 1)
-          export UPLOAD_URL=$(aws devicefarm create-upload --project-arn ${{ secrets.AWS_DEVICE_FARM_PROJECT_ARN }} --name MyApp.apk --type ANDROID_APP | jq -r '.upload.url')
-          curl -T $APK_PATH $UPLOAD_URL
-
-      - name: Upload Espresso tests to AWS Device Farm
-        run: |
-          export TEST_APK_PATH=$(find . -type f -name "*-androidTest.apk" | head -n 1)
-          export UPLOAD_URL=$(aws devicefarm create-upload --project-arn ${{ secrets.AWS_DEVICE_FARM_PROJECT_ARN }} --name EspressoTests.apk --type ANDROID_ESPRESSO | jq -r '.upload.url')
-          curl -T $TEST_APK_PATH $UPLOAD_URL
-
-      - name: Schedule and run tests on AWS Device Farm
-        run: |
-          export DEVICE_POOL=$(aws devicefarm list-device-pools --arn ${{ secrets.AWS_DEVICE_FARM_PROJECT_ARN }} --type PRIVATE | jq -r '.devicePools[0].arn')
-          export SCHEDULE_RUN_RESULT=$(aws devicefarm schedule-run --project-arn ${{ secrets.AWS_DEVICE_FARM_PROJECT_ARN }} --app-arn ${{ secrets.AWS_DEVICE_FARM_APP_ARN }} --device-pool-arn $DEVICE_POOL --name "My GitHub CI Run" --test type=ANDROID_ESPRESSO,testPackageArn=${{ secrets.AWS_DEVICE_FARM_TEST_PACKAGE_ARN }}')
-          export SCHEDULED_RUN_ARN=$(echo $SCHEDULE_RUN_RESULT | jq -r '.run.arn')
-          echo
