@@ -5,7 +5,7 @@ orbs:
   android: circleci/android@x.y.z
   # https://circleci.com/developer/orbs/orb/circleci/android for latest version
 jobs:
-  startEmulator:
+  test:
     executor:
       name: android/android-machine
       resource-class: large
@@ -35,7 +35,7 @@ jobs:
 workflows:
   test:
     jobs:
-      - startEmulator
+      - test
       - build_and_test:
         runs-on: ubuntu-latest
 
