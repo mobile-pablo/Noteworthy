@@ -19,7 +19,8 @@ powerful features to help you stay organized! 🌟
 
 ## 🛠️ Tech stack
 
-* <s>(Jenkins via GCP  'http://34.30.54.198:8080/'</s> (Migrated to Github CI) + AWS Device farm
+* Jenkins via GCP + AWS Device farm
+* Github Actions (CodeQL, Branch closing,Build Apk, Stale issues)
 * Room
 * MVVM
 * Coil
