@@ -1,36 +1,36 @@
-# .circleci/config.yml
 version: 2.1
 orbs:
-  android: circleci/android@2.2.0
-  # https://circleci.com/developer/orbs/orb/circleci/android for latest version
+  android: circleci/android@x.y.z
+  aws-device-farm: circleci/aws-device-farm@1.0.0
 jobs:
-  test:
+  build-and-test:
     executor:
       name: android/android-machine
       resource-class: large
     steps:
       - checkout
+      - run: echo "Build your app here"
       # Create an AVD named "myavd"
       - android/create-avd:
           avd-name: myavd
           system-image: system-images;android-29;default;x86
           install: true
-      # By default, after starting up the emulator, a cache will be restored,
-      # "./gradlew assembleDebugAndroidTest" will be run and then a script
-      # will be run to wait for the emulator to start up.
-      # Specify the "post-emulator-launch-assemble-command" command to override
-      # the gradle command run, or set "wait-for-emulator" to false to disable
-      # waiting for the emulator altogether.
+      # Start the emulator in the background
       - android/start-emulator:
           avd-name: myavd
           no-window: true
-          restore-gradle-cache-prefix: v1a
-      # Runs "./gradlew connectedDebugAndroidTest" by default.
-      # Specify the "test-command" parameter to customize the command run.
-      - android/run-tests
-      - android/save-gradle-cache:
-          cache-prefix: v1a
+          background: true
+      # Run tests on the emulator using AWS Device Farm
+      - aws-device-farm/upload:
+          project-name: MyProject
+          device-pool-arn: ${{ secrets.DEVICE_POOL_ARN }}
+          app-path: app/build/outputs/apk/debug/app-debug.apk
+          test-path: app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+          device-arn: ${{ secrets.DEVICE_ARN }}
+          region: ${{ secrets.AWS_REGION }}
+          upload-type: ANDROID_APP_AND_TEST
+          # Additional options can be specified here, such as test-parameters and environment-variables
 workflows:
-  test:
+  build-and-test:
     jobs:
-      - test
+      - build-and-test
