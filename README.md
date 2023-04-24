@@ -38,13 +38,12 @@ powerful features to help you stay organized! 🌟
 * Jira board at https://mobile-pablo.atlassian.net/
 
 ## 🎨 Screenshots
-
-### Jenkins setup
-<img src="readme_img/ci_works_1.png" width="50%"/><br/><br/>
-<img src="readme_img/ci_works_2.png" width="50%"/><br/><br/>
-<img src="readme_img/ci_works_3.png" width="50%"/><br/><br/>
-
 * Screenshots with templates be added soon
+
+## 🪄 Jenkins setup
+<div align="center"><img src="readme_img/ci_works_1.png" width="70%"/></div><br/><br/>
+<div align="center"><img src="readme_img/ci_works_2.png" width="70%"/><br/><br/></div>
+<div align="center"><img src="readme_img/ci_works_3.png" width="70%"/><br/><br/></div>
 
 ## 📈 Tasks to be done
 
