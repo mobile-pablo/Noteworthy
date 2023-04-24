@@ -19,7 +19,8 @@ powerful features to help you stay organized! 🌟
 
 ## 🛠️ Tech stack
 
-* <s>(Jenkins via GCP  'http://34.30.54.198:8080/'</s> (Migrated to Github CI) + AWS Device farm
+* <s>(Jenkins via GCP  'http://34.30.54.198:8080/'</s> (Migrated to Circle CI) + AWS Device farm
+* Github Actions 
 * Room
 * MVVM
 * Coil
