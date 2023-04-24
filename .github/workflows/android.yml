@@ -2,9 +2,9 @@ name: Android Test Apk
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", main, draft ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", main, draft ]
 
 jobs:
   build:

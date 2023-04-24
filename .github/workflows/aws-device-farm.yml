@@ -3,10 +3,9 @@ name: AWS Device Farm CI
 on:
   push:
     branches:
-      - master
+      [ "master", main, draft ]
   pull_request:
-    branches:
-      - master
+    branches: [ "master", main, draft ]
 
 jobs:
   build_and_test:
@@ -26,7 +25,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build and run tests
-        run: ./gradlew build
+        run: ./gradlew connectedAndroidTest
 
       - name: Zip test results
         if: always()
