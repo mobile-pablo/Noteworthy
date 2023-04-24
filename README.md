@@ -39,7 +39,12 @@ powerful features to help you stay organized! 🌟
 
 ## 🎨 Screenshots
 
-* Will be added soon
+### Jenkins setup
+<img src="readme_img/ci_works_1.png" width="50%"/><br/><br/>
+<img src="readme_img/ci_works_2.png" width="50%"/><br/><br/>
+<img src="readme_img/ci_works_3.png" width="50%"/><br/><br/>
+
+* Screenshots with templates be added soon
 
 ## 📈 Tasks to be done
 
