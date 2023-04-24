@@ -37,7 +37,7 @@ jobs:
           script: echo "Android Emulator is started"
 
       - name: Build and run tests
-        run: ./gradlew build connectedDebugAndroidTest
+        run: ./gradlew build connectedAndroidTest
 
       - name: Zip test results
         if: always()
