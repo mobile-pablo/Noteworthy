@@ -1,4 +1,5 @@
 apply(from = "../ktlint.gradle.kts")
+apply(from = "apkCopy.gradle.kts")
 
 plugins {
     id("com.android.application")
