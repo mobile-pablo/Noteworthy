@@ -1,81 +1,36 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/configuration-reference
+# .circleci/config.yml
 version: 2.1
 orbs:
   android: circleci/android@x.y.z
   # https://circleci.com/developer/orbs/orb/circleci/android for latest version
+jobs:
+  test:
+    executor:
+      name: android/android-machine
+      resource-class: large
+    steps:
+      - checkout
+      # Create an AVD named "myavd"
+      - android/create-avd:
+          avd-name: myavd
+          system-image: system-images;android-29;default;x86
+          install: true
+      # By default, after starting up the emulator, a cache will be restored,
+      # "./gradlew assembleDebugAndroidTest" will be run and then a script
+      # will be run to wait for the emulator to start up.
+      # Specify the "post-emulator-launch-assemble-command" command to override
+      # the gradle command run, or set "wait-for-emulator" to false to disable
+      # waiting for the emulator altogether.
+      - android/start-emulator:
+          avd-name: myavd
+          no-window: true
+          restore-gradle-cache-prefix: v1a
+      # Runs "./gradlew connectedDebugAndroidTest" by default.
+      # Specify the "test-command" parameter to customize the command run.
+      - android/run-tests
+      - android/save-gradle-cache:
+          cache-prefix: v1a
 workflows:
   test:
     jobs:
-      # This job uses the Android machine image by default
-      - android/run-ui-tests:
-          # Use pre-steps and post-steps if necessary
-          # to execute custom steps before and afer any of the built-in steps
-          system-image: system-images;android-29;default;x86
-      - build_and_test:
-        runs-on: ubuntu-latest
-
-        steps:
-          - name: Checkout repository
-            uses: actions/checkout@v2
-
-          - name: Set up JDK 11
-            uses: actions/setup-java@v2
-            with:
-              java-version: 11
-              distribution: 'adopt'
-
-          - name: Grant execute permission for gradlew
-            run: chmod +x gradlew
-
-          - name: Build and run tests
-            run: ./gradlew build
-
-          - name: Zip test results
-            if: always()
-            run: zip -r test-results.zip ./app/build/outputs/androidTest-results/connected
-
-          - name: Upload test results
-            if: always()
-            uses: actions/upload-artifact@v2
-            with:
-              name: test-results
-              path: test-results.zip
-
-      aws_device_farm:
-        needs: build_and_test
-        runs-on: ubuntu-latest
-
-        steps:
-          - name: Checkout repository
-            uses: actions/checkout@v2
-
-          - name: Set up Python
-            uses: actions/setup-python@v2
-            with:
-              python-version: 3.9
-
-          - name: Install AWS CLI
-            run: pip install awscli
-
-          - name: Configure AWS CLI
-            run: aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }} && aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-          - name: Upload APK to AWS Device Farm
-            run: |
-              export APK_PATH=$(find . -type f -name "*.apk" | grep "/release/" | head -n 1)
-              export UPLOAD_URL=$(aws devicefarm create-upload --project-arn ${{ secrets.AWS_DEVICE_FARM_PROJECT_ARN }} --name MyApp.apk --type ANDROID_APP | jq -r '.upload.url')
-              curl -T $APK_PATH $UPLOAD_URL
-
-          - name: Upload Espresso tests to AWS Device Farm
-            run: |
-              export TEST_APK_PATH=$(find . -type f -name "*-androidTest.apk" | head -n 1)
-              export UPLOAD_URL=$(aws devicefarm create-upload --project-arn ${{ secrets.AWS_DEVICE_FARM_PROJECT_ARN }} --name EspressoTests.apk --type ANDROID_ESPRESSO | jq -r '.upload.url')
-              curl -T $TEST_APK_PATH $UPLOAD_URL
-
-          - name: Schedule and run tests on AWS Device Farm
-            run: |
-              export DEVICE_POOL=$(aws devicefarm list-device-pools --arn ${{ secrets.AWS_DEVICE_FARM_PROJECT_ARN }} --type PRIVATE | jq -r '.devicePools[0].arn')
-              export SCHEDULE_RUN_RESULT=$(aws devicefarm schedule-run --project-arn ${{ secrets.AWS_DEVICE_FARM_PROJECT_ARN }} --app-arn ${{ secrets.AWS_DEVICE_FARM_APP_ARN }} --device-pool-arn $DEVICE_POOL --name "My GitHub CI Run" --test type=ANDROID_ESPRESSO,testPackageArn=${{ secrets.AWS_DEVICE_FARM_TEST_PACKAGE_ARN }}')
-              export SCHEDULED_RUN_ARN=$(echo $SCHEDULE_RUN_RESULT | jq -r '.run.arn')
-              echo
+      - test
