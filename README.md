@@ -1,7 +1,6 @@
 # Noteworthy - Android App 🚀
 
 [![Android Test Apk](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/android.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/android.yml)
-[![AWS Device Farm CI](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/aws-device-farm.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/aws-device-farm.yml)
 [![CodeQL](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/codeql.yml/badge.svg?branch=master)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/codeql.yml)
 [![Mark stale issues and pull requests](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/stale.yml/badge.svg)](https://github.com/mobile-pablo/iOS-Notes/actions/workflows/stale.yml)
 <br/>
@@ -39,7 +38,12 @@ powerful features to help you stay organized! 🌟
 
 ## 🎨 Screenshots
 
-* Will be added soon
+### Jenkins setup
+<img src="readme_img/ci_works_1.png" width="50%"/><br/><br/>
+<img src="readme_img/ci_works_2.png" width="50%"/><br/><br/>
+<img src="readme_img/ci_works_3.png" width="50%"/><br/><br/>
+
+* Screenshots with templates be added soon
 
 ## 📈 Tasks to be done
 
