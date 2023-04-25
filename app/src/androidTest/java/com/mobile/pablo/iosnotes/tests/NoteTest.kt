@@ -27,8 +27,6 @@ class NoteTest {
     @get:Rule(order = 1)
     val testRule = createAndroidComposeRule<ComponentActivity>()
 
-    private val noteTestScreen get() = NoteTestScreen(testRule)
-
     private val fakeNoteViewModel = FakeNoteViewModel()
 
     @Before
@@ -55,7 +53,7 @@ class NoteTest {
     @Test
     fun itemNoteScreenIsOpened() {
         sleepView()
-        noteTestScreen.clickAddItemBtn()
+        NoteTestScreen(testRule).clickAddItemBtn()
 
         addNoteScreen(testRule) {
             onTag(views.addNoteScreen).assertIsDisplayed()
