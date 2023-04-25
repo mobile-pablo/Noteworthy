@@ -5,8 +5,6 @@ import com.mobile.pablo.addnote.AddNoteInterface
 import com.mobile.pablo.core.utils.launchAsync
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.domain.data.note.NoteLine
-import com.mobile.pablo.domain.usecase.note.NoteUseCase
-import com.mobile.pablo.uicomponents.common.util.StringRes
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.util.Date
 import javax.inject.Inject
@@ -36,10 +34,14 @@ class FakeAddNoteViewModel @Inject constructor() : ViewModel(), AddNoteInterface
         emptyJob?.cancel()
         emptyJob = launchAsync {
             val noteLines = LOCAL_NOTE.description
-            val notesResult = NoteLine(parentNoteId = parentNoteId, id = noteLines.size+1, isCheckbox = true)
+            val notesResult = NoteLine(
+                parentNoteId = parentNoteId,
+                id = noteLines.size + 1,
+                isCheckbox = true
+            )
 
             LOCAL_NOTE = LOCAL_NOTE.copy(description = noteLines.plus(notesResult))
-            _emptyNoteLineId.emit( noteLines.size+1.toLong())
+            _emptyNoteLineId.emit(noteLines.size + 1.toLong())
         }
     }
 
@@ -83,7 +85,8 @@ private var LOCAL_NOTE = Note(
             parentNoteId = 5,
             isCheckbox = false,
             noteText = "Add pineapple"
-        ), NoteLine(
+        ),
+        NoteLine(
             id = 2,
             parentNoteId = 5,
             isCheckbox = false,
