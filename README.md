@@ -55,6 +55,8 @@ Unfortunately I had to upload apk files here for jenkins view. <br/>
 
 * Add animation for navigation
 * Espresso tests
+* Expand more benchmark tests
+* Unit Tests
 * Swipe with NoteLines  (checklist/delete)
 * Notifications / FCM
 * Crashalitics
