@@ -9,9 +9,12 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
@@ -31,6 +34,7 @@ data class FakeEditNoteScreenNavArgs(
     val note: Note
 )
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Destination(navArgsDelegate = FakeEditNoteScreenNavArgs::class)
 @Composable
 fun FakeEditNoteScreen(
@@ -67,7 +71,10 @@ fun FakeEditNoteScreen(
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
-            .background(Theme.colors.NoteBackground),
+            .background(Theme.colors.NoteBackground)
+            .semantics {
+                testTagsAsResourceId = true
+            },
         constraintSet = constraints
     ) {
         val updatedNote = TextCanvas(

@@ -13,6 +13,8 @@ import androidx.test.espresso.util.TreeIterables
 import java.util.concurrent.TimeoutException
 import org.hamcrest.Matcher
 
+const val DEFAULT_SLEEP_MILLIS = 3000L
+
 fun viewIsDisplayed(viewId: Int): ViewInteraction = onView(withId(viewId)).check(matches(isDisplayed()))
 
 fun viewIsDisplayed(view: Matcher<View>): ViewInteraction = onView(view).check(matches(isDisplayed()))
@@ -68,7 +70,7 @@ fun waitId(
     }
 }
 
-fun sleepView(millis: Long = 3000L) {
+fun sleepView(millis: Long = DEFAULT_SLEEP_MILLIS) {
     try {
         Thread.sleep(millis)
     } catch (e: InterruptedException) {

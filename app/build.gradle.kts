@@ -86,6 +86,7 @@ dependencies {
     androidTestImplementation(project(":domain"))
     implementation(project(":features:addNote"))
     implementation(project(":features:editNote"))
+    implementation(project(":features:note"))
     implementation(project(":uicomponents:common"))
     androidTestImplementation(libs.compose.swipe)
 

@@ -7,4 +7,4 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 
 fun AndroidComposeTestRule<
     ActivityScenarioRule<ComponentActivity>, ComponentActivity>
-    .getString(@StringRes resId: Int) = activity.getString(resId)
+    .getStringByAutomator(@StringRes resId: Int) = activity.getString(resId)

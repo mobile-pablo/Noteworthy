@@ -1,9 +1,10 @@
 package com.mobile.pablo.iosnotes.tests
 
 import androidx.activity.ComponentActivity
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import com.mobile.pablo.iosnotes.ext.isDisplayed
+import com.mobile.pablo.iosnotes.ext.addNoteScreen
 import com.mobile.pablo.iosnotes.ext.sleepView
 import com.mobile.pablo.iosnotes.screens.NoteTestScreen
 import com.mobile.pablo.note.mock.FakeNoteScreen
@@ -43,9 +44,9 @@ class NoteTest {
     @Test
     fun notesAreDisplayed() {
         fakeNoteViewModel.notes.withIndex().map {
-            it.value.forEachIndexed { index, note ->
+            it.value.forEach { note ->
                 note?.let {
-                    testRule.onNodeWithTag("previewNote-${it.id}").isDisplayed()
+                    testRule.onNodeWithTag("previewNote-${it.id}").assertIsDisplayed()
                 }
             }
         }
@@ -55,5 +56,9 @@ class NoteTest {
     fun itemNoteScreenIsOpened() {
         sleepView()
         noteTestScreen.clickAddItemBtn()
+
+        addNoteScreen(testRule) {
+            onTag(views.addNoteScreen).assertIsDisplayed()
+        }
     }
 }

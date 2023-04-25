@@ -9,11 +9,14 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
@@ -26,6 +29,7 @@ import androidx.compose.material.MaterialTheme as Theme
 
 typealias onNewItem = () -> Unit
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 inline fun NoteBottomBar(
     amountNotes: Int,
@@ -46,7 +50,10 @@ inline fun NoteBottomBar(
             .background(Theme.colors.HomeBottomBarBackground)
             .topRectBorder(
                 brush = SolidColor(Theme.colors.PreviewLine)
-            ),
+            )
+            .semantics {
+                testTagsAsResourceId = true
+            },
         constraintSet = homeBottomConstraints
     ) {
 

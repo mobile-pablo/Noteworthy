@@ -9,19 +9,24 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.mobile.pablo.addNote.R
 import com.mobile.pablo.uicomponents.common.theme.NoteBackground
 import com.mobile.pablo.uicomponents.common.ui.CommonNoteBottomBar
 import com.mobile.pablo.uicomponents.common.ui.CommonNoteTopBar
 import com.mobile.pablo.uicomponents.common.ui.TextCanvas
 import com.mobile.pablo.uicomponents.common.util.EmptyObjects.EMPTY_NOTE
+import com.mobile.pablo.uicomponents.common.util.testTag
 import com.ramcosta.composedestinations.annotation.Destination
 import kotlinx.coroutines.launch
 import androidx.compose.material.MaterialTheme as Theme
@@ -30,6 +35,7 @@ data class FakeAddNoteScreenNavArgs(
     val noteId: Int
 )
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Destination(navArgsDelegate = FakeAddNoteScreenNavArgs::class)
 @Composable
 fun FakeAddNoteScreen(
@@ -70,7 +76,11 @@ fun FakeAddNoteScreen(
     ConstraintLayout(
         modifier = Modifier
             .fillMaxSize()
-            .background(Theme.colors.NoteBackground),
+            .background(Theme.colors.NoteBackground)
+            .semantics {
+                testTagsAsResourceId = true
+            }
+            .testTag(R.string.id_add_note_screen),
         constraintSet = constraints
     ) {
         note?.let { note ->
