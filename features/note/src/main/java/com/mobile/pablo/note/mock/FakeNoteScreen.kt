@@ -24,9 +24,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.mobile.pablo.addnote.destinations.AddNoteScreenDestination
+import com.mobile.pablo.addnote.destinations.FakeAddNoteScreenDestination
 import com.mobile.pablo.domain.data.note.Note
-import com.mobile.pablo.editnote.destinations.EditNoteScreenDestination
+import com.mobile.pablo.editnote.destinations.FakeEditNoteScreenDestination
 import com.mobile.pablo.note.ViewState
 import com.mobile.pablo.uicomponents.note.theme.HomeBackground
 import com.mobile.pablo.uicomponents.note.theme.spacing
@@ -134,7 +134,7 @@ fun navigateToEditNote(
     navController: NavController,
     note: Note
 ) {
-    val editNoteDestination = EditNoteScreenDestination(note = note)
+    val editNoteDestination = FakeEditNoteScreenDestination(note = note)
     navController.navigate(editNoteDestination within navController.currentBackStackEntry!!.navGraph())
 }
 
@@ -142,7 +142,7 @@ fun navigateToAddNote(
     navController: NavController,
     noteId: Int
 ) {
-    val addNoteDestination = AddNoteScreenDestination(noteId = noteId)
+    val addNoteDestination = FakeAddNoteScreenDestination(noteId = noteId)
     navController.navigate(addNoteDestination within navController.currentBackStackEntry!!.navGraph())
 }
 
