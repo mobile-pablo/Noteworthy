@@ -15,8 +15,6 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import com.mobile.pablo.core.utils.StringConst.EMPTY_STRING
@@ -50,10 +48,7 @@ inline fun NoteBottomBar(
             .background(Theme.colors.HomeBottomBarBackground)
             .topRectBorder(
                 brush = SolidColor(Theme.colors.PreviewLine)
-            )
-            .semantics {
-                testTagsAsResourceId = true
-            },
+            ),
         constraintSet = homeBottomConstraints
     ) {
 

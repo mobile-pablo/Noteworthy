@@ -134,16 +134,16 @@ fun navigateToEditNote(
     navController: NavController,
     note: Note
 ) {
-    val editNoteDestination = FakeEditNoteScreenDestination(note = note)
-    navController.navigate(editNoteDestination within navController.currentBackStackEntry!!.navGraph())
+    val fakeEditNoteDestination = FakeEditNoteScreenDestination(note = note)
+    navController.navigate(fakeEditNoteDestination within navController.currentBackStackEntry!!.navGraph())
 }
 
 fun navigateToAddNote(
     navController: NavController,
     noteId: Int
 ) {
-    val addNoteDestination = FakeAddNoteScreenDestination(noteId = noteId)
-    navController.navigate(addNoteDestination within navController.currentBackStackEntry!!.navGraph())
+    val fakeAddNoteDestination = FakeAddNoteScreenDestination(noteId = noteId)
+    navController.navigate(fakeAddNoteDestination within navController.currentBackStackEntry!!.navGraph())
 }
 
 private val noteConstraints = ConstraintSet {

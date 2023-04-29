@@ -37,6 +37,7 @@ class FakeNoteViewModel @Inject constructor() : ViewModel() {
         insertJob = launchAsync {
             val lastId = MOCK_NOTE_LIST.last().id + 1
             MOCK_NOTE_LIST.add(Note(id = lastId))
+            _viewState.send(ViewState.InsertSuccessful(lastId.toLong()))
         }
     }
 

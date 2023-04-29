@@ -18,7 +18,6 @@ import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mobile.pablo.domain.data.note.Note
 import com.mobile.pablo.editnote.ViewState
@@ -39,7 +38,7 @@ data class FakeEditNoteScreenNavArgs(
 @Composable
 fun FakeEditNoteScreen(
     fakeEditNoteScreenNavArgs: FakeEditNoteScreenNavArgs,
-    viewModel: FakeEditNoteViewModel = hiltViewModel()
+    viewModel: FakeEditNoteViewModel = FakeEditNoteViewModel()
 ) {
     val note = fakeEditNoteScreenNavArgs.note
     val scope = rememberCoroutineScope()

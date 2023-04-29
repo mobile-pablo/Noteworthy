@@ -102,6 +102,11 @@ dependencies {
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.junit.ext)
+    androidTestImplementation(libs.google.truth) {
+        exclude(group = "dagger.fastInit")
+        exclude(group = "kapt.kotlin.generated")
+        exclude(group = "org.checkerframework")
+    }
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.espresso.barista.compose)
     androidTestImplementation(libs.espresso.barista) {

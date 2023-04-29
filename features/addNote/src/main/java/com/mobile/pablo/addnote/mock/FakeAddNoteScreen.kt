@@ -18,7 +18,6 @@ import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.mobile.pablo.addNote.R
 import com.mobile.pablo.uicomponents.common.theme.NoteBackground
@@ -40,7 +39,7 @@ data class FakeAddNoteScreenNavArgs(
 @Composable
 fun FakeAddNoteScreen(
     fakeAddNoteScreenNavArgs: FakeAddNoteScreenNavArgs,
-    viewModel: FakeAddNoteViewModel = hiltViewModel()
+    viewModel: FakeAddNoteViewModel = FakeAddNoteViewModel()
 ) {
     val noteId = fakeAddNoteScreenNavArgs.noteId
     viewModel.downloadNote(noteId)
