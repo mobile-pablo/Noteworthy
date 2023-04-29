@@ -5,12 +5,13 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
-import androidx.compose.ui.test.onNodeWithTag
 import androidx.navigation.compose.rememberNavController
+import com.google.common.truth.Truth.assertThat
 import com.mobile.pablo.iosnotes.MainActivity
 import com.mobile.pablo.iosnotes.ext.addNoteScreen
+import com.mobile.pablo.iosnotes.ext.isDisplayed
+import com.mobile.pablo.iosnotes.ext.noteTestScreen
 import com.mobile.pablo.iosnotes.ext.sleepView
 import com.mobile.pablo.iosnotes.nav.NavGraphs
 import com.mobile.pablo.iosnotes.screens.NoteTestScreen
@@ -20,8 +21,9 @@ import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.withIndex
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -58,12 +60,18 @@ class NoteTest {
         }
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun notesAreDisplayed() {
-        noteViewModel.notes.withIndex().map {
-            it.value.forEach { note ->
+    fun notesAreDisplayed() = runTest {
+        noteViewModel.notes.collectLatest {
+            assertThat(it).isNotEmpty()
+            it.forEach { note ->
                 note?.let {
-                    testRule.onNodeWithTag("previewNote-${it.id}").assertIsDisplayed()
+                    val tag = "previewNote-${it.id}"
+                    noteTestScreen(testRule) {
+                        waitForTag(tag)
+                        onTag(tag).isDisplayed()
+                    }
                 }
             }
         }
@@ -76,7 +84,7 @@ class NoteTest {
 
         addNoteScreen(testRule) {
             waitForTag(views.addNoteScreen)
-            onTag(views.addNoteScreen).assertIsDisplayed()
+            onTag(views.addNoteScreen).isDisplayed()
         }
     }
 }

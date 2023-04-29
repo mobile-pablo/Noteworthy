@@ -6,7 +6,7 @@ import com.mobile.pablo.iosnotes.MainActivity
 import com.mobile.pablo.iosnotes.screens.AddNoteTestScreen
 import com.mobile.pablo.iosnotes.screens.NoteTestScreen
 
-inline fun noteScreen(
+inline fun noteTestScreen(
     rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>,
     crossinline func: NoteTestScreen.() -> Unit
 ) = NoteTestScreen(rule).apply { func() }
