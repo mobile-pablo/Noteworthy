@@ -9,6 +9,7 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.layoutId
@@ -26,6 +27,7 @@ import androidx.compose.material.MaterialTheme as Theme
 
 typealias onNewItem = () -> Unit
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 inline fun NoteBottomBar(
     amountNotes: Int,

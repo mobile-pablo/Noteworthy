@@ -11,10 +11,10 @@ val uiDevice: UiDevice = UiDevice.getInstance(instrumentation)
 
 val uiSelector = UiSelector()
 
-fun getString(@StringRes resId: Int) = instrumentation.context.getString(resId)
+fun getStringByAutomator(@StringRes resId: Int) = instrumentation.context.getString(resId)
 
 fun getResByString(@StringRes resId: Int) = uiDevice.findObject(
-    uiSelector.resourceId(getString(resId))
+    uiSelector.resourceId(getStringByAutomator(resId))
 )
 
 fun getResFromId(id: String) = uiDevice.findObject(

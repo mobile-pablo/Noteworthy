@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -33,7 +34,7 @@ import com.mobile.pablo.uicomponents.note.ui.PreviewNoteItem
 import com.mobile.pablo.uicomponents.note.util.observeWithLifecycle
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.dynamic.within
-import com.ramcosta.composedestinations.navigation.navigate
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.utils.navGraph
 import androidx.compose.material.MaterialTheme as Theme
 
@@ -41,6 +42,7 @@ import androidx.compose.material.MaterialTheme as Theme
 @Destination
 @Composable
 fun NoteScreen(
+    destinationsNavigator: DestinationsNavigator,
     navController: NavController = rememberNavController(),
     viewModel: NoteViewModel = hiltViewModel()
 ) {
@@ -52,6 +54,7 @@ fun NoteScreen(
             is ViewState.InsertSuccessful -> {
                 it.noteId?.let { noteID ->
                     navigateToAddNote(
+                        destinationsNavigator,
                         navController,
                         noteID.toInt()
                     )
@@ -94,21 +97,22 @@ fun NoteScreen(
                     .layoutId(ID_NOTE_LISTS)
                     .padding(horizontal = Theme.spacing.spacing_14)
             ) {
-                if (notes.isNotEmpty()) {
-                    items(notes) { saveNotes ->
-                        saveNotes?.let {
-                            PreviewNoteItem(note = it,
-                                onClick = {
-                                    navigateToEditNote(
-                                        navController,
-                                        it
-                                    )
-                                },
-                                onDelete = {
-                                    viewModel.deleteNote(it.id)
-                                },
-                                onPin = { })
-                        }
+                items(notes) { note ->
+                    if (note != null) {
+                        PreviewNoteItem(
+                            modifier = Modifier.testTag("previewNote-${note.id}"),
+                            note = note,
+                            onClick = {
+                                navigateToEditNote(
+                                    destinationsNavigator,
+                                    navController,
+                                    note
+                                )
+                            },
+                            onDelete = {
+                                viewModel.deleteNote(note.id)
+                            },
+                            onPin = { })
                     }
                 }
             }
@@ -123,19 +127,21 @@ fun NoteScreen(
 }
 
 fun navigateToEditNote(
+    destinationsNavigator: DestinationsNavigator,
     navController: NavController,
     note: Note
 ) {
     val editNoteDestination = EditNoteScreenDestination(note = note)
-    navController.navigate(editNoteDestination within navController.currentBackStackEntry!!.navGraph())
+    destinationsNavigator.navigate(editNoteDestination within navController.currentBackStackEntry!!.navGraph())
 }
 
 fun navigateToAddNote(
+    destinationsNavigator: DestinationsNavigator,
     navController: NavController,
     noteId: Int
 ) {
     val addNoteDestination = AddNoteScreenDestination(noteId = noteId)
-    navController.navigate(addNoteDestination within navController.currentBackStackEntry!!.navGraph())
+    destinationsNavigator.navigate(addNoteDestination within navController.currentBackStackEntry!!.navGraph())
 }
 
 private val noteConstraints = ConstraintSet {

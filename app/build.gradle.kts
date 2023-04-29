@@ -86,8 +86,8 @@ dependencies {
     androidTestImplementation(project(":domain"))
     implementation(project(":features:addNote"))
     implementation(project(":features:editNote"))
+    implementation(project(":features:note"))
     implementation(project(":uicomponents:common"))
-    androidTestImplementation(libs.compose.swipe)
 
     implementation(libs.androidX.core)
     implementation(libs.androidX.lifecycle)
@@ -101,6 +101,11 @@ dependencies {
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.junit.ext)
+    androidTestImplementation(libs.google.truth) {
+        exclude(group = "dagger.fastInit")
+        exclude(group = "kapt.kotlin.generated")
+        exclude(group = "org.checkerframework")
+    }
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.espresso.barista.compose)
     androidTestImplementation(libs.espresso.barista) {
@@ -109,6 +114,7 @@ dependencies {
     androidTestImplementation(libs.uiautomator)
     androidTestImplementation(libs.compose.junit)
     androidTestImplementation(libs.hilt.testing)
+    androidTestImplementation(libs.compose.hiltNavigation)
     kaptAndroidTest(libs.hilt.android.compiler)
     androidTestAnnotationProcessor(libs.hilt.android.compiler)
 
