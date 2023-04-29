@@ -1,16 +1,16 @@
 package com.mobile.pablo.iosnotes.screens
 
-import androidx.activity.ComponentActivity
 import androidx.annotation.StringRes
 import androidx.compose.ui.test.ExperimentalTestApi
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.test.ext.junit.rules.ActivityScenarioRule
+import com.mobile.pablo.iosnotes.MainActivity
 
 @OptIn(ExperimentalTestApi::class)
 open class BasicTestScreen constructor(
-    private val rule: AndroidComposeTestRule<ActivityScenarioRule<ComponentActivity>, ComponentActivity>
+    private val rule: AndroidComposeTestRule<ActivityScenarioRule<MainActivity>, MainActivity>
 ) {
 
     fun getString(@StringRes id: Int) = rule.activity.getString(id)
@@ -56,6 +56,7 @@ open class BasicTestScreen constructor(
     )
 
     companion object {
+
         const val WAIT_VIEW_MILLIS = 5000L
     }
 }

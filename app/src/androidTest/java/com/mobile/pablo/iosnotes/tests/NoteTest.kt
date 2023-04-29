@@ -1,14 +1,15 @@
 package com.mobile.pablo.iosnotes.tests
 
-import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
+import com.mobile.pablo.iosnotes.MainActivity
 import com.mobile.pablo.iosnotes.ext.addNoteScreen
 import com.mobile.pablo.iosnotes.ext.sleepView
 import com.mobile.pablo.iosnotes.nav.NavGraphs
@@ -19,7 +20,6 @@ import com.ramcosta.composedestinations.DestinationsNavHost
 import com.ramcosta.composedestinations.navigation.EmptyDestinationsNavigator
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import javax.inject.Inject
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.withIndex
 import org.junit.Before
@@ -33,17 +33,16 @@ class NoteTest {
     val hiltAndroidRule = HiltAndroidRule(this)
 
     @get:Rule(order = 2)
-    val testRule = createAndroidComposeRule<ComponentActivity>()
+    val testRule = createAndroidComposeRule<MainActivity>()
 
-    @Inject
     lateinit var noteViewModel: NoteViewModel
 
     @Before
     fun setup() {
         hiltAndroidRule.inject()
-        testRule.setContent {
+        noteViewModel = testRule.activity.viewModels<NoteViewModel>().value
+        testRule.activity.setContent {
             val navController = rememberNavController()
-            noteViewModel = hiltViewModel()
             Surface(
                 modifier = Modifier.fillMaxSize()
             ) {
