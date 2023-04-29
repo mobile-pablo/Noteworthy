@@ -33,7 +33,7 @@ import com.mobile.pablo.uicomponents.note.ui.PreviewNoteItem
 import com.mobile.pablo.uicomponents.note.util.observeWithLifecycle
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.dynamic.within
-import com.ramcosta.composedestinations.navigation.navigate
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.ramcosta.composedestinations.utils.navGraph
 import androidx.compose.material.MaterialTheme as Theme
 
@@ -41,6 +41,7 @@ import androidx.compose.material.MaterialTheme as Theme
 @Destination
 @Composable
 fun NoteScreen(
+    destinationsNavigator: DestinationsNavigator,
     navController: NavController = rememberNavController(),
     viewModel: NoteViewModel = hiltViewModel()
 ) {
@@ -52,6 +53,7 @@ fun NoteScreen(
             is ViewState.InsertSuccessful -> {
                 it.noteId?.let { noteID ->
                     navigateToAddNote(
+                        destinationsNavigator,
                         navController,
                         noteID.toInt()
                     )
@@ -100,6 +102,7 @@ fun NoteScreen(
                             PreviewNoteItem(note = it,
                                 onClick = {
                                     navigateToEditNote(
+                                        destinationsNavigator,
                                         navController,
                                         it
                                     )
@@ -123,19 +126,21 @@ fun NoteScreen(
 }
 
 fun navigateToEditNote(
+    destinationsNavigator: DestinationsNavigator,
     navController: NavController,
     note: Note
 ) {
     val editNoteDestination = EditNoteScreenDestination(note = note)
-    navController.navigate(editNoteDestination within navController.currentBackStackEntry!!.navGraph())
+    destinationsNavigator.navigate(editNoteDestination within navController.currentBackStackEntry!!.navGraph())
 }
 
 fun navigateToAddNote(
+    destinationsNavigator: DestinationsNavigator,
     navController: NavController,
     noteId: Int
 ) {
     val addNoteDestination = AddNoteScreenDestination(noteId = noteId)
-    navController.navigate(addNoteDestination within navController.currentBackStackEntry!!.navGraph())
+    destinationsNavigator.navigate(addNoteDestination within navController.currentBackStackEntry!!.navGraph())
 }
 
 private val noteConstraints = ConstraintSet {

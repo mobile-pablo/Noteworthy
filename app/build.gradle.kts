@@ -88,7 +88,6 @@ dependencies {
     implementation(project(":features:editNote"))
     implementation(project(":features:note"))
     implementation(project(":uicomponents:common"))
-    androidTestImplementation(libs.compose.swipe)
 
     implementation(libs.androidX.core)
     implementation(libs.androidX.lifecycle)
@@ -115,6 +114,7 @@ dependencies {
     androidTestImplementation(libs.uiautomator)
     androidTestImplementation(libs.compose.junit)
     androidTestImplementation(libs.hilt.testing)
+    androidTestImplementation(libs.compose.hiltNavigation)
     kaptAndroidTest(libs.hilt.android.compiler)
     androidTestAnnotationProcessor(libs.hilt.android.compiler)
 
