@@ -5,6 +5,7 @@ import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.navigation.compose.rememberNavController
 import com.google.common.truth.Truth.assertThat
@@ -12,7 +13,6 @@ import com.mobile.pablo.iosnotes.MainActivity
 import com.mobile.pablo.iosnotes.ext.addNoteScreen
 import com.mobile.pablo.iosnotes.ext.isDisplayed
 import com.mobile.pablo.iosnotes.ext.noteTestScreen
-import com.mobile.pablo.iosnotes.ext.sleepView
 import com.mobile.pablo.iosnotes.nav.NavGraphs
 import com.mobile.pablo.iosnotes.screens.NoteTestScreen
 import com.mobile.pablo.note.NoteScreen
@@ -67,7 +67,7 @@ class NoteTest {
             assertThat(it).isNotEmpty()
             it.forEach { note ->
                 note?.let {
-                    val tag = "previewNote-${it.id}"
+                    val tag = "previewNote-${note.id}"
                     noteTestScreen(testRule) {
                         waitForTag(tag)
                         onTag(tag).isDisplayed()
@@ -79,7 +79,6 @@ class NoteTest {
 
     @Test
     fun itemNoteScreenIsOpened() {
-        sleepView()
         NoteTestScreen(testRule).clickAddItemBtn()
 
         addNoteScreen(testRule) {

@@ -1,11 +1,8 @@
 package com.mobile.pablo.iosnotes.screens
 
 import androidx.annotation.StringRes
-import androidx.compose.ui.test.ExperimentalTestApi
-import androidx.compose.ui.test.SemanticsNodeInteraction
-import androidx.compose.ui.test.hasTestTag
+import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.AndroidComposeTestRule
-import androidx.compose.ui.test.onNodeWithTag
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.mobile.pablo.iosnotes.MainActivity
 
@@ -35,6 +32,22 @@ open class BasicTestScreen constructor(
         useUnmergedTree: Boolean = false
     ): SemanticsNodeInteraction = rule.onNodeWithTag(
         tag,
+        useUnmergedTree = useUnmergedTree
+    )
+
+    fun onAnyTag(
+        @StringRes tag: Int,
+        useUnmergedTree: Boolean = false
+    ): SemanticsNodeInteractionCollection = rule.onAllNodesWithTag(
+        testTag = getString(tag),
+        useUnmergedTree = useUnmergedTree
+    )
+
+    fun onAnyTag(
+        tag: String,
+        useUnmergedTree: Boolean = false
+    ): SemanticsNodeInteractionCollection = rule.onAllNodesWithTag(
+        testTag = tag,
         useUnmergedTree = useUnmergedTree
     )
 

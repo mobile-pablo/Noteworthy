@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -96,22 +97,22 @@ fun NoteScreen(
                     .layoutId(ID_NOTE_LISTS)
                     .padding(horizontal = Theme.spacing.spacing_14)
             ) {
-                if (notes.isNotEmpty()) {
-                    items(notes) { saveNotes ->
-                        saveNotes?.let {
-                            PreviewNoteItem(note = it,
-                                onClick = {
-                                    navigateToEditNote(
-                                        destinationsNavigator,
-                                        navController,
-                                        it
-                                    )
-                                },
-                                onDelete = {
-                                    viewModel.deleteNote(it.id)
-                                },
-                                onPin = { })
-                        }
+                items(notes) { note ->
+                    if (note != null) {
+                        PreviewNoteItem(
+                            modifier = Modifier.testTag("previewNote-${note.id}"),
+                            note = note,
+                            onClick = {
+                                navigateToEditNote(
+                                    destinationsNavigator,
+                                    navController,
+                                    note
+                                )
+                            },
+                            onDelete = {
+                                viewModel.deleteNote(note.id)
+                            },
+                            onPin = { })
                     }
                 }
             }
